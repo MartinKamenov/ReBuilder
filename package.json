@@ -1,8 +1,10 @@
 {
-  "name": "builder",
+  "name": "rebuilder",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/bootstrap": "^4.3.0",
+    "bootstrap": "^3.3.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
