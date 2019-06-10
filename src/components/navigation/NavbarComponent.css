@@ -1,0 +1,26 @@
+.nav-link-container {
+    padding: 15px;
+    display: inline-block;
+    line-height: 20px;
+}
+
+a {
+    color: #e53b52 !important;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    background: #00000066;
+    border-radius: 5px;
+    border: #e53b52;
+}
+.nav-link {
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+  
+.nav-link:hover {
+    text-decoration: none !important;
+    border: 1px solid #e53b52;
+}

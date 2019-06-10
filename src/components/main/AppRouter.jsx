@@ -8,7 +8,7 @@ const AppRouter = () => {
         <Router>
             <div>
                 <NavbarComponent/>
-                <div>
+                <div className='container'>
                     <Route exact path="/" component={HomeComponent} />
                 </div>
             </div>
