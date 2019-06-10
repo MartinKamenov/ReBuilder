@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import LoginComponent from './components/auth/login/LoginComponent';
+import AppRouter from './components/main/AppRouter';
 import 'bootstrap/dist/css/bootstrap.css';
 
-ReactDOM.render(<LoginComponent />, document.getElementById('root'));
+ReactDOM.render(<AppRouter />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
