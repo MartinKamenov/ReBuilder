@@ -1,13 +1,13 @@
 import React, { Component, useState } from 'react';
-import './LoginComponent.css';
+import './RegisterComponent.css';
 
-const LoginComponent = () => {
+const RegisterComponent = () => {
     const [username, changeUsername] = useState('');
     const [password, changePassword] = useState('');
-    
-    return ( 
-        <div className='login-container'>
-            <h2>Sign in</h2>
+
+    return (
+        <div className='register-container'>
+            <h2>Sign up</h2>
             <form>
                 <input
                     className='form-input'
@@ -22,11 +22,11 @@ const LoginComponent = () => {
                     onChange={(event) => changePassword(event.target.value)}
                     value={password}/>
                 <button
-                    className='btn btn-success'
+                    className='submit-btn btn btn-success'
                     type='submit'>Log in</button>
             </form>
         </div>
     );
 }
  
-export default LoginComponent;
+export default RegisterComponent;

@@ -1,8 +1,12 @@
 .login-container {
     text-align: center;
+    background-color: grey;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .form-input {
     margin: auto;
     display: block;
+    margin-bottom: 10px;
 }
