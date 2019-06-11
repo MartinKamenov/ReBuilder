@@ -7,7 +7,7 @@ const LoginComponent = () => {
     
     return ( 
         <div className='login-container'>
-            <h2>Sign in</h2>
+            <h3 className='auth-header'>Sign in</h3>
             <form>
                 <input
                     className='form-input'
@@ -22,7 +22,7 @@ const LoginComponent = () => {
                     onChange={(event) => changePassword(event.target.value)}
                     value={password}/>
                 <button
-                    className='btn btn-success'
+                    className='submit-btn btn btn-success'
                     type='submit'>Log in</button>
             </form>
         </div>

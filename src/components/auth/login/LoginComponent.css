@@ -1,12 +1,22 @@
 .login-container {
+    max-width: 200px;
     text-align: center;
-    background-color: grey;
+    margin: auto;
+    background-color: #f7f4f4;
     border-radius: 10px;
     padding: 10px;
+    border: 1px solid black;
+}
+
+.auth-header {
+    font-weight: bold;
 }
 
 .form-input {
-    margin: auto;
-    display: block;
-    margin-bottom: 10px;
+    width: 80%;
+    margin-bottom: 10px !important;
+}
+
+.submit-btn {
+    width: 80%;
 }
