@@ -25,15 +25,17 @@ class NavbarComponent extends Component {
                                 <Link className="nav-link navbar_element" to="/overview">Overview</Link>
                             </NavItem>
                         </Nav>
-                        <Nav>
-                            <NavItem componentClass='span' className="nav-link-container">
-                                <Link className="nav-link navbar_element" to="/login">Sign in</Link>
-                            </NavItem>
-                        </Nav>
-                        <Nav>
-                            <NavItem componentClass='span' className="nav-link-container">
-                                <Link className="nav-link navbar_element" to="/register">Sign up</Link>
-                            </NavItem>
+                        <Nav pullRight>
+                            <Nav>
+                                <NavItem componentClass='span' className="nav-link-container">
+                                    <Link className="nav-link navbar_element" to="/login">Sign in</Link>
+                                </NavItem>
+                            </Nav>
+                            <Nav>
+                                <NavItem componentClass='span' className="nav-link-container">
+                                    <Link className="nav-link navbar_element" to="/register">Sign up</Link>
+                                </NavItem>
+                            </Nav>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
