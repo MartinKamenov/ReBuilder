@@ -20,11 +20,6 @@ class NavbarComponent extends Component {
                                 <Link className="nav-link navbar_element" to="/">Home</Link>
                             </NavItem>
                         </Nav>
-                        <Nav>
-                            <NavItem componentClass='span' className="nav-link-container">
-                                <Link className="nav-link navbar_element" to="/overview">Overview</Link>
-                            </NavItem>
-                        </Nav>
                         <Nav pullRight>
                             <Nav>
                                 <NavItem componentClass='span' className="nav-link-container">

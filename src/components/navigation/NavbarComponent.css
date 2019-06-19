@@ -15,6 +15,10 @@ a {
     border: #e53b52;
 }
 
+.navbar-toggle {
+    color: #e53b52;
+}
+
 .nav-link {
     padding: 10px;
     border: 1px solid transparent;
