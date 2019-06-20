@@ -24,7 +24,7 @@ const apiService = {
     },
 
     register: (username, password, passwordConfirm, email, imageUrl) => {
-        if(!username || !password || !passwordConfirm || email || imageUrl) {
+        if(!username || !password || !passwordConfirm || !email || !imageUrl) {
             return;
         }
         const query = `?username=${username}&password=${password}`;

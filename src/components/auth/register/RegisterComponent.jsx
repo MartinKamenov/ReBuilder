@@ -1,5 +1,5 @@
-import React, { Component, useState } from 'react';
-import apiService from '../../../service/api.service';
+import React, { Component } from 'react';
+import apiService from '../../../service/api.service.js';
 import './RegisterComponent.css';
 
 class RegisterComponent extends Component {
@@ -38,31 +38,36 @@ class RegisterComponent extends Component {
                         className='form-input'
                         type='email'
                         placeholder='Email'
-                        onChange={(event) => this.handleInputChange(event.target.value, 'email')}
+                        onChange={(event) => 
+                            this.handleInputChange(event.target.value, 'email')}
                         value={this.state.email}/>
                     <input
                         className='form-input'
                         type='text'
                         placeholder='Username'
-                        onChange={(event) => this.handleInputChange(event.target.value, 'username')}
+                        onChange={(event) => 
+                            this.handleInputChange(event.target.value, 'username')}
                         value={this.state.username}/>
                     <input
                         className='form-input'
                         type='password'
                         placeholder='Password'
-                        onChange={(event) => this.handleInputChange(event.target.value, 'password')}
+                        onChange={(event) => 
+                            this.handleInputChange(event.target.value, 'password')}
                         value={this.state.password}/>
                     <input
                         className='form-input'
                         type='password'
                         placeholder='Password repeat'
-                        onChange={(event) => this.handleInputChange(event.target.value, 'passwordRepeat')}
+                        onChange={(event) => 
+                            this.handleInputChange(event.target.value, 'passwordRepeat')}
                         value={this.state.passwordRepeat}/>
                     <input
                         className='form-input'
                         type='text'
                         placeholder='Image url'
-                        onChange={(event) => this.handleInputChange(event.target.value, 'imageUrl')}
+                        onChange={(event) => 
+                            this.handleInputChange(event.target.value, 'imageUrl')}
                         value={this.state.imageUrl}/>
                     <button
                         onClick={this.register}
