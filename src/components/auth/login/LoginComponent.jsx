@@ -14,7 +14,9 @@ class LoginComponent extends Component {
 
     login = () => {
         apiService.login(this.state.username, this.state.password).then((r) => {
-            alert(r);
+            console.log(r);
+        }).catch(er => {
+            console.log(er);
         });
     }
     

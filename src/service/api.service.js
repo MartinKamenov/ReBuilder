@@ -13,15 +13,23 @@ const sendObject = {
 
 const apiService = {
     login: (username, password) => {
-        const loginUrl = url + authPath + loginPath;
-        const body = { username, password };
+        if(!username || !password) {
+            return;
+        }
+        
+        const query = `?username=${username}&password=${password}`;
+        const loginUrl = url + authPath + loginPath + query;
 
-        return axios.post(loginUrl, body, sendObject);
+        return axios.post(loginUrl, {}, sendObject);
     },
 
-    register: (username, email, password) => {
-        const registerUrl = url + authPath + registerPath;
-        const body = { username, email, password };
+    register: (username, password, passwordConfirm, email, imageUrl) => {
+        if(!username || !password || !passwordConfirm || email || imageUrl) {
+            return;
+        }
+        const query = `?username=${username}&password=${password}`;
+        const registerUrl = url + authPath + registerPath + query;
+        const body = { password_confirm: passwordConfirm, email, imageUrl };
 
         return axios.post(registerUrl, body, sendObject);
     }
