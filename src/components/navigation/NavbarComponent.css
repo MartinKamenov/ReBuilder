@@ -25,3 +25,6 @@ a {
     text-decoration: none !important;
     border: 1px solid #e53b52;
 }
+.main-navbar.sticky.navbar.navbar-inverse{
+    margin-bottom: 0px;
+}

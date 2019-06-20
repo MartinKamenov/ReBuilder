@@ -6,7 +6,11 @@ class HomeComponent extends Component {
     render() { 
         return ( 
             <div>
-                Home component
+                <nav class="navbar" id="user-navbar">
+                    <a class="navbar-brand" href="#">
+                        <img src="https://mdbootstrap.com/img/logo/mdb-transparent.png" height="30" alt="mdb logo" />
+                    </a>
+                </nav>
             </div>
         );
     }
