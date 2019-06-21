@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import apiService from '../../../service/api.service.js';
+import * as authenticationActions from '../../../actions/authenticationActions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import './LoginComponent.css';
 
 class LoginComponent extends Component {
@@ -13,18 +16,17 @@ class LoginComponent extends Component {
     }
 
     login = () => {
-        apiService.login(
-            this.state.username,
-            this.state.password
-        )
-        .then((r) => {
-            console.log(r);
-        }).catch(er => {
-            console.log(er);
-        });
+        if(!this.state.username || !this.state.password) {
+            return;
+        }
+
+        this.props.actions.login(this.state.username, this.state.password);
     }
     
-    render() {  
+    render() {
+        if(this.state.user) {
+            return <div>{this.state.user.id}</div>;
+        }
         return ( 
             <div className='login-container'>
                 <h3 className='auth-header'>Sign in</h3>
@@ -49,5 +51,17 @@ class LoginComponent extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(authenticationActions, dispatch)
+    };
+};
  
-export default LoginComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
