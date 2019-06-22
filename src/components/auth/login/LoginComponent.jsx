@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import apiService from '../../../service/api.service.js';
 import * as authenticationActions from '../../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -24,8 +23,8 @@ class LoginComponent extends Component {
     }
     
     render() {
-        if(this.state.user) {
-            return <div>{this.state.user.id}</div>;
+        if(this.props.user.id) {
+            return <div>{this.props.user.id}</div>;
         }
         return ( 
             <div className='login-container'>

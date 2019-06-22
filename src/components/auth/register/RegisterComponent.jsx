@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import apiService from '../../../service/api.service.js';
+import * as authenticationActions from '../../../actions/authenticationActions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import './RegisterComponent.css';
 
 class RegisterComponent extends Component {
@@ -16,17 +18,21 @@ class RegisterComponent extends Component {
     }
 
     register = () => {
-        apiService.register(
+        if(!this.state.username ||
+            !this.state.password ||
+            !this.state.passwordRepeat ||
+            !this.state.email ||
+            !this.state.imageUrl) {
+            return;
+        }
+
+        this.props.actions.register(
             this.state.username,
             this.state.password,
             this.state.passwordRepeat,
             this.state.email,
             this.state.imageUrl
-        ).then((r) => {
-            console.log(r);
-        }).catch(er => {
-            console.log(er);
-        });
+        );
     }
 
     render() {
@@ -78,5 +84,17 @@ class RegisterComponent extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(authenticationActions, dispatch)
+    };
+};
  
-export default RegisterComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterComponent);

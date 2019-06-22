@@ -20,7 +20,7 @@ const apiService = {
         const query = `?username=${username}&password=${password}`;
         const loginUrl = url + authPath + loginPath + query;
 
-        return axios.post(loginUrl, {}, sendObject);
+        return axios.post(loginUrl, sendObject);
     },
 
     register: (username, password, passwordConfirm, email, imageUrl) => {
