@@ -2,6 +2,7 @@ import React from 'react';
 import { Droppable } from 'react-drag-and-drop';
 import './ProjectPageComponent.css';
 import PropTypes from 'prop-types';
+import DroppedListComponent from './projectDropedComponents/DroppedListComponent';
 
 const ProjectPageComponent = ({droppedComponents, handleDropComponent}) => {
     return (
@@ -9,9 +10,7 @@ const ProjectPageComponent = ({droppedComponents, handleDropComponent}) => {
             <Droppable
                     types={['component']} // <= allowed drop types
                     onDrop={handleDropComponent}>
-                    <ul className="Smoothie">
-                        {droppedComponents.map(component => (<li>{component.name}</li>))}
-                    </ul>
+                    <DroppedListComponent droppedComponents={droppedComponents}/>
             </Droppable>
         </div>
     );
