@@ -1,6 +1,9 @@
 const componentTypes = [
     {
         name: 'Header'
+    },
+    {
+        name: 'Text'
     }
 ];
 

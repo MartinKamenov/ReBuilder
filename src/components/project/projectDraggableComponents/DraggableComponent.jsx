@@ -1,5 +1,5 @@
 import React from 'react';
-import { Draggable } from 'react-drag-and-drop'
+import { Draggable } from 'react-drag-and-drop';
 import PropTypes from 'prop-types';
 
 const DraggableComponent = ({draggableComponent}) => {
