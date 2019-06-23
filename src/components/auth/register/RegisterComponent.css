@@ -1,8 +1,22 @@
 .register-container {
+    max-width: 300px;
     text-align: center;
+    margin: auto;
+    background-color: #f7f4f4;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.auth-header {
+    font-weight: bold;
 }
 
 .form-input {
-    margin: auto;
-    display: block;
+    width: 80%;
+    margin-bottom: 10px !important;
+}
+
+.submit-btn {
+    width: 80%;
 }

@@ -1,32 +1,66 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
+import * as authenticationActions from '../../../actions/authenticationActions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import './LoginComponent.css';
 
-const LoginComponent = () => {
-    const [username, changeUsername] = useState('');
-    const [password, changePassword] = useState('');
+class LoginComponent extends Component {
+    state = {
+        username: '',
+        password: ''
+    }
+
+    handleInputChange = (value, field) => {
+        this.setState({[field]: value});
+    }
+
+    login = () => {
+        if(!this.state.username || !this.state.password) {
+            return;
+        }
+
+        this.props.actions.login(this.state.username, this.state.password);
+    }
     
-    return ( 
-        <div className='login-container'>
-            <h3 className='auth-header'>Sign in</h3>
-            <form>
-                <input
-                    className='form-input'
-                    type='text'
-                    placeholder='Username'
-                    onChange={(event) => changeUsername(event.target.value)}
-                    value={username}/>
-                <input
-                    className='form-input'
-                    type='password'
-                    placeholder='Password'
-                    onChange={(event) => changePassword(event.target.value)}
-                    value={password}/>
-                <button
-                    className='submit-btn btn btn-success'
-                    type='submit'>Log in</button>
-            </form>
-        </div>
-    );
+    render() {
+        if(this.props.user.id) {
+            return <div>{this.props.user.id}</div>;
+        }
+        return ( 
+            <div className='login-container'>
+                <h3 className='auth-header'>Sign in</h3>
+                <div>
+                    <input
+                        className='form-input'
+                        type='text'
+                        placeholder='Username'
+                        onChange={(event) => this.handleInputChange(event.target.value, 'username')}
+                        value={this.state.username}/>
+                    <input
+                        className='form-input'
+                        type='password'
+                        placeholder='Password'
+                        onChange={(event) => this.handleInputChange(event.target.value, 'password')}
+                        value={this.state.password}/>
+                    <button
+                        className='submit-btn btn btn-success'
+                        onClick={this.login}>Log in</button>
+                </div>
+            </div>
+        );
+    }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(authenticationActions, dispatch)
+    };
+};
  
-export default LoginComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
