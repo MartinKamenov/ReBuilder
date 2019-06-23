@@ -8,6 +8,7 @@ const ProjectPageComponent = ({droppedComponents, handleDropComponent}) => {
     return (
         <div className="project-page-container">
             <Droppable
+                    className='droppable-container'
                     types={['component']} // <= allowed drop types
                     onDrop={handleDropComponent}>
                     <DroppedListComponent droppedComponents={droppedComponents}/>

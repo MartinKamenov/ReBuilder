@@ -4,12 +4,13 @@ import './DroppedListComponent.css';
 import DroppedComponent from './DroppedComponent';
 
 const DroppedListComponent = ({droppedComponents}) => {
-    debugger;
     return (
         <div className='droped-components-container'>
             {
-                droppedComponents.map((component) => (
-                    <DroppedComponent droppedComponent={component} />
+                droppedComponents.map((component, i) => (
+                    <DroppedComponent
+                        key={i}
+                        droppedComponent={component} />
                 ))
             }
         </div>

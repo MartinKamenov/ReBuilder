@@ -1,11 +1,12 @@
 import React from 'react';
 import { Draggable } from 'react-drag-and-drop';
 import PropTypes from 'prop-types';
+import './DraggableComponent.css';
 
 const DraggableComponent = ({draggableComponent}) => {
     return (
         <Draggable type="component" data={draggableComponent.name}>
-            <div>{draggableComponent.name}</div>
+            <div className='draggable-element'>{draggableComponent.name}</div>
         </Draggable>
     );
 };

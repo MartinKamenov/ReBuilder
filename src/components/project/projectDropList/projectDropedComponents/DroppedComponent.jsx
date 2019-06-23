@@ -1,13 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const DroppedComponent = ({droppedComponent}) => {
     return (
-        <div>{droppedComponent.title}</div>
+        <div>{droppedComponent.name}</div>
     );
 };
 
-// DroppedComponent.propTypes = {
-
-// };
+DroppedComponent.propTypes = {
+    droppedComponent: PropTypes.shape({
+        name: PropTypes.string.isRequired
+    }).isRequired
+};
  
 export default DroppedComponent;
