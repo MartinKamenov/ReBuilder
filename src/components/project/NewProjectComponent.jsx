@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProjectComponentsList from './projectComponents/ProjectComponentsList';
+import ProjectPageComponent from './projectDropList/ProjectPageComponent';
 import './NewProjectComponent.css';
 import componentTypes from './components/componentTypes';
 
@@ -11,12 +12,11 @@ class NewProjectComponent extends Component {
         console.log(data)
     }
     render() {
-        debugger;
         return (
             <div>
-                <h1>Pesho</h1>
                 <ProjectComponentsList 
                     draggableComponents={this.state.draggableComponents}/>
+                <ProjectPageComponent/>
                 {/* <Droppable
                     types={['fruit']} // <= allowed drop types
                     onDrop={this.onDrop.bind(this)}>

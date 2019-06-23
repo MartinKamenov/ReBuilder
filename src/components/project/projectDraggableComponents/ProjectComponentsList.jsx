@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import DraggableComponent from './DraggableComponent';
 
 const ProjectComponentsList = ({draggableComponents}) => {
-    debugger;
     return (
         <ul className='component-list-container'>
             {
