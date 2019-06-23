@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './HomeComponent.css';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 class HomeComponent extends Component {
     state = { 
@@ -25,7 +25,7 @@ class HomeComponent extends Component {
     render() { 
         return ( 
             <div>
-                <nav class="navbar" id="user-navbar">
+                <nav id="user-navbar">
                     <button class="user-profile">
                     <a class="navbar-brand user-image" href="#">
                         <img src={this.state.user.imageUrl} height="100%" alt="user avatar" />
@@ -34,6 +34,7 @@ class HomeComponent extends Component {
                         <FontAwesomeIcon icon={faCaretDown} /> 
                     </div>
                     </button>
+                    <button type="button" class="btn btn-outline-dark">New <FontAwesomeIcon icon={faPlusCircle} /></button>
                 </nav>
             </div>
         );
