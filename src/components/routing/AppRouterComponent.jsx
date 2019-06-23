@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import HomeComponent from '../home/HomeComponent';
+import DashboardComponent from '../dashboard/DashboardComponent';
 import NavbarComponent from '../navigation/NavbarComponent';
 import LoginComponent from '../auth/login/LoginComponent';
 import RegisterComponent from '../auth/register/RegisterComponent';
@@ -10,8 +10,8 @@ const AppRouterComponent = () => {
         <Router>
             <div className='main-container'>
                 <NavbarComponent/>
+                <Route exact path="/" component={DashboardComponent} />
                 <div className='container'>
-                    <Route exact path="/" component={HomeComponent} />
                     <Route exact path="/login" component={LoginComponent} />
                     <Route exact path="/register" component={RegisterComponent} />
                 </div>
