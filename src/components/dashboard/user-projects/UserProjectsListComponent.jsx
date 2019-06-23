@@ -5,9 +5,15 @@ import UserProjectComponent from './UserProjectComponent';
 const UserProjectsListComponent = (props) => {
     return ( 
         <div class="user-projects-list">
-            <UserProjectComponent />
+            <ul>
+                {
+                    props.projects.map((project) => {
+                        return <li> <UserProjectComponent projectDetails={project}/></li>
+                    })
+                }
+            </ul>
         </div>
-     );
+    );
 }
  
 export default UserProjectsListComponent;

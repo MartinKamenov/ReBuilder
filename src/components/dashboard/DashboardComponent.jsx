@@ -19,7 +19,13 @@ class DashboardComponent extends Component {
                     userName: 'vasko',
                     userId: 'someId',
                     projectImageUrl: 'https://www.image-line.com/support/flstudio_online_manual/html/img_shot/browser.png'
-                }
+                },
+                {
+                    name: 'test2',
+                    userName: 'vasko',
+                    userId: 'someOtherId',
+                    projectImageUrl: 'https://www.image-line.com/support/flstudio_online_manual/html/img_shot/browser.png'
+                },
             ]
         }
      }
@@ -32,12 +38,12 @@ class DashboardComponent extends Component {
                         <img src={this.state.user.imageUrl} height="100%" alt="user avatar" />
                     </a>
                     <div class="username">{this.state.user.username}
-                        <FontAwesomeIcon icon={faCaretDown} /> 
+                        <FontAwesomeIcon icon={faCaretDown} />
                     </div>
                     </button>
                     <button type="button" class="btn btn-outline-dark">New <FontAwesomeIcon icon={faPlusCircle} /></button>
                 </nav>
-                <UserProjectsListComponent />
+                <UserProjectsListComponent projects={this.state.user.projects}/>
             </div>
         );
     }
