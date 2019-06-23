@@ -1,8 +1,9 @@
 import React from 'react';
+import './UserProjectComponent.css'
 
 const UserProjectComponent = (props) => {
     return (
-        <div>
+        <div class="user-project">
             some dummy data
         </div>
       );
