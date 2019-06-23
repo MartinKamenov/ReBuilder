@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
-import { Draggable, Droppable } from 'react-drag-and-drop'
+import ProjectComponentsList from './projectComponents/ProjectComponentsList';
 import './NewProjectComponent.css';
+import componentTypes from './components/componentTypes';
 
 class NewProjectComponent extends Component {
-    state = {  }
+    state = {
+        draggableComponents: componentTypes
+    }
     onDrop(data) {
         console.log(data)
     }
     render() {
+        debugger;
         return (
             <div>
-            <ul>
-                <Draggable type="fruit" data="banana"><li>Banana</li></Draggable>
-                <Draggable type="fruit" data="apple"><li>Apple</li></Draggable>
-                <Draggable type="metal" data="silver"><li>Silver</li></Draggable>
-            </ul>
-            <Droppable
-                types={['fruit']} // <= allowed drop types
-                onDrop={this.onDrop.bind(this)}>
-                <ul className="Smoothie">
-                    <p>1</p>
-                </ul>
-            </Droppable>
-        </div>        
+                <h1>Pesho</h1>
+                <ProjectComponentsList 
+                    draggableComponents={this.state.draggableComponents}/>
+                {/* <Droppable
+                    types={['fruit']} // <= allowed drop types
+                    onDrop={this.onDrop.bind(this)}>
+                    <ul className="Smoothie">
+                        <p>1</p>
+                    </ul>
+                </Droppable> */}
+            </div>
         );
     }
 }
