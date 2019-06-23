@@ -3,6 +3,7 @@ import './DashboardComponent.css';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import UserProjectComponent from './user-projects/UserProjectComponent';
 
 class DashboardComponent extends Component {
     state = { 
@@ -36,6 +37,7 @@ class DashboardComponent extends Component {
                     </button>
                     <button type="button" class="btn btn-outline-dark">New <FontAwesomeIcon icon={faPlusCircle} /></button>
                 </nav>
+                <UserProjectComponent />
             </div>
         );
     }
