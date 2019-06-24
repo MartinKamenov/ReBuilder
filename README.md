@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-## npm run dev
+## `npm run dev`
 Please use ```npm run dev``` to start the dev server
 
 ### `npm start`
