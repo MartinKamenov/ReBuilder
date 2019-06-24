@@ -24,8 +24,8 @@ class NewProjectComponent extends Component {
     }
     render() {
         return (
-            <div>
-                <ProjectComponentsList 
+            <div className="drag-drop-container">
+                <ProjectComponentsList
                     draggableComponents={this.state.draggableComponents}/>
                 <ProjectPageComponent
                     droppedComponents={this.state.droppedComponents}
