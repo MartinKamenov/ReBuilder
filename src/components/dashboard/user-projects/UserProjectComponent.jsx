@@ -2,16 +2,15 @@ import React from 'react';
 import './UserProjectComponent.css'
 
 const UserProjectComponent = (props) => {
-    debugger;
     return (
         <div class="user-project">
-            <div>
-                {props.projectDetails.projectImageUrl}  
-                {props.projectDetails.userName} 
-                {props.projectDetails.name}
-            </div>
+            <a href="#">
+                <div>
+                    <img src={props.projectDetails.projectImageUrl} /> User: {props.projectDetails.userName} Project: {props.projectDetails.name}
+                </div>
+            </a>
         </div>
-      );
+    );
 }
  
 export default UserProjectComponent;
