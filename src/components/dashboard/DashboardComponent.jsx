@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './DashboardComponent.css';
-import ReactDOM from 'react-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import ReactDOM from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import UserProjectsListComponent from './user-projects/UserProjectsListComponent';
 
 class DashboardComponent extends Component {

@@ -18,6 +18,7 @@ class NewProjectComponent extends Component {
         const componentElement = draggableComponents
             .find((draggableComponent) => draggableComponent.name === event.component);
         const droppedComponents = this.state.droppedComponents;
+        componentElement.innerText = componentElement.name;
         droppedComponents.push(componentElement);
 
         this.setState({draggableComponents, droppedComponents});

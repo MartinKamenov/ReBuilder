@@ -1,7 +1,7 @@
 .draggable-element {
     display: flex;
     width: 200px;
-    height: 150px;
+    height: 50px;
     text-align: center;
     justify-content: center;
     align-items: center;
