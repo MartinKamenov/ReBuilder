@@ -7,7 +7,8 @@ import componentTypes from './components/componentTypes';
 class NewProjectComponent extends Component {
     state = {
         draggableComponents: componentTypes,
-        droppedComponents: []
+        droppedComponents: [],
+        newIndex: 0
     }
 
     generateProject = () => {
@@ -20,15 +21,18 @@ class NewProjectComponent extends Component {
     }
 
     handleDropComponent = (event) => {
+        debugger;
         const draggableComponents = this.state.draggableComponents;
-        const componentElement = draggableComponents
+        const foundElement = draggableComponents
             .find((draggableComponent) => draggableComponent.name === event.component);
+        const componentElement = Object.assign({}, foundElement);
         const droppedComponents = this.state.droppedComponents;
         componentElement.innerText = componentElement.name;
         componentElement.isInEditMode = false;
+        componentElement.index = this.state.newIndex;
         droppedComponents.push(componentElement);
 
-        this.setState({droppedComponents});
+        this.setState({ droppedComponents, newIndex: this.state.newIndex + 1 });
     }
 
     handleChangeEditMode = (index) => {

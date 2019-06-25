@@ -8,15 +8,10 @@ const DroppedListComponent = ({
         handleChangeTextDroppedComponent,
         handleChangeEditMode    
     }) => {
-    const mappedDropedComponents = [];
-    droppedComponents.forEach((component, i) => { 
-        component.index = i;
-        mappedDropedComponents.push(component);
-    })
     return (
         <div className='droped-components-container'>
             {
-                mappedDropedComponents.map((component, i) => (
+                droppedComponents.map((component, i) => (
                     <DroppedComponent
                         key={i}
                         droppedComponent={component}
