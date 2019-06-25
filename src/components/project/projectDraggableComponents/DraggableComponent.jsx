@@ -18,6 +18,8 @@ const DraggableComponent = ({draggableComponent}) => {
                             case 'Text':
                                 icon = <FontAwesomeIcon icon={faFont} />;
                                 break;
+                            default:
+                                break;
                         }
                     return icon;
                 })()}

@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import './DroppedListComponent.css';
 import DroppedComponent from './DroppedComponent';
 
-const DroppedListComponent = ({droppedComponents, handleChangeTextDroppedComponent}) => {
+const DroppedListComponent = ({
+        droppedComponents,
+        handleChangeTextDroppedComponent,
+        handleChangeEditMode    
+    }) => {
     const mappedDropedComponents = [];
     droppedComponents.forEach((component, i) => { 
         component.index = i;
@@ -16,7 +20,8 @@ const DroppedListComponent = ({droppedComponents, handleChangeTextDroppedCompone
                     <DroppedComponent
                         key={i}
                         droppedComponent={component}
-                        handleChangeTextDroppedComponent={handleChangeTextDroppedComponent} />
+                        handleChangeTextDroppedComponent={handleChangeTextDroppedComponent}
+                        handleChangeEditMode={handleChangeEditMode} />
                 ))
             }
         </div>
@@ -25,7 +30,8 @@ const DroppedListComponent = ({droppedComponents, handleChangeTextDroppedCompone
 
 DroppedListComponent.propTypes = {
     droppedComponents: PropTypes.array.isRequired,
-    handleChangeTextDroppedComponent: PropTypes.func.isRequired
+    handleChangeTextDroppedComponent: PropTypes.func.isRequired,
+    handleChangeEditMode: PropTypes.func.isRequired
 };
  
 export default DroppedListComponent;

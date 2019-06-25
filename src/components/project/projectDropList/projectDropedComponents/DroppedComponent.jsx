@@ -2,18 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './DroppedComponent.css';
 
-const DroppedComponent = ({droppedComponent, handleChangeTextDroppedComponent}) => {
+const DroppedComponent = ({
+        droppedComponent,
+        handleChangeTextDroppedComponent,
+        handleChangeEditMode
+    }) => {
     if(droppedComponent.isInEditMode) {
         return (
             <input 
                 className='droped-component'
                 value={droppedComponent.innerText}
-                onChange={handleChangeTextDroppedComponent}>
+                onChange={(event) => 
+                    handleChangeTextDroppedComponent(event.target.value, droppedComponent.index)}>
             </input>
         );
     }
     return (
-        <div className='droped-component'>{droppedComponent.name}</div>
+        <div 
+            onClick={() => handleChangeEditMode(droppedComponent.index)}
+            className='droped-component'>
+            {droppedComponent.innerText}
+        </div>
     );
 };
 

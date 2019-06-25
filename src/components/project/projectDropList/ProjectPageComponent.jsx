@@ -7,7 +7,8 @@ import DroppedListComponent from './projectDropedComponents/DroppedListComponent
 const ProjectPageComponent = ({
         droppedComponents,
         handleDropComponent,
-        handleChangeTextDroppedComponent
+        handleChangeTextDroppedComponent,
+        handleChangeEditMode
     }) => {
     return (
         <div className="project-page-container">
@@ -17,6 +18,7 @@ const ProjectPageComponent = ({
                     onDrop={handleDropComponent}>
                     <DroppedListComponent
                         handleChangeTextDroppedComponent={handleChangeTextDroppedComponent}
+                        handleChangeEditMode={handleChangeEditMode}
                         droppedComponents={droppedComponents}/>
             </Droppable>
         </div>
@@ -26,7 +28,8 @@ const ProjectPageComponent = ({
 ProjectPageComponent.propTypes = {
     droppedComponents: PropTypes.array.isRequired,
     handleDropComponent: PropTypes.func.isRequired,
-    handleChangeTextDroppedComponent: PropTypes.func.isRequired
+    handleChangeTextDroppedComponent: PropTypes.func.isRequired,
+    handleChangeEditMode: PropTypes.func.isRequired
 };
  
 export default ProjectPageComponent;

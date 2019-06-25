@@ -31,6 +31,13 @@ class NewProjectComponent extends Component {
         this.setState({droppedComponents});
     }
 
+    handleChangeEditMode = (index) => {
+        const droppedComponents = this.state.droppedComponents;
+        droppedComponents[index].isInEditMode = !droppedComponents[index].isInEditMode;
+
+        this.setState({droppedComponents});
+    }
+
     handleChangeTextDroppedComponent = (newText, index) => {
         const droppedComponents = this.state.droppedComponents;
         droppedComponents[index].innerText = newText;
@@ -45,6 +52,7 @@ class NewProjectComponent extends Component {
                         draggableComponents={this.state.draggableComponents}/>
                     <ProjectPageComponent
                         handleChangeTextDroppedComponent={this.handleChangeTextDroppedComponent}
+                        handleChangeEditMode={this.handleChangeEditMode}
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
                 </div>
