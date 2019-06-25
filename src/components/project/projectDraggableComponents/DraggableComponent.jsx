@@ -14,10 +14,12 @@ const DraggableComponent = ({draggableComponent}) => {
                         switch(draggableComponent.name) {
                             case 'Header':
                                 icon = <FontAwesomeIcon icon={faHeading} />;
+                                break;
                             case 'Text':
                                 icon = <FontAwesomeIcon icon={faFont} />;
-                        return icon;
-                    }
+                                break;
+                        }
+                    return icon;
                 })()}
                 
                 <span>{draggableComponent.name}</span>

@@ -27,7 +27,7 @@ class NewProjectComponent extends Component {
         componentElement.innerText = componentElement.name;
         droppedComponents.push(componentElement);
 
-        this.setState({draggableComponents, droppedComponents});
+        this.setState({droppedComponents});
     }
     render() {
         return (
@@ -38,11 +38,12 @@ class NewProjectComponent extends Component {
                     <ProjectPageComponent
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
-                    
                 </div>
                 <button 
-                        className='btn btn-success'
-                        onClick={this.generateProject}>Build project</button>
+                    className='btn btn-success'
+                    onClick={this.generateProject}>
+                    Build project
+                </button>
             </div>
         );
     }
