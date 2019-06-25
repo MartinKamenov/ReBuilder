@@ -13,7 +13,7 @@ const DraggableComponent = ({draggableComponent}) => {
                         let icon = <FontAwesomeIcon icon={faFont} />;
                         switch(draggableComponent.name) {
                             case 'Header':
-                                    icon = <FontAwesomeIcon icon={faHeading} />;
+                                icon = <FontAwesomeIcon icon={faHeading} />;
                             case 'Text':
                                 icon = <FontAwesomeIcon icon={faFont} />;
                         return icon;

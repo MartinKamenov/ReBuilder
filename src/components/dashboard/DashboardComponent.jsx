@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import UserProjectsListComponent from './user-projects/UserProjectsListComponent';
+import { Link } from 'react-router-dom';
 
 class DashboardComponent extends Component {
     state = { 
@@ -35,7 +36,7 @@ class DashboardComponent extends Component {
                         <FontAwesomeIcon icon={faCaretDown} /> 
                     </div>
                     </button>
-                    <button type="button" class="btn btn-outline-dark">New <FontAwesomeIcon icon={faPlusCircle} /></button>
+                    <Link to='/project/new' type="button" class="btn btn-outline-dark">New <FontAwesomeIcon icon={faPlusCircle} /></Link>
                 </nav>
                 <UserProjectsListComponent />
             </div>

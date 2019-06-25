@@ -9,8 +9,14 @@ class NewProjectComponent extends Component {
         draggableComponents: componentTypes,
         droppedComponents: []
     }
-    onDrop(data) {
-        console.log(data)
+
+    generateProject = () => {
+        const element = document.createElement("a");
+        const file = new Blob(['text'], {type: 'text/plain'});
+        element.href = URL.createObjectURL(file);
+        element.download = "myFile.zip";
+        document.body.appendChild(element); // Required for this to work in FireFox
+        element.click();
     }
 
     handleDropComponent = (event) => {
@@ -25,12 +31,18 @@ class NewProjectComponent extends Component {
     }
     render() {
         return (
-            <div className="drag-drop-container">
-                <ProjectComponentsList
-                    draggableComponents={this.state.draggableComponents}/>
-                <ProjectPageComponent
-                    droppedComponents={this.state.droppedComponents}
-                    handleDropComponent={this.handleDropComponent}/>
+            <div>
+                <div className="drag-drop-container">
+                    <ProjectComponentsList
+                        draggableComponents={this.state.draggableComponents}/>
+                    <ProjectPageComponent
+                        droppedComponents={this.state.droppedComponents}
+                        handleDropComponent={this.handleDropComponent}/>
+                    
+                </div>
+                <button 
+                        className='btn btn-success'
+                        onClick={this.generateProject}>Build project</button>
             </div>
         );
     }
