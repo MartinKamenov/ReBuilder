@@ -4,14 +4,20 @@ import './ProjectPageComponent.css';
 import PropTypes from 'prop-types';
 import DroppedListComponent from './projectDropedComponents/DroppedListComponent';
 
-const ProjectPageComponent = ({droppedComponents, handleDropComponent}) => {
+const ProjectPageComponent = ({
+        droppedComponents,
+        handleDropComponent,
+        handleChangeTextDroppedComponent
+    }) => {
     return (
         <div className="project-page-container">
             <Droppable
                     className='droppable-container'
                     types={['component']} // <= allowed drop types
                     onDrop={handleDropComponent}>
-                    <DroppedListComponent droppedComponents={droppedComponents}/>
+                    <DroppedListComponent
+                        handleChangeTextDroppedComponent={handleChangeTextDroppedComponent}
+                        droppedComponents={droppedComponents}/>
             </Droppable>
         </div>
     );
@@ -19,7 +25,8 @@ const ProjectPageComponent = ({droppedComponents, handleDropComponent}) => {
 
 ProjectPageComponent.propTypes = {
     droppedComponents: PropTypes.array.isRequired,
-    handleDropComponent: PropTypes.func.isRequired
+    handleDropComponent: PropTypes.func.isRequired,
+    handleChangeTextDroppedComponent: PropTypes.func.isRequired
 };
  
 export default ProjectPageComponent;

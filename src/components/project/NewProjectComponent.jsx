@@ -25,9 +25,17 @@ class NewProjectComponent extends Component {
             .find((draggableComponent) => draggableComponent.name === event.component);
         const droppedComponents = this.state.droppedComponents;
         componentElement.innerText = componentElement.name;
+        componentElement.isInEditMode = false;
         droppedComponents.push(componentElement);
 
         this.setState({droppedComponents});
+    }
+
+    handleChangeTextDroppedComponent = (newText, index) => {
+        const droppedComponents = this.state.droppedComponents;
+        droppedComponents[index].innerText = newText;
+
+        this.setState({ droppedComponents });
     }
     render() {
         return (
@@ -36,6 +44,7 @@ class NewProjectComponent extends Component {
                     <ProjectComponentsList
                         draggableComponents={this.state.draggableComponents}/>
                     <ProjectPageComponent
+                        handleChangeTextDroppedComponent={this.handleChangeTextDroppedComponent}
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
                 </div>

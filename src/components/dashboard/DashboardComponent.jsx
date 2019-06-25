@@ -28,15 +28,15 @@ class DashboardComponent extends Component {
         return ( 
             <div>
                 <nav id="user-navbar">
-                    <button class="user-profile">
-                    <a class="navbar-brand user-image" href="#">
+                    <button className="user-profile">
+                    <a className="navbar-brand user-image" href="#">
                         <img src={this.state.user.imageUrl} height="100%" alt="user avatar" />
                     </a>
-                    <div class="username">{this.state.user.username}
+                    <div className="username">{this.state.user.username}
                         <FontAwesomeIcon icon={faCaretDown} /> 
                     </div>
                     </button>
-                    <Link to='/project/new' type="button" class="btn btn-outline-dark">New <FontAwesomeIcon icon={faPlusCircle} /></Link>
+                    <Link to='/project/new' type="button" className="btn btn-outline-dark">New <FontAwesomeIcon icon={faPlusCircle} /></Link>
                 </nav>
                 <UserProjectsListComponent />
             </div>
