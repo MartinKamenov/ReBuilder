@@ -12,3 +12,7 @@
     height: 100%;
     margin: auto;
 }
+
+.edit-input {
+    display: inline-block;
+}
