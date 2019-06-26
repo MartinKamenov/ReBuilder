@@ -3,6 +3,7 @@ import ProjectComponentsList from './projectDraggableComponents/ProjectComponent
 import ProjectPageComponent from './projectDropList/ProjectPageComponent';
 import './NewProjectComponent.css';
 import componentTypes from './components/componentTypes';
+import projectGenerator from '../../service/projectGenerator.service';
 
 class NewProjectComponent extends Component {
     state = {
@@ -13,12 +14,7 @@ class NewProjectComponent extends Component {
     }
 
     generateProject = () => {
-        const element = document.createElement("a");
-        const file = new Blob(['text'], {type: 'text/plain'});
-        element.href = URL.createObjectURL(file);
-        element.download = "myFile.zip";
-        document.body.appendChild(element); // Required for this to work in FireFox
-        element.click();
+        projectGenerator.generateProject(this.state.droppedComponents);
     }
 
     handleDropComponent = (event) => {
