@@ -8,7 +8,8 @@ class NewProjectComponent extends Component {
     state = {
         draggableComponents: componentTypes,
         droppedComponents: [],
-        newIndex: 0
+        newIndex: 0,
+        previousInnerText: ''
     }
 
     generateProject = () => {
@@ -37,9 +38,27 @@ class NewProjectComponent extends Component {
 
     handleChangeEditMode = (index) => {
         const droppedComponents = this.state.droppedComponents;
+
         droppedComponents[index].isInEditMode = !droppedComponents[index].isInEditMode;
+        droppedComponents.forEach((component, i) => {
+            if(i !== index) {
+                component.isInEditMode = false;
+            }
+        });
+
+        if(droppedComponents[index].isInEditMode) {
+            this.setState({previousInnerText: droppedComponents[index].innerText});
+        }
 
         this.setState({droppedComponents});
+    }
+
+    handleForceExitEditMode = (index) => {
+        const droppedComponents = this.state.droppedComponents;
+        droppedComponents[index].isInEditMode = false;
+        droppedComponents[index].innerText = this.state.previousInnerText;
+
+        this.setState({droppedComponents, previousInnerText: ''});
     }
 
     handleChangeTextDroppedComponent = (newText, index) => {
@@ -57,6 +76,7 @@ class NewProjectComponent extends Component {
                     <ProjectPageComponent
                         handleChangeTextDroppedComponent={this.handleChangeTextDroppedComponent}
                         handleChangeEditMode={this.handleChangeEditMode}
+                        handleForceExitEditMode={this.handleForceExitEditMode}
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
                 </div>

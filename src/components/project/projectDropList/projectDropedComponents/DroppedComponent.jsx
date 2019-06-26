@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './DroppedComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const DroppedComponent = ({
         droppedComponent,
         handleChangeTextDroppedComponent,
-        handleChangeEditMode
+        handleChangeEditMode,
+        handleForceExitEditMode
     }) => {
     if(droppedComponent.isInEditMode) {
         return (
@@ -18,8 +19,15 @@ const DroppedComponent = ({
                     onChange={(event) => 
                         handleChangeTextDroppedComponent(event.target.value, droppedComponent.index)}>
                 </input>
-                <button onClick={() => handleChangeEditMode(droppedComponent.index)}>
+                <button
+                    className='btn btn-success'
+                    onClick={() => handleChangeEditMode(droppedComponent.index)}>
                     <FontAwesomeIcon icon={faCheck} /> 
+                </button>
+                <button
+                    className='btn btn-danger'
+                    onClick={() => handleForceExitEditMode(droppedComponent.index)}>
+                    <FontAwesomeIcon icon={faTimes} /> 
                 </button>
             </div>
         );
@@ -40,7 +48,8 @@ DroppedComponent.propTypes = {
         isInEditMode: PropTypes.bool.isRequired,
         index: PropTypes.number.isRequired
     }).isRequired,
-    handleChangeTextDroppedComponent: PropTypes.func.isRequired
+    handleChangeTextDroppedComponent: PropTypes.func.isRequired,
+    handleForceExitEditMode: PropTypes.func.isRequired
 };
  
 export default DroppedComponent;
