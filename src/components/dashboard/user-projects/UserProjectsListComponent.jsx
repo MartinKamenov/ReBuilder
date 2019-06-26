@@ -1,19 +1,23 @@
 import React from 'react';
-import './UserProjectsListComponent.css'
+import './UserProjectsListComponent.css';
 import UserProjectComponent from './UserProjectComponent';
+import PropTypes, { array } from 'prop-types';
 
-const UserProjectsListComponent = (props) => {
-    return ( 
+const UserProjectsListComponent = ({projects}) => {
+    return (
         <div class="user-projects-list">
             <ul>
                 {
-                    props.projects.map((project) => {
+                    projects.map((project) => {
                         return <li> <UserProjectComponent projectDetails={project}/></li>
                     })
                 }
             </ul>
         </div>
     );
+}
+UserProjectComponent.PropTypes = {
+    projects: PropTypes.array.isRequired
 }
  
 export default UserProjectsListComponent;
