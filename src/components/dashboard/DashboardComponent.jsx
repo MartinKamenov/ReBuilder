@@ -19,7 +19,19 @@ class DashboardComponent extends Component {
                     userName: 'vasko',
                     userId: 'someId',
                     projectImageUrl: 'https://www.image-line.com/support/flstudio_online_manual/html/img_shot/browser.png'
-                }
+                },
+                {
+                    name: 'test2',
+                    userName: 'vasko',
+                    userId: 'someOtherId',
+                    projectImageUrl: 'https://cdn2.slidemodel.com/wp-content/uploads/FF0104-free-dashboard-concept-slide-16x9.jpg'
+                },
+                {
+                    name: 'test3',
+                    userName: 'vasko',
+                    userId: 'someOtherId',
+                    projectImageUrl: 'https://www.themeineed.com/wp-content/uploads/edd/2017/10/klorofil-v2.0-opt.png'
+                },
             ]
         }
      }
@@ -37,7 +49,7 @@ class DashboardComponent extends Component {
                     </button>
                     <Link to='/project/new' type="button" className="btn btn-outline-dark">New <FontAwesomeIcon icon={faPlusCircle} /></Link>
                 </nav>
-                <UserProjectsListComponent />
+                <UserProjectsListComponent projects={this.state.user.projects}/>
             </div>
         );
     }

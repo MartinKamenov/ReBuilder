@@ -1,3 +1,14 @@
-.user-project {
-    color: red;
+.user-project a {
+    color: unset!important;
+    text-decoration: none!important;
+}
+.user-project a div {
+    padding: 5px;
+}
+.user-project a div:hover {
+    background: #F7F8FB;
+}
+.user-project img {
+    height: 50px;
+    width: 70px;
 }

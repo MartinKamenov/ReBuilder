@@ -1,3 +1,10 @@
 .user-projects-list {
-    background: green;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.user-projects-list ul{
+    padding: 15px 0px;
+}
+.user-projects-list ul li{
+    list-style-type: none;
 }
