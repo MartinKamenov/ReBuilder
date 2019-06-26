@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './DashboardComponent.css';
-import ReactDOM from 'react-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import UserProjectsListComponent from './user-projects/UserProjectsListComponent';
+import { Link } from 'react-router-dom';
 
 class DashboardComponent extends Component {
     state = { 
@@ -27,15 +27,15 @@ class DashboardComponent extends Component {
         return ( 
             <div>
                 <nav id="user-navbar">
-                    <button class="user-profile">
-                    <a class="navbar-brand user-image" href="#">
+                    <button className="user-profile">
+                    <a className="navbar-brand user-image" href="#">
                         <img src={this.state.user.imageUrl} height="100%" alt="user avatar" />
                     </a>
-                    <div class="username">{this.state.user.username}
+                    <div className="username">{this.state.user.username}
                         <FontAwesomeIcon icon={faCaretDown} /> 
                     </div>
                     </button>
-                    <button type="button" class="btn btn-outline-dark">New <FontAwesomeIcon icon={faPlusCircle} /></button>
+                    <Link to='/project/new' type="button" className="btn btn-outline-dark">New <FontAwesomeIcon icon={faPlusCircle} /></Link>
                 </nav>
                 <UserProjectsListComponent />
             </div>

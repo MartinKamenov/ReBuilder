@@ -3,7 +3,7 @@ import './UserProjectComponent.css'
 
 const UserProjectComponent = (props) => {
     return (
-        <div class="user-project">
+        <div className="user-project">
             some dummy data
         </div>
       );
