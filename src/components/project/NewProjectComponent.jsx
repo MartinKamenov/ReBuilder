@@ -7,6 +7,7 @@ import projectGenerator from '../../service/projectGenerator.service';
 
 class NewProjectComponent extends Component {
     state = {
+        name: 'Project name',
         draggableComponents: componentTypes,
         droppedComponents: [],
         newIndex: 0,
@@ -18,7 +19,6 @@ class NewProjectComponent extends Component {
     }
 
     handleDropComponent = (event) => {
-        debugger;
         const draggableComponents = this.state.draggableComponents;
         const foundElement = draggableComponents
             .find((draggableComponent) => draggableComponent.name === event.component);
@@ -79,7 +79,7 @@ class NewProjectComponent extends Component {
                 <button 
                     className='btn btn-success'
                     onClick={this.generateProject}>
-                    Build project
+                    Generate project
                 </button>
             </div>
         );
