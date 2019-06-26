@@ -2,3 +2,29 @@
     display: flex;
     flex-direction: row;
 }
+
+.new-project-name-outer-container {
+    width: 100%;
+    text-align: center;
+    margin: 10px;
+    padding: 5px;
+}
+.new-project-name-inner-container {
+    margin: auto;
+}
+
+.new-project-name-input {
+    margin-left: 10px;
+}
+
+.generate-project-btn-container {
+    float: right;
+}
+
+.generate-project-btn {
+    width: 150px;
+}
+
+.new-project-btn-text {
+    margin-left: 5px;
+}

@@ -4,10 +4,12 @@ import ProjectPageComponent from './projectDropList/ProjectPageComponent';
 import './NewProjectComponent.css';
 import componentTypes from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload, faSave } from '@fortawesome/free-solid-svg-icons';
 
 class NewProjectComponent extends Component {
     state = {
-        name: 'Project name',
+        name: '',
         draggableComponents: componentTypes,
         droppedComponents: [],
         newIndex: 0,
@@ -15,7 +17,7 @@ class NewProjectComponent extends Component {
     }
 
     generateProject = () => {
-        projectGenerator.generateProject(this.state.droppedComponents);
+        projectGenerator.generateProject(this.state.name, this.state.droppedComponents);
     }
 
     handleDropComponent = (event) => {
@@ -63,9 +65,43 @@ class NewProjectComponent extends Component {
 
         this.setState({ droppedComponents });
     }
+
+    handleChangeProjectName = (event) => {
+        this.setState({ name: event.target.value });
+    }
+
+    handleSaveProject = () => {
+        //TO DO: Make request for saving current project state
+        alert('To be implement');
+    }
+
     render() {
         return (
             <div>
+                <div className='new-project-name-outer-container'>
+                    <div className='new-project-name-inner-container'>
+                        <label>Project name</label>
+                        <input
+                            className='new-project-name-input'
+                            placeholder='Add name here'
+                            value={this.state.name}
+                            onChange={this.handleChangeProjectName}/>
+                        <div className='generate-project-btn-container'>
+                            <button
+                                className='btn btn-primary generate-project-btn'
+                                onClick={this.handleSaveProject}>
+                                <FontAwesomeIcon icon={faSave} /> 
+                                <span className='new-project-btn-text'>Save project</span>
+                            </button>
+                            <button 
+                                className='btn btn-success generate-project-btn'
+                                onClick={this.generateProject}>
+                                <FontAwesomeIcon icon={faDownload} />
+                                <span className='new-project-btn-text'>Generate project</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div className="drag-drop-container">
                     <ProjectComponentsList
                         draggableComponents={this.state.draggableComponents}/>
@@ -76,11 +112,6 @@ class NewProjectComponent extends Component {
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
                 </div>
-                <button 
-                    className='btn btn-success'
-                    onClick={this.generateProject}>
-                    Generate project
-                </button>
             </div>
         );
     }
