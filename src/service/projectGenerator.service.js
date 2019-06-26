@@ -1,11 +1,13 @@
+import JSZip from 'jszip';
+import FileSaver from 'file-saver';
+
 const projectGenerator = {
     generateProject: (droppedComponents) => {
-        const element = document.createElement("a");
-        const file = new Blob(['text'], {type: 'text/plain'});
-        element.href = URL.createObjectURL(file);
-        element.download = "myFile.zip";
-        document.body.appendChild(element);
-        element.click();
+        let zip = new JSZip();
+        zip.file("idlist.txt", `PMID:29651880\r\nPMID:29303721`);
+        zip.generateAsync({type: "blob"}).then(function(content) {
+        FileSaver.saveAs(content, "download.zip");
+        });
     }
 };
 
