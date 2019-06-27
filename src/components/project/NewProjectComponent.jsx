@@ -77,12 +77,20 @@ class NewProjectComponent extends Component {
     }
 
     getComponentInEditMode = () => {
-        const component = this.state.droppedComponents.find(comp => comp.isInEditMode);
-        return component;
+        let index = -1;
+        const component = this.state.droppedComponents.find((comp, i) => {
+            if(comp.isInEditMode) {
+                index = i;
+            }
+
+            return comp.isInEditMode;
+        });
+
+        return {componentInEditMode: component, index};
     }
 
     render() {
-        const componentInEditMode = this.getComponentInEditMode();
+        const { componentInEditMode, index } = this.getComponentInEditMode();
         return (
             <div>
                 <div className='new-project-name-outer-container'>
@@ -118,7 +126,7 @@ class NewProjectComponent extends Component {
                         handleForceExitEditMode={this.handleForceExitEditMode}
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
-                    <ElementToolbarComponent component={componentInEditMode}/>
+                    <ElementToolbarComponent component={componentInEditMode} index={index}/>
                 </div>
             </div>
         );

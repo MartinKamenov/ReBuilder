@@ -3,7 +3,7 @@ import { SliderPicker } from 'react-color';
 import PropTypes from 'prop-types';
 import './ElementToolbarComponent.css';
 
-const ElementToolbarComponent = ({component}) => {
+const ElementToolbarComponent = ({component, index}) => {
     if(!component) {
         return (
             <div className='toolbar-container'>
@@ -14,14 +14,21 @@ const ElementToolbarComponent = ({component}) => {
     }
     return (
         <div className='toolbar-container'>
-            <SliderPicker style={{width: '200px'}} />
-            <input
-                value={component.innerText}
-                placeholder='Text'
-                disabled></input>
-            <input
-                placeholder='Background'
-                disabled></input>
+            <div className='toolbar-element-container'>
+                <label>Text</label>
+                <input
+                    value={component.innerText}
+                    placeholder='Text'>
+                </input>
+            </div>
+            <div className='toolbar-element-container'>
+                <label>Font color</label>
+                <SliderPicker style={{width: '200px'}} />
+            </div>
+            <div className='toolbar-element-container'>
+                <label>Background color</label>
+                <SliderPicker style={{width: '200px'}} />
+            </div>
         </div>
     );
 }
@@ -30,7 +37,8 @@ ElementToolbarComponent.propTypes = {
     component: PropTypes.shape({
         name: PropTypes.string.isRequired,
         innerText: PropTypes.string.isRequired
-    })
+    }),
+    index: PropTypes.number
 };
  
 export default ElementToolbarComponent;
