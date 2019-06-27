@@ -1,7 +1,7 @@
 import elementGenerator from './elementGenerator.service';
 
 const templatingService = {
-    getAllTemplates: (droppedComponents) => {
+    getAllTemplates: (name, droppedComponents) => {
         return [
             {
                 filePath: "src/index.js",
@@ -74,7 +74,7 @@ export default App;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>React App</title>
+    <title>${name}</title>
     </head>
     <body>
     <div id="root"></div>
