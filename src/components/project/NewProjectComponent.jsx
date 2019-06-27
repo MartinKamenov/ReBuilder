@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import ProjectComponentsList from './projectDraggableComponents/ProjectComponentsList';
 import ProjectPageComponent from './projectDropList/ProjectPageComponent';
-import './NewProjectComponent.css';
+import ElementToolbarComponent from './elementToolbar/ElementToolbarComponent';
 import componentTypes from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faSave } from '@fortawesome/free-solid-svg-icons';
+import './NewProjectComponent.css';
 
 class NewProjectComponent extends Component {
     state = {
@@ -111,6 +112,7 @@ class NewProjectComponent extends Component {
                         handleForceExitEditMode={this.handleForceExitEditMode}
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
+                    <ElementToolbarComponent/>
                 </div>
             </div>
         );
