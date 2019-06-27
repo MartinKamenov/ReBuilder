@@ -4,6 +4,9 @@ const componentTypes = [
     },
     {
         name: 'Text'
+    },
+    {
+        name: 'Grid'
     }
 ];
 
