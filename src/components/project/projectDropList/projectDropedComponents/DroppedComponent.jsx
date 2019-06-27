@@ -33,10 +33,40 @@ const DroppedComponent = ({
         );
     }
     return (
-        <div 
-            onClick={() => handleChangeEditMode(droppedComponent.index)}
-            className='droped-component'>
-            {droppedComponent.innerText}
+        <div>
+        {
+            (() => {
+                let component = null;
+                switch (droppedComponent.name) {
+                    case 'Header':
+                        component = (
+                        <h1
+                            onClick={() => handleChangeEditMode(droppedComponent.index)}
+                            className='droped-component'>
+                            {droppedComponent.innerText}
+                        </h1>)
+                        break;
+                    case 'Text':
+                        component = (
+                        <div
+                            onClick={() => handleChangeEditMode(droppedComponent.index)}
+                            className='droped-component'>
+                            {droppedComponent.innerText}
+                        </div>);
+                        break;
+                    default:
+                        component = (
+                        <div
+                            onClick={() => handleChangeEditMode(droppedComponent.index)}
+                            className='droped-component'>
+                            {droppedComponent.innerText}
+                        </div>);
+                        break;
+                }
+
+                return component;
+            })()
+        }
         </div>
     );
 };

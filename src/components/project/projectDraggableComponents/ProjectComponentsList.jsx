@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DraggableComponent from './DraggableComponent';
+import './ProjectComponentsList.css';
 
 const ProjectComponentsList = ({draggableComponents}) => {
     return (
@@ -10,6 +11,7 @@ const ProjectComponentsList = ({draggableComponents}) => {
                     <DraggableComponent key={i} draggableComponent={component}/>
                 )
             }
+            <button className='btn btn-primary rearange-btn'>Rearange</button>
         </ul>
     );
 }
