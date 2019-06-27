@@ -16,7 +16,7 @@ const ElementToolbarComponent = ({component}) => {
         <div className='toolbar-container'>
             <SliderPicker style={{width: '200px'}} />
             <input
-
+                value={component.innerText}
                 placeholder='Text'
                 disabled></input>
             <input
@@ -28,7 +28,8 @@ const ElementToolbarComponent = ({component}) => {
 
 ElementToolbarComponent.propTypes = {
     component: PropTypes.shape({
-
+        name: PropTypes.string.isRequired,
+        innerText: PropTypes.string.isRequired
     })
 };
  

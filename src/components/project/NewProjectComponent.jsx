@@ -76,7 +76,13 @@ class NewProjectComponent extends Component {
         alert('To be implement');
     }
 
+    getComponentInEditMode = () => {
+        const component = this.state.droppedComponents.find(comp => comp.isInEditMode);
+        return component;
+    }
+
     render() {
+        const componentInEditMode = this.getComponentInEditMode();
         return (
             <div>
                 <div className='new-project-name-outer-container'>
@@ -112,7 +118,7 @@ class NewProjectComponent extends Component {
                         handleForceExitEditMode={this.handleForceExitEditMode}
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
-                    <ElementToolbarComponent/>
+                    <ElementToolbarComponent component={componentInEditMode}/>
                 </div>
             </div>
         );
