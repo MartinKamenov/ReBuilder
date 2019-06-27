@@ -1,19 +1,35 @@
 import React from 'react';
-import { SketchPicker } from 'react-color'
+import { SliderPicker } from 'react-color';
+import PropTypes from 'prop-types';
 import './ElementToolbarComponent.css';
 
-const ElementToolbarComponent = () => {
+const ElementToolbarComponent = ({component}) => {
+    if(!component) {
+        return (
+            <div className='toolbar-container'>
+                <h3>Toolbar</h3>
+                <div>Select an element by clicking on it</div>
+            </div>
+        )
+    }
     return (
         <div className='toolbar-container'>
-            <SketchPicker/>
+            <SliderPicker style={{width: '200px'}} />
             <input
-                placeholder='Text color'
+
+                placeholder='Text'
                 disabled></input>
             <input
-                placeholder='Background color'
+                placeholder='Background'
                 disabled></input>
         </div>
     );
 }
+
+ElementToolbarComponent.propTypes = {
+    component: PropTypes.shape({
+
+    })
+};
  
 export default ElementToolbarComponent;
