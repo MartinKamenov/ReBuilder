@@ -1,7 +1,7 @@
-
+import elementGenerator from './elementGenerator.service';
 
 const templatingService = {
-    getAllTemplates: () => {
+    getAllTemplates: (droppedComponents) => {
         return [
             {
                 filePath: "src/index.js",
@@ -16,11 +16,11 @@ ReactDOM.render(<App />, document.getElementById('root'));`
                 filePath: "src/App.js",
                 template: 
 `import React from 'react';
+import MainComponent from './components/MainComponent.jsx';
 
 function App() {
     return (
-    <div className="App">
-    </div>
+        <MainComponent/>
     );
 }
 
@@ -81,6 +81,33 @@ export default App;
     </body>
 </html>`
             },
+            {
+                filePath: "./src/components/main.css",
+                template: 
+`.element-center {
+    text-align: center;
+    width: '100%';
+}
+`
+            },
+            {
+                filePath: "./src/components/MainComponent.jsx",
+                template: 
+`import React, { Component } from 'react';
+import './main.css';
+
+class MainComponent extends Component {
+    state = {  }
+    render() { 
+        return (
+            <div>${elementGenerator.generateElements(droppedComponents)}</div>
+        );
+    }
+}
+ 
+export default MainComponent;
+`
+            }
         ]
     }
 };
