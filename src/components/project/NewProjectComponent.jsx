@@ -67,10 +67,6 @@ class NewProjectComponent extends Component {
         this.setState({ droppedComponents });
     }
 
-    handleChangeProjectName = (event) => {
-        this.setState({ name: event.target.value });
-    }
-
     handleSaveProject = () => {
         //TO DO: Make request for saving current project state
         alert('To be implement');
@@ -95,12 +91,6 @@ class NewProjectComponent extends Component {
             <div>
                 <div className='new-project-name-outer-container'>
                     <div className='new-project-name-inner-container'>
-                        <label>Project name</label>
-                        <input
-                            className='new-project-name-input'
-                            placeholder='Add name here'
-                            value={this.state.name}
-                            onChange={this.handleChangeProjectName}/>
                         <div className='generate-project-btn-container'>
                             <button
                                 className='btn btn-primary generate-project-btn'
