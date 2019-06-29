@@ -5,7 +5,7 @@ import PropTypes, { array } from 'prop-types';
 
 const UserProjectsListComponent = ({projects}) => {
     return (
-        <div class="user-projects-list">
+        <div className="user-projects-list">
             <ul>
                 {
                     projects.map((project) => {

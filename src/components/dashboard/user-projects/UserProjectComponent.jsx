@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const UserProjectComponent = ({projectDetails}) => {
     return (
-        <div class="user-project">
+        <div className="user-project">
             <a href="#">
                 <div>
                     <img src={projectDetails.projectImageUrl} /> {projectDetails.name}

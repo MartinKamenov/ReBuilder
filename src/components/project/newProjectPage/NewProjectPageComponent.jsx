@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import * as authenticationActions from '../../../actions/projectActions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import './NewProjectPageComponent.css';
 
 class NewProjectPageComponent extends Component {
@@ -10,7 +13,17 @@ class NewProjectPageComponent extends Component {
     handleChangeInput = (text, field) => {
         this.setState({ [field]: text });
     }
-    render() { 
+
+    handleCreateProject = () => {
+        this.props.actions.createProject();
+    }
+
+    render() {
+        // debugger;
+        // if(this.props.project) {
+        //     debugger;
+        //     //this.props.navigation;
+        // }
         return ( 
             <div className='center-container'>
                 <div>
@@ -30,10 +43,24 @@ class NewProjectPageComponent extends Component {
                         value={this.state.projectImage}
                         onChange={(event) => this.handleChangeInput(event.target.value, 'projectImage')}/>
                 </div>
-                <button className='btn btn-success project-page-button'>Create new project</button>
+                <button
+                    onClick={this.handleCreateProject}
+                    className='btn btn-success project-page-button'>Create new project</button>
             </div>
         );
     }
 }
- 
-export default NewProjectPageComponent;
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(authenticationActions, dispatch)
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewProjectPageComponent);
