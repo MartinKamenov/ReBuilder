@@ -15,16 +15,14 @@ class NewProjectPageComponent extends Component {
     }
 
     handleCreateProject = () => {
-        this.props.actions.createProject();
+        if(!this.state.name || !this.state.projectImage) {
+            return;
+        }
+        this.props.actions.createProject(this.state.name, this.state.projectImage);
     }
 
     render() {
-        // debugger;
-        // if(this.props.project) {
-        //     debugger;
-        //     //this.props.navigation;
-        // }
-        return ( 
+        return (
             <div className='center-container'>
                 <div>
                     <label className='project-page-label'>Project name</label>
@@ -53,7 +51,7 @@ class NewProjectPageComponent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        project: state.project
     };
 };
 
