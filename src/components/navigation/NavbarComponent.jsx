@@ -1,10 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import * as authenticationActions from '../../actions/authenticationActions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import './NavbarComponent.css';
 
 class NavbarComponent extends Component {
     render() { 
+        console.log(this.state);
         return ( 
             <Fragment>
                 <Navbar inverse collapseOnSelect className="main-navbar sticky">
@@ -20,18 +24,29 @@ class NavbarComponent extends Component {
                                 <Link className="nav-link navbar_element" to="/">Home</Link>
                             </NavItem>
                         </Nav>
-                        <Nav pullRight>
-                            <Nav>
+                        { this.props.user.username ? (
+                            <Nav pullRight>
                                 <NavItem componentClass='span' className="nav-link-container">
-                                    <Link className="nav-link navbar_element" to="/login">Sign in</Link>
+                                    <Link className="nav-link navbar_element"
+                                        to={"/user/" + this.props.user.id}>
+                                        Hello, {this.props.user.username}
+                                    </Link>
                                 </NavItem>
+                            </Nav>  
+                        ) : (
+                            <Nav pullRight>
+                                <Nav>
+                                    <NavItem componentClass='span' className="nav-link-container">
+                                        <Link className="nav-link navbar_element" to="/login">Sign in</Link>
+                                    </NavItem>
+                                </Nav>
+                                <Nav>
+                                    <NavItem componentClass='span' className="nav-link-container">
+                                        <Link className="nav-link navbar_element" to="/register">Sign up</Link>
+                                    </NavItem>
+                                </Nav>
                             </Nav>
-                            <Nav>
-                                <NavItem componentClass='span' className="nav-link-container">
-                                    <Link className="nav-link navbar_element" to="/register">Sign up</Link>
-                                </NavItem>
-                            </Nav>
-                        </Nav>
+                        ) } 
                     </Navbar.Collapse>
                 </Navbar>
             </Fragment>
@@ -39,4 +54,16 @@ class NavbarComponent extends Component {
     }
 }
  
-export default NavbarComponent;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(authenticationActions, dispatch)
+    };
+};
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarComponent);

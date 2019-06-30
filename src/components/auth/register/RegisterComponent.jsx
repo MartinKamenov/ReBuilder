@@ -36,6 +36,11 @@ class RegisterComponent extends Component {
     }
 
     render() {
+        if(this.props.user.id) {
+            const history = this.props.history;
+            history.push('/');
+        }
+
         return (
             <div className='register-container'>
                 <h3 className='auth-header'>Sign up</h3>

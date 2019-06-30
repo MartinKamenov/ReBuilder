@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as authenticationActions from '../../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import './LoginComponent.css';
 
 class LoginComponent extends Component {
@@ -24,8 +25,10 @@ class LoginComponent extends Component {
     
     render() {
         if(this.props.user.id) {
-            return <div>{this.props.user.id}</div>;
+            const history = this.props.history;
+            history.push('/');
         }
+        
         return ( 
             <div className='login-container'>
                 <h3 className='auth-header'>Sign in</h3>
