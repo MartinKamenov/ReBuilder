@@ -54,7 +54,7 @@ const apiService = {
         const newProjectUrl = url + projectsPath + newProjectPath;
         const body = { projectName, projectUrl };
 
-        return axios.post(newProjectUrl, body, secondSendObject);
+        return axios.post(newProjectUrl, body, sendObject);
     }
 };
 
