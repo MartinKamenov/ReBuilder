@@ -4,4 +4,10 @@
     border-radius: 10px;
     width: 200px;
     height: 500px;
+    padding: 10px;
+    text-align: center;
+}
+
+.toolbar-element-container {
+    margin-bottom: 30px;
 }

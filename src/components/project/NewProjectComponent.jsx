@@ -67,26 +67,30 @@ class NewProjectComponent extends Component {
         this.setState({ droppedComponents });
     }
 
-    handleChangeProjectName = (event) => {
-        this.setState({ name: event.target.value });
-    }
-
     handleSaveProject = () => {
         //TO DO: Make request for saving current project state
         alert('To be implement');
     }
 
+    getComponentInEditMode = () => {
+        let index = -1;
+        const component = this.state.droppedComponents.find((comp, i) => {
+            if(comp.isInEditMode) {
+                index = i;
+            }
+
+            return comp.isInEditMode;
+        });
+
+        return {componentInEditMode: component, index};
+    }
+
     render() {
+        const { componentInEditMode, index } = this.getComponentInEditMode();
         return (
             <div>
                 <div className='new-project-name-outer-container'>
                     <div className='new-project-name-inner-container'>
-                        <label>Project name</label>
-                        <input
-                            className='new-project-name-input'
-                            placeholder='Add name here'
-                            value={this.state.name}
-                            onChange={this.handleChangeProjectName}/>
                         <div className='generate-project-btn-container'>
                             <button
                                 className='btn btn-primary generate-project-btn'
@@ -112,7 +116,7 @@ class NewProjectComponent extends Component {
                         handleForceExitEditMode={this.handleForceExitEditMode}
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
-                    <ElementToolbarComponent/>
+                    <ElementToolbarComponent component={componentInEditMode} index={index}/>
                 </div>
             </div>
         );

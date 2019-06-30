@@ -1,15 +1,16 @@
 import React from 'react';
 import './UserProjectComponent.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const UserProjectComponent = ({projectDetails}) => {
     return (
-        <div class="user-project">
-            <a href="#">
+        <div className="user-project">
+            <Link to={ '/projects/' + projectDetails.id }>
                 <div>
-                    <img src={projectDetails.projectImageUrl} /> {projectDetails.name}
+                    <img alt='Project' src={projectDetails.projectImageUrl} /> {projectDetails.name}
                 </div>
-            </a>
+            </Link>
         </div>
     );
 }

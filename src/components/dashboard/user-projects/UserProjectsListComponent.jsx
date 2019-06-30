@@ -1,15 +1,15 @@
 import React from 'react';
 import './UserProjectsListComponent.css';
 import UserProjectComponent from './UserProjectComponent';
-import PropTypes, { array } from 'prop-types';
+import PropTypes from 'prop-types';
 
 const UserProjectsListComponent = ({projects}) => {
     return (
-        <div class="user-projects-list">
+        <div className="user-projects-list">
             <ul>
                 {
                     projects.map((project) => {
-                        return <li> <UserProjectComponent projectDetails={project}/></li>
+                        return <li> <UserProjectComponent key={project.id} projectDetails={project}/></li>
                     })
                 }
             </ul>
