@@ -8,16 +8,12 @@ const projectsPath = '/projects';
 const newProjectPath = '/new';
 
 const sendObject = {
-    withCredentials: true,
     headers: {
         'Access-Control-Allow-Origin': '*',
         'withCredentials': true,
-        'credentials': 'same-origin',
-        'mode': 'same-origin',
         'headers': {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'withCredentials': true,
             'Access-Control-Allow-Credentials': true
         }
     }
