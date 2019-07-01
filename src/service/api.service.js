@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://rebuilder-api.herokuapp.com';
+const url = 'http://192.168.0.115:5000';
 const authPath = '/auth';
 const loginPath = '/login';
 const registerPath = '/register';
@@ -25,10 +25,13 @@ const apiService = {
             return;
         }
         
-        const query = `?username=${username}&password=${password}`;
-        const loginUrl = url + authPath + loginPath + query;
+        const body = {
+            username,
+            password
+        };
+        const loginUrl = url + authPath + loginPath;
 
-        return axios.post(loginUrl, sendObject);
+        return axios.post(loginUrl, body, sendObject);
     },
 
     register: (username, password, passwordConfirm, email, imageUrl) => {
