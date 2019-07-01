@@ -4,7 +4,8 @@ import apiService from '../service/api.service';
 export function login(username, password) {
     return async function(dispatch) {
         const res = await apiService.login(username, password);
-        const user = res.data;
+        const user = res.data.user;
+        user.token = res.data.token;
         return dispatch(loginSuccess(user));
     };
 }

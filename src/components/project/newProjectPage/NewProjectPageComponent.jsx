@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as authenticationActions from '../../../actions/projectActions';
+import * as projectActions from '../../../actions/projectActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import './NewProjectPageComponent.css';
@@ -15,10 +15,12 @@ class NewProjectPageComponent extends Component {
     }
 
     handleCreateProject = () => {
-        if(!this.state.name || !this.state.projectImage) {
+        if(!this.state.name || !this.state.projectImage || !this.props) {
             return;
         }
-        this.props.actions.createProject(this.state.name, this.state.projectImage);
+        
+        debugger;
+        this.props.actions.createProject(this.state.name, this.state.projectImage, this.props.user.token);
     }
 
     render() {
@@ -51,13 +53,14 @@ class NewProjectPageComponent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        project: state.project
+        project: state.project,
+        user: state.user
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(authenticationActions, dispatch)
+        actions: bindActionCreators(projectActions, dispatch)
     };
 };
 

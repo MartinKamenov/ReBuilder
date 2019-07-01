@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { send } from 'q';
 
 const url = 'http://192.168.0.115:5000';
 const authPath = '/auth';
@@ -10,7 +11,6 @@ const newProjectPath = '/new';
 const sendObject = {
     headers: {
         'Access-Control-Allow-Origin': '*',
-        'withCredentials': true,
         'headers': {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -46,12 +46,14 @@ const apiService = {
         return axios.post(registerUrl, body, sendObject);
     },
 
-    createProject: (projectName, projectUrl) => {
+    createProject: (projectName, projectUrl, token) => {
+        debugger;
         if(!projectName || !projectUrl) {
             return;
         }
         const newProjectUrl = url + projectsPath + newProjectPath;
         const body = { projectName, projectUrl };
+        sendObject.headers.Authorization = 'Bearer ' + token;
 
         return axios.post(newProjectUrl, body, sendObject);
     }
