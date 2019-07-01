@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import * as authenticationActions from '../../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import './LoginComponent.css';
 
 class LoginComponent extends Component {
