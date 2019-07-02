@@ -16,7 +16,6 @@ export function loginSuccess(user) {
 
 export function register(username, password, email, imageUrl) {
     return async function(dispatch) {
-        debugger;
         const res = await apiService.register(
             username,
             password,
