@@ -26,10 +26,13 @@ class RegisterComponent extends Component {
             return;
         }
 
+        if(this.state.password !== this.state.passwordRepeat) {
+            return;
+        }
+
         this.props.actions.register(
             this.state.username,
             this.state.password,
-            this.state.passwordRepeat,
             this.state.email,
             this.state.imageUrl
         );

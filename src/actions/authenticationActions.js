@@ -14,16 +14,17 @@ export function loginSuccess(user) {
     return { type: types.LOGIN_SUCCESS, user };
 }
 
-export function register(username, password, passwordConfirm, email, imageUrl) {
+export function register(username, password, email, imageUrl) {
     return async function(dispatch) {
+        debugger;
         const res = await apiService.register(
             username,
             password,
-            passwordConfirm,
             email,
             imageUrl
         );
-        const user = res.data;
+        const user = res.data.user;
+        user.token = res.data.token;
         return dispatch(registerSuccess(user));
     };
 }
