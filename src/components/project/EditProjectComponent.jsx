@@ -9,9 +9,9 @@ import { faDownload, faSave } from '@fortawesome/free-solid-svg-icons';
 import * as projectActions from '../../actions/projectActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import './NewProjectComponent.css';
+import './EditProjectComponent.css';
 
-class NewProjectComponent extends Component {
+class EditProjectComponent extends Component {
     state = {
         name: '',
         draggableComponents: componentTypes,
@@ -149,4 +149,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
  
-export default connect(mapStateToProps, mapDispatchToProps)(NewProjectComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProjectComponent);
