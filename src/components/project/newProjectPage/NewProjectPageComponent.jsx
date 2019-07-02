@@ -19,7 +19,6 @@ class NewProjectPageComponent extends Component {
             return;
         }
         
-        debugger;
         this.props.actions.createProject(this.state.name, this.state.projectImage, this.props.user.token);
     }
 
