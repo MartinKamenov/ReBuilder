@@ -4,6 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import UserProjectsListComponent from './user-projects/UserProjectsListComponent';
 import { Link } from 'react-router-dom';
+import * as authenticationActions from '../../actions/authenticationActions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 
 class DashboardComponent extends Component {
     state = { 
@@ -35,15 +39,20 @@ class DashboardComponent extends Component {
             ]
         }
      }
-    render() { 
+    render() {
+        if (!this.props.user.id) {
+            return (
+                <div>Unauthorized</div>
+            )
+        }
         return ( 
             <div>
                 <nav id="user-navbar">
                     <button className="user-profile">
                     <div className="navbar-brand user-image">
-                        <img src={this.state.user.imageUrl} height="100%" alt="user avatar" />
+                        <img src={this.props.user.imageUrl} height="100%" alt="user avatar" />
                     </div>
-                    <div className="username">{this.state.user.username}
+                    <div className="username">{this.props.user.username}
                         <FontAwesomeIcon icon={faCaretDown} /> 
                     </div>
                     </button>
@@ -54,10 +63,14 @@ class DashboardComponent extends Component {
                             New <FontAwesomeIcon icon={faPlusCircle} />
                     </Link>
                 </nav>
-                <UserProjectsListComponent projects={this.state.user.projects}/>
+                <UserProjectsListComponent projects={this.props.user.projects}/>
             </div>
         );
     }
 }
- 
-export default DashboardComponent;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
+export default connect(mapStateToProps)(DashboardComponent);
