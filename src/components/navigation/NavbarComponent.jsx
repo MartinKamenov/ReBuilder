@@ -7,8 +7,7 @@ import { connect } from 'react-redux';
 import './NavbarComponent.css';
 
 class NavbarComponent extends Component {
-    render() { 
-        console.log(this.state);
+    render() {
         return ( 
             <Fragment>
                 <Navbar inverse collapseOnSelect className="main-navbar sticky">

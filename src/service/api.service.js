@@ -10,7 +10,6 @@ const newProjectPath = '/new';
 const sendObject = {
     headers: {
         'Access-Control-Allow-Origin': '*',
-        'withCredentials': true,
         'headers': {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -25,30 +24,33 @@ const apiService = {
             return;
         }
         
-        const query = `?username=${username}&password=${password}`;
-        const loginUrl = url + authPath + loginPath + query;
+        const body = {
+            username,
+            password
+        };
+        const loginUrl = url + authPath + loginPath;
 
-        return axios.post(loginUrl, sendObject);
+        return axios.post(loginUrl, body, sendObject);
     },
 
-    register: (username, password, passwordConfirm, email, imageUrl) => {
-        if(!username || !password || !passwordConfirm || !email || !imageUrl ||
-            (password !== passwordConfirm)) {
+    register: (username, password, email, imageUrl) => {
+        if(!username || !password || !email || !imageUrl) {
             return;
         }
-        const query = `?username=${username}&password=${password}`;
-        const registerUrl = url + authPath + registerPath + query;
-        const body = { password_confirm: passwordConfirm, email, imageUrl };
+
+        const registerUrl = url + authPath + registerPath;
+        const body = { username, password, email, imageUrl };
 
         return axios.post(registerUrl, body, sendObject);
     },
 
-    createProject: (projectName, projectUrl) => {
+    createProject: (projectName, projectUrl, token) => {
         if(!projectName || !projectUrl) {
             return;
         }
         const newProjectUrl = url + projectsPath + newProjectPath;
-        const body = { projectName, projectUrl };
+        const body = { name: projectName, projectImageUrl: projectUrl };
+        sendObject.headers.Authorization = 'Bearer ' + token;
 
         return axios.post(newProjectUrl, body, sendObject);
     }
