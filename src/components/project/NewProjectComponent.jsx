@@ -6,6 +6,9 @@ import componentTypes from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faSave } from '@fortawesome/free-solid-svg-icons';
+import * as projectActions from '../../actions/projectActions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import './NewProjectComponent.css';
 
 class NewProjectComponent extends Component {
@@ -15,6 +18,16 @@ class NewProjectComponent extends Component {
         droppedComponents: [],
         newIndex: 0,
         previousInnerText: ''
+    }
+
+    componentDidMount() {
+        if(!this.props.user.id) {
+            const history = this.props.history;
+            history.push('/');
+            return;
+        }
+        const id = this.props.match.params.id;
+        this.props.actions.updateProject(id, null, this.props.user.token);
     }
 
     generateProject = () => {
@@ -122,5 +135,18 @@ class NewProjectComponent extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        project: state.project,
+        user: state.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(projectActions, dispatch)
+    };
+};
  
-export default NewProjectComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(NewProjectComponent);

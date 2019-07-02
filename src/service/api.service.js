@@ -53,6 +53,29 @@ const apiService = {
         sendObject.headers.Authorization = 'Bearer ' + token;
 
         return axios.post(newProjectUrl, body, sendObject);
+    },
+
+    getProject: (projectId, token) => {
+        if(!projectId || !token) {
+            return;
+        }
+
+        const getProjectUrl = url + projectsPath + `/${projectId}`;
+        sendObject.headers.Authorization = 'Bearer ' + token;
+
+        return axios.post(getProjectUrl, sendObject);
+    },
+
+    updateProject: (projectId, components, token) => {
+        if(!projectId || !components || !token) {
+            return;
+        }
+
+        const updateProjectUrl = url + projectsPath + `/${projectId}`;
+        const body = { components };
+        sendObject.headers.Authorization = 'Bearer ' + token;
+
+        return axios.post(updateProjectUrl, body, sendObject);
     }
 };
 
