@@ -25,10 +25,6 @@ export function register(username, password, email, imageUrl) {
         );
         const user = res.data.user;
         user.token = res.data.token;
-        return dispatch(registerSuccess(user));
+        return dispatch(loginSuccess(user));
     };
-}
-
-export function registerSuccess(user) {
-    return { type: types.REGISTER_SUCCESS, user };
 }
