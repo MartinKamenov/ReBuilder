@@ -23,6 +23,11 @@ class NewProjectPageComponent extends Component {
     }
 
     render() {
+        if(this.props.project.id) {
+            const history = this.props.history;
+            history.push(`/projects/${this.props.project.id}`);
+        }
+
         return (
             <div className='center-container'>
                 <div>

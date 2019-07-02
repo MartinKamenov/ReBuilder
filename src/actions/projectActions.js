@@ -5,10 +5,10 @@ export function createProject(projectName, projectUrl, token) {
     return async function(dispatch) {
         const res = await apiService.createProject(projectName, projectUrl, token);
         const project = res.data;
-        return dispatch(createProjectSuccess(project));
+        return dispatch(selectProjectSuccess(project));
     };
 }
 
-export function createProjectSuccess(project) {
-    return { type: types.CREATE_PROJECT_SUCCESS, project };
+export function selectProjectSuccess(project) {
+    return { type: types.SELECT_PROJECT_SUCCESS, project };
 }
