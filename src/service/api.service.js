@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { send } from 'q';
 
-const url = 'http://192.168.0.115:5000';
+const url = 'https://rebuilder-api.herokuapp.com';
 const authPath = '/auth';
 const loginPath = '/login';
 const registerPath = '/register';
@@ -52,7 +51,7 @@ const apiService = {
             return;
         }
         const newProjectUrl = url + projectsPath + newProjectPath;
-        const body = { projectName, projectUrl };
+        const body = { name: projectName, projectImageUrl: projectUrl };
         sendObject.headers.Authorization = 'Bearer ' + token;
 
         return axios.post(newProjectUrl, body, sendObject);
