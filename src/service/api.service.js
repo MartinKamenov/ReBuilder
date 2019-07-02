@@ -56,6 +56,7 @@ const apiService = {
     },
 
     getProject: (projectId, token) => {
+        debugger;
         if(!projectId || !token) {
             return;
         }
@@ -63,7 +64,7 @@ const apiService = {
         const getProjectUrl = url + projectsPath + `/${projectId}`;
         sendObject.headers.Authorization = 'Bearer ' + token;
 
-        return axios.post(getProjectUrl, sendObject);
+        return axios.post(getProjectUrl, {}, sendObject);
     },
 
     updateProject: (projectId, components, token) => {
