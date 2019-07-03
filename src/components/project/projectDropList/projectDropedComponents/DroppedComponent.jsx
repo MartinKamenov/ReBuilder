@@ -41,6 +41,7 @@ const DroppedComponent = ({
                     case 'Header':
                         component = (
                         <h1
+                            style={droppedComponent.style}
                             onClick={() => handleChangeEditMode(droppedComponent.index)}
                             className='droped-component'>
                             {droppedComponent.innerText}
@@ -49,6 +50,7 @@ const DroppedComponent = ({
                     case 'Text':
                         component = (
                         <div
+                            style={droppedComponent.style}
                             onClick={() => handleChangeEditMode(droppedComponent.index)}
                             className='droped-component'>
                             {droppedComponent.innerText}
@@ -57,6 +59,7 @@ const DroppedComponent = ({
                     default:
                         component = (
                         <div
+                            style={droppedComponent.style}
                             onClick={() => handleChangeEditMode(droppedComponent.index)}
                             className='droped-component'>
                             {droppedComponent.innerText}

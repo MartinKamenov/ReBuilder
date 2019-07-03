@@ -90,9 +90,10 @@ class EditProjectComponent extends Component {
         const droppedComponents = this.state.droppedComponents;
         const {componentInEditMode, index} = this.getComponentInEditMode();
         if(value.hex) {
-            debugger;
+            const style = Object.assign({}, componentInEditMode.style);
             value = value.hex;
-            componentInEditMode.style[field] = value;
+            style[field] = value;
+            componentInEditMode.style = style;
         } else {
             componentInEditMode[field] = value;
         }
@@ -112,9 +113,11 @@ class EditProjectComponent extends Component {
         this.props.actions.updateProject(this.state.id, droppedComponents, token);
     }
 
+    // Returns component directly from state
+    // meaning if we change it we mutate state
     getComponentInEditMode = () => {
         let index = -1;
-        const component = this.state.droppedComponents.find((comp, i) => {
+        let component = this.state.droppedComponents.find((comp, i) => {
             if(comp.isInEditMode) {
                 index = i;
             }

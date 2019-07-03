@@ -33,7 +33,7 @@ const ElementToolbarComponent = ({component, index, handleComponentValueChange})
                 <label>Background color</label>
                 <ChromePicker
                     color={{ hex: component.style.backgroundColor }}
-                    onChangeComplete={(event) => handleComponentValueChange(event, 'backroundColor')}
+                    onChangeComplete={(event) => handleComponentValueChange(event, 'backgroundColor')}
                     style={{width: '200px'}} />
             </div>
         </div>
