@@ -6,7 +6,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const DroppedComponent = ({
         droppedComponent,
-        handleChangeTextDroppedComponent,
+        handleComponentValueChange,
         handleChangeEditMode,
         handleForceExitEditMode
     }) => {
@@ -17,7 +17,7 @@ const DroppedComponent = ({
                     className='edit-input'
                     value={droppedComponent.innerText}
                     onChange={(event) => 
-                        handleChangeTextDroppedComponent(event.target.value, droppedComponent.index)}>
+                        handleComponentValueChange(event.target.value, 'innerText')}>
                 </input>
                 <button
                     className='btn btn-success'
@@ -78,7 +78,7 @@ DroppedComponent.propTypes = {
         isInEditMode: PropTypes.bool.isRequired,
         index: PropTypes.number.isRequired
     }).isRequired,
-    handleChangeTextDroppedComponent: PropTypes.func.isRequired,
+    handleComponentValueChange: PropTypes.func.isRequired,
     handleForceExitEditMode: PropTypes.func.isRequired
 };
  

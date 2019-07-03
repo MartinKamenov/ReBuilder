@@ -17,7 +17,6 @@ import './EditProjectComponent.css';
 class EditProjectComponent extends Component {
     state = {
         id: 0,
-        name: '',
         draggableComponents: componentTypes,
         droppedComponents: [],
         newIndex: 0,
@@ -39,7 +38,7 @@ class EditProjectComponent extends Component {
     }
 
     generateProject = () => {
-        projectGenerator.generateProject(this.state.name, this.state.droppedComponents);
+        projectGenerator.generateProject(this.props.project.name, this.state.droppedComponents);
     }
 
     handleDropComponent = (event) => {
@@ -81,9 +80,11 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents, previousInnerText: '' });
     }
 
-    handleChangeTextDroppedComponent = (newText, index) => {
+    handleComponentValueChange = (text, field) => {
         const droppedComponents = this.state.droppedComponents;
-        droppedComponents[index].innerText = newText;
+        const {componentInEditMode, index} = this.getComponentInEditMode();
+        componentInEditMode[field] = text;
+        droppedComponents[index] = componentInEditMode;
 
         this.setState({ droppedComponents });
     }
@@ -128,6 +129,7 @@ class EditProjectComponent extends Component {
         const { componentInEditMode, index } = this.getComponentInEditMode();
         return (
             <div>
+                <h1 className='project-name-header'>{this.props.project.name}</h1>
                 <div className='new-project-name-outer-container'>
                     <div className='new-project-name-inner-container'>
                         <div className='generate-project-btn-container'>
@@ -150,12 +152,15 @@ class EditProjectComponent extends Component {
                     <ProjectComponentsList
                         draggableComponents={this.state.draggableComponents}/>
                     <ProjectPageComponent
-                        handleChangeTextDroppedComponent={this.handleChangeTextDroppedComponent}
+                        handleComponentValueChange={this.handleComponentValueChange}
                         handleChangeEditMode={this.handleChangeEditMode}
                         handleForceExitEditMode={this.handleForceExitEditMode}
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
-                    <ElementToolbarComponent component={componentInEditMode} index={index}/>
+                    <ElementToolbarComponent
+                        component={componentInEditMode}
+                        index={index}
+                        handleComponentValueChange={this.handleComponentValueChange}/>
                 </div>
             </div>
         );

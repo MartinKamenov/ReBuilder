@@ -7,7 +7,7 @@ import DroppedListComponent from './projectDropedComponents/DroppedListComponent
 const ProjectPageComponent = ({
         droppedComponents,
         handleDropComponent,
-        handleChangeTextDroppedComponent,
+        handleComponentValueChange,
         handleChangeEditMode,
         handleForceExitEditMode
     }) => {
@@ -18,7 +18,7 @@ const ProjectPageComponent = ({
                     types={['component']} // <= allowed drop types
                     onDrop={handleDropComponent}>
                     <DroppedListComponent
-                        handleChangeTextDroppedComponent={handleChangeTextDroppedComponent}
+                        handleComponentValueChange={handleComponentValueChange}
                         handleChangeEditMode={handleChangeEditMode}
                         handleForceExitEditMode={handleForceExitEditMode}
                         droppedComponents={droppedComponents}/>
@@ -30,7 +30,7 @@ const ProjectPageComponent = ({
 ProjectPageComponent.propTypes = {
     droppedComponents: PropTypes.array.isRequired,
     handleDropComponent: PropTypes.func.isRequired,
-    handleChangeTextDroppedComponent: PropTypes.func.isRequired,
+    handleComponentValueChange: PropTypes.func.isRequired,
     handleChangeEditMode: PropTypes.func.isRequired,
     handleForceExitEditMode: PropTypes.func.isRequired
 };

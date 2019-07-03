@@ -3,7 +3,7 @@ import { SliderPicker } from 'react-color';
 import PropTypes from 'prop-types';
 import './ElementToolbarComponent.css';
 
-const ElementToolbarComponent = ({component, index}) => {
+const ElementToolbarComponent = ({component, index, handleComponentValueChange}) => {
     if(!component) {
         return (
             <div className='toolbar-container'>
@@ -17,6 +17,7 @@ const ElementToolbarComponent = ({component, index}) => {
             <div className='toolbar-element-container'>
                 <label>Text</label>
                 <input
+                    onChange={(event) => handleComponentValueChange(event.target.value, 'innerText')}
                     value={component.innerText}
                     placeholder='Text'>
                 </input>
@@ -38,7 +39,8 @@ ElementToolbarComponent.propTypes = {
         name: PropTypes.string.isRequired,
         innerText: PropTypes.string.isRequired
     }),
-    index: PropTypes.number
+    index: PropTypes.number,
+    handleComponentValueChange: PropTypes.func.isRequired
 };
  
 export default ElementToolbarComponent;
