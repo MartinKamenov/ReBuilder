@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LoadingComponent from '../../common/LoadingComponent';
 import * as authenticationActions from '../../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -49,7 +50,7 @@ class RegisterComponent extends Component {
         }
 
         if(this.state.isLoading) {
-            return <div>Loading...</div>;
+            return <LoadingComponent message='Authenticating user' />;
         }
 
         return (

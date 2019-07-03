@@ -6,9 +6,12 @@ import componentTypes from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faSave } from '@fortawesome/free-solid-svg-icons';
+import LoadingComponent from '../common/LoadingComponent';
 import * as projectActions from '../../actions/projectActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+
 import './EditProjectComponent.css';
 
 class EditProjectComponent extends Component {
@@ -119,7 +122,7 @@ class EditProjectComponent extends Component {
         }
 
         if(this.state.isLoading) {
-            return <div>Loading...</div>
+            return <LoadingComponent message='Fetching project' />
         }
 
         const { componentInEditMode, index } = this.getComponentInEditMode();
