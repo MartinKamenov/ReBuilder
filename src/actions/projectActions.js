@@ -11,6 +11,7 @@ export function createProject(projectName, projectUrl, token) {
 
 export function updateProject(projectId, components, token) {
     return async function(dispatch) {
+        debugger;
         let res;
         if(components) {
             res = await apiService.updateProject(projectId, components, token);

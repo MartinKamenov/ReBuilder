@@ -56,7 +56,6 @@ const apiService = {
     },
 
     getProject: (projectId, token) => {
-        debugger;
         if(!projectId || !token) {
             return;
         }

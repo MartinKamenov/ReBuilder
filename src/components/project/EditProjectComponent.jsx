@@ -18,11 +18,11 @@ class EditProjectComponent extends Component {
         draggableComponents: componentTypes,
         droppedComponents: [],
         newIndex: 0,
-        previousInnerText: ''
+        previousInnerText: '',
+        isInitialyLoaded: true
     }
 
     componentDidMount() {
-        debugger;
         let token = localStorage.getItem('token');
         if(!this.props.user.id && !token) {
             const history = this.props.history;
@@ -89,6 +89,7 @@ class EditProjectComponent extends Component {
         if(!token) {
             return;
         }
+
         const droppedComponents = this.state.droppedComponents;
         
         this.props.actions.updateProject(this.state.id, droppedComponents, token);
@@ -108,6 +109,9 @@ class EditProjectComponent extends Component {
     }
 
     render() {
+        if(this.props.project.id && this.state.isInitialyLoaded) {
+            this.setState({ isInitialyLoaded: false, droppedComponents: this.props.project.components.slice(0) });
+        }
         const { componentInEditMode, index } = this.getComponentInEditMode();
         return (
             <div>
