@@ -14,6 +14,7 @@ const DroppedComponent = ({
         return (
             <div className='edit-component-container'>
                 <input
+                    style={droppedComponent.style}
                     className='edit-input'
                     value={droppedComponent.innerText}
                     onChange={(event) => 
