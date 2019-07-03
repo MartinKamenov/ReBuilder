@@ -4,7 +4,7 @@ import DashboardComponent from '../dashboard/DashboardComponent';
 import NavbarComponent from '../navigation/NavbarComponent';
 import LoginComponent from '../auth/login/LoginComponent';
 import RegisterComponent from '../auth/register/RegisterComponent';
-import NewProjectComponent from '../project/NewProjectComponent';
+import EditProjectComponent from '../project/EditProjectComponent';
 import NewProjectPageComponent from '../project/newProjectPage/NewProjectPageComponent';
 
 const AppRouterComponent = () => {
@@ -16,7 +16,7 @@ const AppRouterComponent = () => {
                 <div className='container'>
                     <Route exact path="/login" component={LoginComponent} />
                     <Route exact path="/register" component={RegisterComponent} />
-                    <Route exact path="/projects/:id" component={NewProjectComponent} />
+                    <Route exact path="/projects/:id" component={EditProjectComponent} />
                     <Route exact path="/project/new" component={NewProjectPageComponent} />
                 </div>
             </div>

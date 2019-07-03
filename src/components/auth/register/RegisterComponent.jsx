@@ -10,7 +10,8 @@ class RegisterComponent extends Component {
         username: '',
         password: '',
         passwordRepeat: '',
-        imageUrl: ''
+        imageUrl: '',
+        isLoading: false
     }
 
     handleInputChange = (value, field) => {
@@ -30,6 +31,8 @@ class RegisterComponent extends Component {
             return;
         }
 
+        this.setState({ isLoading: true });
+
         this.props.actions.register(
             this.state.username,
             this.state.password,
@@ -40,8 +43,13 @@ class RegisterComponent extends Component {
 
     render() {
         if(this.props.user.id) {
+            this.setState({ isLoading: false });
             const history = this.props.history;
             history.push('/');
+        }
+
+        if(this.state.isLoading) {
+            return <div>Loading...</div>;
         }
 
         return (

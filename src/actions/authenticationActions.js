@@ -11,6 +11,8 @@ export function login(username, password) {
 }
 
 export function loginSuccess(user) {
+    localStorage.setItem('token', user.token);
+
     return { type: types.LOGIN_SUCCESS, user };
 }
 

@@ -6,15 +6,33 @@ import componentTypes from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faSave } from '@fortawesome/free-solid-svg-icons';
-import './NewProjectComponent.css';
+import * as projectActions from '../../actions/projectActions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import './EditProjectComponent.css';
 
-class NewProjectComponent extends Component {
+class EditProjectComponent extends Component {
     state = {
+        id: 0,
         name: '',
         draggableComponents: componentTypes,
         droppedComponents: [],
         newIndex: 0,
-        previousInnerText: ''
+        previousInnerText: '',
+        isInitialyLoaded: true,
+        isLoading: true
+    }
+
+    componentDidMount() {
+        let token = localStorage.getItem('token');
+        if(!this.props.user.id && !token) {
+            const history = this.props.history;
+            history.push('/');
+            return;
+        }
+        const id = this.props.match.params.id;
+        this.setState({ id });
+        this.props.actions.updateProject(id, null, token);
     }
 
     generateProject = () => {
@@ -49,7 +67,7 @@ class NewProjectComponent extends Component {
             this.setState({previousInnerText: droppedComponents[index].innerText});
         }
 
-        this.setState({droppedComponents});
+        this.setState({ droppedComponents });
     }
 
     handleForceExitEditMode = (index) => {
@@ -57,7 +75,7 @@ class NewProjectComponent extends Component {
         droppedComponents[index].isInEditMode = false;
         droppedComponents[index].innerText = this.state.previousInnerText;
 
-        this.setState({droppedComponents, previousInnerText: ''});
+        this.setState({ droppedComponents, previousInnerText: '' });
     }
 
     handleChangeTextDroppedComponent = (newText, index) => {
@@ -68,8 +86,14 @@ class NewProjectComponent extends Component {
     }
 
     handleSaveProject = () => {
-        //TO DO: Make request for saving current project state
-        alert('To be implement');
+        let token = localStorage.getItem('token');
+        if(!token) {
+            return;
+        }
+
+        const droppedComponents = this.state.droppedComponents;
+        
+        this.props.actions.updateProject(this.state.id, droppedComponents, token);
     }
 
     getComponentInEditMode = () => {
@@ -82,10 +106,22 @@ class NewProjectComponent extends Component {
             return comp.isInEditMode;
         });
 
-        return {componentInEditMode: component, index};
+        return { componentInEditMode: component, index };
     }
 
     render() {
+        if(this.props.project.id && this.state.isInitialyLoaded) {
+            this.setState({
+                isInitialyLoaded: false,
+                droppedComponents: this.props.project.components.slice(0),
+                isLoading: false
+            });
+        }
+
+        if(this.state.isLoading) {
+            return <div>Loading...</div>
+        }
+
         const { componentInEditMode, index } = this.getComponentInEditMode();
         return (
             <div>
@@ -122,5 +158,18 @@ class NewProjectComponent extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        project: state.project,
+        user: state.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(projectActions, dispatch)
+    };
+};
  
-export default NewProjectComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(EditProjectComponent);

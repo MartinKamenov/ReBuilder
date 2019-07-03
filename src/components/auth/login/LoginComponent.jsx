@@ -7,7 +7,8 @@ import './LoginComponent.css';
 class LoginComponent extends Component {
     state = {
         username: '',
-        password: ''
+        password: '',
+        isLoading: false
     }
 
     handleInputChange = (value, field) => {
@@ -19,13 +20,20 @@ class LoginComponent extends Component {
             return;
         }
 
+        this.setState({ isLoading: true });
+
         this.props.actions.login(this.state.username, this.state.password);
     }
     
     render() {
         if(this.props.user.id) {
+            this.setState({ isLoading: false });
             const history = this.props.history;
             history.push('/');
+        }
+
+        if(this.state.isLoading) {
+            return <div>Loading...</div>
         }
         
         return ( 
