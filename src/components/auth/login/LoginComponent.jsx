@@ -3,6 +3,7 @@ import * as authenticationActions from '../../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import './LoginComponent.css';
+import LoadingComponent from '../../common/LoadingComponent';
 
 class LoginComponent extends Component {
     state = {
@@ -33,7 +34,7 @@ class LoginComponent extends Component {
         }
 
         if(this.state.isLoading) {
-            return <div>Loading...</div>
+            return <LoadingComponent message='Authenticating user' />
         }
         
         return ( 

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import * as projectActions from '../../../actions/projectActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import LoadingComponent from '../../common/LoadingComponent';
+
 import './NewProjectPageComponent.css';
 
 class NewProjectPageComponent extends Component {
@@ -33,7 +35,7 @@ class NewProjectPageComponent extends Component {
         }
 
         if(this.state.isLoading) {
-            return <div>Loading...</div>;
+            return <LoadingComponent message='Creating user' />;
         }
 
         return (

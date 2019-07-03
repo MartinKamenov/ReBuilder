@@ -1,0 +1,13 @@
+.loading-component {
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.loading-container {
+    margin: auto;
+    max-width: 100px;
+    max-height: 100px;
+}
