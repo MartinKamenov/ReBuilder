@@ -11,6 +11,7 @@ export function login(username, password) {
 }
 
 export function loginSuccess(user) {
+    const token = user.token;
     return { type: types.LOGIN_SUCCESS, user };
 }
 

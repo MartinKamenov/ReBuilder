@@ -24,6 +24,7 @@ class LoginComponent extends Component {
     
     render() {
         if(this.props.user.id) {
+            localStorage.setItem('token', this.props.user.token);
             const history = this.props.history;
             history.push('/');
         }

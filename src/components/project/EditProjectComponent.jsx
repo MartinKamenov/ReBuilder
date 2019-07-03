@@ -13,6 +13,7 @@ import './EditProjectComponent.css';
 
 class EditProjectComponent extends Component {
     state = {
+        id: 0,
         name: '',
         draggableComponents: componentTypes,
         droppedComponents: [],
@@ -21,13 +22,16 @@ class EditProjectComponent extends Component {
     }
 
     componentDidMount() {
-        if(!this.props.user.id) {
+        debugger;
+        let token = localStorage.getItem('token');
+        if(!this.props.user.id && !token) {
             const history = this.props.history;
             history.push('/');
             return;
         }
         const id = this.props.match.params.id;
-        this.props.actions.updateProject(id, null, this.props.user.token);
+        this.setState({ id });
+        this.props.actions.updateProject(id, null, token);
     }
 
     generateProject = () => {
@@ -62,7 +66,7 @@ class EditProjectComponent extends Component {
             this.setState({previousInnerText: droppedComponents[index].innerText});
         }
 
-        this.setState({droppedComponents});
+        this.setState({ droppedComponents });
     }
 
     handleForceExitEditMode = (index) => {
@@ -70,7 +74,7 @@ class EditProjectComponent extends Component {
         droppedComponents[index].isInEditMode = false;
         droppedComponents[index].innerText = this.state.previousInnerText;
 
-        this.setState({droppedComponents, previousInnerText: ''});
+        this.setState({ droppedComponents, previousInnerText: '' });
     }
 
     handleChangeTextDroppedComponent = (newText, index) => {
@@ -81,8 +85,13 @@ class EditProjectComponent extends Component {
     }
 
     handleSaveProject = () => {
-        //TO DO: Make request for saving current project state
-        alert('To be implement');
+        let token = localStorage.getItem('token');
+        if(!token) {
+            return;
+        }
+        const droppedComponents = this.state.droppedComponents;
+        
+        this.props.actions.updateProject(this.state.id, droppedComponents, token);
     }
 
     getComponentInEditMode = () => {
