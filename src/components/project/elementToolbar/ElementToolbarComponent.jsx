@@ -1,5 +1,5 @@
 import React from 'react';
-import { SliderPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import PropTypes from 'prop-types';
 import './ElementToolbarComponent.css';
 
@@ -24,11 +24,17 @@ const ElementToolbarComponent = ({component, index, handleComponentValueChange})
             </div>
             <div className='toolbar-element-container'>
                 <label>Font color</label>
-                <SliderPicker style={{width: '200px'}} />
+                <ChromePicker
+                    color={{ hex: component.style.color }}
+                    onChangeComplete={(event) => handleComponentValueChange(event, 'color')}
+                    style={{width: '200px'}} />
             </div>
             <div className='toolbar-element-container'>
                 <label>Background color</label>
-                <SliderPicker style={{width: '200px'}} />
+                <ChromePicker
+                    color={{ hex: component.style.backgroundColor }}
+                    onChangeComplete={(event) => handleComponentValueChange(event, 'backroundColor')}
+                    style={{width: '200px'}} />
             </div>
         </div>
     );

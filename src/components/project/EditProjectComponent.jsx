@@ -48,6 +48,12 @@ class EditProjectComponent extends Component {
         const componentElement = Object.assign({}, foundElement);
         const droppedComponents = this.state.droppedComponents;
         componentElement.innerText = componentElement.name;
+
+        const style = {};
+        style.color = '#000000';
+        style.backgroundColor = '#ffffff';
+        componentElement.style = style;
+        
         componentElement.isInEditMode = false;
         componentElement.index = this.state.newIndex;
         droppedComponents.push(componentElement);
@@ -80,10 +86,16 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents, previousInnerText: '' });
     }
 
-    handleComponentValueChange = (text, field) => {
+    handleComponentValueChange = (value, field) => {
         const droppedComponents = this.state.droppedComponents;
         const {componentInEditMode, index} = this.getComponentInEditMode();
-        componentInEditMode[field] = text;
+        if(value.hex) {
+            debugger;
+            value = value.hex;
+            componentInEditMode.style[field] = value;
+        } else {
+            componentInEditMode[field] = value;
+        }
         droppedComponents[index] = componentInEditMode;
 
         this.setState({ droppedComponents });
