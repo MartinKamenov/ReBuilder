@@ -9,7 +9,7 @@ class LoginComponent extends Component {
     state = {
         username: '',
         password: '',
-        isLoading: true
+        isLoading: false
     }
 
     handleInputChange = (value, field) => {
