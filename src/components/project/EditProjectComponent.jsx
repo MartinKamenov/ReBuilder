@@ -19,7 +19,8 @@ class EditProjectComponent extends Component {
         droppedComponents: [],
         newIndex: 0,
         previousInnerText: '',
-        isInitialyLoaded: true
+        isInitialyLoaded: true,
+        isLoading: true
     }
 
     componentDidMount() {
@@ -105,13 +106,22 @@ class EditProjectComponent extends Component {
             return comp.isInEditMode;
         });
 
-        return {componentInEditMode: component, index};
+        return { componentInEditMode: component, index };
     }
 
     render() {
         if(this.props.project.id && this.state.isInitialyLoaded) {
-            this.setState({ isInitialyLoaded: false, droppedComponents: this.props.project.components.slice(0) });
+            this.setState({
+                isInitialyLoaded: false,
+                droppedComponents: this.props.project.components.slice(0),
+                isLoading: false
+            });
         }
+
+        if(this.state.isLoading) {
+            return <div>Loading...</div>
+        }
+
         const { componentInEditMode, index } = this.getComponentInEditMode();
         return (
             <div>

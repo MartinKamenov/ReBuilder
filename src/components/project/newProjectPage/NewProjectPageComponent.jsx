@@ -7,7 +7,8 @@ import './NewProjectPageComponent.css';
 class NewProjectPageComponent extends Component {
     state = { 
         name: '',
-        projectImage: ''
+        projectImage: '',
+        isLoading: false
     }
 
     handleChangeInput = (text, field) => {
@@ -19,13 +20,20 @@ class NewProjectPageComponent extends Component {
             return;
         }
         
+        this.setState({ isLoading: true });
+
         this.props.actions.createProject(this.state.name, this.state.projectImage, this.props.user.token);
     }
 
     render() {
         if(this.props.project.id) {
+            this.setState({ isLoading: false });
             const history = this.props.history;
             history.push(`/projects/${this.props.project.id}`);
+        }
+
+        if(this.state.isLoading) {
+            return <div>Loading...</div>;
         }
 
         return (
