@@ -52,6 +52,9 @@ class EditProjectComponent extends Component {
         const style = {};
         style.color = '#000000';
         style.backgroundColor = '#ffffff';
+        style.fontSize = 16;
+        style.height = 30;
+        style.width = '100%';
         componentElement.style = style;
         
         componentElement.isInEditMode = false;

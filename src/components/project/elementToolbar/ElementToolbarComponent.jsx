@@ -21,6 +21,12 @@ const ElementToolbarComponent = ({component, index, handleComponentValueChange})
                     value={component.innerText}
                     placeholder='Text'>
                 </input>
+                <label>Font size</label>
+                <input
+                    onChange={(event) => handleComponentValueChange(event.target.value, 'innerText')}
+                    value={component.style.fontSize}
+                    placeholder='Font size'>
+                </input>
             </div>
             <div className='toolbar-element-container'>
                 <label>Font color</label>
