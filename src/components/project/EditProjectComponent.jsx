@@ -52,8 +52,8 @@ class EditProjectComponent extends Component {
         const style = {};
         style.color = '#000000';
         style.backgroundColor = '#ffffff';
-        style.fontSize = 16;
-        style.height = 30;
+        style.fontSize = '16px';
+        style.height = '30px';
         style.width = '100%';
         componentElement.style = style;
         
@@ -95,6 +95,11 @@ class EditProjectComponent extends Component {
         if(value.hex) {
             const style = Object.assign({}, componentInEditMode.style);
             value = value.hex;
+            style[field] = value;
+            componentInEditMode.style = style;
+        } else if(field.startsWith('style.')) {
+            field = field.substring(6)
+            const style = Object.assign({}, componentInEditMode.style);
             style[field] = value;
             componentInEditMode.style = style;
         } else {
