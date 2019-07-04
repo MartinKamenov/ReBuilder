@@ -17,7 +17,6 @@ import './EditProjectComponent.css';
 class EditProjectComponent extends Component {
     state = {
         id: 0,
-        name: '',
         draggableComponents: componentTypes,
         droppedComponents: [],
         newIndex: 0,
@@ -39,7 +38,7 @@ class EditProjectComponent extends Component {
     }
 
     generateProject = () => {
-        projectGenerator.generateProject(this.state.name, this.state.droppedComponents);
+        projectGenerator.generateProject(this.props.project.name, this.state.droppedComponents);
     }
 
     handleDropComponent = (event) => {
@@ -49,6 +48,15 @@ class EditProjectComponent extends Component {
         const componentElement = Object.assign({}, foundElement);
         const droppedComponents = this.state.droppedComponents;
         componentElement.innerText = componentElement.name;
+
+        const style = {};
+        style.color = '#000000';
+        style.backgroundColor = '#ffffff';
+        style.fontSize = '16px';
+        style.height = '30px';
+        style.width = '100%';
+        componentElement.style = style;
+        
         componentElement.isInEditMode = false;
         componentElement.index = this.state.newIndex;
         droppedComponents.push(componentElement);
@@ -81,9 +89,23 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents, previousInnerText: '' });
     }
 
-    handleChangeTextDroppedComponent = (newText, index) => {
+    handleComponentValueChange = (value, field) => {
         const droppedComponents = this.state.droppedComponents;
-        droppedComponents[index].innerText = newText;
+        const {componentInEditMode, index} = this.getComponentInEditMode();
+        if(value.hex) {
+            const style = Object.assign({}, componentInEditMode.style);
+            value = value.hex;
+            style[field] = value;
+            componentInEditMode.style = style;
+        } else if(field.startsWith('style.')) {
+            field = field.substring(6)
+            const style = Object.assign({}, componentInEditMode.style);
+            style[field] = value;
+            componentInEditMode.style = style;
+        } else {
+            componentInEditMode[field] = value;
+        }
+        droppedComponents[index] = componentInEditMode;
 
         this.setState({ droppedComponents });
     }
@@ -99,9 +121,11 @@ class EditProjectComponent extends Component {
         this.props.actions.updateProject(this.state.id, droppedComponents, token);
     }
 
+    // Returns component directly from state
+    // meaning if we change it we mutate state
     getComponentInEditMode = () => {
         let index = -1;
-        const component = this.state.droppedComponents.find((comp, i) => {
+        let component = this.state.droppedComponents.find((comp, i) => {
             if(comp.isInEditMode) {
                 index = i;
             }
@@ -128,6 +152,7 @@ class EditProjectComponent extends Component {
         const { componentInEditMode, index } = this.getComponentInEditMode();
         return (
             <div>
+                <h1 className='project-name-header'>{this.props.project.name}</h1>
                 <div className='new-project-name-outer-container'>
                     <div className='new-project-name-inner-container'>
                         <div className='generate-project-btn-container'>
@@ -150,12 +175,15 @@ class EditProjectComponent extends Component {
                     <ProjectComponentsList
                         draggableComponents={this.state.draggableComponents}/>
                     <ProjectPageComponent
-                        handleChangeTextDroppedComponent={this.handleChangeTextDroppedComponent}
+                        handleComponentValueChange={this.handleComponentValueChange}
                         handleChangeEditMode={this.handleChangeEditMode}
                         handleForceExitEditMode={this.handleForceExitEditMode}
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
-                    <ElementToolbarComponent component={componentInEditMode} index={index}/>
+                    <ElementToolbarComponent
+                        component={componentInEditMode}
+                        index={index}
+                        handleComponentValueChange={this.handleComponentValueChange}/>
                 </div>
             </div>
         );

@@ -35,7 +35,7 @@ class NewProjectPageComponent extends Component {
         }
 
         if(this.state.isLoading) {
-            return <LoadingComponent message='Creating user' />;
+            return <LoadingComponent message='Creating project' />;
         }
 
         return (

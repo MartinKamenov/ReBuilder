@@ -5,7 +5,7 @@ import DroppedComponent from './DroppedComponent';
 
 const DroppedListComponent = ({
         droppedComponents,
-        handleChangeTextDroppedComponent,
+        handleComponentValueChange,
         handleChangeEditMode,
         handleForceExitEditMode
     }) => {
@@ -16,7 +16,7 @@ const DroppedListComponent = ({
                     <DroppedComponent
                         key={i}
                         droppedComponent={component}
-                        handleChangeTextDroppedComponent={handleChangeTextDroppedComponent}
+                        handleComponentValueChange={handleComponentValueChange}
                         handleChangeEditMode={handleChangeEditMode}
                         handleForceExitEditMode={handleForceExitEditMode} />
                 ))
@@ -27,7 +27,7 @@ const DroppedListComponent = ({
 
 DroppedListComponent.propTypes = {
     droppedComponents: PropTypes.array.isRequired,
-    handleChangeTextDroppedComponent: PropTypes.func.isRequired,
+    handleComponentValueChange: PropTypes.func.isRequired,
     handleChangeEditMode: PropTypes.func.isRequired,
     handleForceExitEditMode: PropTypes.func.isRequired
 };

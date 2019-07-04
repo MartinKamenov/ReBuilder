@@ -2,12 +2,33 @@
     display: inline-block;
     border: 1px solid black;
     border-radius: 10px;
-    width: 200px;
+    width: 300px;
     height: 500px;
     padding: 10px;
     text-align: center;
+    overflow: auto;
 }
 
 .toolbar-element-container {
     margin-bottom: 30px;
+}
+
+.chrome-picker {
+    margin: auto;
+    width: 200px !important;
+}
+
+.component-input-changer-container {
+    width: '100%';
+}
+
+.component-changer-label {
+    display: inline-block;
+    width: 100px;
+}
+
+.component-changer-input {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
 }

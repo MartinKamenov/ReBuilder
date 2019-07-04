@@ -6,7 +6,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const DroppedComponent = ({
         droppedComponent,
-        handleChangeTextDroppedComponent,
+        handleComponentValueChange,
         handleChangeEditMode,
         handleForceExitEditMode
     }) => {
@@ -14,10 +14,11 @@ const DroppedComponent = ({
         return (
             <div className='edit-component-container'>
                 <input
+                    style={droppedComponent.style}
                     className='edit-input'
                     value={droppedComponent.innerText}
                     onChange={(event) => 
-                        handleChangeTextDroppedComponent(event.target.value, droppedComponent.index)}>
+                        handleComponentValueChange(event.target.value, 'innerText')}>
                 </input>
                 <button
                     className='btn btn-success'
@@ -41,6 +42,7 @@ const DroppedComponent = ({
                     case 'Header':
                         component = (
                         <h1
+                            style={droppedComponent.style}
                             onClick={() => handleChangeEditMode(droppedComponent.index)}
                             className='droped-component'>
                             {droppedComponent.innerText}
@@ -49,6 +51,7 @@ const DroppedComponent = ({
                     case 'Text':
                         component = (
                         <div
+                            style={droppedComponent.style}
                             onClick={() => handleChangeEditMode(droppedComponent.index)}
                             className='droped-component'>
                             {droppedComponent.innerText}
@@ -57,6 +60,7 @@ const DroppedComponent = ({
                     default:
                         component = (
                         <div
+                            style={droppedComponent.style}
                             onClick={() => handleChangeEditMode(droppedComponent.index)}
                             className='droped-component'>
                             {droppedComponent.innerText}
@@ -78,7 +82,7 @@ DroppedComponent.propTypes = {
         isInEditMode: PropTypes.bool.isRequired,
         index: PropTypes.number.isRequired
     }).isRequired,
-    handleChangeTextDroppedComponent: PropTypes.func.isRequired,
+    handleComponentValueChange: PropTypes.func.isRequired,
     handleForceExitEditMode: PropTypes.func.isRequired
 };
  
