@@ -33,3 +33,13 @@
 .username svg{
     margin-left: 3%;
 }
+.unauthorized-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 52px);
+    color: white;
+    background: black;
+}

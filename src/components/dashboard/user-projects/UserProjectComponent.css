@@ -1,7 +1,11 @@
 .user-project a {
-    color: unset!important;
+    color: unset;
     text-decoration: none!important;
 }
+.user-project a:hover {
+    color: unset;
+}
+
 .user-project a div {
     padding: 5px;
 }

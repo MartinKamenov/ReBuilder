@@ -30,3 +30,6 @@ a.main-header {
 .main-navbar.sticky.navbar.navbar-inverse{
     margin-bottom: 0px;
 }
+.navbar-nav {
+    margin: unset!important;
+}
