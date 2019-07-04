@@ -19,7 +19,6 @@ class EditProjectComponent extends Component {
         id: 0,
         draggableComponents: componentTypes,
         droppedComponents: [],
-        newIndex: 0,
         previousComponent: {},
         isInitialyLoaded: true,
         isLoading: true
@@ -58,13 +57,14 @@ class EditProjectComponent extends Component {
         componentElement.style = style;
         
         componentElement.isInEditMode = false;
-        componentElement.index = this.state.newIndex;
+        componentElement.index = this.state.droppedComponents.length;
         droppedComponents.push(componentElement);
 
-        this.setState({ droppedComponents, newIndex: this.state.newIndex + 1 });
+        this.setState({ droppedComponents });
     }
 
     handleChangeEditMode = (index) => {
+        debugger;
         const droppedComponents = this.state.droppedComponents;
 
         droppedComponents[index].isInEditMode = !droppedComponents[index].isInEditMode;
