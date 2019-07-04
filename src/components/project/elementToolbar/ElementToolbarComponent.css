@@ -17,3 +17,18 @@
     margin: auto;
     width: 200px !important;
 }
+
+.component-input-changer-container {
+    width: '100%';
+}
+
+.component-changer-label {
+    display: inline-block;
+    width: 100px;
+}
+
+.component-changer-input {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+}

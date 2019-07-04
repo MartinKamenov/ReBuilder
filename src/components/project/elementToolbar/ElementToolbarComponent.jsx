@@ -15,18 +15,42 @@ const ElementToolbarComponent = ({component, index, handleComponentValueChange})
     return (
         <div className='toolbar-container'>
             <div className='toolbar-element-container'>
-                <label>Text</label>
-                <input
-                    onChange={(event) => handleComponentValueChange(event.target.value, 'innerText')}
-                    value={component.innerText}
-                    placeholder='Text'>
-                </input>
-                <label>Font size</label>
-                <input
-                    onChange={(event) => handleComponentValueChange(event.target.value, 'innerText')}
-                    value={component.style.fontSize}
-                    placeholder='Font size'>
-                </input>
+                <div className='component-input-changer-container'>
+                    <label className='component-changer-label'>Text</label>
+                    <input
+                        className='component-changer-input'
+                        onChange={(event) => handleComponentValueChange(event.target.value, 'innerText')}
+                        value={component.innerText}
+                        placeholder='Text'>
+                    </input>
+                </div>
+                <div className='component-input-changer-container'>
+                    <label className='component-changer-label'>Font-size</label>
+                    <input
+                        className='component-changer-input'
+                        onChange={(event) => handleComponentValueChange(event.target.value, 'style.fontSize')}
+                        value={component.style.fontSize}
+                        placeholder='Font size'>
+                    </input>
+                </div>
+                <div className='component-input-changer-container'>
+                    <label className='component-changer-label'>Width</label>
+                    <input
+                        className='component-changer-input'
+                        onChange={(event) => handleComponentValueChange(event.target.value, 'style.width')}
+                        value={component.style.width}
+                        placeholder='Element width'>
+                    </input>
+                </div>
+                <div className='component-input-changer-container'>
+                    <label className='component-changer-label'>Height</label>
+                    <input
+                        className='component-changer-input'
+                        onChange={(event) => handleComponentValueChange(event.target.value, 'style.height')}
+                        value={component.style.height}
+                        placeholder='Element height'>
+                    </input>
+                </div>
             </div>
             <div className='toolbar-element-container'>
                 <label>Font color</label>
