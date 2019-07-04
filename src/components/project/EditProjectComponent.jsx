@@ -20,7 +20,7 @@ class EditProjectComponent extends Component {
         draggableComponents: componentTypes,
         droppedComponents: [],
         newIndex: 0,
-        previousInnerText: '',
+        previousComponent: {},
         isInitialyLoaded: true,
         isLoading: true
     }
@@ -75,7 +75,7 @@ class EditProjectComponent extends Component {
         });
 
         if(droppedComponents[index].isInEditMode) {
-            this.setState({previousInnerText: droppedComponents[index].innerText});
+            this.setState({previousComponent: Object.assign({}, droppedComponents[index])});
         }
 
         this.setState({ droppedComponents });
@@ -83,10 +83,10 @@ class EditProjectComponent extends Component {
 
     handleForceExitEditMode = (index) => {
         const droppedComponents = this.state.droppedComponents;
+        droppedComponents[index] = this.state.previousComponent;
         droppedComponents[index].isInEditMode = false;
-        droppedComponents[index].innerText = this.state.previousInnerText;
 
-        this.setState({ droppedComponents, previousInnerText: '' });
+        this.setState({ droppedComponents, previousComponent: {} });
     }
 
     handleComponentValueChange = (value, field) => {
@@ -120,9 +120,6 @@ class EditProjectComponent extends Component {
         
         this.props.actions.updateProject(this.state.id, droppedComponents, token);
     }
-
-    // Returns component directly from state
-    // meaning if we change it we mutate state
     getComponentInEditMode = () => {
         let index = -1;
         let component = this.state.droppedComponents.find((comp, i) => {
@@ -138,6 +135,7 @@ class EditProjectComponent extends Component {
 
     render() {
         if(this.props.project.id && this.state.isInitialyLoaded) {
+            debugger;
             this.setState({
                 isInitialyLoaded: false,
                 droppedComponents: this.props.project.components.slice(0),
