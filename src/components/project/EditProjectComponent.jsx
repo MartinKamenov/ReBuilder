@@ -19,8 +19,7 @@ class EditProjectComponent extends Component {
         id: 0,
         draggableComponents: componentTypes,
         droppedComponents: [],
-        newIndex: 0,
-        previousInnerText: '',
+        previousComponent: {},
         isInitialyLoaded: true,
         isLoading: true
     }
@@ -35,6 +34,16 @@ class EditProjectComponent extends Component {
         const id = this.props.match.params.id;
         this.setState({ id });
         this.props.actions.updateProject(id, null, token);
+    }
+
+    componentWillReceiveProps(props) {
+        if(props.project.id && this.state.isInitialyLoaded) {
+            this.setState({
+                isInitialyLoaded: false,
+                droppedComponents: props.project.components.slice(0),
+                isLoading: false
+            });
+        }
     }
 
     generateProject = () => {
@@ -58,14 +67,14 @@ class EditProjectComponent extends Component {
         componentElement.style = style;
         
         componentElement.isInEditMode = false;
-        componentElement.index = this.state.newIndex;
+        componentElement.index = this.state.droppedComponents.length;
         droppedComponents.push(componentElement);
 
-        this.setState({ droppedComponents, newIndex: this.state.newIndex + 1 });
+        this.setState({ droppedComponents });
     }
 
     handleChangeEditMode = (index) => {
-        const droppedComponents = this.state.droppedComponents;
+        const droppedComponents = this.state.droppedComponents.splice(0);
 
         droppedComponents[index].isInEditMode = !droppedComponents[index].isInEditMode;
         droppedComponents.forEach((component, i) => {
@@ -75,7 +84,7 @@ class EditProjectComponent extends Component {
         });
 
         if(droppedComponents[index].isInEditMode) {
-            this.setState({previousInnerText: droppedComponents[index].innerText});
+            this.setState({ previousComponent: Object.assign({}, droppedComponents[index]) });
         }
 
         this.setState({ droppedComponents });
@@ -83,15 +92,16 @@ class EditProjectComponent extends Component {
 
     handleForceExitEditMode = (index) => {
         const droppedComponents = this.state.droppedComponents;
+        droppedComponents[index] = this.state.previousComponent;
         droppedComponents[index].isInEditMode = false;
-        droppedComponents[index].innerText = this.state.previousInnerText;
 
-        this.setState({ droppedComponents, previousInnerText: '' });
+        this.setState({ droppedComponents, previousComponent: {} });
     }
 
     handleComponentValueChange = (value, field) => {
         const droppedComponents = this.state.droppedComponents;
-        const {componentInEditMode, index} = this.getComponentInEditMode();
+        let {componentInEditMode, index} = this.getComponentInEditMode();
+        componentInEditMode = Object.assign({}, componentInEditMode);
         if(value.hex) {
             const style = Object.assign({}, componentInEditMode.style);
             value = value.hex;
@@ -116,13 +126,10 @@ class EditProjectComponent extends Component {
             return;
         }
 
-        const droppedComponents = this.state.droppedComponents;
+        const droppedComponents = this.state.droppedComponents.slice(0);
         
         this.props.actions.updateProject(this.state.id, droppedComponents, token);
     }
-
-    // Returns component directly from state
-    // meaning if we change it we mutate state
     getComponentInEditMode = () => {
         let index = -1;
         let component = this.state.droppedComponents.find((comp, i) => {
@@ -137,16 +144,8 @@ class EditProjectComponent extends Component {
     }
 
     render() {
-        if(this.props.project.id && this.state.isInitialyLoaded) {
-            this.setState({
-                isInitialyLoaded: false,
-                droppedComponents: this.props.project.components.slice(0),
-                isLoading: false
-            });
-        }
-
         if(this.state.isLoading) {
-            return <LoadingComponent message='Fetching project' />
+            return <LoadingComponent message='Fetching project' />;
         }
 
         const { componentInEditMode, index } = this.getComponentInEditMode();

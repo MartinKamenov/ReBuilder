@@ -14,7 +14,7 @@ class DashboardComponent extends Component {
                 <div className="unauthorized-container">
                     <h1>Unauthorized</h1>
                     <p>Please log in using your credentials</p>
-                    <Link className="nav-link navbar_element">Log In</Link>
+                    <Link to='/login' className="nav-link navbar_element">Log In</Link>
                 </div>
             )
         }
