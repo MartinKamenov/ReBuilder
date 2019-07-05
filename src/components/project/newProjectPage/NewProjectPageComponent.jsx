@@ -10,7 +10,8 @@ class NewProjectPageComponent extends Component {
     state = { 
         name: '',
         projectImage: '',
-        isLoading: false
+        isLoading: false,
+        isCreated: false
     }
 
     handleChangeInput = (text, field) => {
@@ -18,17 +19,18 @@ class NewProjectPageComponent extends Component {
     }
 
     handleCreateProject = () => {
+
         if(!this.state.name || !this.state.projectImage || !this.props) {
             return;
         }
         
-        this.setState({ isLoading: true });
+        this.setState({ isLoading: true, isCreated: true });
 
         this.props.actions.createProject(this.state.name, this.state.projectImage, this.props.user.token);
     }
 
     render() {
-        if(this.props.project.id) {
+        if(this.props.project.id  && this.state.isCreated) {
             this.setState({ isLoading: false });
             const history = this.props.history;
             history.push(`/projects/${this.props.project.id}`);
