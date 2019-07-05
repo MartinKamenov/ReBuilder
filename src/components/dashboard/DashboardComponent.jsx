@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import * as authenticationActions from '../../actions/authenticationActions';
-import { bindActionCreators } from 'redux';
 import './DashboardComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
@@ -13,20 +11,6 @@ import LoadingComponent from '../common/LoadingComponent';
 class DashboardComponent extends Component {
     state = {
         isLoading: false
-    }
-    componentDidMount() {
-        const user = this.props.user;
-        const token = localStorage.getItem('token'); 
-        if(!user.id && token) {
-            this.props.actions.loginByToken(token);
-            this.setState({ isLoading: true });
-        }
-    }
-
-    componentWillReceiveProps(props) {
-        if(props.user.id) {
-            this.setState({ isLoading: false });
-        }
     }
     render() {
         if(this.state.isLoading) {
@@ -69,9 +53,4 @@ const mapStateToProps = (state) => {
         user: state.user
     };
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators(authenticationActions, dispatch)
-    };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardComponent);
+export default connect(mapStateToProps)(DashboardComponent);
