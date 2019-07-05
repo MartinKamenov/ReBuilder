@@ -9,13 +9,7 @@ import LoadingComponent from '../common/LoadingComponent';
 
 
 class DashboardComponent extends Component {
-    state = {
-        isLoading: false
-    }
     render() {
-        if(this.state.isLoading) {
-            return <LoadingComponent message='Loading...' />;
-        }
         if (!this.props.user.id) {
             return (
                 <div className="unauthorized-container">
