@@ -3,6 +3,7 @@ import axios from 'axios';
 const url = 'https://rebuilder-api.herokuapp.com';
 const authPath = '/auth';
 const loginPath = '/login';
+const getUser = '/user';
 const registerPath = '/register';
 const projectsPath = '/projects';
 const newProjectPath = '/new';
@@ -29,6 +30,15 @@ const apiService = {
             password
         };
         const loginUrl = url + authPath + loginPath;
+
+        return axios.post(loginUrl, body, sendObject);
+    },
+
+    loginByToken: (token) => {
+        const loginUrl = url + authPath + getUser;
+
+        const body = {};
+        body.token = token;
 
         return axios.post(loginUrl, body, sendObject);
     },

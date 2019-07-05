@@ -25,7 +25,7 @@ class EditProjectComponent extends Component {
     }
 
     componentDidMount() {
-        let token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         if(!this.props.user.id && !token) {
             const history = this.props.history;
             history.push('/');
@@ -121,7 +121,7 @@ class EditProjectComponent extends Component {
     }
 
     handleSaveProject = () => {
-        let token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         if(!token) {
             return;
         }

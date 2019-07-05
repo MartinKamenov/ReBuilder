@@ -10,6 +10,15 @@ export function login(username, password) {
     };
 }
 
+export function loginByToken(token) {
+    return async function(dispatch) {
+        const res = await apiService.loginByToken(token);
+        const user = res.data;
+        user.token = token;
+        return dispatch(loginSuccess(user));
+    };
+}
+
 export function loginSuccess(user) {
     localStorage.setItem('token', user.token);
 
