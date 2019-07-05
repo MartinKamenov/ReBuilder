@@ -121,7 +121,6 @@ class EditProjectComponent extends Component {
     }
 
     handleSaveProject = () => {
-        debugger;
         let token = localStorage.getItem('token');
         if(!token) {
             return;
