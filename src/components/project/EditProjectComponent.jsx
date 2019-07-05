@@ -127,7 +127,7 @@ class EditProjectComponent extends Component {
             return;
         }
 
-        const droppedComponents = this.state.droppedComponents;
+        const droppedComponents = this.state.droppedComponents.slice(0);
         
         this.props.actions.updateProject(this.state.id, droppedComponents, token);
     }

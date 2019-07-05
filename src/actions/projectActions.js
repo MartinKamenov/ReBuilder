@@ -13,12 +13,12 @@ export function updateProject(projectId, components, token) {
     return async function(dispatch) {
         let res;
         if(components) {
-            res = await apiService.updateProject(projectId, components, token);
+            await apiService.updateProject(projectId, components, token);
         } else {
             res = await apiService.getProject(projectId, token);
+            const project = res.data;
+            return dispatch(selectProjectSuccess(project));
         }
-        const project = res.data;
-        return dispatch(selectProjectSuccess(project));
     };
 }
 
