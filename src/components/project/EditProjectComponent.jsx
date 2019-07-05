@@ -36,6 +36,16 @@ class EditProjectComponent extends Component {
         this.props.actions.updateProject(id, null, token);
     }
 
+    componentWillReceiveProps(props) {
+        if(props.project.id && this.state.isInitialyLoaded) {
+            this.setState({
+                isInitialyLoaded: false,
+                droppedComponents: props.project.components.slice(0),
+                isLoading: false
+            });
+        }
+    }
+
     generateProject = () => {
         projectGenerator.generateProject(this.props.project.name, this.state.droppedComponents);
     }
@@ -64,8 +74,7 @@ class EditProjectComponent extends Component {
     }
 
     handleChangeEditMode = (index) => {
-        debugger;
-        const droppedComponents = this.state.droppedComponents;
+        const droppedComponents = this.state.droppedComponents.splice(0);
 
         droppedComponents[index].isInEditMode = !droppedComponents[index].isInEditMode;
         droppedComponents.forEach((component, i) => {
@@ -75,7 +84,7 @@ class EditProjectComponent extends Component {
         });
 
         if(droppedComponents[index].isInEditMode) {
-            this.setState({previousComponent: Object.assign({}, droppedComponents[index])});
+            this.setState({ previousComponent: Object.assign({}, droppedComponents[index]) });
         }
 
         this.setState({ droppedComponents });
@@ -91,7 +100,8 @@ class EditProjectComponent extends Component {
 
     handleComponentValueChange = (value, field) => {
         const droppedComponents = this.state.droppedComponents;
-        const {componentInEditMode, index} = this.getComponentInEditMode();
+        let {componentInEditMode, index} = this.getComponentInEditMode();
+        componentInEditMode = Object.assign({}, componentInEditMode);
         if(value.hex) {
             const style = Object.assign({}, componentInEditMode.style);
             value = value.hex;
@@ -111,6 +121,7 @@ class EditProjectComponent extends Component {
     }
 
     handleSaveProject = () => {
+        debugger;
         let token = localStorage.getItem('token');
         if(!token) {
             return;
@@ -134,17 +145,8 @@ class EditProjectComponent extends Component {
     }
 
     render() {
-        if(this.props.project.id && this.state.isInitialyLoaded) {
-            debugger;
-            this.setState({
-                isInitialyLoaded: false,
-                droppedComponents: this.props.project.components.slice(0),
-                isLoading: false
-            });
-        }
-
         if(this.state.isLoading) {
-            return <LoadingComponent message='Fetching project' />
+            return <LoadingComponent message='Fetching project' />;
         }
 
         const { componentInEditMode, index } = this.getComponentInEditMode();
