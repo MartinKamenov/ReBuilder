@@ -16,6 +16,12 @@ class LoginComponent extends Component {
         this.setState({[field]: value});
     }
 
+    componentWillReceiveProps(props) {
+        if(props.error) {
+            this.setState({ isLoading: false });
+        }
+    }
+
     login = () => {
         if(!this.state.username || !this.state.password) {
             return;
@@ -64,7 +70,8 @@ class LoginComponent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        error: state.error
     };
 };
 

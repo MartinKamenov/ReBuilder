@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import apiService from '../service/api.service';
-import {dismiss, update, error, message, warning, success, info} from 'react-toastify-redux';
+import { error as toastError, error } from 'react-toastify-redux';
+import { createError } from './errorActions';
 
 export function login(username, password) {
     return async function(dispatch) {
@@ -8,12 +9,14 @@ export function login(username, password) {
             const res = await apiService.login(username, password);
             const user = res.data.user;
             if(!user) {
-                return dispatch(message(res.data));
+                dispatch(toastError(res.data));
+                return dispatch(createError(res.data));
             }
             user.token = res.data.token;
             return dispatch(loginSuccess(user));
         } catch(error) {
-            return dispatch(error.message);
+            dispatch(toastError(error.message));
+            return dispatch(createError(error.message));
         }
     };
 }
