@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as projectActions from '../../../actions/projectActions';
+import * as authenticationActions from '../../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoadingComponent from '../../common/LoadingComponent';
@@ -31,6 +32,7 @@ class NewProjectPageComponent extends Component {
 
     render() {
         if(this.props.project.id  && this.state.isCreated) {
+            this.props.actions.loginByToken(this.props.user.token);
             this.setState({ isLoading: false });
             const history = this.props.history;
             history.push(`/projects/${this.props.project.id}`);
@@ -76,7 +78,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(projectActions, dispatch)
+        actions: bindActionCreators(Object.assign({}, projectActions, authenticationActions), dispatch)
     };
 };
 
