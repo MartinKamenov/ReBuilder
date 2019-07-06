@@ -17,6 +17,13 @@ class LoginComponent extends Component {
     }
 
     componentWillReceiveProps(props) {
+        if(props.user.id) {
+            this.setState({ isLoading: false });
+            const history = this.props.history;
+            history.push('/');
+            return;
+        }
+
         if(props.error) {
             this.setState({ isLoading: false });
         }
@@ -33,12 +40,6 @@ class LoginComponent extends Component {
     }
     
     render() {
-        if(this.props.user.id) {
-            this.setState({ isLoading: false });
-            const history = this.props.history;
-            history.push('/');
-        }
-
         if(this.state.isLoading) {
             return <LoadingComponent message='Authenticating user' />
         }
