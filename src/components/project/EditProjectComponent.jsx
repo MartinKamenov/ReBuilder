@@ -57,14 +57,6 @@ class EditProjectComponent extends Component {
         const componentElement = Object.assign({}, foundElement);
         const droppedComponents = this.state.droppedComponents;
         componentElement.innerText = componentElement.name;
-
-        const style = {};
-        style.color = '#000000';
-        style.backgroundColor = '#ffffff';
-        style.fontSize = '16px';
-        style.height = '30px';
-        style.width = '100%';
-        componentElement.style = style;
         
         componentElement.isInEditMode = false;
         componentElement.index = this.state.droppedComponents.length;
