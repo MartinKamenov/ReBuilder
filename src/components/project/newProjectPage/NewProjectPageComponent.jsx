@@ -16,6 +16,10 @@ class NewProjectPageComponent extends Component {
     }
 
     componentWillReceiveProps(props) {
+        if(props.error) {
+            this.setState({ isLoading: false });
+        }
+
         if(props.project.id  && this.state.isCreated) {
             props.actions.loginByToken(props.user.token);
             this.setState({ isLoading: false });
