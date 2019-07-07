@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import apiService from '../service/api.service';
-import { error as toastError, error } from 'react-toastify-redux';
+import { error as toastError } from 'react-toastify-redux';
 import { createError } from './errorActions';
 
 export function login(username, password) {
@@ -23,10 +23,15 @@ export function login(username, password) {
 
 export function loginByToken(token) {
     return async function(dispatch) {
-        const res = await apiService.loginByToken(token);
-        const user = res.data;
-        user.token = token;
-        return dispatch(loginSuccess(user));
+        try {
+            const res = await apiService.loginByToken(token);
+            const user = res.data;
+            user.token = token;
+            return dispatch(loginSuccess(user));
+        } catch(error) {
+            dispatch(toastError(error.message));
+            return dispatch(createError(error.message));
+        }
     };
 }
 
@@ -38,14 +43,23 @@ export function loginSuccess(user) {
 
 export function register(username, password, email, imageUrl) {
     return async function(dispatch) {
-        const res = await apiService.register(
-            username,
-            password,
-            email,
-            imageUrl
-        );
-        const user = res.data.user;
-        user.token = res.data.token;
-        return dispatch(loginSuccess(user));
+        try {
+            const res = await apiService.register(
+                username,
+                password,
+                email,
+                imageUrl
+            );
+            const user = res.data.user;
+            if(!user) {
+                dispatch(toastError(res.data));
+                return dispatch(createError(res.data));
+            }
+            user.token = res.data.token;
+            return dispatch(loginSuccess(user));
+        } catch(error) {
+            dispatch(toastError(error.message));
+            return dispatch(createError(error.message));
+        }
     };
 }

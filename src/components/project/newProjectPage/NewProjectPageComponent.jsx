@@ -15,6 +15,15 @@ class NewProjectPageComponent extends Component {
         isCreated: false
     }
 
+    componentWillReceiveProps(props) {
+        if(props.project.id  && this.state.isCreated) {
+            props.actions.loginByToken(props.user.token);
+            this.setState({ isLoading: false });
+            const history = props.history;
+            history.push(`/projects/${props.project.id}`);
+        }
+    }
+
     handleChangeInput = (text, field) => {
         this.setState({ [field]: text });
     }
@@ -31,13 +40,6 @@ class NewProjectPageComponent extends Component {
     }
 
     render() {
-        if(this.props.project.id  && this.state.isCreated) {
-            this.props.actions.loginByToken(this.props.user.token);
-            this.setState({ isLoading: false });
-            const history = this.props.history;
-            history.push(`/projects/${this.props.project.id}`);
-        }
-
         if(this.state.isLoading) {
             return <LoadingComponent message='Creating project' />;
         }
@@ -72,7 +74,8 @@ class NewProjectPageComponent extends Component {
 const mapStateToProps = (state) => {
     return {
         project: state.project,
-        user: state.user
+        user: state.user,
+        error: state.error
     };
 };
 
