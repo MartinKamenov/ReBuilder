@@ -7,6 +7,7 @@ const getUser = '/user';
 const registerPath = '/register';
 const projectsPath = '/projects';
 const newProjectPath = '/new';
+const deployPath = '/deploy';
 
 const sendObject = {
     headers: {
@@ -86,6 +87,17 @@ const apiService = {
         sendObject.headers.Authorization = 'Bearer ' + token;
 
         return axios.post(updateProjectUrl, body, sendObject);
+    },
+
+    deployProject: (projectId, token) => {
+        if(!projectId || !token) {
+            return;
+        }
+
+        const deployProjectUrl = url + projectsPath + `/${projectId}` + deployPath;
+        sendObject.headers.Authorization = 'Bearer ' + token;
+
+        return axios.post(deployProjectUrl, {}, sendObject);
     }
 };
 

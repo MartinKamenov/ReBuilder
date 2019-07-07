@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 
 
 import './EditProjectComponent.css';
+import apiService from '../../service/api.service';
 
 class EditProjectComponent extends Component {
     state = {
@@ -130,6 +131,11 @@ class EditProjectComponent extends Component {
         
         this.props.actions.updateProject(this.state.id, droppedComponents, token);
     }
+
+    handleDeployProject = async () => {
+        const res = await apiService.deployProject(this.state.id, this.props.user.token);
+        console.log(res);
+    }
     getComponentInEditMode = () => {
         let index = -1;
         let component = this.state.droppedComponents.find((comp, i) => {
@@ -166,6 +172,12 @@ class EditProjectComponent extends Component {
                                 onClick={this.generateProject}>
                                 <FontAwesomeIcon icon={faDownload} />
                                 <span className='new-project-btn-text'>Generate project</span>
+                            </button>
+                            <button 
+                                className='btn btn-success generate-project-btn'
+                                onClick={this.handleDeployProject}>
+                                <FontAwesomeIcon icon={faDownload} />
+                                <span className='new-project-btn-text'>Deploy project</span>
                             </button>
                         </div>
                     </div>
