@@ -24,16 +24,18 @@ class DashboardComponent extends Component {
                         <div className="navbar-brand user-image">
                             <img src={this.props.user.imageUrl} height="100%" alt="user avatar" />
                         </div>
-                        <div className="username">{this.props.user.username}
+                        <div className="vertical-centered">{this.props.user.username}
                             <FontAwesomeIcon icon={faCaretDown} />
                         </div>
                     </button>
+                    <div id="addButton" className="vertical-centered">
                     <Link
                         to='/project/new'
                         type="button"
                         className="btn btn-outline-dark">
                             New <FontAwesomeIcon icon={faPlusCircle} />
                     </Link>
+                    </div>
                 </nav>
                 <UserProjectsListComponent projects={this.props.user.projects}/>
             </div>
