@@ -23,15 +23,18 @@
     align-items: center;
     justify-content: center;
 }
-.username{
+.vertical-centered {
     margin-right: 12%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.username svg{
+.vertical-centered svg {
     margin-left: 3%;
+}
+#addButton {
+    margin-right: unset;
 }
 .unauthorized-container {
     display: flex;
