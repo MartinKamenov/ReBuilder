@@ -16,6 +16,19 @@ class LoginComponent extends Component {
         this.setState({[field]: value});
     }
 
+    componentWillReceiveProps(props) {
+        if(props.user.id) {
+            this.setState({ isLoading: false });
+            const history = this.props.history;
+            history.push('/');
+            return;
+        }
+
+        if(props.error) {
+            this.setState({ isLoading: false });
+        }
+    }
+
     login = () => {
         if(!this.state.username || !this.state.password) {
             return;
@@ -27,12 +40,6 @@ class LoginComponent extends Component {
     }
     
     render() {
-        if(this.props.user.id) {
-            this.setState({ isLoading: false });
-            const history = this.props.history;
-            history.push('/');
-        }
-
         if(this.state.isLoading) {
             return <LoadingComponent message='Authenticating user' />
         }
@@ -64,7 +71,8 @@ class LoginComponent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        error: state.error
     };
 };
 

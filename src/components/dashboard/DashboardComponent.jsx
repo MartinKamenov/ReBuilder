@@ -5,8 +5,6 @@ import { faCaretDown, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import UserProjectsListComponent from './user-projects/UserProjectsListComponent';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LoadingComponent from '../common/LoadingComponent';
-
 
 class DashboardComponent extends Component {
     render() {

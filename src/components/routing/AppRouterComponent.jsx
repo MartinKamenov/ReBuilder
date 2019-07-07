@@ -9,6 +9,8 @@ import NewProjectPageComponent from '../project/newProjectPage/NewProjectPageCom
 import * as authenticationActions from '../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { ToastContainer } from 'react-toastify-redux';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AppRouterComponent extends Component {
     componentDidMount() {
@@ -21,6 +23,9 @@ class AppRouterComponent extends Component {
     render() {
         return (
             <Router>
+                <div>
+                    <ToastContainer/>
+                </div>
                 <div className='main-container'>
                     <NavbarComponent/>
                     <Route exact path="/" component={DashboardComponent} />

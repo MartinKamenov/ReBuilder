@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as projectActions from '../../../actions/projectActions';
+import * as authenticationActions from '../../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoadingComponent from '../../common/LoadingComponent';
@@ -12,6 +13,19 @@ class NewProjectPageComponent extends Component {
         projectImage: '',
         isLoading: false,
         isCreated: false
+    }
+
+    componentWillReceiveProps(props) {
+        if(props.error) {
+            this.setState({ isLoading: false });
+        }
+
+        if(props.project.id  && this.state.isCreated) {
+            props.actions.loginByToken(props.user.token);
+            this.setState({ isLoading: false });
+            const history = props.history;
+            history.push(`/projects/${props.project.id}`);
+        }
     }
 
     handleChangeInput = (text, field) => {
@@ -30,12 +44,6 @@ class NewProjectPageComponent extends Component {
     }
 
     render() {
-        if(this.props.project.id  && this.state.isCreated) {
-            this.setState({ isLoading: false });
-            const history = this.props.history;
-            history.push(`/projects/${this.props.project.id}`);
-        }
-
         if(this.state.isLoading) {
             return <LoadingComponent message='Creating project' />;
         }
@@ -70,13 +78,14 @@ class NewProjectPageComponent extends Component {
 const mapStateToProps = (state) => {
     return {
         project: state.project,
-        user: state.user
+        user: state.user,
+        error: state.error
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(projectActions, dispatch)
+        actions: bindActionCreators(Object.assign({}, projectActions, authenticationActions), dispatch)
     };
 };
 
