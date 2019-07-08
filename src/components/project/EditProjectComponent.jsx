@@ -140,7 +140,7 @@ class EditProjectComponent extends Component {
     }
 
     handleDeployProject = async () => {
-        this.props.deploymentActions.deployProject(this.state.id, this.props.user.token);
+        this.props.actions.deployProject(this.state.id, this.props.user.token);
     }
     getComponentInEditMode = () => {
         let index = -1;

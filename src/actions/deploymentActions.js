@@ -6,10 +6,10 @@ import { createError } from './errorActions';
 export function deployProject(projectId, token) {
     return async function(dispatch) {
         try {
-            let res;
-            await apiService.deployProject(projectId, token);
-            res = await apiService.getProject(projectId, token);
+            debugger;
+            const res = await apiService.getProject(projectId, token);
             const projectStatus = res.data;
+            debugger;
             return dispatch(deployProjectSuccess(projectStatus));
         } catch(error) {
             dispatch(toastError(error.message));
