@@ -16,9 +16,10 @@ const UserProjectComponent = ({projectDetails}) => {
 }
 
 UserProjectComponent.propTypes = {
-    projectDetails: PropTypes.object.isRequired,
-    projectImageUrl: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    projectDetails: PropTypes.shape({
+        projectImageUrl: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired
+    }).isRequired,
 }
  
 export default UserProjectComponent;

@@ -9,7 +9,11 @@ const UserProjectsListComponent = ({projects}) => {
             <ul>
                 {
                     projects.map((project) => {
-                        return <li> <UserProjectComponent key={project.id} projectDetails={project}/></li>
+                        return (
+                            <li key={project.id}>
+                                <UserProjectComponent projectDetails={project}/>
+                            </li>
+                        );
                     })
                 }
             </ul>
