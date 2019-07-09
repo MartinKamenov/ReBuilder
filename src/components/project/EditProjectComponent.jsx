@@ -5,7 +5,7 @@ import ElementToolbarComponent from './elementToolbar/ElementToolbarComponent';
 import componentTypes from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faSave, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
 import LoadingComponent from '../common/LoadingComponent';
 import * as projectActions from '../../actions/projectActions';
 import * as deploymentActions from '../../actions/deploymentActions';
@@ -174,7 +174,7 @@ class EditProjectComponent extends Component {
                                 <span className='new-project-btn-text'>Save project</span>
                             </button>
                             <button 
-                                className='btn btn-success generate-project-btn'
+                                className='btn btn-warning generate-project-btn'
                                 onClick={this.generateProject}>
                                 <FontAwesomeIcon icon={faDownload} />
                                 <span className='new-project-btn-text'>Generate project</span>
@@ -182,7 +182,7 @@ class EditProjectComponent extends Component {
                             <button 
                                 className='btn btn-success generate-project-btn'
                                 onClick={this.handleDeployProject}>
-                                <FontAwesomeIcon icon={faDownload} />
+                                <FontAwesomeIcon icon={faArrowAltCircleUp} />
                                 <span className='new-project-btn-text'>Deploy project</span>
                             </button>
                         </div>
