@@ -6,7 +6,7 @@ import { createError } from './errorActions';
 export function deployProject(projectId, token) {
     return async function(dispatch) {
         try {
-            const res = await apiService.getProject(projectId, token);
+            const res = await apiService.deployProject(projectId, token);
             const projectStatus = res.data;
             debugger;
             return dispatch(deployProjectSuccess(projectStatus));
