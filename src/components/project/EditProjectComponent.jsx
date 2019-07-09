@@ -48,7 +48,7 @@ class EditProjectComponent extends Component {
         // Opens window in new tab after project is deployed
         if(props.projectStatus) {
             setTimeout(() => {
-                const url = props.projectStatus.url;
+                const url = props.projectStatus.projectUrl;
                 window.open(url, "_blank");
             }, 20000);
         }
