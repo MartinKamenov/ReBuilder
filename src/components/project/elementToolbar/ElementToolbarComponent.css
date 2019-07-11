@@ -4,9 +4,26 @@
     border-radius: 10px;
     width: 300px;
     height: 500px;
-    padding: 10px;
     text-align: center;
-    overflow: auto;
+    flex-direction: column;
+}
+
+.toolbar-scrollable {
+    height: calc(100% - 130px);
+    padding: 10px;
+}
+.actions-container {
+    height: 1300px;
+    padding: 10px;
+}
+.actions-button {
+    width: 75%;
+    height: 40px;
+    display: block;
+}
+
+.action-icon {
+    margin-right: 5px;
 }
 
 .toolbar-element-container {

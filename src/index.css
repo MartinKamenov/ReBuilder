@@ -15,3 +15,7 @@ code {
 .center-container {
   text-align: center;
 }
+
+.vertical-scrollable-container {
+  overflow: auto;
+}
