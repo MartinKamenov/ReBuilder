@@ -5,14 +5,15 @@ import './ProjectComponentsList.css';
 
 const ProjectComponentsList = ({draggableComponents}) => {
     return (
-        <ul className='component-list-container vertical-scrollable-container'>
-            {
-                draggableComponents.map((component, i) => 
-                    <DraggableComponent key={i} draggableComponent={component}/>
-                )
-            }
+        <div className='component-list-container vertical-scrollable-container'>
+            <h3>Draggable element</h3>
+                {
+                    draggableComponents.map((component, i) => 
+                        <DraggableComponent key={i} draggableComponent={component}/>
+                    )
+                }
             <button className='btn btn-primary rearange-btn'>Rearange</button>
-        </ul>
+        </div>
     );
 }
 

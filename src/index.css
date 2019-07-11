@@ -19,3 +19,7 @@ code {
 .vertical-scrollable-container {
   overflow: auto;
 }
+
+.btn {
+  cursor: pointer !important;
+}
