@@ -5,7 +5,7 @@ import './ProjectComponentsList.css';
 
 const ProjectComponentsList = ({draggableComponents}) => {
     return (
-        <ul className='component-list-container'>
+        <ul className='component-list-container vertical-scrollable-container'>
             {
                 draggableComponents.map((component, i) => 
                     <DraggableComponent key={i} draggableComponent={component}/>

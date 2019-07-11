@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
 import './ElementToolbarComponent.css';
 
-const ElementToolbarComponent = ({component, handleComponentValueChange}) => {
+const ElementToolbarComponent = ({component, handleComponentValueChange, actions}) => {
     if(!component) {
         return (
             <div className='toolbar-container'>
@@ -71,15 +71,21 @@ const ElementToolbarComponent = ({component, handleComponentValueChange}) => {
                 </div>
             </div>
             <div className='actions-container'>
-                <button className='actions-button btn btn-success'>
+                <button
+                    onClick={() => actions.handleChangeEditMode(component.index)}
+                    className='actions-button btn btn-success'>
                     <FontAwesomeIcon className='action-icon' icon={faCheck} />
                     Accept changes
                 </button>
-                <button className='actions-button btn btn-warning'>
+                <button
+                    onClick={() => actions.handleForceExitEditMode(component.index)}
+                    className='actions-button btn btn-warning'>
                     <FontAwesomeIcon className='action-icon' icon={faUndo} />
                     Revert changes
                 </button>
-                <button className='actions-button btn btn-danger'>
+                <button
+                    onClick={() => actions.handleDeleteComponent(component.index)}
+                    className='actions-button btn btn-danger'>
                     <FontAwesomeIcon className='action-icon' icon={faTrashAlt} />
                     Delete component
                 </button>
@@ -93,6 +99,11 @@ ElementToolbarComponent.propTypes = {
         name: PropTypes.string.isRequired,
         innerText: PropTypes.string.isRequired
     }),
+    actions: PropTypes.shape({
+        handleChangeEditMode: PropTypes.func.isRequired,
+        handleForceExitEditMode: PropTypes.func.isRequired,
+        handleDeleteComponent: PropTypes.func.isRequired
+    }).isRequired,
     handleComponentValueChange: PropTypes.func.isRequired
 };
  

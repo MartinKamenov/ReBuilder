@@ -98,6 +98,13 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents, previousComponent: {} });
     }
 
+    handleDeleteComponent = (index) => {
+        const droppedComponents = this.state.droppedComponents;
+        droppedComponents.splice(index, 1);
+
+        this.setState({ droppedComponents, previousComponent: {} });
+    }
+
     handleComponentValueChange = (value, field) => {
         const droppedComponents = this.state.droppedComponents;
         let {componentInEditMode, index} = this.getComponentInEditMode();
@@ -190,8 +197,12 @@ class EditProjectComponent extends Component {
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
                     <ElementToolbarComponent
+                        actions={{
+                            handleChangeEditMode: this.handleChangeEditMode,
+                            handleForceExitEditMode: this.handleForceExitEditMode,
+                            handleDeleteComponent: this.handleDeleteComponent
+                        }}
                         component={componentInEditMode}
-                        index={index}
                         handleComponentValueChange={this.handleComponentValueChange}/>
                 </div>
             </div>
