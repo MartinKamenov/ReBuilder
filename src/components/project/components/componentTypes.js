@@ -51,7 +51,8 @@ const componentTypes = [
         style: {
             height: '100px',
             width: '200px',
-            textAlign: 'center'
+            textAlign: 'center',
+            display: 'block'
         }
     }
 ];

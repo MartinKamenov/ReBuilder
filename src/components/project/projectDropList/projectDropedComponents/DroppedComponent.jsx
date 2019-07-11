@@ -13,13 +13,35 @@ const DroppedComponent = ({
     if(droppedComponent.isInEditMode) {
         return (
             <div className='edit-component-container'>
-                <input
-                    style={droppedComponent.style}
-                    className='edit-input'
-                    value={droppedComponent.innerText}
-                    onChange={(event) => 
-                        handleComponentValueChange(event.target.value, 'innerText')}>
-                </input>
+                {
+                    (() => {
+                        let element;
+                        switch(droppedComponent.name) {
+                            case 'Image':
+                                element = (
+                                    <img
+                                        alt='component'
+                                        src={droppedComponent.src}
+                                        style={droppedComponent.style}
+                                        className='edit-input'/>
+                                );
+                                break;
+                            default:
+                                element = (
+                                    <input
+                                        style={droppedComponent.style}
+                                        className='edit-input'
+                                        value={droppedComponent.innerText}
+                                        onChange={(event) => 
+                                            handleComponentValueChange(event.target.value, 'innerText')}>
+                                    </input>
+                                );
+                                break;
+                        }
+                        return element;
+                    })()
+                }
+                
                 <button
                     className='btn btn-success'
                     onClick={() => handleChangeEditMode(droppedComponent.index)}>
@@ -56,6 +78,15 @@ const DroppedComponent = ({
                             className='droped-component'>
                             {droppedComponent.innerText}
                         </div>);
+                        break;
+                    case 'Image':
+                        component = (
+                            <img
+                                alt='component'
+                                src={droppedComponent.src}
+                                style={droppedComponent.style}
+                                onClick={() => handleChangeEditMode(droppedComponent.index)}
+                                className='droped-component'/>);
                         break;
                     default:
                         component = (
