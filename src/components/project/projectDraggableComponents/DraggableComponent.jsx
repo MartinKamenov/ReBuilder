@@ -3,7 +3,7 @@ import { Draggable } from 'react-drag-and-drop';
 import PropTypes from 'prop-types';
 import './DraggableComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeading, faFont, faBorderAll } from '@fortawesome/free-solid-svg-icons';
+import { faHeading, faFont, faBorderAll, faItalic } from '@fortawesome/free-solid-svg-icons';
 
 const DraggableComponent = ({draggableComponent}) => {
     return (
@@ -20,6 +20,9 @@ const DraggableComponent = ({draggableComponent}) => {
                                 break;
                             case 'Grid':
                                 icon = <FontAwesomeIcon icon={faBorderAll} />;
+                                break;
+                            case 'Input':
+                                icon = <FontAwesomeIcon icon={faItalic} />;
                                 break;
                             default:
                                 break;

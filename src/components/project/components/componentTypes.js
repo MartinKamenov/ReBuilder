@@ -7,6 +7,9 @@ const componentTypes = [
     },
     {
         name: 'Grid'
+    },
+    {
+        name: 'Input'
     }
 ];
 
