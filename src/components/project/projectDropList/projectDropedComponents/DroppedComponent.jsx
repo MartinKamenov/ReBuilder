@@ -28,13 +28,13 @@ const DroppedComponent = ({
                                 break;
                             default:
                                 element = (
-                                    <input
+                                    <textarea
                                         style={droppedComponent.style}
                                         className='edit-input'
                                         value={droppedComponent.innerText}
                                         onChange={(event) => 
                                             handleComponentValueChange(event.target.value, 'innerText')}>
-                                    </input>
+                                    </textarea>
                                 );
                                 break;
                         }

@@ -159,7 +159,7 @@ class EditProjectComponent extends Component {
             return <LoadingComponent message='Fetching project' />;
         }
 
-        const { componentInEditMode, index } = this.getComponentInEditMode();
+        const { componentInEditMode } = this.getComponentInEditMode();
         return (
             <div>
                 <h1 className='project-name-header'>{this.props.project.name}</h1>
