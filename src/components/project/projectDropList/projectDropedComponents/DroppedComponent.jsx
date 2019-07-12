@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './DroppedComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 
 const DroppedComponent = ({
         droppedComponent,
@@ -50,9 +50,9 @@ const DroppedComponent = ({
                     <FontAwesomeIcon icon={faCheck} /> 
                 </button>
                 <button
-                    className='btn btn-danger'
+                    className='btn btn-warning'
                     onClick={() => handleForceExitEditMode(droppedComponent.index)}>
-                    <FontAwesomeIcon icon={faTimes} /> 
+                    <FontAwesomeIcon icon={faUndo} /> 
                 </button>
             </div>
         );
