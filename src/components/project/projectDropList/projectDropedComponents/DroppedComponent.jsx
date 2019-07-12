@@ -27,9 +27,11 @@ const DroppedComponent = ({
                                 );
                                 break;
                             default:
+                                const copyOfStyles = Object.assign({}, droppedComponent.style);
+                                copyOfStyles.resize = 'none';
                                 element = (
                                     <textarea
-                                        style={droppedComponent.style}
+                                        style={copyOfStyles}
                                         className='edit-input'
                                         value={droppedComponent.innerText}
                                         onChange={(event) => 
