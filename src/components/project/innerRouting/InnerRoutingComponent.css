@@ -1,0 +1,11 @@
+.routing-page-component {
+    text-align: center;
+    height: 300px;
+    background-color: red;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.add-route-container {
+    padding-top: 50px;
+}

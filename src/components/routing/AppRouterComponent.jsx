@@ -6,6 +6,7 @@ import LoginComponent from '../auth/login/LoginComponent';
 import RegisterComponent from '../auth/register/RegisterComponent';
 import EditProjectComponent from '../project/EditProjectComponent';
 import NewProjectPageComponent from '../project/newProjectPage/NewProjectPageComponent';
+import InnerRoutingComponent from '../project/innerRouting/InnerRoutingComponent';
 import * as authenticationActions from '../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -32,6 +33,7 @@ class AppRouterComponent extends Component {
                     <div className='container'>
                         <Route exact path="/login" component={LoginComponent} />
                         <Route exact path="/register" component={RegisterComponent} />
+                        <Route exact path="/projects/:id/routing" component={InnerRoutingComponent} />
                         <Route exact path="/projects/:id" component={EditProjectComponent} />
                         <Route exact path="/project/new" component={NewProjectPageComponent} />
                     </div>
