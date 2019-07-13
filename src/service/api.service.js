@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://rebuilder-api.herokuapp.com';
+const url = 'http://192.168.1.30:5000';
 const authPath = '/auth';
 const loginPath = '/login';
 const getUser = '/user';
@@ -77,13 +77,13 @@ const apiService = {
         return axios.post(getProjectUrl, {}, sendObject);
     },
 
-    updateProject: (projectId, components, token) => {
-        if(!projectId || !components || !token) {
+    updateProject: (projectId, pages, token) => {
+        if(!projectId || !pages || !token) {
             return;
         }
 
         const updateProjectUrl = url + projectsPath + `/${projectId}`;
-        const body = { components };
+        const body = { pages };
         sendObject.headers.Authorization = 'Bearer ' + token;
 
         return axios.post(updateProjectUrl, body, sendObject);

@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import * as projectActions from '../../../actions/projectActions';
+import * as deploymentActions from '../../../actions/deploymentActions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import './InnerRoutingComponent.css';
 
 class InnerRoutingComponent extends Component {
-    state = {
-        pages: [{
-            route: '/bla',
-            components: []
-        }]
-    }
     render() {
-        debugger;
         return (
             <div>
                 {
@@ -31,4 +28,21 @@ class InnerRoutingComponent extends Component {
     }
 }
 
-export default InnerRoutingComponent;
+const mapStateToProps = (state) => {
+    return {
+        project: state.project,
+        user: state.user,
+        projectStatus: state.projectStatus
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(
+            Object.assign({}, projectActions, deploymentActions),
+            dispatch
+        )
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InnerRoutingComponent);

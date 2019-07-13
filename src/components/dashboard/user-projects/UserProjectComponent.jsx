@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const UserProjectComponent = ({projectDetails}) => {
     return (
         <div className="user-project">
-            <Link to={ '/projects/' + projectDetails.id }>
+            <Link to={ '/projects/' + projectDetails.id + '/routing' }>
                 <div>
                     <img alt='Project' src={projectDetails.projectImageUrl} /> {projectDetails.name}
                 </div>

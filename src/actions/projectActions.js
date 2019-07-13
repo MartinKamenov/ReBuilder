@@ -16,12 +16,12 @@ export function createProject(projectName, projectUrl, token) {
     };
 }
 
-export function updateProject(projectId, components, token) {
+export function updateProject(projectId, pages, token) {
     return async function(dispatch) {
         try {
             let res;
-            if(components) {
-                await apiService.updateProject(projectId, components, token);
+            if(pages) {
+                await apiService.updateProject(projectId, pages, token);
             } else {
                 res = await apiService.getProject(projectId, token);
                 const project = res.data;
