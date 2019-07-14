@@ -5,12 +5,12 @@ import ElementToolbarComponent from './elementToolbar/ElementToolbarComponent';
 import componentTypes from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faSave, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
 import LoadingComponent from '../common/LoadingComponent';
 import * as projectActions from '../../actions/projectActions';
+import * as deploymentActions from '../../actions/deploymentActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
 
 import './EditProjectComponent.css';
 
@@ -44,6 +44,14 @@ class EditProjectComponent extends Component {
                 isLoading: false
             });
         }
+
+        // Opens window in new tab after project is deployed
+        if(props.projectStatus) {
+            setTimeout(() => {
+                const url = props.projectStatus.projectUrl;
+                window.open(url, "_blank");
+            }, 20000);
+        }
     }
 
     generateProject = () => {
@@ -57,14 +65,6 @@ class EditProjectComponent extends Component {
         const componentElement = Object.assign({}, foundElement);
         const droppedComponents = this.state.droppedComponents;
         componentElement.innerText = componentElement.name;
-
-        const style = {};
-        style.color = '#000000';
-        style.backgroundColor = '#ffffff';
-        style.fontSize = '16px';
-        style.height = '30px';
-        style.width = '100%';
-        componentElement.style = style;
         
         componentElement.isInEditMode = false;
         componentElement.index = this.state.droppedComponents.length;
@@ -94,6 +94,13 @@ class EditProjectComponent extends Component {
         const droppedComponents = this.state.droppedComponents;
         droppedComponents[index] = this.state.previousComponent;
         droppedComponents[index].isInEditMode = false;
+
+        this.setState({ droppedComponents, previousComponent: {} });
+    }
+
+    handleDeleteComponent = (index) => {
+        const droppedComponents = this.state.droppedComponents;
+        droppedComponents.splice(index, 1);
 
         this.setState({ droppedComponents, previousComponent: {} });
     }
@@ -130,6 +137,10 @@ class EditProjectComponent extends Component {
         
         this.props.actions.updateProject(this.state.id, droppedComponents, token);
     }
+
+    handleDeployProject = async () => {
+        this.props.actions.deployProject(this.state.id, this.props.user.token);
+    }
     getComponentInEditMode = () => {
         let index = -1;
         let component = this.state.droppedComponents.find((comp, i) => {
@@ -148,7 +159,7 @@ class EditProjectComponent extends Component {
             return <LoadingComponent message='Fetching project' />;
         }
 
-        const { componentInEditMode, index } = this.getComponentInEditMode();
+        const { componentInEditMode } = this.getComponentInEditMode();
         return (
             <div>
                 <h1 className='project-name-header'>{this.props.project.name}</h1>
@@ -162,10 +173,16 @@ class EditProjectComponent extends Component {
                                 <span className='new-project-btn-text'>Save project</span>
                             </button>
                             <button 
-                                className='btn btn-success generate-project-btn'
+                                className='btn btn-warning generate-project-btn'
                                 onClick={this.generateProject}>
                                 <FontAwesomeIcon icon={faDownload} />
                                 <span className='new-project-btn-text'>Generate project</span>
+                            </button>
+                            <button 
+                                className='btn btn-success generate-project-btn'
+                                onClick={this.handleDeployProject}>
+                                <FontAwesomeIcon icon={faArrowAltCircleUp} />
+                                <span className='new-project-btn-text'>Deploy project</span>
                             </button>
                         </div>
                     </div>
@@ -180,8 +197,12 @@ class EditProjectComponent extends Component {
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
                     <ElementToolbarComponent
+                        actions={{
+                            handleChangeEditMode: this.handleChangeEditMode,
+                            handleForceExitEditMode: this.handleForceExitEditMode,
+                            handleDeleteComponent: this.handleDeleteComponent
+                        }}
                         component={componentInEditMode}
-                        index={index}
                         handleComponentValueChange={this.handleComponentValueChange}/>
                 </div>
             </div>
@@ -192,13 +213,17 @@ class EditProjectComponent extends Component {
 const mapStateToProps = (state) => {
     return {
         project: state.project,
-        user: state.user
+        user: state.user,
+        projectStatus: state.projectStatus
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(projectActions, dispatch)
+        actions: bindActionCreators(
+            Object.assign({}, projectActions, deploymentActions),
+            dispatch
+        )
     };
 };
  

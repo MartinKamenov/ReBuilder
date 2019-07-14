@@ -10,7 +10,7 @@ const DroppedListComponent = ({
         handleForceExitEditMode
     }) => {
     return (
-        <div className='droped-components-container'>
+        <div className='droped-components-container vertical-scrollable-container'>
             {
                 droppedComponents.map((component, i) => (
                     <DroppedComponent
