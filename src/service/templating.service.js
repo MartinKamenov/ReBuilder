@@ -1,8 +1,8 @@
 import elementGenerator from './elementGenerator.service';
 
 const templatingService = {
-    getAllTemplates: (name, droppedComponents) => {
-        return [
+    getAllTemplates: (name, pages) => {
+        const templates = [
             {
                 filePath: "src/index.js",
                 template: 
@@ -37,7 +37,8 @@ export default App;
     "dependencies": {
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
-        "react-scripts": "3.0.1"
+        "react-scripts": "3.0.1",
+        "react-router-dom": "^5.0.1"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -91,12 +92,42 @@ export default App;
 `
             },
             {
-                filePath: "./src/components/MainComponent.jsx",
+                filePath: `./src/components/MainComponent.jsx`,
                 template: 
 `import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+${pages.map(page => (
+    `import ${page.id} from './${project.id}' />`
+))}
 import './main.css';
 
 class MainComponent extends Component {
+state = {  }
+render() { 
+    return (
+        <Router>
+            ${pages.map(page => (
+                `           <Route exact path='${page.route}' component={${page.id}} />`
+            ))}
+        </Router>
+    );
+}
+}
+
+export default MainComponent;
+`
+            }
+        ];
+
+        pages.forEach(page => {
+            templates.push(
+                {
+                    filePath: `./src/components/${page.id}.jsx`,
+                    template: 
+`import React, { Component } from 'react';
+import './main.css';
+
+class ${page.id} extends Component {
     state = {  }
     render() { 
         return (
@@ -104,11 +135,11 @@ class MainComponent extends Component {
         );
     }
 }
- 
-export default MainComponent;
+    
+export default ${page.id};
 `
-            }
-        ]
+                });
+        });
     }
 };
 
