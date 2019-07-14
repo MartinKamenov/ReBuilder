@@ -140,8 +140,6 @@ class EditProjectComponent extends Component {
             return;
         }
 
-        debugger;
-
         const droppedComponents = this.state.droppedComponents.slice(0);
         const page = this.state.page;
         page.elements = droppedComponents;

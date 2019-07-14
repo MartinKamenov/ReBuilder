@@ -61,6 +61,14 @@ class InnerRoutingComponent extends Component {
 
         return (
             <div>
+                <div className='col-md-4 col-sm-6 outer-route-container'>
+                    <div
+                        className='routing-page-component add-route-container'
+                        onClick={this.addNewPage}>
+                        <h3>Add new page</h3>
+                        <FontAwesomeIcon style={{width: 100, height: 100}} icon={faPlusCircle} />
+                    </div>
+                </div>
                 {
                     this.state.pages.map((page) => {
                         return (
@@ -75,15 +83,6 @@ class InnerRoutingComponent extends Component {
                         );
                     })
                 }
-
-                <div className='col-md-4 col-sm-6 outer-route-container'>
-                    <div
-                        className='routing-page-component add-route-container'
-                        onClick={this.addNewPage}>
-                        <h3>Add new page</h3>
-                        <FontAwesomeIcon style={{width: 100, height: 100}} icon={faPlusCircle} />
-                    </div>
-                </div>
             </div>
         );
     }
