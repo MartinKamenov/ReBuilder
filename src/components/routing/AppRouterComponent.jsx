@@ -31,9 +31,9 @@ class AppRouterComponent extends Component {
                     <NavbarComponent/>
                     <Route exact path="/" component={DashboardComponent} />
                     <Route exact path="/projects/:id" component={EditProjectComponent} />
+                    <Route exact path="/login" component={LoginComponent} />
+                    <Route exact path="/register" component={RegisterComponent} />
                     <div className='container'>
-                        <Route exact path="/login" component={LoginComponent} />
-                        <Route exact path="/register" component={RegisterComponent} />
                         <Route exact path="/projects/:id/routing" component={InnerRoutingComponent} />
                         <Route exact path="/project/new" component={NewProjectPageComponent} />
                     </div>
@@ -53,5 +53,5 @@ const mapDispatchToProps = (dispatch) => {
         actions: bindActionCreators(authenticationActions, dispatch)
     };
 };
- 
+
 export default connect(mapStateToProps, mapDispatchToProps)(AppRouterComponent);
