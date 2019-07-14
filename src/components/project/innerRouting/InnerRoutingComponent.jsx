@@ -6,16 +6,31 @@ import * as deploymentActions from '../../../actions/deploymentActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import './InnerRoutingComponent.css';
+import LoadingComponent from '../../common/LoadingComponent';
 
 class InnerRoutingComponent extends Component {
+    componentDidMount() {
+        const token = localStorage.getItem('token');
+        if(!this.props.user.id && !token) {
+            const history = this.props.history;
+            history.push('/');
+            return;
+        }
+        const id = this.props.match.params.id;
+        this.setState({ id });
+        this.props.actions.updateProject(id, null, token);
+    }
     render() {
+        if(!this.props.project.id) {
+            return (<LoadingComponent message='Fetching project'/>)
+        }
         return (
             <div>
                 {
-                    this.state.pages.map(() => {
-                        return <div className='col-md-4 routing-page-component'>
+                    this.props.project.pages.map(() => {
+                        return (<div className='col-md-4 routing-page-component'>
                             Pesho
-                        </div>;
+                        </div>);
                     })
                 }
 
