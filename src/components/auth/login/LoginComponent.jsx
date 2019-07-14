@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import './LoginComponent.css';
 import LoadingComponent from '../../common/LoadingComponent';
+import ButtonComponent from '../../common/ButtonComponent';
 
 class LoginComponent extends Component {
     state = {
@@ -60,9 +61,11 @@ class LoginComponent extends Component {
                         placeholder='Password'
                         onChange={(event) => this.handleInputChange(event.target.value, 'password')}
                         value={this.state.password}/>
-                    <button
-                        className='submit-btn btn btn-success'
-                        onClick={this.login}>Log in</button>
+                    <ButtonComponent
+                        title='Log in'
+                        className='submit-btn'
+                        type='success'
+                        onClick={this.login}/>
                 </div>
             </div>
         );

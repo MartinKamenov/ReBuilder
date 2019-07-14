@@ -1,0 +1,24 @@
+.custom-button {
+    height: 40px;
+    border-radius: 10px; 
+}
+
+.custom-button:hover {
+    background-color: #f0f0f0;
+}
+
+.custom-button-success {
+    border: 1px solid green;
+    color: green;
+    background-color: white;
+}
+.custom-button-danger {
+    border: 1px solid red;
+    color: red;
+    background-color: white;
+}
+.custom-button-warning {
+    border: 1px solid yellow;
+    color: yellow;
+    background-color: white;
+}
