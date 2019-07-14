@@ -1,22 +1,29 @@
 .register-container {
     max-width: 300px;
     text-align: center;
-    margin: auto;
-    background-color: #f7f4f4;
-    border-radius: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: transparent;
     padding: 10px;
-    border: 1px solid black;
 }
 
 .auth-header {
     font-weight: bold;
 }
 
-.form-input {
+input.form-input {
     width: 80%;
-    margin-bottom: 10px !important;
+    margin-bottom: 10px;
 }
 
 .submit-btn {
     width: 80%;
+    margin-top: 10px;
+}
+.auth-container{
+    background-image: url("https://images.pexels.com/photos/1437493/pexels-photo-1437493.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-position: center;
+    width: 100%;
+    height: calc(100vh - 52px);
+    padding-top: 40px;
 }
