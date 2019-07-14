@@ -45,24 +45,26 @@ class LoginComponent extends Component {
         }
         
         return ( 
-            <div className='login-container'>
-                <h3 className='auth-header'>Sign in</h3>
-                <div>
-                    <input
-                        className='form-input'
-                        type='text'
-                        placeholder='Username'
-                        onChange={(event) => this.handleInputChange(event.target.value, 'username')}
-                        value={this.state.username}/>
-                    <input
-                        className='form-input'
-                        type='password'
-                        placeholder='Password'
-                        onChange={(event) => this.handleInputChange(event.target.value, 'password')}
-                        value={this.state.password}/>
-                    <button
-                        className='submit-btn btn btn-success'
-                        onClick={this.login}>Log in</button>
+            <div className='auth-container'>
+                <div className='login-container'>
+                    <h3 className='auth-header'>Sign in</h3>
+                    <div>
+                        <input
+                            className='form-input'
+                            type='text'
+                            placeholder='Username'
+                            onChange={(event) => this.handleInputChange(event.target.value, 'username')}
+                            value={this.state.username}/>
+                        <input
+                            className='form-input'
+                            type='password'
+                            placeholder='Password'
+                            onChange={(event) => this.handleInputChange(event.target.value, 'password')}
+                            value={this.state.password}/>
+                        <button
+                            className='submit-btn btn btn-success'
+                            onClick={this.login}>Log in</button>
+                    </div>
                 </div>
             </div>
         );
