@@ -48,7 +48,9 @@ class InnerRoutingComponent extends Component {
         const project = this.props.project;
         project.pages.push(page);
 
-        this.props.actions.updateProject(project.id, this.state.pages, this.props.user.id);
+        const token = localStorage.getItem('token');
+
+        this.props.actions.updateProject(project.id, this.state.pages, token);
         this.setState({ pages: project.pages });
     }
 
