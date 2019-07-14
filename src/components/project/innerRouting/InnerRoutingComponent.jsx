@@ -11,7 +11,10 @@ import uuid from 'uuid';
 
 class InnerRoutingComponent extends Component {
     state = {
-        pages: []
+        pages: [],
+        isAdding: false,
+        newPageName: '',
+        newPageRoute: ''
     }
     componentDidMount() {
         const token = localStorage.getItem('token');
@@ -31,6 +34,14 @@ class InnerRoutingComponent extends Component {
         }
     }
 
+    updateNewPageValue = (field, value) => {
+        this.setState({ [field]: value });
+    }
+
+    changeIsAdding = () => {
+        this.setState({ isAdding: !this.state.isAdding });
+    }
+
     navigateToPage = (pageId) => {
         const project = this.props.project;
         this.setState({ isLoading: false });
@@ -41,7 +52,8 @@ class InnerRoutingComponent extends Component {
     addNewPage = () => {
         const page = {
             id: uuid.v1(),
-            route: '/routing',
+            route: this.state.newPageRoute,
+            name: this.state.newPageName,
             elements: []
         };
 
@@ -51,7 +63,7 @@ class InnerRoutingComponent extends Component {
         const token = localStorage.getItem('token');
 
         this.props.actions.updateProject(project.id, this.state.pages, token);
-        this.setState({ pages: project.pages });
+        this.setState({ pages: project.pages, isAdding: false });
     }
 
     render() {
@@ -62,12 +74,36 @@ class InnerRoutingComponent extends Component {
         return (
             <div>
                 <div className='col-md-4 col-sm-6 outer-route-container'>
-                    <div
-                        className='routing-page-component add-route-container'
-                        onClick={this.addNewPage}>
-                        <h3>Add new page</h3>
-                        <FontAwesomeIcon style={{width: 100, height: 100}} icon={faPlusCircle} />
-                    </div>
+                    {
+                        this.state.isAdding ? 
+                        (
+                        <div className='routing-page-component edit-mode-add-route-container'>
+                            <input
+                                value={this.state.newPageName}
+                                className='from-input'
+                                placeholder='Page name'/>
+                            <input
+                                value={this.state.newPageRoute}
+                                className='from-input'
+                                placeholder='Page route'/>
+                            <button
+                                onClick={this.addNewPage}
+                                className='btn btn-success from-input'>
+                                    Create page
+                            </button>
+                        </div>
+                        )
+                        :
+                        (
+                            <div
+                                className='routing-page-component add-route-container'
+                                onClick={this.changeIsAdding}>
+                                <h3>Add new page</h3>
+                                <FontAwesomeIcon style={{width: 100, height: 100}} icon={faPlusCircle} />
+                            </div>
+                        )
+                    }
+                    
                 </div>
                 {
                     this.state.pages.map((page) => {

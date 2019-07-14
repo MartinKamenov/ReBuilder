@@ -97,7 +97,7 @@ export default App;
 `import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 ${pages.map(page => (
-    `import ${page.id} from './${page.id}' />`
+    `import ${page.name} from './${page.name}' />`
 ))}
 import './main.css';
 
@@ -107,7 +107,7 @@ render() {
     return (
         <Router>
             ${pages.map(page => (
-                `<Route exact path='${page.route}' component={${page.id}} />`
+                `<Route exact path='${page.route}' component={${page.name}} />`
             ))}
         </Router>
     );
@@ -122,12 +122,12 @@ export default MainComponent;
         pages.forEach(page => {
             templates.push(
                 {
-                    filePath: `./src/components/${page.id}.jsx`,
+                    filePath: `./src/components/${page.name}.jsx`,
                     template: 
 `import React, { Component } from 'react';
 import './main.css';
 
-class ${page.id} extends Component {
+class ${page.name} extends Component {
     state = {  }
     render() { 
         return (
@@ -136,7 +136,7 @@ class ${page.id} extends Component {
     }
 }
     
-export default ${page.id};
+export default ${page.name};
 `
                 });
         });
