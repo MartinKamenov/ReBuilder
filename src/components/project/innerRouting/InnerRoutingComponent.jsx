@@ -31,7 +31,7 @@ class InnerRoutingComponent extends Component {
         }
     }
 
-    navigateToPage = (pageId) => {
+    2 = (pageId) => {
         const project = this.props.project;
         this.setState({ isLoading: false });
         const history = this.props.history;
@@ -63,7 +63,10 @@ class InnerRoutingComponent extends Component {
                 {
                     this.state.pages.map((page) => {
                         return (
-                            <div key={page.id} className='col-md-4 col-sm-6 outer-route-container'>
+                            <div
+                                onClick={() => this.navigateToPage(page.id)}
+                                key={page.id}
+                                className='col-md-4 col-sm-6 outer-route-container'>
                                 <div className='routing-page-component'>
                                     {page.route}
                                 </div>
