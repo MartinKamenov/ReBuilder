@@ -97,7 +97,7 @@ export default App;
 `import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 ${pages.map(page => (
-    `import ${page.id} from './${project.id}' />`
+    `import ${page.id} from './${page.id}' />`
 ))}
 import './main.css';
 
@@ -107,7 +107,7 @@ render() {
     return (
         <Router>
             ${pages.map(page => (
-                `           <Route exact path='${page.route}' component={${page.id}} />`
+                `<Route exact path='${page.route}' component={${page.id}} />`
             ))}
         </Router>
     );
@@ -131,7 +131,7 @@ class ${page.id} extends Component {
     state = {  }
     render() { 
         return (
-            <div>${elementGenerator.generateElements(droppedComponents)}</div>
+            <div>${elementGenerator.generateElements(page.elements)}</div>
         );
     }
 }
@@ -140,6 +140,9 @@ export default ${page.id};
 `
                 });
         });
+
+
+        return templates;
     }
 };
 

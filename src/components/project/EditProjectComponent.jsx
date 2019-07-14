@@ -64,7 +64,7 @@ class EditProjectComponent extends Component {
     generateProject = () => {
         const pages = this.props.project.pages;
         const index = pages.findIndex((p) => p.id === this.state.pageId);
-        pages[index] = page;
+        pages[index] = this.state.page;
 
         projectGenerator.generateProject(this.props.project.name, pages);
     }
