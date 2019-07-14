@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './DroppedComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 
 const DroppedComponent = ({
         droppedComponent,
@@ -13,22 +13,46 @@ const DroppedComponent = ({
     if(droppedComponent.isInEditMode) {
         return (
             <div className='edit-component-container'>
-                <input
-                    style={droppedComponent.style}
-                    className='edit-input'
-                    value={droppedComponent.innerText}
-                    onChange={(event) => 
-                        handleComponentValueChange(event.target.value, 'innerText')}>
-                </input>
+                {
+                    (() => {
+                        let element;
+                        switch(droppedComponent.name) {
+                            case 'Image':
+                                element = (
+                                    <img
+                                        alt='component'
+                                        src={droppedComponent.src}
+                                        style={droppedComponent.style}
+                                        className='edit-input'/>
+                                );
+                                break;
+                            default:
+                                const copyOfStyles = Object.assign({}, droppedComponent.style);
+                                copyOfStyles.resize = 'none';
+                                element = (
+                                    <textarea
+                                        style={copyOfStyles}
+                                        className='edit-input'
+                                        value={droppedComponent.innerText}
+                                        onChange={(event) => 
+                                            handleComponentValueChange(event.target.value, 'innerText')}>
+                                    </textarea>
+                                );
+                                break;
+                        }
+                        return element;
+                    })()
+                }
+                
                 <button
                     className='btn btn-success'
                     onClick={() => handleChangeEditMode(droppedComponent.index)}>
                     <FontAwesomeIcon icon={faCheck} /> 
                 </button>
                 <button
-                    className='btn btn-danger'
+                    className='btn btn-warning'
                     onClick={() => handleForceExitEditMode(droppedComponent.index)}>
-                    <FontAwesomeIcon icon={faTimes} /> 
+                    <FontAwesomeIcon icon={faUndo} /> 
                 </button>
             </div>
         );
@@ -56,6 +80,15 @@ const DroppedComponent = ({
                             className='droped-component'>
                             {droppedComponent.innerText}
                         </div>);
+                        break;
+                    case 'Image':
+                        component = (
+                            <img
+                                alt='component'
+                                src={droppedComponent.src}
+                                style={droppedComponent.style}
+                                onClick={() => handleChangeEditMode(droppedComponent.index)}
+                                className='droped-component'/>);
                         break;
                     default:
                         component = (

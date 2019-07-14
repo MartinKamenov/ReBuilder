@@ -15,6 +15,14 @@ const elementGenerator = {
                     result += 
 `<div className='element-center' style={${JSON.stringify(component.style)}}>${component.innerText}</div>`;
                     break;
+                case 'Input':
+                    result += 
+`<input className='element-center' style={${JSON.stringify(component.style)}}/>`;
+                    break;
+                case 'Image':
+                    result += 
+`<img src={${JSON.stringify(component.src)}} className='element-center' style={${JSON.stringify(component.style)}}/>`;
+                    break;
                 default:
                     result += 
 `<div className='element-center' style={${JSON.stringify(component.style)}}>${component.innerText}</div>`;
