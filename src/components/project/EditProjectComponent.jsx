@@ -65,14 +65,6 @@ class EditProjectComponent extends Component {
         const componentElement = Object.assign({}, foundElement);
         const droppedComponents = this.state.droppedComponents;
         componentElement.innerText = componentElement.name;
-
-        const style = {};
-        style.color = '#000000';
-        style.backgroundColor = '#ffffff';
-        style.fontSize = '16px';
-        style.height = '30px';
-        style.width = '100%';
-        componentElement.style = style;
         
         componentElement.isInEditMode = false;
         componentElement.index = this.state.droppedComponents.length;
@@ -102,6 +94,13 @@ class EditProjectComponent extends Component {
         const droppedComponents = this.state.droppedComponents;
         droppedComponents[index] = this.state.previousComponent;
         droppedComponents[index].isInEditMode = false;
+
+        this.setState({ droppedComponents, previousComponent: {} });
+    }
+
+    handleDeleteComponent = (index) => {
+        const droppedComponents = this.state.droppedComponents;
+        droppedComponents.splice(index, 1);
 
         this.setState({ droppedComponents, previousComponent: {} });
     }
@@ -160,7 +159,7 @@ class EditProjectComponent extends Component {
             return <LoadingComponent message='Fetching project' />;
         }
 
-        const { componentInEditMode, index } = this.getComponentInEditMode();
+        const { componentInEditMode } = this.getComponentInEditMode();
         return (
             <div>
                 <h1 className='project-name-header'>{this.props.project.name}</h1>
@@ -198,8 +197,12 @@ class EditProjectComponent extends Component {
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}/>
                     <ElementToolbarComponent
+                        actions={{
+                            handleChangeEditMode: this.handleChangeEditMode,
+                            handleForceExitEditMode: this.handleForceExitEditMode,
+                            handleDeleteComponent: this.handleDeleteComponent
+                        }}
                         component={componentInEditMode}
-                        index={index}
                         handleComponentValueChange={this.handleComponentValueChange}/>
                 </div>
             </div>

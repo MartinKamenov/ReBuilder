@@ -1,9 +1,11 @@
 import React from 'react';
 import { ChromePicker } from 'react-color';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
 import './ElementToolbarComponent.css';
 
-const ElementToolbarComponent = ({component, index, handleComponentValueChange}) => {
+const ElementToolbarComponent = ({component, handleComponentValueChange, actions}) => {
     if(!component) {
         return (
             <div className='toolbar-container'>
@@ -12,59 +14,81 @@ const ElementToolbarComponent = ({component, index, handleComponentValueChange})
             </div>
         )
     }
+    const inputs = Object.keys(component).filter((c) =>
+        (c !== 'style' && c !== 'isInEditMode' && c !== 'index' && c !== 'name'));
+    const styles = Object.keys(component.style).filter((c) => (c !== 'color' && c !== 'backgroundColor'));
     return (
         <div className='toolbar-container'>
-            <div className='toolbar-element-container'>
-                <div className='component-input-changer-container'>
-                    <label className='component-changer-label'>Text</label>
-                    <input
-                        className='component-changer-input'
-                        onChange={(event) => handleComponentValueChange(event.target.value, 'innerText')}
-                        value={component.innerText}
-                        placeholder='Text'>
-                    </input>
+            <div className='vertical-scrollable-container toolbar-scrollable'>
+                <div className='toolbar-element-container'>
+                    <h3>Properties</h3>
+                    {
+                        inputs.map((input) => {
+                            return (
+                                <div className='component-input-changer-container'>
+                                    <label className='component-changer-label'>{input}</label>
+                                    <input
+                                        className='component-changer-input'
+                                        onChange={(event) => handleComponentValueChange(event.target.value, input)}
+                                        value={component[input]}
+                                        placeholder={input}>
+                                    </input>
+                                </div>
+                            )
+                        })
+                    }
+                    <h3>Styles</h3>
+                    {
+                        styles.map((style) => {
+                            return (
+                                <div className='component-input-changer-container'>
+                                    <label className='component-changer-label'>{style}</label>
+                                    <input
+                                        className='component-changer-input'
+                                        onChange={(event) => handleComponentValueChange(event.target.value, 'style.' + style)}
+                                        value={component.style[style]}
+                                        placeholder={style}>
+                                    </input>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
-                <div className='component-input-changer-container'>
-                    <label className='component-changer-label'>Font-size</label>
-                    <input
-                        className='component-changer-input'
-                        onChange={(event) => handleComponentValueChange(event.target.value, 'style.fontSize')}
-                        value={component.style.fontSize}
-                        placeholder='Font size'>
-                    </input>
+                <h3>Colors</h3>
+                <div className='toolbar-element-container'>
+                    <label>Font color</label>
+                    <ChromePicker
+                        color={{ hex: component.style.color }}
+                        onChangeComplete={(event) => handleComponentValueChange(event, 'color')}
+                        style={{width: '100px', margin: 'auto'}} />
                 </div>
-                <div className='component-input-changer-container'>
-                    <label className='component-changer-label'>Width</label>
-                    <input
-                        className='component-changer-input'
-                        onChange={(event) => handleComponentValueChange(event.target.value, 'style.width')}
-                        value={component.style.width}
-                        placeholder='Element width'>
-                    </input>
-                </div>
-                <div className='component-input-changer-container'>
-                    <label className='component-changer-label'>Height</label>
-                    <input
-                        className='component-changer-input'
-                        onChange={(event) => handleComponentValueChange(event.target.value, 'style.height')}
-                        value={component.style.height}
-                        placeholder='Element height'>
-                    </input>
+                <div className='toolbar-element-container'>
+                    <label>Background color</label>
+                    <ChromePicker
+                        color={{ hex: component.style.backgroundColor }}
+                        onChangeComplete={(event) => handleComponentValueChange(event, 'backgroundColor')}
+                        style={{width: '100px'}} />
                 </div>
             </div>
-            <div className='toolbar-element-container'>
-                <label>Font color</label>
-                <ChromePicker
-                    color={{ hex: component.style.color }}
-                    onChangeComplete={(event) => handleComponentValueChange(event, 'color')}
-                    style={{width: '100px', margin: 'auto'}} />
-            </div>
-            <div className='toolbar-element-container'>
-                <label>Background color</label>
-                <ChromePicker
-                    color={{ hex: component.style.backgroundColor }}
-                    onChangeComplete={(event) => handleComponentValueChange(event, 'backgroundColor')}
-                    style={{width: '100px'}} />
+            <div className='actions-container'>
+                <button
+                    onClick={() => actions.handleChangeEditMode(component.index)}
+                    className='actions-button btn btn-success'>
+                    <FontAwesomeIcon className='action-icon' icon={faCheck} />
+                    Accept changes
+                </button>
+                <button
+                    onClick={() => actions.handleForceExitEditMode(component.index)}
+                    className='actions-button btn btn-warning'>
+                    <FontAwesomeIcon className='action-icon' icon={faUndo} />
+                    Revert changes
+                </button>
+                <button
+                    onClick={() => actions.handleDeleteComponent(component.index)}
+                    className='actions-button btn btn-danger'>
+                    <FontAwesomeIcon className='action-icon' icon={faTrashAlt} />
+                    Delete component
+                </button>
             </div>
         </div>
     );
@@ -75,7 +99,11 @@ ElementToolbarComponent.propTypes = {
         name: PropTypes.string.isRequired,
         innerText: PropTypes.string.isRequired
     }),
-    index: PropTypes.number,
+    actions: PropTypes.shape({
+        handleChangeEditMode: PropTypes.func.isRequired,
+        handleForceExitEditMode: PropTypes.func.isRequired,
+        handleDeleteComponent: PropTypes.func.isRequired
+    }).isRequired,
     handleComponentValueChange: PropTypes.func.isRequired
 };
  
