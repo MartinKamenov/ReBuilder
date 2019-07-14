@@ -35,7 +35,7 @@ class InnerRoutingComponent extends Component {
         const project = this.props.project;
         this.setState({ isLoading: false });
         const history = this.props.history;
-        history.push(`/${project.id}/${pageId}`);
+        history.push(`/projects/${project.id}/${pageId}`);
     }
 
     addNewPage = () => {
@@ -58,7 +58,7 @@ class InnerRoutingComponent extends Component {
         if(!this.props.project.id) {
             return (<LoadingComponent message='Fetching project'/>);
         }
-        debugger;
+
         return (
             <div>
                 {

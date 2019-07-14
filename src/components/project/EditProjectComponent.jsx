@@ -35,12 +35,12 @@ class EditProjectComponent extends Component {
         const id = this.props.match.params.id;
         const pageId = this.props.match.params.pageId;
         this.setState({ id, pageId });
-        //this.props.actions.updateProject(id, null, token);
+        this.props.actions.updateProject(id, null, token);
     }
 
     componentWillReceiveProps(props) {
         if(props.project.id && this.state.isInitialyLoaded) {
-            const page = props.pages.find((p) => this.state.pageId === p.id);
+            const page = props.project.pages.find((p) => this.state.pageId === p.id);
             this.setState({
                 isInitialyLoaded: false,
                 droppedComponents: page.elements.slice(0),

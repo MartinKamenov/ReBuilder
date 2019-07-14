@@ -8,7 +8,6 @@ export function deployProject(projectId, token) {
         try {
             const res = await apiService.deployProject(projectId, token);
             const projectStatus = res.data;
-            debugger;
             return dispatch(deployProjectSuccess(projectStatus));
         } catch(error) {
             dispatch(toastError(error.message));
