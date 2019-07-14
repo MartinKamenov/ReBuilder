@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://192.168.0.107:5000';
+const url = 'http://192.168.1.72:5000';
 const authPath = '/auth';
 const loginPath = '/login';
 const getUser = '/user';

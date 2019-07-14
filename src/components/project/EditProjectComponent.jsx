@@ -16,7 +16,8 @@ import './EditProjectComponent.css';
 
 class EditProjectComponent extends Component {
     state = {
-        id: 0,
+        id: '',
+        pageId: '',
         draggableComponents: componentTypes,
         droppedComponents: [],
         previousComponent: {},
@@ -32,15 +33,17 @@ class EditProjectComponent extends Component {
             return;
         }
         const id = this.props.match.params.id;
-        this.setState({ id });
-        this.props.actions.updateProject(id, null, token);
+        const pageId = this.props.match.params.pageId;
+        this.setState({ id, pageId });
+        //this.props.actions.updateProject(id, null, token);
     }
 
     componentWillReceiveProps(props) {
         if(props.project.id && this.state.isInitialyLoaded) {
+            const page = props.pages.find((p) => this.state.pageId === p.id);
             this.setState({
                 isInitialyLoaded: false,
-                droppedComponents: props.project.components.slice(0),
+                droppedComponents: page.elements.slice(0),
                 isLoading: false
             });
         }
