@@ -18,6 +18,9 @@ class EditProjectComponent extends Component {
     state = {
         id: '',
         pageId: '',
+        page: {
+            elements: []
+        },
         draggableComponents: componentTypes,
         droppedComponents: [],
         previousComponent: {},
@@ -44,6 +47,7 @@ class EditProjectComponent extends Component {
             this.setState({
                 isInitialyLoaded: false,
                 droppedComponents: page.elements.slice(0),
+                page,
                 isLoading: false
             });
         }
@@ -136,9 +140,19 @@ class EditProjectComponent extends Component {
             return;
         }
 
+        debugger;
+
         const droppedComponents = this.state.droppedComponents.slice(0);
+        const page = this.state.page;
+        page.elements = droppedComponents;
+
+        const pages = this.props.project.pages;
+        const index = pages.findIndex((p) => p.id === this.state.pageId);
+        pages[index] = page;
+
+        this.setState({ page });
         
-        this.props.actions.updateProject(this.state.id, droppedComponents, token);
+        this.props.actions.updateProject(this.state.id, pages, token);
     }
 
     handleDeployProject = async () => {

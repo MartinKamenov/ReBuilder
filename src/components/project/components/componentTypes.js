@@ -5,6 +5,7 @@ const componentTypes = [
         style: {
             color: '#000000',
             backgroundColor: '#ffffff',
+            fontSize: '24px',
             height: '50px',
             width: '100%',
             textAlign: 'center'
