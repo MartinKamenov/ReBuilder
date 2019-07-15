@@ -7,7 +7,8 @@ const componentTypes = [
             backgroundColor: '#ffffff',
             height: '50px',
             width: '100%',
-            textAlign: 'center'
+            textAlign: 'center',
+            margin: 'auto'
         }
     },
     {
@@ -19,7 +20,8 @@ const componentTypes = [
             fontSize: '16px',
             height: '30px',
             width: '100%',
-            textAlign: 'center'
+            textAlign: 'center',
+            margin: 'auto'
         }
     },
     {
@@ -30,7 +32,8 @@ const componentTypes = [
             color: '#000000',
             backgroundColor: '#ffffff',
             height: '80px',
-            width: '100%'
+            width: '100%',
+            margin: 'auto'
         }
     },
     {
@@ -42,7 +45,8 @@ const componentTypes = [
             fontSize: '16px',
             height: '30px',
             width: '100%',
-            textAlign: 'center'
+            textAlign: 'center',
+            margin: 'auto'
         }
     },
     {
@@ -52,7 +56,8 @@ const componentTypes = [
             height: '100px',
             width: '200px',
             textAlign: 'center',
-            display: 'block'
+            display: 'block',
+            margin: 'auto'
         }
     }
 ];
