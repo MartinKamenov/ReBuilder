@@ -97,8 +97,8 @@ export default App;
 `import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 ${pages.map(page => (
-    `import ${page.name} from './${page.name}' />`
-))}
+    `import ${page.name} from './${page.name}';`
+)).join('\n')}
 import './main.css';
 
 class MainComponent extends Component {
@@ -108,7 +108,7 @@ render() {
         <Router>
             ${pages.map(page => (
                 `<Route exact path='${page.route}' component={${page.name}} />`
-            ))}
+            )).join('\n           ')}
         </Router>
     );
 }

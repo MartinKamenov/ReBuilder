@@ -80,10 +80,12 @@ class InnerRoutingComponent extends Component {
                         <div className='routing-page-component edit-mode-add-route-container'>
                             <input
                                 value={this.state.newPageName}
+                                onChange={(event) => this.updateNewPageValue('newPageName', event.target.value)}
                                 className='from-input'
                                 placeholder='Page name'/>
                             <input
                                 value={this.state.newPageRoute}
+                                onChange={(event) => this.updateNewPageValue('newPageRoute', event.target.value)}
                                 className='from-input'
                                 placeholder='Page route'/>
                             <button
@@ -113,7 +115,7 @@ class InnerRoutingComponent extends Component {
                                 key={page.id}
                                 className='col-md-4 col-sm-6 outer-route-container'>
                                 <div className='routing-page-component'>
-                                    {page.route}
+                                    {page.name}
                                 </div>
                             </div>
                         );
