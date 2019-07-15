@@ -1,7 +1,7 @@
 const elementGenerator = {
-    generateElements: (droppedComponents) => {
+    generateElements: (elements) => {
         let result = '';
-        droppedComponents.forEach(component => {
+        elements.forEach(component => {
             switch(component.name) {
                 case 'Header':
                     result += 

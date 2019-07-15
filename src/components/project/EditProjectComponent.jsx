@@ -16,7 +16,11 @@ import './EditProjectComponent.css';
 
 class EditProjectComponent extends Component {
     state = {
-        id: 0,
+        id: '',
+        pageId: '',
+        page: {
+            elements: []
+        },
         draggableComponents: componentTypes,
         droppedComponents: [],
         previousComponent: {},
@@ -32,15 +36,18 @@ class EditProjectComponent extends Component {
             return;
         }
         const id = this.props.match.params.id;
-        this.setState({ id });
+        const pageId = this.props.match.params.pageId;
+        this.setState({ id, pageId });
         this.props.actions.updateProject(id, null, token);
     }
 
     componentWillReceiveProps(props) {
         if(props.project.id && this.state.isInitialyLoaded) {
+            const page = props.project.pages.find((p) => this.state.pageId === p.id);
             this.setState({
                 isInitialyLoaded: false,
-                droppedComponents: props.project.components.slice(0),
+                droppedComponents: page.elements.slice(0),
+                page,
                 isLoading: false
             });
         }
@@ -55,7 +62,11 @@ class EditProjectComponent extends Component {
     }
 
     generateProject = () => {
-        projectGenerator.generateProject(this.props.project.name, this.state.droppedComponents);
+        const pages = this.props.project.pages;
+        const index = pages.findIndex((p) => p.id === this.state.pageId);
+        pages[index] = this.state.page;
+
+        projectGenerator.generateProject(this.props.project.name, pages);
     }
 
     handleDropComponent = (event) => {
@@ -134,8 +145,16 @@ class EditProjectComponent extends Component {
         }
 
         const droppedComponents = this.state.droppedComponents.slice(0);
+        const page = this.state.page;
+        page.elements = droppedComponents;
+
+        const pages = this.props.project.pages;
+        const index = pages.findIndex((p) => p.id === this.state.pageId);
+        pages[index] = page;
+
+        this.setState({ page });
         
-        this.props.actions.updateProject(this.state.id, droppedComponents, token);
+        this.props.actions.updateProject(this.state.id, pages, token);
     }
 
     handleDeployProject = async () => {
