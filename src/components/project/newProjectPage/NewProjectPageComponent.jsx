@@ -24,7 +24,7 @@ class NewProjectPageComponent extends Component {
             props.actions.loginByToken(props.user.token);
             this.setState({ isLoading: false });
             const history = props.history;
-            history.push(`/projects/${props.project.id}/routing`);
+            history.push(`/projects/${props.project.id}`);
         }
     }
 
