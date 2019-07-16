@@ -43,7 +43,8 @@ class EditProjectComponent extends Component {
 
     componentWillReceiveProps(props) {
         if(props.project.id && this.state.isInitialyLoaded) {
-            const page = props.project.pages.find((p) => this.state.pageId === p.id);
+            const project = Object.assign({}, props.project);
+            const page = project.pages.find((p) => this.state.pageId === p.id);
             this.setState({
                 isInitialyLoaded: false,
                 droppedComponents: page.elements.slice(0),
@@ -62,7 +63,7 @@ class EditProjectComponent extends Component {
     }
 
     generateProject = () => {
-        const pages = this.props.project.pages;
+        const pages = [...this.props.project.pages];
         const index = pages.findIndex((p) => p.id === this.state.pageId);
         pages[index] = this.state.page;
 
@@ -145,10 +146,10 @@ class EditProjectComponent extends Component {
         }
 
         const droppedComponents = this.state.droppedComponents.slice(0);
-        const page = this.state.page;
+        const page = Object.assign({}, this.state.page);
         page.elements = droppedComponents;
 
-        const pages = this.props.project.pages;
+        const pages = [...this.props.project.pages];
         const index = pages.findIndex((p) => p.id === this.state.pageId);
         pages[index] = page;
 
