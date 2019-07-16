@@ -8,7 +8,16 @@ const componentTypes = [
             fontSize: '24px',
             height: '50px',
             width: '100%',
-            textAlign: 'center'
+            textAlign: 'center',
+            display: 'block',
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRigth: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
         }
     },
     {
@@ -20,7 +29,16 @@ const componentTypes = [
             fontSize: '16px',
             height: '30px',
             width: '100%',
-            textAlign: 'center'
+            textAlign: 'center',
+            display: 'block',
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRigth: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
         }
     },
     {
@@ -31,7 +49,16 @@ const componentTypes = [
             color: '#000000',
             backgroundColor: '#ffffff',
             height: '80px',
-            width: '100%'
+            width: '100%',
+            display: 'block',
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRigth: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
         }
     },
     {
@@ -43,7 +70,16 @@ const componentTypes = [
             fontSize: '16px',
             height: '30px',
             width: '100%',
-            textAlign: 'center'
+            textAlign: 'center',
+            display: 'block',
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRigth: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
         }
     },
     {
@@ -53,7 +89,11 @@ const componentTypes = [
             height: '100px',
             width: '200px',
             textAlign: 'center',
-            display: 'block'
+            display: 'block',
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px'
         }
     }
 ];
