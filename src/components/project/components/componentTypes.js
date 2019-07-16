@@ -9,7 +9,14 @@ const componentTypes = [
             height: '50px',
             width: '100%',
             textAlign: 'center',
-            margin: 'auto'
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRigth: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
         }
     },
     {
@@ -22,7 +29,14 @@ const componentTypes = [
             height: '30px',
             width: '100%',
             textAlign: 'center',
-            margin: 'auto'
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRigth: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
         }
     },
     {
@@ -34,7 +48,14 @@ const componentTypes = [
             backgroundColor: '#ffffff',
             height: '80px',
             width: '100%',
-            margin: 'auto'
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRigth: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
         }
     },
     {
@@ -47,7 +68,14 @@ const componentTypes = [
             height: '30px',
             width: '100%',
             textAlign: 'center',
-            margin: 'auto'
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRigth: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
         }
     },
     {
@@ -58,7 +86,10 @@ const componentTypes = [
             width: '200px',
             textAlign: 'center',
             display: 'block',
-            margin: 'auto'
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px'
         }
     }
 ];
