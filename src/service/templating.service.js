@@ -1,8 +1,8 @@
 import elementGenerator from './elementGenerator.service';
 
 const templatingService = {
-    getAllTemplates: (name, droppedComponents) => {
-        return [
+    getAllTemplates: (name, pages) => {
+        const templates = [
             {
                 filePath: "src/index.js",
                 template: 
@@ -37,7 +37,8 @@ export default App;
     "dependencies": {
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
-        "react-scripts": "3.0.1"
+        "react-scripts": "3.0.1",
+        "react-router-dom": "^5.0.1"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -91,24 +92,57 @@ export default App;
 `
             },
             {
-                filePath: "./src/components/MainComponent.jsx",
+                filePath: `./src/components/MainComponent.jsx`,
                 template: 
 `import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+${pages.map(page => (
+    `import ${page.name} from './${page.name}';`
+)).join('\n')}
 import './main.css';
 
 class MainComponent extends Component {
-    state = {  }
-    render() { 
-        return (
-            <div>${elementGenerator.generateElements(droppedComponents)}</div>
-        );
-    }
+state = {  }
+render() { 
+    return (
+        <Router>
+            ${pages.map(page => (
+                `<Route exact path='${page.route}' component={${page.name}} />`
+            )).join('\n           ')}
+        </Router>
+    );
 }
- 
+}
+
 export default MainComponent;
 `
             }
-        ]
+        ];
+
+        pages.forEach(page => {
+            templates.push(
+                {
+                    filePath: `./src/components/${page.name}.jsx`,
+                    template: 
+`import React, { Component } from 'react';
+import './main.css';
+
+class ${page.name} extends Component {
+    state = {  }
+    render() { 
+        return (
+            <div>${elementGenerator.generateElements(page.elements)}</div>
+        );
+    }
+}
+    
+export default ${page.name};
+`
+                });
+        });
+
+
+        return templates;
     }
 };
 
