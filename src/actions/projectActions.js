@@ -6,10 +6,8 @@ import { createError } from './errorActions';
 export function createProject(projectName, projectUrl, token) {
     return async function(dispatch) {
         try {
-            debugger;
             const res = await apiService.createProject(projectName, projectUrl, token);
             const project = res.data;
-            debugger;
             return dispatch(selectProjectSuccess(project));
         } catch(error) {
             dispatch(toastError(error.message));
@@ -21,14 +19,12 @@ export function createProject(projectName, projectUrl, token) {
 export function updateProject(projectId, pages, token) {
     return async function(dispatch) {
         try {
-            debugger;
             let res;
             if(pages) {
                 await apiService.updateProject(projectId, pages, token);
             } else {
                 res = await apiService.getProject(projectId, token);
                 const project = res.data;
-                debugger;
                 return dispatch(selectProjectSuccess(project));
             }
         } catch(error) {
