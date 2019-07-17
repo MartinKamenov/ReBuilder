@@ -1,4 +1,4 @@
-const componentTypes = [
+const componentObjects = [
     {
         name: 'Header',
         innerText: 'Header',
@@ -95,7 +95,20 @@ const componentTypes = [
             marginTop: '0px',
             marginBottom: '0px'
         }
+    },
+    {
+        name: 'RoutingLink',
+        to: []
     }
 ];
 
-export default componentTypes;
+export const componentTypes = {
+    Header: 'Header',
+    Text: 'Text',
+    Grid: 'Grid',
+    Input: 'Input',
+    Image: 'Image',
+    RoutingLink: 'RoutingLink'
+};
+
+export default componentObjects;

@@ -3,7 +3,15 @@ import { Draggable } from 'react-drag-and-drop';
 import PropTypes from 'prop-types';
 import './DraggableComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeading, faFont, faBorderAll, faItalic } from '@fortawesome/free-solid-svg-icons';
+import {
+    faHeading,
+    faFont,
+    faBorderAll,
+    faItalic,
+    faLink
+} from '@fortawesome/free-solid-svg-icons';
+
+import { componentTypes } from '../components/componentTypes';
 
 const DraggableComponent = ({draggableComponent}) => {
     return (
@@ -12,17 +20,20 @@ const DraggableComponent = ({draggableComponent}) => {
                 {(() => {
                         let icon = <FontAwesomeIcon className='action-icon' icon={faFont} />;
                         switch(draggableComponent.name) {
-                            case 'Header':
+                            case componentTypes.Header:
                                 icon = <FontAwesomeIcon className='action-icon' icon={faHeading} />;
                                 break;
-                            case 'Text':
+                            case componentTypes.Text:
                                 icon = <FontAwesomeIcon className='action-icon' icon={faFont} />;
                                 break;
-                            case 'Grid':
+                            case componentTypes.Grid:
                                 icon = <FontAwesomeIcon className='action-icon' icon={faBorderAll} />;
                                 break;
-                            case 'Input':
+                            case componentTypes.Input:
                                 icon = <FontAwesomeIcon className='action-icon' icon={faItalic} />;
+                                break;
+                            case componentTypes.RoutingLink:
+                                icon = <FontAwesomeIcon className='action-icon' icon={faLink} />;
                                 break;
                             default:
                                 break;

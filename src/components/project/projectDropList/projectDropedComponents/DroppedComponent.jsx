@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './DroppedComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
+import { componentTypes } from '../../components/componentTypes';
 
 const DroppedComponent = ({
         droppedComponent,
@@ -17,7 +18,7 @@ const DroppedComponent = ({
                     (() => {
                         let element;
                         switch(droppedComponent.name) {
-                            case 'Image':
+                            case componentTypes.Image:
                                 element = (
                                     <img
                                         alt='component'
@@ -63,7 +64,7 @@ const DroppedComponent = ({
             (() => {
                 let component = null;
                 switch (droppedComponent.name) {
-                    case 'Header':
+                    case componentTypes.Header:
                         component = (
                         <h1
                             style={droppedComponent.style}
@@ -72,7 +73,7 @@ const DroppedComponent = ({
                             {droppedComponent.innerText}
                         </h1>)
                         break;
-                    case 'Text':
+                    case componentTypes.Text:
                         component = (
                         <div
                             style={droppedComponent.style}
@@ -81,7 +82,16 @@ const DroppedComponent = ({
                             {droppedComponent.innerText}
                         </div>);
                         break;
-                    case 'Image':
+                    case componentTypes.Image:
+                        component = (
+                            <img
+                                alt='component'
+                                src={droppedComponent.src}
+                                style={droppedComponent.style}
+                                onClick={() => handleChangeEditMode(droppedComponent.index)}
+                                className='droped-component'/>);
+                        break;
+                    case componentTypes.RoutingLink:
                         component = (
                             <img
                                 alt='component'

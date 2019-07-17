@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ProjectComponentsList from './projectDraggableComponents/ProjectComponentsList';
 import ProjectPageComponent from './projectDropList/ProjectPageComponent';
 import ElementToolbarComponent from './elementToolbar/ElementToolbarComponent';
-import componentTypes from './components/componentTypes';
+import componentObjects from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faSave, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +21,7 @@ class EditProjectComponent extends Component {
         page: {
             elements: []
         },
-        draggableComponents: componentTypes,
+        draggableComponents: componentObjects,
         droppedComponents: [],
         previousComponent: {},
         isInitialyLoaded: true,
