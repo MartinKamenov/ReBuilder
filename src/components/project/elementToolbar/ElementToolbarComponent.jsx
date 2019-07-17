@@ -5,6 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
 import './ElementToolbarComponent.css';
 
+const capitalizeFirstLetter = (text) => {
+    return text.charAt(0).toUpperCase() + dropdown.slice(1);
+};
+
 const ElementToolbarComponent = ({component, handleComponentValueChange, actions}) => {
     if(!component) {
         return (
@@ -15,14 +19,15 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
         )
     }
 
-    debugger;
     const inputs = Object.keys(component).filter((c) =>
         (c !== 'style' && c !== 'isInEditMode' &&
             c !== 'index' && c !== 'name' && c !== 'to'));
     const dropdowns = Object.keys(component).filter((c) => (
         Array.isArray(component[c])
     ));
-    const styles = Object.keys(component.style).filter((c) => (c !== 'color' && c !== 'backgroundColor'));
+    const styles = Object.keys(component.style)
+        .filter((c) => (c !== 'color' && c !== 'backgroundColor'));
+
     return (
         <div className='toolbar-container'>
             <div className='vertical-scrollable-container toolbar-scrollable'>
@@ -36,7 +41,7 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                                     key={k}
                                     className='component-input-changer-container'>
                                     <label className='component-changer-label'>
-                                        {dropdown.charAt(0).toUpperCase() + dropdown.slice(1)}
+                                        {capitalizeFirstLetter(dropdown)}
                                     </label>
                                     <select
                                         className='component-changer-input'
@@ -59,7 +64,7 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                                     className='component-input-changer-container'
                                     key={i}>
                                     <label className='component-changer-label'>
-                                        {input.charAt(0).toUpperCase() + input.slice(1)}
+                                        {capitalizeFirstLetter(input)}
                                     </label>
                                     <input
                                         className='component-changer-input'
@@ -79,7 +84,7 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                                     key={i}
                                     className='component-input-changer-container'>
                                     <label className='component-changer-label'>
-                                        {style.charAt(0).toUpperCase() + style.slice(1)}
+                                        {capitalizeFirstLetter(style)}
                                     </label>
                                     <input
                                         className='component-changer-input'
