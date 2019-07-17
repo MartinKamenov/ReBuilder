@@ -14,9 +14,14 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
             </div>
         )
     }
+
+    debugger;
     const inputs = Object.keys(component).filter((c) =>
         (c !== 'style' && c !== 'isInEditMode' &&
             c !== 'index' && c !== 'name' && c !== 'to'));
+    const dropdowns = Object.keys(component).filter((c) => (
+        Array.isArray(component[c])
+    ));
     const styles = Object.keys(component.style).filter((c) => (c !== 'color' && c !== 'backgroundColor'));
     return (
         <div className='toolbar-container'>
@@ -24,9 +29,35 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                 <div className='toolbar-element-container'>
                     <h3>Properties</h3>
                     {
-                        inputs.map((input) => {
+                        dropdowns.map((dropdown, k) => {
+                            const values = component[dropdown];
                             return (
-                                <div className='component-input-changer-container'>
+                                <div
+                                    key={k}
+                                    className='component-input-changer-container'>
+                                    <label className='component-changer-label'>
+                                        {dropdown.charAt(0).toUpperCase() + dropdown.slice(1)}
+                                    </label>
+                                    <select
+                                        className='component-changer-input'
+                                        name={dropdown}>
+                                        {values.map((value, i) => (
+                                            <option
+                                                key={i}
+                                                value={value}>{value}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            )
+                        })
+                    }
+                    {
+                        inputs.map((input, i) => {
+                            return (
+                                <div
+                                    className='component-input-changer-container'
+                                    key={i}>
                                     <label className='component-changer-label'>
                                         {input.charAt(0).toUpperCase() + input.slice(1)}
                                     </label>
@@ -42,9 +73,11 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                     }
                     <h3>Styles</h3>
                     {
-                        styles.map((style) => {
+                        styles.map((style, i) => {
                             return (
-                                <div className='component-input-changer-container'>
+                                <div
+                                    key={i}
+                                    className='component-input-changer-container'>
                                     <label className='component-changer-label'>
                                         {style.charAt(0).toUpperCase() + style.slice(1)}
                                     </label>
