@@ -15,7 +15,8 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
         )
     }
     const inputs = Object.keys(component).filter((c) =>
-        (c !== 'style' && c !== 'isInEditMode' && c !== 'index' && c !== 'name'));
+        (c !== 'style' && c !== 'isInEditMode' &&
+            c !== 'index' && c !== 'name' && c !== 'to'));
     const styles = Object.keys(component.style).filter((c) => (c !== 'color' && c !== 'backgroundColor'));
     return (
         <div className='toolbar-container'>
@@ -26,7 +27,9 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                         inputs.map((input) => {
                             return (
                                 <div className='component-input-changer-container'>
-                                    <label className='component-changer-label'>{input}</label>
+                                    <label className='component-changer-label'>
+                                        {input.charAt(0).toUpperCase() + input.slice(1)}
+                                    </label>
                                     <input
                                         className='component-changer-input'
                                         onChange={(event) => handleComponentValueChange(event.target.value, input)}
@@ -42,7 +45,9 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                         styles.map((style) => {
                             return (
                                 <div className='component-input-changer-container'>
-                                    <label className='component-changer-label'>{style}</label>
+                                    <label className='component-changer-label'>
+                                        {style.charAt(0).toUpperCase() + style.slice(1)}
+                                    </label>
                                     <input
                                         className='component-changer-input'
                                         onChange={(event) => handleComponentValueChange(event.target.value, 'style.' + style)}

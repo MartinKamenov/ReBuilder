@@ -93,12 +93,13 @@ const DroppedComponent = ({
                         break;
                     case componentTypes.RoutingLink:
                         component = (
-                            <img
+                            <a
                                 alt='component'
-                                src={droppedComponent.src}
                                 style={droppedComponent.style}
                                 onClick={() => handleChangeEditMode(droppedComponent.index)}
-                                className='droped-component'/>);
+                                className='droped-component'>
+                                {droppedComponent.innerText}
+                            </a>);
                         break;
                     default:
                         component = (

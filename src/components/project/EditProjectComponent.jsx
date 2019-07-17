@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ProjectComponentsList from './projectDraggableComponents/ProjectComponentsList';
 import ProjectPageComponent from './projectDropList/ProjectPageComponent';
 import ElementToolbarComponent from './elementToolbar/ElementToolbarComponent';
-import componentObjects from './components/componentTypes';
+import componentObjects, { componentTypes } from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faSave, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
@@ -37,6 +37,7 @@ class EditProjectComponent extends Component {
         }
         const id = this.props.match.params.id;
         const pageId = this.props.match.params.pageId;
+
         this.setState({ id, pageId });
         this.props.actions.updateProject(id, null, token);
     }
@@ -45,7 +46,25 @@ class EditProjectComponent extends Component {
         if(props.project.id && this.state.isInitialyLoaded) {
             const project = Object.assign({}, props.project);
             const page = project.pages.find((p) => this.state.pageId === p.id);
+
+            // Adds routes to routinglink
+            const draggableComponents = [...this.state.draggableComponents];
+            let routerLinkComponentIndex = -1;
+            const routerLinkComponent = draggableComponents
+                .find((c, i) => {
+                    if(c.name === componentTypes.RoutingLink) {
+                        routerLinkComponentIndex = i;
+                        return true;
+                    }
+
+                    return false;
+                });
+
+            routerLinkComponent.to = [...props.project.pages].map(page => page.route);
+            draggableComponents[routerLinkComponentIndex] = routerLinkComponent;
+
             this.setState({
+                draggableComponents,
                 isInitialyLoaded: false,
                 droppedComponents: page.elements.slice(0),
                 page,
