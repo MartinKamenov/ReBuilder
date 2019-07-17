@@ -6,7 +6,7 @@ import { faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
 import './ElementToolbarComponent.css';
 
 const capitalizeFirstLetter = (text) => {
-    return text.charAt(0).toUpperCase() + dropdown.slice(1);
+    return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
 const ElementToolbarComponent = ({component, handleComponentValueChange, actions}) => {
