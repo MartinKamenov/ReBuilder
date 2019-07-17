@@ -43,7 +43,7 @@ class InnerRoutingComponent extends Component {
     }
 
     navigateToPage = (pageId) => {
-        const project = this.props.project;
+        const project = Object.assign({}, this.props.project);
         this.setState({ isLoading: false });
         const history = this.props.history;
         history.push(`/projects/${project.id}/${pageId}`);
@@ -57,13 +57,13 @@ class InnerRoutingComponent extends Component {
             elements: []
         };
 
-        const project = this.props.project;
-        project.pages.push(page);
+        const pages = [...this.props.project.pages];
+        pages.push(page);
 
         const token = localStorage.getItem('token');
 
-        this.props.actions.updateProject(project.id, this.state.pages, token);
-        this.setState({ pages: project.pages, isAdding: false });
+        this.props.actions.updateProject(this.props.project.id, pages, token);
+        this.setState({ pages, isAdding: false });
     }
 
     render() {
