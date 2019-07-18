@@ -33,6 +33,7 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
         <div className='toolbar-container'>
             <div className='vertical-scrollable-container toolbar-scrollable'>
                 <div className='toolbar-element-container'>
+                    <h3>{component.name}</h3>
                     <h3>Properties</h3>
                     {
                         dropdowns.map((dropdown, k) => {
