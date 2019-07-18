@@ -126,6 +126,7 @@ export default MainComponent;
                     template: 
 `import React, { Component } from 'react';
 import './main.css';
+import { Link } from 'react-router-dom';
 
 class ${page.name} extends Component {
     state = {  }

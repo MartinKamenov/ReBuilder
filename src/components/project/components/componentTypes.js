@@ -1,4 +1,4 @@
-const componentTypes = [
+const componentObjects = [
     {
         name: 'Header',
         innerText: 'Header',
@@ -95,7 +95,38 @@ const componentTypes = [
             marginTop: '0px',
             marginBottom: '0px'
         }
+    },
+    {
+        name: 'RoutingLink',
+        to: '',
+        toValues: [],
+        style: {
+            color: '#000000',
+            backgroundColor: '#ffffff',
+            fontSize: '16px',
+            height: '30px',
+            width: '100%',
+            textAlign: 'center',
+            display: 'block',
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRigth: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
+        }
     }
 ];
 
-export default componentTypes;
+export const componentTypes = {
+    Header: 'Header',
+    Text: 'Text',
+    Grid: 'Grid',
+    Input: 'Input',
+    Image: 'Image',
+    RoutingLink: 'RoutingLink'
+};
+
+export default componentObjects;
