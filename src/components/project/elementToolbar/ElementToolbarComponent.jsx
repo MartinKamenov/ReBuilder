@@ -21,9 +21,9 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
 
     const inputs = Object.keys(component).filter((c) =>
         (c !== 'style' && c !== 'isInEditMode' &&
-            c !== 'index' && c !== 'name' && c !== 'to'));
+            c !== 'index' && c !== 'name' && c !== 'to' && !c.endsWith('Values')));
     const dropdowns = Object.keys(component).filter((c) => (
-        Array.isArray(component[c])
+        Array.isArray(component[c + 'Values'])
     ));
     const styles = Object.keys(component.style)
         .filter((c) => (c !== 'color' && c !== 'backgroundColor'));
@@ -35,7 +35,8 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                     <h3>Properties</h3>
                     {
                         dropdowns.map((dropdown, k) => {
-                            const values = component[dropdown];
+                            const values = component[dropdown + 'Values'];
+                            debugger;
                             return (
                                 <div
                                     key={k}
@@ -44,8 +45,12 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                                         {capitalizeFirstLetter(dropdown)}
                                     </label>
                                     <select
+                                        onChange={(event) => 
+                                            handleComponentValueChange(event.target.value, dropdown)
+                                        }
                                         className='component-changer-input'
-                                        name={dropdown}>
+                                        name={dropdown}
+                                        value={component[dropdown]}>
                                         {values.map((value, i) => (
                                             <option
                                                 key={i}

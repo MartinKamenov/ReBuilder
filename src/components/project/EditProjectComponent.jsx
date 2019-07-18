@@ -61,7 +61,7 @@ class EditProjectComponent extends Component {
                     return false;
                 });
 
-            routerLinkComponent.to = [...props.project.pages].map(page => page.route);
+            routerLinkComponent.toValues = [...props.project.pages].map(page => page.route);
             draggableComponents[routerLinkComponentIndex] = routerLinkComponent;
 
             this.setState({

@@ -98,7 +98,8 @@ const componentObjects = [
     },
     {
         name: 'RoutingLink',
-        to: [],
+        to: '',
+        toValues: [],
         style: {
             color: '#000000',
             backgroundColor: '#ffffff',
