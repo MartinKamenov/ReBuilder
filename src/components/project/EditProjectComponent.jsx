@@ -9,6 +9,7 @@ import { faDownload, faSave, faArrowAltCircleUp } from '@fortawesome/free-solid-
 import LoadingComponent from '../common/LoadingComponent';
 import * as projectActions from '../../actions/projectActions';
 import * as deploymentActions from '../../actions/deploymentActions';
+import uuid from 'uuid';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -47,7 +48,7 @@ class EditProjectComponent extends Component {
             const page = project.pages.find((p) => this.state.pageId === p.id);
             this.setState({
                 isInitialyLoaded: false,
-                droppedComponents: page.elements.slice(0),
+                droppedComponents: [...page.elements],
                 page,
                 isLoading: false
             });
@@ -79,40 +80,42 @@ class EditProjectComponent extends Component {
         componentElement.innerText = componentElement.name;
         
         componentElement.isInEditMode = false;
-        componentElement.index = this.state.droppedComponents.length;
+        componentElement.index = uuid.v1();
         droppedComponents.push(componentElement);
 
         this.setState({ droppedComponents });
     }
 
     handleChangeEditMode = (index) => {
-        const droppedComponents = this.state.droppedComponents.splice(0);
+        const droppedComponents = [...this.state.droppedComponents];
 
-        droppedComponents[index].isInEditMode = !droppedComponents[index].isInEditMode;
-        droppedComponents.forEach((component, i) => {
-            if(i !== index) {
+        droppedComponents.find(c => c.index === index)
+            .isInEditMode = !droppedComponents.find(c => c.index === index).isInEditMode;
+        droppedComponents.forEach((component) => {
+            if(component.index !== index) {
                 component.isInEditMode = false;
             }
         });
 
-        if(droppedComponents[index].isInEditMode) {
-            this.setState({ previousComponent: Object.assign({}, droppedComponents[index]) });
+        if(this.getComponentFromIndex(index).isInEditMode) {
+            this.setState({ previousComponent: this.getComponentFromIndex(index) });
         }
 
         this.setState({ droppedComponents });
     }
 
     handleForceExitEditMode = (index) => {
-        const droppedComponents = this.state.droppedComponents;
-        droppedComponents[index] = this.state.previousComponent;
-        droppedComponents[index].isInEditMode = false;
+        const droppedComponents = [...this.state.droppedComponents];
+        const exitModeComponentIndex = droppedComponents.findIndex(c => c.index === index);
+        droppedComponents[exitModeComponentIndex] = this.state.previousComponent;
+        droppedComponents[exitModeComponentIndex].isInEditMode = false;
 
         this.setState({ droppedComponents, previousComponent: {} });
     }
 
     handleDeleteComponent = (index) => {
-        const droppedComponents = this.state.droppedComponents;
-        droppedComponents.splice(index, 1);
+        const droppedComponents = this.state.droppedComponents
+            .filter((c) => c.index !== index);
 
         this.setState({ droppedComponents, previousComponent: {} });
     }
@@ -145,7 +148,7 @@ class EditProjectComponent extends Component {
             return;
         }
 
-        const droppedComponents = this.state.droppedComponents.slice(0);
+        const droppedComponents = [...this.state.droppedComponents];
         const page = Object.assign({}, this.state.page);
         page.elements = droppedComponents;
 
@@ -163,15 +166,19 @@ class EditProjectComponent extends Component {
     }
     getComponentInEditMode = () => {
         let index = -1;
-        let component = this.state.droppedComponents.find((comp, i) => {
-            if(comp.isInEditMode) {
+        let component = this.state.droppedComponents.find((c, i) => {
+            if(c.isInEditMode) {
                 index = i;
             }
 
-            return comp.isInEditMode;
+            return c.isInEditMode;
         });
 
         return { componentInEditMode: component, index };
+    }
+
+    getComponentFromIndex = (index) => {
+        return Object.assign({}, this.state.droppedComponents.find(c => c.index === index));
     }
 
     render() {
