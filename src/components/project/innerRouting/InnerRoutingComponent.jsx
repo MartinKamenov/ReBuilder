@@ -6,6 +6,7 @@ import * as deploymentActions from '../../../actions/deploymentActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import './InnerRoutingComponent.css';
+import './PageElementsStyle.css';
 import LoadingComponent from '../../common/LoadingComponent';
 import uuid from 'uuid';
 
@@ -73,7 +74,7 @@ class InnerRoutingComponent extends Component {
 
         return (
             <div>
-                <div className='col-md-4 col-sm-6 outer-route-container'>
+                <div>
                     {
                         this.state.isAdding ? 
                         (
