@@ -21,7 +21,8 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
 
     const inputs = Object.keys(component).filter((c) =>
         (c !== 'style' && c !== 'isInEditMode' &&
-            c !== 'index' && c !== 'name' && c !== 'to' && !c.endsWith('Values')));
+            c !== 'index' && c !== 'name' &&
+            !Array.isArray(component[c + 'Values'])) && !Array.isArray(component[c]));
     const dropdowns = Object.keys(component).filter((c) => (
         Array.isArray(component[c + 'Values'])
     ));
