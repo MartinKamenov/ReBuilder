@@ -38,7 +38,6 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                     {
                         dropdowns.map((dropdown, k) => {
                             const values = component[dropdown + 'Values'];
-                            debugger;
                             return (
                                 <div
                                     key={k}

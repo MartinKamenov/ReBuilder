@@ -94,9 +94,12 @@ const DroppedComponent = ({
                     case componentTypes.RoutingLink:
                         component = (
                             <a
+                                href={droppedComponent.to}
                                 alt='component'
                                 style={droppedComponent.style}
-                                onClick={() => handleChangeEditMode(droppedComponent.index)}
+                                onClick={(e) => {
+                                    e.preventDefault(); 
+                                    handleChangeEditMode(droppedComponent.index)}}
                                 className='droped-component'>
                                 {droppedComponent.innerText}
                             </a>);
