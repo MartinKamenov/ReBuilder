@@ -1,13 +1,21 @@
 .loading-component {
-    padding: 20px;
     text-align: center;
     margin: auto;
-    max-width: 200px;
-    max-height: 200px;
+    background-image: url("https://images.pexels.com/photos/896768/pexels-photo-896768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-position: center;
+    width: 100%;
+    height: calc(100vh - 52px);
+    padding-top: 40px;
 }
 
 .loading-container {
     margin: auto;
     max-width: 100px;
     max-height: 100px;
+}
+
+.loading-text {
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
 }
