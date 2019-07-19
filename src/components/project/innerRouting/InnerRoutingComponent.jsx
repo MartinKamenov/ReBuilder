@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 
 import './InnerRoutingComponent.css';
 import './PageElementsStyle.css';
+import ButtonComponent from '../../common/ButtonComponent';
 
 class InnerRoutingComponent extends Component {
     state = {
@@ -116,11 +117,12 @@ class InnerRoutingComponent extends Component {
                         onChange={(event) => this.updateNewPageValue('newPageRoute', event.target.value)}
                         className='from-input'
                         placeholder='Page route'/>
-                    <button
+                    <ButtonComponent
+                        type='success'
                         onClick={this.addNewPage}
                         className='from-input'>
                             Create page
-                    </button>
+                    </ButtonComponent>
                 </div>
                     
                 </div>

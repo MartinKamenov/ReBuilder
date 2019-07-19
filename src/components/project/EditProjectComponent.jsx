@@ -220,18 +220,20 @@ class EditProjectComponent extends Component {
                                 <FontAwesomeIcon icon={faSave} /> 
                                 <span className='new-project-btn-text'>Save project</span>
                             </ButtonComponent>
-                            <button 
-                                className='btn btn-warning generate-project-btn'
+                            <ButtonComponent
+                                type='warning'
+                                className='generate-project-btn'
                                 onClick={this.generateProject}>
                                 <FontAwesomeIcon icon={faDownload} />
                                 <span className='new-project-btn-text'>Generate project</span>
-                            </button>
-                            <button 
-                                className='btn btn-success generate-project-btn'
+                            </ButtonComponent>
+                            <ButtonComponent
+                                type='success'
+                                className='generate-project-btn'
                                 onClick={this.handleDeployProject}>
                                 <FontAwesomeIcon icon={faArrowAltCircleUp} />
                                 <span className='new-project-btn-text'>Deploy project</span>
-                            </button>
+                            </ButtonComponent>
                         </div>
                     </div>
                 </div>

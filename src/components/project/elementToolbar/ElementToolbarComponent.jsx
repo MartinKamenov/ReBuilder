@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
 import './ElementToolbarComponent.css';
+import ButtonComponent from '../../common/ButtonComponent';
 
 const capitalizeFirstLetter = (text) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
@@ -120,24 +121,27 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                 </div>
             </div>
             <div className='actions-container'>
-                <button
+                <ButtonComponent
+                    type='success'
                     onClick={() => actions.handleChangeEditMode(component.index)}
-                    className='actions-button btn btn-success'>
+                    className='actions-button'>
                     <FontAwesomeIcon className='action-icon' icon={faCheck} />
                     Accept changes
-                </button>
-                <button
+                </ButtonComponent>
+                <ButtonComponent
+                    type='warning'
                     onClick={() => actions.handleForceExitEditMode(component.index)}
-                    className='actions-button btn btn-warning'>
+                    className='actions-button'>
                     <FontAwesomeIcon className='action-icon' icon={faUndo} />
                     Revert changes
-                </button>
-                <button
+                </ButtonComponent>
+                <ButtonComponent
+                    type='danger'
                     onClick={() => actions.handleDeleteComponent(component.index)}
-                    className='actions-button btn btn-danger'>
+                    className='actions-button'>
                     <FontAwesomeIcon className='action-icon' icon={faTrashAlt} />
                     Delete component
-                </button>
+                </ButtonComponent>
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DraggableComponent from './DraggableComponent';
 import './ProjectComponentsList.css';
+import ButtonComponent from '../../common/ButtonComponent';
 
 const ProjectComponentsList = ({draggableComponents}) => {
     return (
@@ -12,7 +13,11 @@ const ProjectComponentsList = ({draggableComponents}) => {
                         <DraggableComponent key={i} draggableComponent={component}/>
                     )
                 }
-            <button className='btn btn-primary rearange-btn'>Rearange</button>
+            <ButtonComponent
+                title='Rearange'
+                type='primary'
+                className='rearange-btn'>
+            </ButtonComponent>
         </div>
     );
 }
