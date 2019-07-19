@@ -1,33 +1,37 @@
 .custom-button {
     height: 40px;
+    border: 1px solid white;
+    color: white;
 }
 
 .custom-buttom-rounded {
     border-radius: 10px;
 }
 
-.custom-button:hover {
-    background-color: #f0f0f0;
-}
-
 .custom-button-success {
-    border: 1px solid green;
-    color: green;
-    background-color: white;
+    background-color: #5CB85C;
 }
 .custom-button-danger {
-    border: 1px solid red;
-    color: red;
-    background-color: white;
+    background-color: #D9534F;
 }
 .custom-button-warning {
-    border: 1px solid yellow;
-    color: yellow;
-    background-color: white;
+    background-color: #F0AD4E;
 }
 
 .custom-button-primary {
-    border: 1px solid blue;
-    color: blue;
-    background-color: white;
+    background-color: #286090;
+}
+
+.custom-button-success:hover {
+    background-color: #449D44;
+}
+.custom-button-danger:hover {
+    background-color: #C9302C;
+}
+.custom-button-warning:hover {
+    background-color: #EC971F;
+}
+
+.custom-button-primary:hover {
+    background-color: #337AB7;
 }
