@@ -32,8 +32,8 @@ class AppRouterComponent extends Component {
                     <Route exact path="/" component={DashboardComponent} />
                     <Route exact path="/login" component={LoginComponent} />
                     <Route exact path="/register" component={RegisterComponent} />
+                    <Route exact path="/projects/:id" component={InnerRoutingComponent} />
                     <div className='container'>
-                        <Route exact path="/projects/:id" component={InnerRoutingComponent} />
                         <Route exact path="/project/new" component={NewProjectPageComponent} />
                     </div>
                     <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
