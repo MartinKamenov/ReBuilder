@@ -36,7 +36,8 @@
 }
 
 .from-input {
-    display: block;
+    display: inline-block;
+    height: 40px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;

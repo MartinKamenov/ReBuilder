@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import * as projectActions from '../../../actions/projectActions';
 import * as deploymentActions from '../../../actions/deploymentActions';
 import { bindActionCreators } from 'redux';
@@ -16,7 +14,6 @@ class InnerRoutingComponent extends Component {
     state = {
         isLoading: true,
         pages: [],
-        isAdding: false,
         newPageName: '',
         newPageRoute: ''
     }
@@ -41,7 +38,6 @@ class InnerRoutingComponent extends Component {
     }
 
     executeStylesScript = () => {
-        debugger;
         const nodes = [].slice.call(document.querySelectorAll('li'), 0);
         const directions  = { 0: 'top', 1: 'right', 2: 'bottom', 3: 'left' };
         const classNames = ['in', 'out'].map((p) => Object.values(directions).map((d) => `${p}-${d}`)).reduce((a, b) => a.concat(b));
@@ -75,10 +71,6 @@ class InnerRoutingComponent extends Component {
         this.setState({ [field]: value });
     }
 
-    changeIsAdding = () => {
-        this.setState({ isAdding: !this.state.isAdding });
-    }
-
     navigateToPage = (pageId) => {
         const project = Object.assign({}, this.props.project);
         this.setState({ isLoading: false });
@@ -100,7 +92,7 @@ class InnerRoutingComponent extends Component {
         const token = localStorage.getItem('token');
 
         this.props.actions.updateProject(this.props.project.id, pages, token);
-        this.setState({ pages, isAdding: false }, () => {
+        this.setState({ pages }, () => {
             this.executeStylesScript();
         });
     }
@@ -113,22 +105,20 @@ class InnerRoutingComponent extends Component {
         return (
             <div className='inner-routing-container'>
                 <div className='container'>
-                <div>
+                <div className='center-container'>
                     <input
-                        style={{ display: 'inline-block' }}
                         value={this.state.newPageName}
                         onChange={(event) => this.updateNewPageValue('newPageName', event.target.value)}
                         className='from-input'
                         placeholder='Page name'/>
                     <input
-                        style={{ display: 'inline-block' }}
                         value={this.state.newPageRoute}
                         onChange={(event) => this.updateNewPageValue('newPageRoute', event.target.value)}
                         className='from-input'
                         placeholder='Page route'/>
                     <button
                         onClick={this.addNewPage}
-                        className='btn btn-success from-input'>
+                        className='from-input'>
                             Create page
                     </button>
                 </div>
