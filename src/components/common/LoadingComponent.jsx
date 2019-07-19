@@ -10,7 +10,7 @@ const LoadingComponent = ({ message }) => {
             <div className='loading-container'>
                 <ReactLoading type='cylon' color='#E53B52' height={100} width={100} />
             </div>
-            <div>{message}</div>
+            <div className='loading-text'>{message}</div>
         </div>
     );
 };

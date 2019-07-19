@@ -12,14 +12,24 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify-redux';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingComponent from '../common/LoadingComponent';
 
 class AppRouterComponent extends Component {
+    state = {
+        isLoading: true
+    }
     componentDidMount() {
         const user = this.props.user;
         const token = localStorage.getItem('token'); 
         if(!user.id && token) {
             this.props.actions.loginByToken(token);
+        } else {
+            this.setState({ isLoading: false });
         }
+    }
+
+    componentWillReceiveProps() {
+        this.setState({ isLoading: false });
     }
     render() {
         return (
@@ -27,17 +37,23 @@ class AppRouterComponent extends Component {
                 <div>
                     <ToastContainer/>
                 </div>
-                <div className='main-container'>
-                    <NavbarComponent/>
-                    <Route exact path="/" component={DashboardComponent} />
-                    <Route exact path="/login" component={LoginComponent} />
-                    <Route exact path="/register" component={RegisterComponent} />
-                    <Route exact path="/projects/:id" component={InnerRoutingComponent} />
-                    <div className='container'>
-                        <Route exact path="/project/new" component={NewProjectPageComponent} />
+                { this.state.isLoading ? (
+                    <LoadingComponent message='Fetching user'/>
+                ) : 
+                (
+                    <div className='main-container'>
+                        <NavbarComponent/>
+                        <Route exact path="/" component={DashboardComponent} />
+                        <Route exact path="/login" component={LoginComponent} />
+                        <Route exact path="/register" component={RegisterComponent} />
+                        <Route exact path="/projects/:id" component={InnerRoutingComponent} />
+                        <div className='container'>
+                            <Route exact path="/project/new" component={NewProjectPageComponent} />
+                        </div>
+                        <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
                     </div>
-                    <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
-                </div>
+                )}
+                
             </Router>
         );
     }
@@ -45,7 +61,8 @@ class AppRouterComponent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        error: state.error
     };
 };
 const mapDispatchToProps = (dispatch) => {
