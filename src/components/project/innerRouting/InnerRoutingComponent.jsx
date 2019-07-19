@@ -14,6 +14,7 @@ import './PageElementsStyle.css';
 
 class InnerRoutingComponent extends Component {
     state = {
+        isLoading: true,
         pages: [],
         isAdding: false,
         newPageName: '',
@@ -33,7 +34,7 @@ class InnerRoutingComponent extends Component {
 
     componentWillReceiveProps(props) {
         if(props.project.pages) {
-            this.setState({ pages: props.project.pages }, () => {
+            this.setState({ pages: props.project.pages, isLoading: false }, () => {
                 this.executeStylesScript();
             });
         }
@@ -105,7 +106,7 @@ class InnerRoutingComponent extends Component {
     }
 
     render() {
-        if(!this.props.project.id) {
+        if(this.state.isLoading) {
             return (<LoadingComponent message='Fetching project'/>);
         }
 
