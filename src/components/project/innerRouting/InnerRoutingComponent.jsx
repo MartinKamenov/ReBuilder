@@ -111,39 +111,27 @@ class InnerRoutingComponent extends Component {
         }
 
         return (
-            <div>
+            <div className='inner-routing-container'>
+                <div className='container'>
                 <div>
-                    {
-                        this.state.isAdding ? 
-                        (
-                        <div className='routing-page-component edit-mode-add-route-container'>
-                            <input
-                                value={this.state.newPageName}
-                                onChange={(event) => this.updateNewPageValue('newPageName', event.target.value)}
-                                className='from-input'
-                                placeholder='Page name'/>
-                            <input
-                                value={this.state.newPageRoute}
-                                onChange={(event) => this.updateNewPageValue('newPageRoute', event.target.value)}
-                                className='from-input'
-                                placeholder='Page route'/>
-                            <button
-                                onClick={this.addNewPage}
-                                className='btn btn-success from-input'>
-                                    Create page
-                            </button>
-                        </div>
-                        )
-                        :
-                        (
-                            <div
-                                className='routing-page-component add-route-container'
-                                onClick={this.changeIsAdding}>
-                                <h3>Add new page</h3>
-                                <FontAwesomeIcon style={{width: 100, height: 100}} icon={faPlusCircle} />
-                            </div>
-                        )
-                    }
+                    <input
+                        style={{ display: 'inline-block' }}
+                        value={this.state.newPageName}
+                        onChange={(event) => this.updateNewPageValue('newPageName', event.target.value)}
+                        className='from-input'
+                        placeholder='Page name'/>
+                    <input
+                        style={{ display: 'inline-block' }}
+                        value={this.state.newPageRoute}
+                        onChange={(event) => this.updateNewPageValue('newPageRoute', event.target.value)}
+                        className='from-input'
+                        placeholder='Page route'/>
+                    <button
+                        onClick={this.addNewPage}
+                        className='btn btn-success from-input'>
+                            Create page
+                    </button>
+                </div>
                     
                 </div>
                 <div className='routing-pages-styling-container'>

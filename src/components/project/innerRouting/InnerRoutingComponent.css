@@ -7,6 +7,14 @@
     cursor: pointer;
 }
 
+.inner-routing-container {
+    background-position: center;
+    width: 100%;
+    height: calc(100vh - 52px);
+    padding-top: 40px;
+    background-image: url("https://images.pexels.com/photos/176103/pexels-photo-176103.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+}
+
 .outer-route-container {
     padding: 10px;
 }
@@ -16,6 +24,7 @@
     text-align: center;
 }
 .add-route-container {
+    width: 300px;
     padding-top: 40px;
     text-align: center;
 }
