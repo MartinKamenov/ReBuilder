@@ -20,6 +20,7 @@
     width: 75%;
     height: 40px;
     display: block;
+    margin: auto;
 }
 
 .action-icon {
