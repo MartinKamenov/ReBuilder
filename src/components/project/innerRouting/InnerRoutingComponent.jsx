@@ -118,6 +118,7 @@ class InnerRoutingComponent extends Component {
                         className='from-input'
                         placeholder='Page route'/>
                     <ButtonComponent
+                        rounded={false}
                         type='success'
                         onClick={this.addNewPage}
                         className='from-input'>

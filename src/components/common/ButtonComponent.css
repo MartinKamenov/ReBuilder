@@ -1,6 +1,9 @@
 .custom-button {
     height: 40px;
-    border-radius: 10px; 
+}
+
+.custom-buttom-rounded {
+    border-radius: 10px;
 }
 
 .custom-button:hover {
