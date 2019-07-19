@@ -5,6 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
 import './ElementToolbarComponent.css';
 
+const capitalizeFirstLetter = (text) => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+};
+
 const ElementToolbarComponent = ({component, handleComponentValueChange, actions}) => {
     if(!component) {
         return (
@@ -14,19 +18,60 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
             </div>
         )
     }
+
     const inputs = Object.keys(component).filter((c) =>
-        (c !== 'style' && c !== 'isInEditMode' && c !== 'index' && c !== 'name'));
-    const styles = Object.keys(component.style).filter((c) => (c !== 'color' && c !== 'backgroundColor'));
+        (c !== 'style' && c !== 'isInEditMode' &&
+            c !== 'index' && c !== 'name' &&
+            !Array.isArray(component[c + 'Values'])) && !Array.isArray(component[c]));
+    const dropdowns = Object.keys(component).filter((c) => (
+        Array.isArray(component[c + 'Values'])
+    ));
+    const styles = Object.keys(component.style)
+        .filter((c) => (c !== 'color' && c !== 'backgroundColor'));
+
     return (
         <div className='toolbar-container'>
             <div className='vertical-scrollable-container toolbar-scrollable'>
                 <div className='toolbar-element-container'>
+                    <h3>{component.name}</h3>
                     <h3>Properties</h3>
                     {
-                        inputs.map((input) => {
+                        dropdowns.map((dropdown, k) => {
+                            const values = component[dropdown + 'Values'];
                             return (
-                                <div className='component-input-changer-container'>
-                                    <label className='component-changer-label'>{input}</label>
+                                <div
+                                    key={k}
+                                    className='component-input-changer-container'>
+                                    <label className='component-changer-label'>
+                                        {capitalizeFirstLetter(dropdown)}
+                                    </label>
+                                    <select
+                                        onChange={(event) => 
+                                            handleComponentValueChange(event.target.value, dropdown)
+                                        }
+                                        className='component-changer-input'
+                                        name={dropdown}
+                                        value={component[dropdown]}>
+                                        {values.map((value, i) => (
+                                            <option
+                                                key={i}
+                                                value={value}>{value}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            )
+                        })
+                    }
+                    {
+                        inputs.map((input, i) => {
+                            return (
+                                <div
+                                    className='component-input-changer-container'
+                                    key={i}>
+                                    <label className='component-changer-label'>
+                                        {capitalizeFirstLetter(input)}
+                                    </label>
                                     <input
                                         className='component-changer-input'
                                         onChange={(event) => handleComponentValueChange(event.target.value, input)}
@@ -39,10 +84,14 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                     }
                     <h3>Styles</h3>
                     {
-                        styles.map((style) => {
+                        styles.map((style, i) => {
                             return (
-                                <div className='component-input-changer-container'>
-                                    <label className='component-changer-label'>{style}</label>
+                                <div
+                                    key={i}
+                                    className='component-input-changer-container'>
+                                    <label className='component-changer-label'>
+                                        {capitalizeFirstLetter(style)}
+                                    </label>
                                     <input
                                         className='component-changer-input'
                                         onChange={(event) => handleComponentValueChange(event.target.value, 'style.' + style)}

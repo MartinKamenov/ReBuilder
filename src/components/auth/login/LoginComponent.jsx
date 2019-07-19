@@ -45,27 +45,29 @@ class LoginComponent extends Component {
             return <LoadingComponent message='Authenticating user' />
         }
         
-        return ( 
-            <div className='login-container'>
-                <h3 className='auth-header'>Sign in</h3>
-                <div>
-                    <input
-                        className='form-input'
-                        type='text'
-                        placeholder='Username'
-                        onChange={(event) => this.handleInputChange(event.target.value, 'username')}
-                        value={this.state.username}/>
-                    <input
-                        className='form-input'
-                        type='password'
-                        placeholder='Password'
-                        onChange={(event) => this.handleInputChange(event.target.value, 'password')}
-                        value={this.state.password}/>
-                    <ButtonComponent
-                        title='Log in'
-                        className='submit-btn'
-                        type='success'
-                        onClick={this.login}/>
+        return (
+            <div className='auth-container'>
+                <div className='login-container'>
+                    <h3 className='auth-header'>Sign in</h3>
+                    <div>
+                        <input
+                            className='form-input'
+                            type='text'
+                            placeholder='Username'
+                            onChange={(event) => this.handleInputChange(event.target.value, 'username')}
+                            value={this.state.username}/>
+                        <input
+                            className='form-input'
+                            type='password'
+                            placeholder='Password'
+                            onChange={(event) => this.handleInputChange(event.target.value, 'password')}
+                            value={this.state.password}/>
+                        <ButtonComponent
+                            title='Log in'
+                            className='submit-btn'
+                            type='success'
+                            onClick={this.login}/>
+                    </div>
                 </div>
             </div>
         );

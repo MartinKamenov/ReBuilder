@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import ProjectComponentsList from './projectDraggableComponents/ProjectComponentsList';
 import ProjectPageComponent from './projectDropList/ProjectPageComponent';
 import ElementToolbarComponent from './elementToolbar/ElementToolbarComponent';
-import componentTypes from './components/componentTypes';
+import componentObjects, { componentTypes } from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faSave, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
 import LoadingComponent from '../common/LoadingComponent';
 import * as projectActions from '../../actions/projectActions';
 import * as deploymentActions from '../../actions/deploymentActions';
+import uuid from 'uuid';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -16,8 +17,12 @@ import './EditProjectComponent.css';
 
 class EditProjectComponent extends Component {
     state = {
-        id: 0,
-        draggableComponents: componentTypes,
+        id: '',
+        pageId: '',
+        page: {
+            elements: []
+        },
+        draggableComponents: componentObjects,
         droppedComponents: [],
         previousComponent: {},
         isInitialyLoaded: true,
@@ -32,15 +37,38 @@ class EditProjectComponent extends Component {
             return;
         }
         const id = this.props.match.params.id;
-        this.setState({ id });
+        const pageId = this.props.match.params.pageId;
+
+        this.setState({ id, pageId });
         this.props.actions.updateProject(id, null, token);
     }
 
     componentWillReceiveProps(props) {
         if(props.project.id && this.state.isInitialyLoaded) {
+            const project = Object.assign({}, props.project);
+            const page = project.pages.find((p) => this.state.pageId === p.id);
+
+            // Adds routes to routinglink
+            const draggableComponents = [...this.state.draggableComponents];
+            let routerLinkComponentIndex = -1;
+            const routerLinkComponent = draggableComponents
+                .find((c, i) => {
+                    if(c.name === componentTypes.RoutingLink) {
+                        routerLinkComponentIndex = i;
+                        return true;
+                    }
+
+                    return false;
+                });
+
+            routerLinkComponent.toValues = [...props.project.pages].map(page => page.route);
+            draggableComponents[routerLinkComponentIndex] = routerLinkComponent;
+
             this.setState({
+                draggableComponents,
                 isInitialyLoaded: false,
-                droppedComponents: props.project.components.slice(0),
+                droppedComponents: [...page.elements],
+                page,
                 isLoading: false
             });
         }
@@ -55,7 +83,11 @@ class EditProjectComponent extends Component {
     }
 
     generateProject = () => {
-        projectGenerator.generateProject(this.props.project.name, this.state.droppedComponents);
+        const pages = [...this.props.project.pages];
+        const index = pages.findIndex((p) => p.id === this.state.pageId);
+        pages[index] = this.state.page;
+
+        projectGenerator.generateProject(this.props.project.name, pages);
     }
 
     handleDropComponent = (event) => {
@@ -67,40 +99,42 @@ class EditProjectComponent extends Component {
         componentElement.innerText = componentElement.name;
         
         componentElement.isInEditMode = false;
-        componentElement.index = this.state.droppedComponents.length;
+        componentElement.index = uuid.v1();
         droppedComponents.push(componentElement);
 
         this.setState({ droppedComponents });
     }
 
     handleChangeEditMode = (index) => {
-        const droppedComponents = this.state.droppedComponents.splice(0);
+        const droppedComponents = [...this.state.droppedComponents];
 
-        droppedComponents[index].isInEditMode = !droppedComponents[index].isInEditMode;
-        droppedComponents.forEach((component, i) => {
-            if(i !== index) {
+        droppedComponents.find(c => c.index === index)
+            .isInEditMode = !droppedComponents.find(c => c.index === index).isInEditMode;
+        droppedComponents.forEach((component) => {
+            if(component.index !== index) {
                 component.isInEditMode = false;
             }
         });
 
-        if(droppedComponents[index].isInEditMode) {
-            this.setState({ previousComponent: Object.assign({}, droppedComponents[index]) });
+        if(this.getComponentFromIndex(index).isInEditMode) {
+            this.setState({ previousComponent: this.getComponentFromIndex(index) });
         }
 
         this.setState({ droppedComponents });
     }
 
     handleForceExitEditMode = (index) => {
-        const droppedComponents = this.state.droppedComponents;
-        droppedComponents[index] = this.state.previousComponent;
-        droppedComponents[index].isInEditMode = false;
+        const droppedComponents = [...this.state.droppedComponents];
+        const exitModeComponentIndex = droppedComponents.findIndex(c => c.index === index);
+        droppedComponents[exitModeComponentIndex] = this.state.previousComponent;
+        droppedComponents[exitModeComponentIndex].isInEditMode = false;
 
         this.setState({ droppedComponents, previousComponent: {} });
     }
 
     handleDeleteComponent = (index) => {
-        const droppedComponents = this.state.droppedComponents;
-        droppedComponents.splice(index, 1);
+        const droppedComponents = this.state.droppedComponents
+            .filter((c) => c.index !== index);
 
         this.setState({ droppedComponents, previousComponent: {} });
     }
@@ -133,9 +167,17 @@ class EditProjectComponent extends Component {
             return;
         }
 
-        const droppedComponents = this.state.droppedComponents.slice(0);
+        const droppedComponents = [...this.state.droppedComponents];
+        const page = Object.assign({}, this.state.page);
+        page.elements = droppedComponents;
+
+        const pages = [...this.props.project.pages];
+        const index = pages.findIndex((p) => p.id === this.state.pageId);
+        pages[index] = page;
+
+        this.setState({ page });
         
-        this.props.actions.updateProject(this.state.id, droppedComponents, token);
+        this.props.actions.updateProject(this.state.id, pages, token);
     }
 
     handleDeployProject = async () => {
@@ -143,15 +185,19 @@ class EditProjectComponent extends Component {
     }
     getComponentInEditMode = () => {
         let index = -1;
-        let component = this.state.droppedComponents.find((comp, i) => {
-            if(comp.isInEditMode) {
+        let component = this.state.droppedComponents.find((c, i) => {
+            if(c.isInEditMode) {
                 index = i;
             }
 
-            return comp.isInEditMode;
+            return c.isInEditMode;
         });
 
         return { componentInEditMode: component, index };
+    }
+
+    getComponentFromIndex = (index) => {
+        return Object.assign({}, this.state.droppedComponents.find(c => c.index === index));
     }
 
     render() {
