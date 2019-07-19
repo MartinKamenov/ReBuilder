@@ -1,0 +1,32 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
+
+.button2 {
+  text-decoration: none;
+  color: white;
+  width: 200px;
+  height: 100px;
+  background: #F2385A;
+  position: relative;
+  margin: 30px;
+  padding: 16px;
+  font-size: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 15px 0px 0px #f02046, 0px 0px 20px 0px #bbb;
+  transition: all 0.2s;
+}
+
+.button2:active {
+  top: 8px;
+  box-shadow: 0px 7px 0px 0px #f02046;
+}
+
+.button2 {
+  background-color: #3498DB;
+  box-shadow: 0px 15px 0px 0px #258cd1;
+}
+.button2:active {
+  box-shadow: 0px 7px 0px 0px #258cd1;
+}
