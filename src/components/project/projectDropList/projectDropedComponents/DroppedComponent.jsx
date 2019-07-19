@@ -4,6 +4,7 @@ import './DroppedComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { componentTypes } from '../../components/componentTypes';
+import ButtonComponent from '../../../common/ButtonComponent';
 
 const DroppedComponent = ({
         droppedComponent,
@@ -45,16 +46,18 @@ const DroppedComponent = ({
                     })()
                 }
                 
-                <button
-                    className='btn btn-success'
+                <ButtonComponent
+                    type='success'
                     onClick={() => handleChangeEditMode(droppedComponent.index)}>
-                    <FontAwesomeIcon icon={faCheck} /> 
-                </button>
-                <button
-                    className='btn btn-warning'
+                    <FontAwesomeIcon icon={faCheck} />
+                    Accept
+                </ButtonComponent>
+                <ButtonComponent
+                    type='warning'
                     onClick={() => handleForceExitEditMode(droppedComponent.index)}>
-                    <FontAwesomeIcon icon={faUndo} /> 
-                </button>
+                    <FontAwesomeIcon icon={faUndo} />
+                    Undo
+                </ButtonComponent>
             </div>
         );
     }

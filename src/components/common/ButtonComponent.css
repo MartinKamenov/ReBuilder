@@ -1,0 +1,37 @@
+.custom-button {
+    height: 40px;
+    border: 1px solid white;
+    color: white;
+}
+
+.custom-buttom-rounded {
+    border-radius: 10px;
+}
+
+.custom-button-success {
+    background-color: #5CB85C;
+}
+.custom-button-danger {
+    background-color: #D9534F;
+}
+.custom-button-warning {
+    background-color: #F0AD4E;
+}
+
+.custom-button-primary {
+    background-color: #286090;
+}
+
+.custom-button-success:hover {
+    background-color: #449D44;
+}
+.custom-button-danger:hover {
+    background-color: #C9302C;
+}
+.custom-button-warning:hover {
+    background-color: #EC971F;
+}
+
+.custom-button-primary:hover {
+    background-color: #337AB7;
+}

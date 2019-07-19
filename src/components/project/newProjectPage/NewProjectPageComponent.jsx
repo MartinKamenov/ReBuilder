@@ -4,6 +4,8 @@ import * as authenticationActions from '../../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoadingComponent from '../../common/LoadingComponent';
+import ButtonComponent from '../../common/ButtonComponent';
+
 
 import './NewProjectPageComponent.css';
 
@@ -67,9 +69,11 @@ class NewProjectPageComponent extends Component {
                         value={this.state.projectImage}
                         onChange={(event) => this.handleChangeInput(event.target.value, 'projectImage')}/>
                 </div>
-                <button
-                    onClick={this.handleCreateProject}
-                    className='btn btn-success project-page-button'>Create new project</button>
+                     <ButtonComponent
+                        title='Create new project'
+                        className='submit-btn'
+                        type='success'
+                        onClick={this.handleCreateProject}/>
             </div>
         );
     }

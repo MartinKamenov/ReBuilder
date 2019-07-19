@@ -4,6 +4,8 @@ import * as authenticationActions from '../../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import './RegisterComponent.css';
+import ButtonComponent from '../../common/ButtonComponent';
+
 
 class RegisterComponent extends Component {
     state = {
@@ -94,10 +96,11 @@ class RegisterComponent extends Component {
                             onChange={(event) => 
                                 this.handleInputChange(event.target.value, 'imageUrl')}
                             value={this.state.imageUrl}/>
-                        <button
-                            onClick={this.register}
-                            className='submit-btn btn btn-success'
-                            type='submit'>Sign up</button>
+                        <ButtonComponent
+                            title='Sign up'
+                            className='submit-btn'
+                            type='success'
+                            onClick={this.register}/>
                     </div>
                 </div>
             </div>

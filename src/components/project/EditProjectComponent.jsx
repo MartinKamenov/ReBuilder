@@ -14,6 +14,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import './EditProjectComponent.css';
+import ButtonComponent from '../common/ButtonComponent';
 
 class EditProjectComponent extends Component {
     state = {
@@ -212,24 +213,27 @@ class EditProjectComponent extends Component {
                 <div className='new-project-name-outer-container'>
                     <div className='new-project-name-inner-container'>
                         <div className='generate-project-btn-container'>
-                            <button
-                                className='btn btn-primary generate-project-btn'
+                            <ButtonComponent
+                                type='primary'
+                                className='generate-project-btn'
                                 onClick={this.handleSaveProject}>
                                 <FontAwesomeIcon icon={faSave} /> 
                                 <span className='new-project-btn-text'>Save project</span>
-                            </button>
-                            <button 
-                                className='btn btn-warning generate-project-btn'
+                            </ButtonComponent>
+                            <ButtonComponent
+                                type='warning'
+                                className='generate-project-btn'
                                 onClick={this.generateProject}>
                                 <FontAwesomeIcon icon={faDownload} />
                                 <span className='new-project-btn-text'>Generate project</span>
-                            </button>
-                            <button 
-                                className='btn btn-success generate-project-btn'
+                            </ButtonComponent>
+                            <ButtonComponent
+                                type='success'
+                                className='generate-project-btn'
                                 onClick={this.handleDeployProject}>
                                 <FontAwesomeIcon icon={faArrowAltCircleUp} />
                                 <span className='new-project-btn-text'>Deploy project</span>
-                            </button>
+                            </ButtonComponent>
                         </div>
                     </div>
                 </div>
