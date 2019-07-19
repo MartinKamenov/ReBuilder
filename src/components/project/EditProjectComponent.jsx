@@ -5,7 +5,7 @@ import ElementToolbarComponent from './elementToolbar/ElementToolbarComponent';
 import componentObjects, { componentTypes } from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faSave, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faSave, faArrowAltCircleUp, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import LoadingComponent from '../common/LoadingComponent';
 import * as projectActions from '../../actions/projectActions';
 import * as deploymentActions from '../../actions/deploymentActions';
@@ -201,6 +201,12 @@ class EditProjectComponent extends Component {
         return Object.assign({}, this.state.droppedComponents.find(c => c.index === index));
     }
 
+    returnToRouting = () => {
+        const history = this.props.history;
+        history.push(`/projects/${this.state.id}`);
+        return;
+    }
+
     render() {
         if(this.state.isLoading) {
             return <LoadingComponent message='Fetching project' />;
@@ -213,6 +219,13 @@ class EditProjectComponent extends Component {
                 <div className='new-project-name-outer-container'>
                     <div className='new-project-name-inner-container'>
                         <div className='generate-project-btn-container'>
+                            <ButtonComponent
+                                type='danger'
+                                className='generate-project-btn'
+                                onClick={this.returnToRouting}>
+                                <FontAwesomeIcon icon={faArrowLeft} /> 
+                                <span className='new-project-btn-text'>Back to pages</span>
+                            </ButtonComponent>
                             <ButtonComponent
                                 type='primary'
                                 className='generate-project-btn'
