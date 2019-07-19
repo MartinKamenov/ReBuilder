@@ -22,3 +22,9 @@
     color: yellow;
     background-color: white;
 }
+
+.custom-button-primary {
+    border: 1px solid blue;
+    color: blue;
+    background-color: white;
+}
