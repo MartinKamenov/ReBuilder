@@ -35,6 +35,25 @@ export function loginByToken(token) {
     };
 }
 
+export function logout() {
+    return async function(dispatch) {
+        try {
+            debugger;
+            return dispatch(logoutSuccess());
+        } catch(error) {
+            dispatch(toastError(error.message));
+            return dispatch(createError(error.message));
+        }
+    };
+}
+
+export function logoutSuccess() {
+    debugger;
+    localStorage.removeItem('token');
+
+    return { type: types.LOGOUT_SUCCESS, user: {} };
+}
+
 export function loginSuccess(user) {
     localStorage.setItem('token', user.token);
 

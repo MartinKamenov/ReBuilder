@@ -3,14 +3,23 @@ import * as authenticationActions from '../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faUndo } from '@fortawesome/free-solid-svg-icons';
 
 import './UserComponent.css';
 import ButtonComponent from '../common/ButtonComponent';
 
 class UserComponent extends Component {
+    componentWillReceiveProps(props) {
+        debugger;
+        const token = localStorage.getItem('token');
+        if(!props.user.id && !token) {
+            const history = this.props.history;
+            history.push('/login');
+            return;
+        }
+    }
     logout = () => {
-
+        this.props.actions.logout();
     }
     render() {
         const user = this.props.user;

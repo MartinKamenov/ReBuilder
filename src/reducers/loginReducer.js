@@ -4,8 +4,8 @@ export default function loginReducer(user = {}, action) {
     switch (action.type) {
         case types.LOGIN_SUCCESS:
         case types.REGISTER_SUCCESS:
+        case types.LOGOUT_SUCCESS:
             return action.user;
-
         default:
             return user;
     }
