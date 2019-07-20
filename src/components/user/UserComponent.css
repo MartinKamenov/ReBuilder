@@ -1,0 +1,9 @@
+.user-container {
+    padding: 10px;
+    max-width: 300px;
+    margin: auto;
+}
+
+.logout-btn {
+    width: 100%;
+}
