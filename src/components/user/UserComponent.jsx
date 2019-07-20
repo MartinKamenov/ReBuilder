@@ -12,11 +12,16 @@ class UserComponent extends Component {
     logout = () => {
 
     }
-    render() { 
+    render() {
+        const user = this.props.user;
         return (
             <div className='center-container user-container'>
+                <img
+                    className='user-component-user-image'
+                    alt='user image'
+                    src={user.imageUrl}/>
                 <h3>
-                    {this.props.user.username}
+                    {user.username}
                 </h3>
                 <ButtonComponent
                     className='logout-btn'
