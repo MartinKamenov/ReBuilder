@@ -27,7 +27,7 @@ class NavbarComponent extends Component {
                             <Nav pullRight>
                                 <NavItem componentClass='span' className="nav-link-container">
                                     <Link className="nav-link navbar_element"
-                                        to={"/user/" + this.props.user.id}>
+                                        to={"/users/" + this.props.user.id}>
                                         Hello, {this.props.user.username}
                                     </Link>
                                 </NavItem>

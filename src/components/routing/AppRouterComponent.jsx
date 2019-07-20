@@ -11,8 +11,10 @@ import * as authenticationActions from '../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify-redux';
-import 'react-toastify/dist/ReactToastify.css';
 import LoadingComponent from '../common/LoadingComponent';
+import UserComponent from '../user/UserComponent';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 class AppRouterComponent extends Component {
     state = {
@@ -47,10 +49,11 @@ class AppRouterComponent extends Component {
                         <Route exact path="/login" component={LoginComponent} />
                         <Route exact path="/register" component={RegisterComponent} />
                         <Route exact path="/projects/:id" component={InnerRoutingComponent} />
+                        <Route exact path="/users/:id" component={UserComponent} />
+                        <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
                         <div className='container'>
                             <Route exact path="/project/new" component={NewProjectPageComponent} />
                         </div>
-                        <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
                     </div>
                 )}
                 
