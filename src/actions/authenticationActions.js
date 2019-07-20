@@ -38,7 +38,6 @@ export function loginByToken(token) {
 export function logout() {
     return async function(dispatch) {
         try {
-            debugger;
             return dispatch(logoutSuccess());
         } catch(error) {
             dispatch(toastError(error.message));
@@ -48,7 +47,6 @@ export function logout() {
 }
 
 export function logoutSuccess() {
-    debugger;
     localStorage.removeItem('token');
 
     return { type: types.LOGOUT_SUCCESS, user: {} };

@@ -10,7 +10,6 @@ import ButtonComponent from '../common/ButtonComponent';
 
 class UserComponent extends Component {
     componentWillReceiveProps(props) {
-        debugger;
         const token = localStorage.getItem('token');
         if(!props.user.id && !token) {
             const history = this.props.history;
