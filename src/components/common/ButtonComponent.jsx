@@ -33,12 +33,11 @@ const ButtonComponent = ({ title, style, type, onClick, className, rounded, chil
 };
 
 ButtonComponent.propTypes = {
-    title: PropTypes.string.isRequired,
-    style: PropTypes.object.isRequired,
+    title: PropTypes.string,
+    style: PropTypes.object,
     type: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     className: PropTypes.string,
-    children: PropTypes.array,
     rounded: PropTypes.bool
 };
 

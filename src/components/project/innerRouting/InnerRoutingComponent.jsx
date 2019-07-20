@@ -130,7 +130,9 @@ class InnerRoutingComponent extends Component {
                 <div className='routing-pages-styling-container'>
                     <ul className='routing-page-styling-ul'>
                         {this.state.pages.map((page) => (
-                            <li className='routing-page-styling-li'>
+                            <li
+                                key={page.id}
+                                className='routing-page-styling-li'>
                                 <Link
                                     className='normal'
                                     to={`/projects/${this.props.project.id}/${page.id}`}>
