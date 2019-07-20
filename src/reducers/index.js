@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 // import initialState from './initialState';
-import user from './loginReducer';
+import user from './updateUserReducer';
 import project from './createProjectReducer';
 import projectStatus from './deployProjectReducer';
 import error from './errorReducer';
