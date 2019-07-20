@@ -19,7 +19,7 @@
 }
 
 .custom-button-primary {
-    background-color: #286090;
+    background-color: #337AB7;
 }
 
 .custom-button-success:hover {
@@ -33,5 +33,5 @@
 }
 
 .custom-button-primary:hover {
-    background-color: #337AB7;
+    background-color: #286090;
 }
