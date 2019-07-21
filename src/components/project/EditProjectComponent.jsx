@@ -150,7 +150,7 @@ class EditProjectComponent extends Component {
             style[field] = value;
             componentInEditMode.style = style;
         } else if(field.startsWith('style.')) {
-            field = field.substring(6)
+            field = field.substring(6);
             const style = Object.assign({}, componentInEditMode.style);
             style[field] = value;
             componentInEditMode.style = style;
