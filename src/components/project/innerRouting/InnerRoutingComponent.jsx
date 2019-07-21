@@ -16,7 +16,10 @@ class InnerRoutingComponent extends Component {
         isLoading: true,
         pages: [],
         newPageName: '',
-        newPageRoute: ''
+        newPageRoute: '',
+
+        newPageNameError: '',
+        newPageRouteError: ''
     }
     componentDidMount() {
         const token = localStorage.getItem('token');
@@ -80,10 +83,26 @@ class InnerRoutingComponent extends Component {
     }
 
     addNewPage = () => {
+        const name = this.state.newPageName;
+        const route = this.state.newPageRoute;
+        if(!name) {
+            this.setState({ newPageNameError: 'Please provide a name for the page' });
+            return;
+        }
+
+        this.setState({ newPageNameError: '' });
+
+        if(!route) {
+            this.setState({ newPageRouteError: 'Please provide a valid route' });
+            return;
+        }
+
+        this.setState({ newPageRouteError: '' });
+
         const page = {
             id: uuid.v1(),
-            route: this.state.newPageRoute,
-            name: this.state.newPageName,
+            route,
+            name,
             elements: []
         };
 
@@ -98,6 +117,13 @@ class InnerRoutingComponent extends Component {
         });
     }
 
+    isValidClass = (errorField) => {
+        debugger;
+        if(this.state[errorField]) {
+            return 'routing-form-input-invalid';
+        }
+    }
+
     render() {
         if(this.state.isLoading) {
             return (<LoadingComponent message='Fetching project'/>);
@@ -106,26 +132,47 @@ class InnerRoutingComponent extends Component {
         return (
             <div className='inner-routing-container'>
                 <div className='container'>
-                <div className='center-container'>
-                    <input
-                        value={this.state.newPageName}
-                        onChange={(event) => this.updateNewPageValue('newPageName', event.target.value)}
-                        className='from-input'
-                        placeholder='Page name'/>
-                    <input
-                        value={this.state.newPageRoute}
-                        onChange={(event) => this.updateNewPageValue('newPageRoute', event.target.value)}
-                        className='from-input'
-                        placeholder='Page route'/>
-                    <ButtonComponent
-                        rounded={false}
-                        type='success'
-                        onClick={this.addNewPage}
-                        className='from-input'>
-                            Create page
-                    </ButtonComponent>
-                </div>
-                    
+                    <div className='center-container routing-form-container'>
+                        <div className='routing-form-input-container'>
+                            <input
+                                value={this.state.newPageName}
+                                onChange={(event) => this.updateNewPageValue('newPageName', event.target.value)}
+                                className={'routing-form-input ' + this.isValidClass('newPageNameError')}
+                                placeholder='Page name'/>
+                            {
+                                this.state.newPageNameError ? (
+                                    <div className='routing-form-input-error'>
+                                        {this.state.newPageNameError}
+                                    </div>
+                                ) : (
+                                    <div></div>
+                                )
+                            }
+                        </div>
+                        <div className='routing-form-input-container'>
+                            <input
+                                value={this.state.newPageRoute}
+                                onChange={(event) => this.updateNewPageValue('newPageRoute', event.target.value)}
+                                className={'routing-form-input ' + this.isValidClass('newPageRouteError')}
+                                placeholder='Page route'/>
+                            {
+                                this.state.newPageRouteError ? (
+                                    <div className='routing-form-input-error'>
+                                        {this.state.newPageRouteError}
+                                    </div>
+                                ) : (
+                                    <div></div>
+                                )
+                            }
+                        </div>
+                        <ButtonComponent
+                            rounded={false}
+                            type='success'
+                            onClick={this.addNewPage}
+                            className='routing-from-button'>
+                                Create page
+                        </ButtonComponent>
+                    </div>
                 </div>
                 <div className='routing-pages-styling-container'>
                     <ul className='routing-page-styling-ul'>
