@@ -18,7 +18,7 @@ class LoginComponent extends Component {
     }
     handleEnterPressed = (key) => {
         if (key === "Enter") {
-            this.login()
+            this.login();
         }
     }
 
@@ -66,7 +66,6 @@ class LoginComponent extends Component {
                             type='password'
                             placeholder='Password'
                             onChange={(event) => this.handleInputChange(event.target.value, 'password')}
-
                             value={this.state.password}/>
                         <ButtonComponent
                             title='Log in'

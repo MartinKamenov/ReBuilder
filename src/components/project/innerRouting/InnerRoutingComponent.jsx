@@ -80,7 +80,7 @@ class InnerRoutingComponent extends Component {
     }
     handleEnterPressed = (key) => {
         if (key === "Enter") {
-            this.addNewPage()
+            this.addNewPage();
         }
     }
 

@@ -23,7 +23,7 @@ class RegisterComponent extends Component {
 
     handleEnterPressed = (key) => {
         if (key === "Enter") {
-            this.register()
+            this.register();
         }
     }
     
