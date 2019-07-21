@@ -85,14 +85,14 @@ class InnerRoutingComponent extends Component {
     addNewPage = () => {
         const name = this.state.newPageName;
         const route = this.state.newPageRoute;
-        if(!name) {
+        if(!this.isValid('newPageName')) {
             this.setState({ newPageNameError: 'Please provide a name for the page' });
             return;
         }
 
         this.setState({ newPageNameError: '' });
 
-        if(!route) {
+        if(!this.isValid('newPageRoute')) {
             this.setState({ newPageRouteError: 'Please provide a valid route' });
             return;
         }
@@ -117,8 +117,23 @@ class InnerRoutingComponent extends Component {
         });
     }
 
+    isValid = (field) => {
+        const value = this.state[field];
+        switch(field) {
+            case 'newPageName':
+                if(!value || !value.match("^[A-z0-9]+$")) {
+                    return false;
+                }
+                return true;
+            case 'newPageRoute':
+                if(!value || !value.match("^[A-z0-9/]+$") || !value.startsWith('/')) {
+                    return false;
+                }
+                return true;
+        }
+    }
+
     isValidClass = (errorField) => {
-        debugger;
         if(this.state[errorField]) {
             return 'routing-form-input-invalid';
         }
