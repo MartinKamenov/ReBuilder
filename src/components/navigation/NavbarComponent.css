@@ -29,6 +29,7 @@ a.main-header {
 }
 .main-navbar.sticky.navbar.navbar-inverse{
     margin-bottom: 0px;
+    border-radius: unset;
 }
 .navbar-nav {
     margin: unset!important;

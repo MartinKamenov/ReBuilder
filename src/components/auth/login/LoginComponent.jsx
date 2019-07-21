@@ -16,6 +16,11 @@ class LoginComponent extends Component {
     handleInputChange = (value, field) => {
         this.setState({[field]: value});
     }
+    handleEnterPressed = (key) => {
+        if (key === "Enter") {
+            this.login();
+        }
+    }
 
     componentWillReceiveProps(props) {
         if(props.user.id) {
@@ -49,7 +54,7 @@ class LoginComponent extends Component {
             <div className='auth-container'>
                 <div className='login-container'>
                     <h3 className='auth-header'>Sign in</h3>
-                    <div>
+                    <div onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                         <input
                             className='form-input'
                             type='text'
