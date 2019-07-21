@@ -7,6 +7,11 @@ import { componentTypes } from '../../components/componentTypes';
 import ButtonComponent from '../../../common/ButtonComponent';
 import { Resizable } from 're-resizable';
 
+const initialSizes = {
+    width: '0px',
+    height: '0px'
+};
+
 const DroppedComponent = ({
         droppedComponent,
         handleComponentValueChange,
@@ -17,12 +22,14 @@ const DroppedComponent = ({
         return (
             <div className='edit-component-container'>
                 <Resizable
-                    onResizeStop={(event, direction, refToElement, delta) => {
+                    onResizeStart={(event, direction, refToElement, delta) => {
+                        initialSizes.width = parseInt(droppedComponent.style.width, 10);
+                        initialSizes.height = parseInt(droppedComponent.style.height, 10);
+                    }}
+                    onResize={(event, direction, refToElement, delta) => {
                         const { width, height } = delta;
-                        const previousWidth = parseInt(droppedComponent.style.width, 10);
-                        const previousHeight = parseInt(droppedComponent.style.height, 10);
-                        const newWidth = previousWidth + width;
-                        const newHeight = previousHeight + height;
+                        const newWidth = initialSizes.width + width;
+                        const newHeight = initialSizes.height + height;
                         handleComponentValueChange(newWidth + 'px', 'style.width');
                         handleComponentValueChange(newHeight + 'px', 'style.height');
                     }}
