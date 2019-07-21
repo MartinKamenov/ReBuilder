@@ -34,6 +34,12 @@ class NewProjectPageComponent extends Component {
         this.setState({ [field]: text });
     }
 
+    handleEnterPressed = (key) => {
+        if (key === "Enter") {
+            this.handleCreateProject()
+        }
+    }
+
     handleCreateProject = () => {
 
         if(!this.state.name || !this.state.projectImage || !this.props) {
@@ -51,7 +57,7 @@ class NewProjectPageComponent extends Component {
         }
 
         return (
-            <div className='center-container'>
+            <div className='center-container' onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                 <div>
                     <label className='project-page-label'>Project name</label>
                     <input

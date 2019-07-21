@@ -54,8 +54,7 @@ class LoginComponent extends Component {
             <div className='auth-container'>
                 <div className='login-container'>
                     <h3 className='auth-header'>Sign in</h3>
-                    <div
-                        onKeyDown={(event) => this.handleEnterPressed(event.key)}>
+                    <div onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                         <input
                             className='form-input'
                             type='text'
@@ -67,6 +66,7 @@ class LoginComponent extends Component {
                             type='password'
                             placeholder='Password'
                             onChange={(event) => this.handleInputChange(event.target.value, 'password')}
+
                             value={this.state.password}/>
                         <ButtonComponent
                             title='Log in'

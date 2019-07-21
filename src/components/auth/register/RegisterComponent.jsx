@@ -21,6 +21,11 @@ class RegisterComponent extends Component {
         this.setState({[field]: value});
     }
 
+    handleEnterPressed = (key) => {
+        if (key === "Enter") {
+            this.register()
+        }
+    }
     
     register = () => {
         if(!this.state.username ||
@@ -60,7 +65,7 @@ class RegisterComponent extends Component {
             <div className='auth-container'>
                 <div className='register-container'>
                     <h3 className='auth-header'>Sign up</h3>
-                    <div>
+                    <div onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                         <input
                             className='form-input'
                             type='email'
