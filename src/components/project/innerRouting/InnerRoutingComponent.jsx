@@ -86,14 +86,16 @@ class InnerRoutingComponent extends Component {
         const name = this.state.newPageName;
         const route = this.state.newPageRoute;
         if(!this.isValid('newPageName')) {
-            this.setState({ newPageNameError: 'Please provide a name for the page' });
+            this.setState({ 
+                newPageNameError: 'Please provide valid name only using symbols and numbers.'
+            });
             return;
         }
 
         this.setState({ newPageNameError: '' });
 
         if(!this.isValid('newPageRoute')) {
-            this.setState({ newPageRouteError: 'Please provide a valid route' });
+            this.setState({ newPageRouteError: `Please provide valid route, which starts with "/" symbol.` });
             return;
         }
 
@@ -112,7 +114,7 @@ class InnerRoutingComponent extends Component {
         const token = localStorage.getItem('token');
 
         this.props.actions.updateProject(this.props.project.id, pages, token);
-        this.setState({ pages }, () => {
+        this.setState({ pages, newPageName: '', newPageRoute: '' }, () => {
             this.executeStylesScript();
         });
     }
@@ -121,12 +123,14 @@ class InnerRoutingComponent extends Component {
         const value = this.state[field];
         switch(field) {
             case 'newPageName':
-                if(!value || !value.match("^[A-z0-9]+$")) {
+                if(!value || !value.match("^[A-z0-9]+$") ||
+                    this.state.pages.includes((p => p[field] === value))) {
                     return false;
                 }
                 return true;
             case 'newPageRoute':
-                if(!value || !value.match("^[A-z0-9/]+$") || !value.startsWith('/')) {
+                if(!value || !value.match("^[A-z0-9/]+$") || !value.startsWith('/') ||
+                    this.state.pages.includes((p => p[field] === value))) {
                     return false;
                 }
                 return true;
