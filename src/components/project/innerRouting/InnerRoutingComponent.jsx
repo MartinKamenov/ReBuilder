@@ -81,6 +81,11 @@ class InnerRoutingComponent extends Component {
         const history = this.props.history;
         history.push(`/projects/${project.id}/${pageId}`);
     }
+    handleEnterPressed = (key) => {
+        if (key === "Enter") {
+            this.addNewPage();
+        }
+    }
 
     addNewPage = () => {
         const name = this.state.newPageName;
@@ -151,7 +156,7 @@ class InnerRoutingComponent extends Component {
         return (
             <div className='inner-routing-container'>
                 <div className='container'>
-                    <div className='center-container routing-form-container'>
+                    <div className='center-container routing-form-container'  onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                         <div className='routing-form-input-container'>
                             <input
                                 value={this.state.newPageName}

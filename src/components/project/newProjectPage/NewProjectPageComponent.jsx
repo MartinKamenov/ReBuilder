@@ -34,14 +34,17 @@ class NewProjectPageComponent extends Component {
         this.setState({ [field]: text });
     }
 
-    handleCreateProject = () => {
+    handleEnterPressed = (key) => {
+        if (key === "Enter") {
+            this.handleCreateProject();
+        }
+    }
 
+    handleCreateProject = () => {
         if(!this.state.name || !this.state.projectImage || !this.props) {
             return;
         }
-        
         this.setState({ isLoading: true, isCreated: true });
-
         this.props.actions.createProject(this.state.name, this.state.projectImage, this.props.user.token);
     }
 
@@ -51,7 +54,7 @@ class NewProjectPageComponent extends Component {
         }
 
         return (
-            <div className='center-container'>
+            <div className='center-container' onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                 <div>
                     <label className='project-page-label'>Project name</label>
                     <input
@@ -59,7 +62,6 @@ class NewProjectPageComponent extends Component {
                         placeholder='Add name here'
                         value={this.state.name}
                         onChange={(event) => this.handleChangeInput(event.target.value, 'name')}/>
-                    
                 </div>
                 <div>
                     <label className='project-page-label'>Project image</label>

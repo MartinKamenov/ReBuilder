@@ -5,6 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { componentTypes } from '../../components/componentTypes';
 import ButtonComponent from '../../../common/ButtonComponent';
+import { Resizable } from 're-resizable';
+
+const initialSizes = {
+    width: '0px',
+    height: '0px'
+};
 
 const DroppedComponent = ({
         droppedComponent,
@@ -15,6 +21,22 @@ const DroppedComponent = ({
     if(droppedComponent.isInEditMode) {
         return (
             <div className='edit-component-container'>
+                <Resizable
+                    onResizeStart={(event, direction, refToElement, delta) => {
+                        initialSizes.width = parseInt(droppedComponent.style.width, 10);
+                        initialSizes.height = parseInt(droppedComponent.style.height, 10);
+                    }}
+                    onResize={(event, direction, refToElement, delta) => {
+                        const { width, height } = delta;
+                        const newWidth = initialSizes.width + width;
+                        const newHeight = initialSizes.height + height;
+                        handleComponentValueChange(newWidth + 'px', 'style.width');
+                        handleComponentValueChange(newHeight + 'px', 'style.height');
+                    }}
+                    size={{
+                        width: droppedComponent.style.width,
+                        height: droppedComponent.style.height 
+                        }}>
                 {
                     (() => {
                         let element;
@@ -32,19 +54,20 @@ const DroppedComponent = ({
                                 const copyOfStyles = Object.assign({}, droppedComponent.style);
                                 copyOfStyles.resize = 'none';
                                 element = (
-                                    <textarea
-                                        style={copyOfStyles}
-                                        className='edit-input'
-                                        value={droppedComponent.innerText}
-                                        onChange={(event) => 
-                                            handleComponentValueChange(event.target.value, 'innerText')}>
-                                    </textarea>
+                                        <textarea
+                                            style={copyOfStyles}
+                                            className='edit-input'
+                                            value={droppedComponent.innerText}
+                                            onChange={(event) => 
+                                                handleComponentValueChange(event.target.value, 'innerText')}>
+                                        </textarea>
                                 );
                                 break;
                         }
                         return element;
                     })()
                 }
+                </Resizable>
                 
                 <ButtonComponent
                     type='success'
@@ -69,12 +92,12 @@ const DroppedComponent = ({
                 switch (droppedComponent.name) {
                     case componentTypes.Header:
                         component = (
-                        <h1
-                            style={droppedComponent.style}
-                            onClick={() => handleChangeEditMode(droppedComponent.index)}
-                            className='droped-component'>
-                            {droppedComponent.innerText}
-                        </h1>)
+                            <h1
+                                style={droppedComponent.style}
+                                onClick={() => handleChangeEditMode(droppedComponent.index)}
+                                className='droped-component'>
+                                {droppedComponent.innerText}
+                            </h1>)
                         break;
                     case componentTypes.Text:
                         component = (
