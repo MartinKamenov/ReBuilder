@@ -92,7 +92,7 @@ class InnerRoutingComponent extends Component {
         const route = this.state.newPageRoute;
         if(!this.isValid('newPageName')) {
             this.setState({ 
-                newPageNameError: 'Please provide valid name only using symbols and numbers.'
+                newPageNameError: 'Please provide unique name only using symbols and numbers.'
             });
             return;
         }
@@ -100,7 +100,7 @@ class InnerRoutingComponent extends Component {
         this.setState({ newPageNameError: '' });
 
         if(!this.isValid('newPageRoute')) {
-            this.setState({ newPageRouteError: `Please provide valid route, which starts with "/" symbol.` });
+            this.setState({ newPageRouteError: `Please provide unique route, which starts with "/" symbol.` });
             return;
         }
 
@@ -126,16 +126,17 @@ class InnerRoutingComponent extends Component {
 
     isValid = (field) => {
         const value = this.state[field];
+        debugger;
         switch(field) {
             case 'newPageName':
                 if(!value || !value.match("^[A-z0-9]+$") ||
-                    this.state.pages.includes((p => p[field] === value))) {
+                    this.state.pages.find((p => p.name.toLowerCase() === value.toLowerCase()))) {
                     return false;
                 }
                 return true;
             case 'newPageRoute':
                 if(!value || !value.match("^[A-z0-9/]+$") || !value.startsWith('/') ||
-                    this.state.pages.includes((p => p[field] === value))) {
+                    this.state.pages.find((p => p.route.toLowerCase() === value.toLowerCase()))) {
                     return false;
                 }
                 return true;

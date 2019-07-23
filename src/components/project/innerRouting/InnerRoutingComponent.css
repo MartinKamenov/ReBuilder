@@ -58,7 +58,10 @@
 
 .routing-form-input-error {
     color: red;
+    background-color: #ffffffaa;
     font-size: 10px;
+    max-width: 150px;
+    margin: auto;
 }
 
 .routing-form-input-invalid {
