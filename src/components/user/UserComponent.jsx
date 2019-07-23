@@ -8,7 +8,6 @@ import { faUndo, faSave } from '@fortawesome/free-solid-svg-icons';
 import './UserComponent.css';
 import ButtonComponent from '../common/ButtonComponent';
 import apiService from '../../service/api.service';
-import { async } from 'q';
 import LoadingComponent from '../common/LoadingComponent';
 
 class UserComponent extends Component {
@@ -63,7 +62,7 @@ class UserComponent extends Component {
             <div className='center-container user-container'>
                 <img
                     className='user-component-user-image'
-                    alt='user image'
+                    alt='User'
                     src={this.state.imageUrl}/>
                 <input onChange={this.changeImage} type='file' name='pic' accept='image/*'/>
                 <h3>

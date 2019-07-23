@@ -139,6 +139,8 @@ class InnerRoutingComponent extends Component {
                     return false;
                 }
                 return true;
+            default:
+                return false;
         }
     }
 
