@@ -7,8 +7,16 @@ import { faUndo } from '@fortawesome/free-solid-svg-icons';
 
 import './UserComponent.css';
 import ButtonComponent from '../common/ButtonComponent';
+import apiService from '../../service/api.service';
 
 class UserComponent extends Component {
+    state = {
+        imageUrl: ''
+    }
+
+    componentDidMount() {
+        this.setState({ imageUrl: this.props.user.imageUrl });
+    }
     componentWillReceiveProps(props) {
         const token = localStorage.getItem('token');
         if(!props.user.id && !token) {
@@ -20,6 +28,24 @@ class UserComponent extends Component {
     logout = () => {
         this.props.actions.logout();
     }
+
+    changeImage = (event) => {
+        debugger;
+        const target = event.target;
+        if (!target.files || !target.files[0]) {
+            return;
+        }
+
+        const file = target.files[0];
+        const formData = new FormData();
+        formData.append('image', file, file.name);
+
+        apiService.uploadImage(formData)
+            .then(res => {
+                debugger;
+                this.setState({ imageUrl: `https://api.imgur.com/3/image/${res.data.data.id}` });
+            });
+    }
     render() {
         const user = this.props.user;
         return (
@@ -27,7 +53,8 @@ class UserComponent extends Component {
                 <img
                     className='user-component-user-image'
                     alt='user image'
-                    src={user.imageUrl}/>
+                    src={this.state.imageUrl}/>
+                <input onChange={this.changeImage} type='file' name='pic' accept='image/*'/>
                 <h3>
                     {user.username}
                 </h3>
