@@ -16,7 +16,10 @@ class InnerRoutingComponent extends Component {
         isLoading: true,
         pages: [],
         newPageName: '',
-        newPageRoute: ''
+        newPageRoute: '',
+
+        newPageNameError: '',
+        newPageRouteError: ''
     }
     componentDidMount() {
         const token = localStorage.getItem('token');
@@ -85,10 +88,28 @@ class InnerRoutingComponent extends Component {
     }
 
     addNewPage = () => {
+        const name = this.state.newPageName;
+        const route = this.state.newPageRoute;
+        if(!this.isValid('newPageName')) {
+            this.setState({ 
+                newPageNameError: 'Please provide unique name only using symbols and numbers.'
+            });
+            return;
+        }
+
+        this.setState({ newPageNameError: '' });
+
+        if(!this.isValid('newPageRoute')) {
+            this.setState({ newPageRouteError: `Please provide unique route, which starts with "/" symbol.` });
+            return;
+        }
+
+        this.setState({ newPageRouteError: '' });
+
         const page = {
             id: uuid.v1(),
-            route: this.state.newPageRoute,
-            name: this.state.newPageName,
+            route,
+            name,
             elements: []
         };
 
@@ -98,9 +119,34 @@ class InnerRoutingComponent extends Component {
         const token = localStorage.getItem('token');
 
         this.props.actions.updateProject(this.props.project.id, pages, token);
-        this.setState({ pages }, () => {
+        this.setState({ pages, newPageName: '', newPageRoute: '' }, () => {
             this.executeStylesScript();
         });
+    }
+
+    isValid = (field) => {
+        const value = this.state[field];
+        debugger;
+        switch(field) {
+            case 'newPageName':
+                if(!value || !value.match("^[A-z0-9]+$") ||
+                    this.state.pages.find((p => p.name.toLowerCase() === value.toLowerCase()))) {
+                    return false;
+                }
+                return true;
+            case 'newPageRoute':
+                if(!value || !value.match("^[A-z0-9/]+$") || !value.startsWith('/') ||
+                    this.state.pages.find((p => p.route.toLowerCase() === value.toLowerCase()))) {
+                    return false;
+                }
+                return true;
+        }
+    }
+
+    isValidClass = (errorField) => {
+        if(this.state[errorField]) {
+            return 'routing-form-input-invalid';
+        }
     }
 
     render() {
@@ -111,26 +157,47 @@ class InnerRoutingComponent extends Component {
         return (
             <div className='inner-routing-container'>
                 <div className='container'>
-                <div className='center-container' onKeyDown={(event) => this.handleEnterPressed(event.key)}>
-                    <input
-                        value={this.state.newPageName}
-                        onChange={(event) => this.updateNewPageValue('newPageName', event.target.value)}
-                        className='from-input'
-                        placeholder='Page name'/>
-                    <input
-                        value={this.state.newPageRoute}
-                        onChange={(event) => this.updateNewPageValue('newPageRoute', event.target.value)}
-                        className='from-input'
-                        placeholder='Page route'/>
-                    <ButtonComponent
-                        rounded={false}
-                        type='success'
-                        onClick={this.addNewPage}
-                        className='from-input'>
-                            Create page
-                    </ButtonComponent>
-                </div>
-                    
+                    <div className='center-container routing-form-container'  onKeyDown={(event) => this.handleEnterPressed(event.key)}>
+                        <div className='routing-form-input-container'>
+                            <input
+                                value={this.state.newPageName}
+                                onChange={(event) => this.updateNewPageValue('newPageName', event.target.value)}
+                                className={'routing-form-input ' + this.isValidClass('newPageNameError')}
+                                placeholder='Page name'/>
+                            {
+                                this.state.newPageNameError ? (
+                                    <div className='routing-form-input-error'>
+                                        {this.state.newPageNameError}
+                                    </div>
+                                ) : (
+                                    <div></div>
+                                )
+                            }
+                        </div>
+                        <div className='routing-form-input-container'>
+                            <input
+                                value={this.state.newPageRoute}
+                                onChange={(event) => this.updateNewPageValue('newPageRoute', event.target.value)}
+                                className={'routing-form-input ' + this.isValidClass('newPageRouteError')}
+                                placeholder='Page route'/>
+                            {
+                                this.state.newPageRouteError ? (
+                                    <div className='routing-form-input-error'>
+                                        {this.state.newPageRouteError}
+                                    </div>
+                                ) : (
+                                    <div></div>
+                                )
+                            }
+                        </div>
+                        <ButtonComponent
+                            rounded={false}
+                            type='success'
+                            onClick={this.addNewPage}
+                            className='routing-from-button'>
+                                Create page
+                        </ButtonComponent>
+                    </div>
                 </div>
                 <div className='routing-pages-styling-container'>
                     <ul className='routing-page-styling-ul'>
