@@ -8,6 +8,7 @@ import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import './UserComponent.css';
 import ButtonComponent from '../common/ButtonComponent';
 import apiService from '../../service/api.service';
+import { async } from 'q';
 
 class UserComponent extends Component {
     state = {
@@ -29,7 +30,7 @@ class UserComponent extends Component {
         this.props.actions.logout();
     }
 
-    changeImage = (event) => {
+    changeImage = async(event) => {
         debugger;
         const target = event.target;
         if (!target.files || !target.files[0]) {
@@ -40,11 +41,12 @@ class UserComponent extends Component {
         const formData = new FormData();
         formData.append('image', file, file.name);
 
-        apiService.uploadImage(formData)
-            .then(res => {
-                debugger;
-                this.setState({ imageUrl: `https://api.imgur.com/3/image/${res.data.data.id}` });
-            });
+        try {
+            const res = await apiService.uploadImage(formData);
+            this.setState({ imageUrl: res.data.data.link });
+        } catch(error) {
+            console.log(error);
+        }
     }
     render() {
         const user = this.props.user;

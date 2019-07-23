@@ -104,7 +104,7 @@ const apiService = {
             return;
         }
 
-
+        const clientId = '778d0d89a9bcabc';
         const authenticationObject = { 'headers': {'Authorization': `Client-ID ${clientId}`}};
         return axios.post('https://api.imgur.com/3/image/', formData, authenticationObject);
     }
