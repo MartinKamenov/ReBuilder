@@ -75,7 +75,7 @@ class NewProjectPageComponent extends Component {
             <div className='center-container' onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                 <img
                     className='new-project-image'
-                    alt='Project image'
+                    alt='Project'
                     src={this.state.imageUrl}/>
                 <input
                     type='file'
