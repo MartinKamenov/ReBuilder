@@ -48,9 +48,11 @@ class UserComponent extends Component {
             const res = await apiService.uploadImage(formData);
             this.setState({ imageUrl: res.data.data.link, isLoading: false });
         } catch(error) {
+            this.setState({ isLoading: false });
             console.log(error);
         }
     }
+
     render() {
         if(this.state.isLoading) {
             return <LoadingComponent message='Uploading image'/>;
