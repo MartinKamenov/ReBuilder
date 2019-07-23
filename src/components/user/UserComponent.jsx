@@ -3,16 +3,18 @@ import * as authenticationActions from '../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faUndo, faSave } from '@fortawesome/free-solid-svg-icons';
 
 import './UserComponent.css';
 import ButtonComponent from '../common/ButtonComponent';
 import apiService from '../../service/api.service';
 import { async } from 'q';
+import LoadingComponent from '../common/LoadingComponent';
 
 class UserComponent extends Component {
     state = {
-        imageUrl: ''
+        imageUrl: '',
+        isLoading: false
     }
 
     componentDidMount() {
@@ -31,11 +33,12 @@ class UserComponent extends Component {
     }
 
     changeImage = async(event) => {
-        debugger;
         const target = event.target;
         if (!target.files || !target.files[0]) {
             return;
         }
+
+        this.setState({ isLoading: true });
 
         const file = target.files[0];
         const formData = new FormData();
@@ -43,12 +46,16 @@ class UserComponent extends Component {
 
         try {
             const res = await apiService.uploadImage(formData);
-            this.setState({ imageUrl: res.data.data.link });
+            this.setState({ imageUrl: res.data.data.link, isLoading: false });
         } catch(error) {
             console.log(error);
         }
     }
     render() {
+        if(this.state.isLoading) {
+            return <LoadingComponent message='Uploading image'/>;
+        }
+
         const user = this.props.user;
         return (
             <div className='center-container user-container'>
@@ -60,6 +67,13 @@ class UserComponent extends Component {
                 <h3>
                     {user.username}
                 </h3>
+                <ButtonComponent
+                    className='logout-btn'
+                    type='success'
+                    onClick={this.logout}>
+                    <FontAwesomeIcon className='action-icon' icon={faSave} />
+                    Save changes
+                </ButtonComponent>
                 <ButtonComponent
                     className='logout-btn'
                     type='danger'
