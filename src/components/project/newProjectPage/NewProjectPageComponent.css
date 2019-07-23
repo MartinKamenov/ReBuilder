@@ -6,6 +6,16 @@
     width: 150px;
 }
 
+.image-input {
+    margin: auto;
+}
+
 .project-page-button {
     width: 300px;
+}
+
+.new-project-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }

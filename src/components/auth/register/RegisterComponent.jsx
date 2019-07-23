@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import './RegisterComponent.css';
 import ButtonComponent from '../../common/ButtonComponent';
-
+import apiService from '../../../service/api.service';
 
 class RegisterComponent extends Component {
     state = {
@@ -13,7 +13,7 @@ class RegisterComponent extends Component {
         username: '',
         password: '',
         passwordRepeat: '',
-        imageUrl: '',
+        imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnUMov053v0hONBpUNyQoint83KzTEMW_vXxNWHOEBbaqATtTq',
         isLoading: false
     }
 
@@ -48,6 +48,24 @@ class RegisterComponent extends Component {
             this.state.email,
             this.state.imageUrl
         );
+    }
+
+    changeImage = async(event) => {
+        const target = event.target;
+        if (!target.files || !target.files[0]) {
+            return;
+        }
+
+        const file = target.files[0];
+        const formData = new FormData();
+        formData.append('image', file, file.name);
+
+        try {
+            const res = await apiService.uploadImage(formData);
+            this.setState({ imageUrl: res.data.data.link });
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     render() {
@@ -94,13 +112,6 @@ class RegisterComponent extends Component {
                             onChange={(event) => 
                                 this.handleInputChange(event.target.value, 'passwordRepeat')}
                             value={this.state.passwordRepeat}/>
-                        <input
-                            className='form-input'
-                            type='text'
-                            placeholder='Image url'
-                            onChange={(event) => 
-                                this.handleInputChange(event.target.value, 'imageUrl')}
-                            value={this.state.imageUrl}/>
                         <ButtonComponent
                             title='Sign up'
                             className='submit-btn'
