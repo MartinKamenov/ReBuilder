@@ -223,8 +223,10 @@ class EditProjectComponent extends Component {
 
         const firstIndex = droppedComponents.findIndex((c) => c.index === dropIndex);
         const secondIndex = droppedComponents.findIndex((c) => c.index === draggedComponentIndex);
+        if(firstIndex === -1 || secondIndex === -1) {
+            return;
+        }
 
-        debugger;
         const swap = droppedComponents[firstIndex];
         droppedComponents[firstIndex] = droppedComponents[secondIndex];
         droppedComponents[secondIndex] = swap;
