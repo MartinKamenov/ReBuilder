@@ -19,7 +19,7 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         case componentTypes.Header:
             component = (
                 <h1
-                    id={droppedComponent.id}
+                    id={droppedComponent.index}
                     style={droppedComponent.style}
                     onClick={() => handleChangeEditMode(droppedComponent.index)}
                     className='droped-component'>
@@ -29,7 +29,7 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         case componentTypes.Text:
             component = (
             <div
-                id={droppedComponent.id}
+                id={droppedComponent.index}
                 style={droppedComponent.style}
                 onClick={() => handleChangeEditMode(droppedComponent.index)}
                 className='droped-component'>
@@ -39,7 +39,7 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         case componentTypes.Image:
             component = (
                 <img
-                    id={droppedComponent.id}
+                    id={droppedComponent.index}
                     alt='component'
                     src={droppedComponent.src}
                     style={droppedComponent.style}
@@ -49,7 +49,7 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         case componentTypes.RoutingLink:
             component = (
                 <a
-                    id={droppedComponent.id}
+                    id={droppedComponent.index}
                     href={droppedComponent.to}
                     alt='component'
                     style={droppedComponent.style}
@@ -63,7 +63,7 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         default:
             component = (
             <div
-                id={droppedComponent.id}
+                id={droppedComponent.index}
                 style={droppedComponent.style}
                 onClick={() => handleChangeEditMode(droppedComponent.index)}
                 className='droped-component'>
@@ -164,7 +164,7 @@ DroppedComponent.propTypes = {
         name: PropTypes.string.isRequired,
         innerText: PropTypes.string.isRequired,
         isInEditMode: PropTypes.bool.isRequired,
-        index: PropTypes.number.isRequired
+        index: PropTypes.string.isRequired
     }).isRequired,
     handleComponentValueChange: PropTypes.func.isRequired,
     handleForceExitEditMode: PropTypes.func.isRequired

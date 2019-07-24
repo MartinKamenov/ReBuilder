@@ -26,7 +26,7 @@ class EditProjectComponent extends Component {
         draggableComponents: componentObjects,
         droppedComponents: [],
         previousComponent: {},
-        draggedComponent: {},
+        draggedComponentIndex: '',
         isInitialyLoaded: true,
         isLoading: true
     }
@@ -209,13 +209,24 @@ class EditProjectComponent extends Component {
     }
 
     componentDragStart = (index) => {
-        const draggedComponent = this.state.droppedComponents
-            .find((d) => d.index === index);
-        this.setState({ draggedComponent });
+        this.setState({ draggedComponentIndex: index });
     }
 
     rearangeComponents = (event) => {
-        console.log(event.nativeEvent);
+        const dropIndex = event.nativeEvent.target.id;
+        const draggedComponentIndex = this.state.index;
+        const droppedComponents = [...this.state.droppedComponents];
+
+        const firstIndex = droppedComponents.findIndex((c) => c.index === dropIndex);
+        const secondIndex = droppedComponents.findIndex((c) => c.index === draggedComponentIndex);
+
+        
+
+        const swap = droppedComponents[firstIndex];
+        droppedComponents[firstIndex] = droppedComponents[secondIndex];
+        droppedComponents[secondIndex] = swap;
+
+        this.setState({ droppedComponents });
     }
 
     render() {
