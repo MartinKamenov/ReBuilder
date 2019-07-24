@@ -214,14 +214,17 @@ class EditProjectComponent extends Component {
 
     rearangeComponents = (event) => {
         const dropIndex = event.nativeEvent.target.id;
-        const draggedComponentIndex = this.state.index;
+        const draggedComponentIndex = this.state.draggedComponentIndex;
+        if(dropIndex === draggedComponentIndex) {
+            return;
+        }
+
         const droppedComponents = [...this.state.droppedComponents];
 
         const firstIndex = droppedComponents.findIndex((c) => c.index === dropIndex);
         const secondIndex = droppedComponents.findIndex((c) => c.index === draggedComponentIndex);
 
-        
-
+        debugger;
         const swap = droppedComponents[firstIndex];
         droppedComponents[firstIndex] = droppedComponents[secondIndex];
         droppedComponents[secondIndex] = swap;
