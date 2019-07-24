@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { componentTypes } from '../../components/componentTypes';
 import ButtonComponent from '../../../common/ButtonComponent';
+import { Draggable } from 'react-drag-and-drop';
 import { Resizable } from 're-resizable';
 
 const initialSizes = {
@@ -12,11 +13,75 @@ const initialSizes = {
     height: '0px'
 };
 
+const getComponent = (droppedComponent, handleChangeEditMode) => {
+    let component = null;
+    switch (droppedComponent.name) {
+        case componentTypes.Header:
+            component = (
+                <h1
+                    id={droppedComponent.index}
+                    style={droppedComponent.style}
+                    onClick={() => handleChangeEditMode(droppedComponent.index)}
+                    className='droped-component'>
+                    {droppedComponent.innerText}
+                </h1>)
+            break;
+        case componentTypes.Text:
+            component = (
+            <div
+                id={droppedComponent.index}
+                style={droppedComponent.style}
+                onClick={() => handleChangeEditMode(droppedComponent.index)}
+                className='droped-component'>
+                {droppedComponent.innerText}
+            </div>);
+            break;
+        case componentTypes.Image:
+            component = (
+                <img
+                    id={droppedComponent.index}
+                    alt='component'
+                    src={droppedComponent.src}
+                    style={droppedComponent.style}
+                    onClick={() => handleChangeEditMode(droppedComponent.index)}
+                    className='droped-component'/>);
+            break;
+        case componentTypes.RoutingLink:
+            component = (
+                <a
+                    id={droppedComponent.index}
+                    href={droppedComponent.to}
+                    alt='component'
+                    style={droppedComponent.style}
+                    onClick={(e) => {
+                        e.preventDefault(); 
+                        handleChangeEditMode(droppedComponent.index)}}
+                    className='droped-component'>
+                    {droppedComponent.innerText}
+                </a>);
+            break;
+        default:
+            component = (
+            <div
+                id={droppedComponent.index}
+                style={droppedComponent.style}
+                onClick={() => handleChangeEditMode(droppedComponent.index)}
+                className='droped-component'>
+                {droppedComponent.innerText}
+            </div>);
+            break;
+    }
+
+    return component;
+};
+
 const DroppedComponent = ({
         droppedComponent,
         handleComponentValueChange,
         handleChangeEditMode,
-        handleForceExitEditMode
+        handleForceExitEditMode,
+        componentDragStart,
+        rearangeComponents
     }) => {
     if(droppedComponent.isInEditMode) {
         return (
@@ -84,67 +149,13 @@ const DroppedComponent = ({
             </div>
         );
     }
+    const component = getComponent(droppedComponent, handleChangeEditMode);
     return (
-        <div>
-        {
-            (() => {
-                let component = null;
-                switch (droppedComponent.name) {
-                    case componentTypes.Header:
-                        component = (
-                            <h1
-                                style={droppedComponent.style}
-                                onClick={() => handleChangeEditMode(droppedComponent.index)}
-                                className='droped-component'>
-                                {droppedComponent.innerText}
-                            </h1>)
-                        break;
-                    case componentTypes.Text:
-                        component = (
-                        <div
-                            style={droppedComponent.style}
-                            onClick={() => handleChangeEditMode(droppedComponent.index)}
-                            className='droped-component'>
-                            {droppedComponent.innerText}
-                        </div>);
-                        break;
-                    case componentTypes.Image:
-                        component = (
-                            <img
-                                alt='component'
-                                src={droppedComponent.src}
-                                style={droppedComponent.style}
-                                onClick={() => handleChangeEditMode(droppedComponent.index)}
-                                className='droped-component'/>);
-                        break;
-                    case componentTypes.RoutingLink:
-                        component = (
-                            <a
-                                href={droppedComponent.to}
-                                alt='component'
-                                style={droppedComponent.style}
-                                onClick={(e) => {
-                                    e.preventDefault(); 
-                                    handleChangeEditMode(droppedComponent.index)}}
-                                className='droped-component'>
-                                {droppedComponent.innerText}
-                            </a>);
-                        break;
-                    default:
-                        component = (
-                        <div
-                            style={droppedComponent.style}
-                            onClick={() => handleChangeEditMode(droppedComponent.index)}
-                            className='droped-component'>
-                            {droppedComponent.innerText}
-                        </div>);
-                        break;
-                }
-
-                return component;
-            })()
-        }
-        </div>
+        <Draggable 
+            onDragStart={() => componentDragStart(droppedComponent.index)}
+            onDragOver={rearangeComponents}>
+            {component}
+        </Draggable>
     );
 };
 
@@ -153,7 +164,7 @@ DroppedComponent.propTypes = {
         name: PropTypes.string.isRequired,
         innerText: PropTypes.string.isRequired,
         isInEditMode: PropTypes.bool.isRequired,
-        index: PropTypes.number.isRequired
+        index: PropTypes.string.isRequired
     }).isRequired,
     handleComponentValueChange: PropTypes.func.isRequired,
     handleForceExitEditMode: PropTypes.func.isRequired

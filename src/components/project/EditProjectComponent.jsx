@@ -26,6 +26,7 @@ class EditProjectComponent extends Component {
         draggableComponents: componentObjects,
         droppedComponents: [],
         previousComponent: {},
+        draggedComponentIndex: '',
         isInitialyLoaded: true,
         isLoading: true
     }
@@ -207,6 +208,32 @@ class EditProjectComponent extends Component {
         return;
     }
 
+    componentDragStart = (index) => {
+        this.setState({ draggedComponentIndex: index });
+    }
+
+    rearangeComponents = (event) => {
+        const dropIndex = event.nativeEvent.target.id;
+        const draggedComponentIndex = this.state.draggedComponentIndex;
+        if(dropIndex === draggedComponentIndex) {
+            return;
+        }
+
+        const droppedComponents = [...this.state.droppedComponents];
+
+        const firstIndex = droppedComponents.findIndex((c) => c.index === dropIndex);
+        const secondIndex = droppedComponents.findIndex((c) => c.index === draggedComponentIndex);
+        if(firstIndex === -1 || secondIndex === -1) {
+            return;
+        }
+
+        const swap = droppedComponents[firstIndex];
+        droppedComponents[firstIndex] = droppedComponents[secondIndex];
+        droppedComponents[secondIndex] = swap;
+
+        this.setState({ droppedComponents });
+    }
+
     render() {
         if(this.state.isLoading) {
             return <LoadingComponent message='Fetching project' />;
@@ -258,7 +285,9 @@ class EditProjectComponent extends Component {
                         handleChangeEditMode={this.handleChangeEditMode}
                         handleForceExitEditMode={this.handleForceExitEditMode}
                         droppedComponents={this.state.droppedComponents}
-                        handleDropComponent={this.handleDropComponent}/>
+                        handleDropComponent={this.handleDropComponent}
+                        componentDragStart={this.componentDragStart}
+                        rearangeComponents={this.rearangeComponents}/>
                     <ElementToolbarComponent
                         actions={{
                             handleChangeEditMode: this.handleChangeEditMode,
