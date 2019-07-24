@@ -4,7 +4,7 @@ import DraggableComponent from './DraggableComponent';
 import './ProjectComponentsList.css';
 import ButtonComponent from '../../common/ButtonComponent';
 
-const ProjectComponentsList = ({draggableComponents}) => {
+const ProjectComponentsList = ({ draggableComponents }) => {
     return (
         <div className='component-list-container vertical-scrollable-container'>
             <h3>Draggable element</h3>
