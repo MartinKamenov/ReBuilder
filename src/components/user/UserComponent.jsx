@@ -52,6 +52,21 @@ class UserComponent extends Component {
         }
     }
 
+    updateUser = async () => {
+        const token = localStorage.getItem('token');
+        if(!token) {
+            return;
+        }
+
+        const userInformation = {};
+        userInformation.imageUrl = this.state.imageUrl;
+
+        debugger;
+        const res = await apiService.updateUser(userInformation, token);
+
+        this.props.actions.loginByToken(token);
+    }
+
     render() {
         if(this.state.isLoading) {
             return <LoadingComponent message='Uploading image'/>;
@@ -71,7 +86,7 @@ class UserComponent extends Component {
                 <ButtonComponent
                     className='logout-btn'
                     type='success'
-                    onClick={this.logout}>
+                    onClick={this.updateUser}>
                     <FontAwesomeIcon className='action-icon' icon={faSave} />
                     Save changes
                 </ButtonComponent>
