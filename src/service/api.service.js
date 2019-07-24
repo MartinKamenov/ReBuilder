@@ -4,6 +4,7 @@ const url = 'https://rebuilder-api.herokuapp.com';
 const authPath = '/auth';
 const loginPath = '/login';
 const getUser = '/user';
+const updateUser = '/update';
 const registerPath = '/register';
 const projectsPath = '/projects';
 const newProjectPath = '/new';
@@ -107,6 +108,17 @@ const apiService = {
         const clientId = '778d0d89a9bcabc';
         const authenticationObject = { 'headers': {'Authorization': `Client-ID ${clientId}`}};
         return axios.post('https://api.imgur.com/3/image/', formData, authenticationObject);
+    },
+
+    updateUser: (userInformation, token) => {
+        if(!token) {
+            return;
+        }
+
+        userInformation.token = token;
+        const updateUserUrl = url + authPath + getUser + updateUser;
+
+        return axios.post(updateUserUrl, userInformation, sendObject);
     }
 };
 
