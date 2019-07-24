@@ -19,6 +19,7 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         case componentTypes.Header:
             component = (
                 <h1
+                    id={droppedComponent.id}
                     style={droppedComponent.style}
                     onClick={() => handleChangeEditMode(droppedComponent.index)}
                     className='droped-component'>
@@ -28,6 +29,7 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         case componentTypes.Text:
             component = (
             <div
+                id={droppedComponent.id}
                 style={droppedComponent.style}
                 onClick={() => handleChangeEditMode(droppedComponent.index)}
                 className='droped-component'>
@@ -37,6 +39,7 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         case componentTypes.Image:
             component = (
                 <img
+                    id={droppedComponent.id}
                     alt='component'
                     src={droppedComponent.src}
                     style={droppedComponent.style}
@@ -46,6 +49,7 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         case componentTypes.RoutingLink:
             component = (
                 <a
+                    id={droppedComponent.id}
                     href={droppedComponent.to}
                     alt='component'
                     style={droppedComponent.style}
@@ -59,6 +63,7 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         default:
             component = (
             <div
+                id={droppedComponent.id}
                 style={droppedComponent.style}
                 onClick={() => handleChangeEditMode(droppedComponent.index)}
                 className='droped-component'>
@@ -74,7 +79,9 @@ const DroppedComponent = ({
         droppedComponent,
         handleComponentValueChange,
         handleChangeEditMode,
-        handleForceExitEditMode
+        handleForceExitEditMode,
+        componentDragStart,
+        rearangeComponents
     }) => {
     if(droppedComponent.isInEditMode) {
         return (
@@ -144,7 +151,9 @@ const DroppedComponent = ({
     }
     const component = getComponent(droppedComponent, handleChangeEditMode);
     return (
-        <Draggable>
+        <Draggable 
+            onDragStart={() => componentDragStart(droppedComponent.index)}
+            onDragOver={rearangeComponents}>
             {component}
         </Draggable>
     );

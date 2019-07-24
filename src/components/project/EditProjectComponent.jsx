@@ -26,6 +26,7 @@ class EditProjectComponent extends Component {
         draggableComponents: componentObjects,
         droppedComponents: [],
         previousComponent: {},
+        draggedComponent: {},
         isInitialyLoaded: true,
         isLoading: true
     }
@@ -207,6 +208,16 @@ class EditProjectComponent extends Component {
         return;
     }
 
+    componentDragStart = (index) => {
+        const draggedComponent = this.state.droppedComponents
+            .find((d) => d.index === index);
+        this.setState({ draggedComponent });
+    }
+
+    rearangeComponents = (event) => {
+        console.log(event.nativeEvent);
+    }
+
     render() {
         if(this.state.isLoading) {
             return <LoadingComponent message='Fetching project' />;
@@ -258,7 +269,9 @@ class EditProjectComponent extends Component {
                         handleChangeEditMode={this.handleChangeEditMode}
                         handleForceExitEditMode={this.handleForceExitEditMode}
                         droppedComponents={this.state.droppedComponents}
-                        handleDropComponent={this.handleDropComponent}/>
+                        handleDropComponent={this.handleDropComponent}
+                        componentDragStart={this.componentDragStart}
+                        rearangeComponents={this.rearangeComponents}/>
                     <ElementToolbarComponent
                         actions={{
                             handleChangeEditMode: this.handleChangeEditMode,
