@@ -61,8 +61,7 @@ class UserComponent extends Component {
         const userInformation = {};
         userInformation.imageUrl = this.state.imageUrl;
 
-        debugger;
-        const res = await apiService.updateUser(userInformation, token);
+        await apiService.updateUser(userInformation, token);
 
         this.props.actions.loginByToken(token);
     }
