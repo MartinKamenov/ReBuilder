@@ -89,6 +89,7 @@ const DroppedComponent = ({
         return (
             <div className='edit-component-container'>
                 <Resizable
+                    style={{margin: 'auto'}}
                     onResizeStart={(event, direction, refToElement, delta) => {
                         initialSizes.width = parseInt(droppedComponent.style.width, 10);
                         initialSizes.height = parseInt(droppedComponent.style.height, 10);
@@ -103,7 +104,7 @@ const DroppedComponent = ({
                     size={{
                         width: droppedComponent.style.width,
                         height: droppedComponent.style.height 
-                        }}>
+                    }}>
                 {
                     (() => {
                         let element;
