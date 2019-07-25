@@ -222,7 +222,6 @@ class EditProjectComponent extends Component {
     }
 
     componentDragEnd = () => {
-        debugger;
         const droppedComponents = [...this.state.droppedComponents];
         const componentIndex = droppedComponents
             .findIndex(d => d.index === this.state.draggedComponentIndex);
