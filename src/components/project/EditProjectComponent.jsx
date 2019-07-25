@@ -28,6 +28,7 @@ class EditProjectComponent extends Component {
         droppedComponents: [],
         previousComponent: {},
         draggedComponentIndex: '',
+        swapDate: new Date(),
         isInitialyLoaded: true,
         isLoading: true
     }
@@ -228,13 +229,37 @@ class EditProjectComponent extends Component {
     }
 
     componentDragStart = (index) => {
-        this.setState({ draggedComponentIndex: index });
+        const droppedComponents = [...this.state.droppedComponents];
+        const componentIndex = droppedComponents.findIndex(d => d.index === index);
+        const copyOfComponent = Object.assign({}, droppedComponents[componentIndex]);
+        const style = Object.assign({}, copyOfComponent.style);
+        style.border = '2px solid #e53b52';
+        copyOfComponent.style = style;
+
+        droppedComponents[componentIndex] = copyOfComponent
+
+        this.setState({ draggedComponentIndex: index, droppedComponents });
+    }
+
+    componentDragEnd = () => {
+        const droppedComponents = [...this.state.droppedComponents];
+        const componentIndex = droppedComponents
+            .findIndex(d => d.index === this.state.draggedComponentIndex);
+        const copyOfComponent = Object.assign({}, droppedComponents[componentIndex]);
+        const style = Object.assign({}, copyOfComponent.style);
+        delete style.border;
+        copyOfComponent.style = style;
+
+        droppedComponents[componentIndex] = copyOfComponent
+
+        this.setState({ draggedComponentIndex: '', droppedComponents });
     }
 
     rearangeComponents = (event) => {
         const dropIndex = event.nativeEvent.target.id;
         const draggedComponentIndex = this.state.draggedComponentIndex;
-        if(dropIndex === draggedComponentIndex) {
+        const timeDifference = new Date().getTime() - this.state.swapDate.getTime();
+        if(dropIndex === draggedComponentIndex || timeDifference < 1000) {
             return;
         }
 
@@ -250,7 +275,7 @@ class EditProjectComponent extends Component {
         droppedComponents[firstIndex] = droppedComponents[secondIndex];
         droppedComponents[secondIndex] = swap;
 
-        this.setState({ droppedComponents });
+        this.setState({ droppedComponents, swapDate: new Date() });
     }
 
     render() {
@@ -306,6 +331,7 @@ class EditProjectComponent extends Component {
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}
                         componentDragStart={this.componentDragStart}
+                        componentDragEnd={this.componentDragEnd}
                         rearangeComponents={this.rearangeComponents}/>
                     <ElementToolbarComponent
                         actions={{
