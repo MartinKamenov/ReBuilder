@@ -11,6 +11,7 @@ const ProjectPageComponent = ({
         handleChangeEditMode,
         handleForceExitEditMode,
         componentDragStart,
+        componentDragEnd,
         rearangeComponents
     }) => {
     return (
@@ -25,6 +26,7 @@ const ProjectPageComponent = ({
                         handleForceExitEditMode={handleForceExitEditMode}
                         droppedComponents={droppedComponents}
                         componentDragStart={componentDragStart}
+                        componentDragEnd={componentDragEnd}
                         rearangeComponents={rearangeComponents}/>
             </Droppable>
         </div>

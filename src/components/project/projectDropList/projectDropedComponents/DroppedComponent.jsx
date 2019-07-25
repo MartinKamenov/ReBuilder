@@ -28,17 +28,18 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
             break;
         case componentTypes.Text:
             component = (
-            <div
-                id={droppedComponent.index}
-                style={droppedComponent.style}
-                onClick={() => handleChangeEditMode(droppedComponent.index)}
-                className='droped-component'>
-                {droppedComponent.innerText}
-            </div>);
+                <div
+                    id={droppedComponent.index}
+                    style={droppedComponent.style}
+                    onClick={() => handleChangeEditMode(droppedComponent.index)}
+                    className='droped-component'>
+                    {droppedComponent.innerText}
+                </div>);
             break;
         case componentTypes.Image:
             component = (
                 <img
+                    draggable={false}
                     id={droppedComponent.index}
                     alt='component'
                     src={droppedComponent.src}
@@ -81,7 +82,8 @@ const DroppedComponent = ({
         handleChangeEditMode,
         handleForceExitEditMode,
         componentDragStart,
-        rearangeComponents
+        rearangeComponents,
+        componentDragEnd
     }) => {
     if(droppedComponent.isInEditMode) {
         return (
@@ -153,7 +155,8 @@ const DroppedComponent = ({
     return (
         <Draggable 
             onDragStart={() => componentDragStart(droppedComponent.index)}
-            onDragOver={rearangeComponents}>
+            onDragOver={rearangeComponents}
+            onDragEnd={componentDragEnd}>
             {component}
         </Draggable>
     );

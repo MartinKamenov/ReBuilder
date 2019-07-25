@@ -9,6 +9,7 @@ const DroppedListComponent = ({
         handleChangeEditMode,
         handleForceExitEditMode,
         componentDragStart,
+        componentDragEnd,
         rearangeComponents
     }) => {
     return (
@@ -22,6 +23,7 @@ const DroppedListComponent = ({
                         handleChangeEditMode={handleChangeEditMode}
                         handleForceExitEditMode={handleForceExitEditMode}
                         componentDragStart={componentDragStart}
+                        componentDragEnd={componentDragEnd}
                         rearangeComponents={rearangeComponents}/>
                 ))
             }
