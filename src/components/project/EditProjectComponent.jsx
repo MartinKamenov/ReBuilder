@@ -27,6 +27,7 @@ class EditProjectComponent extends Component {
         droppedComponents: [],
         previousComponent: {},
         draggedComponentIndex: '',
+        swapDate: new Date(),
         isInitialyLoaded: true,
         isLoading: true
     }
@@ -213,7 +214,7 @@ class EditProjectComponent extends Component {
         const componentIndex = droppedComponents.findIndex(d => d.index === index);
         const copyOfComponent = Object.assign({}, droppedComponents[componentIndex]);
         const style = Object.assign({}, copyOfComponent.style);
-        style.border = '2px solid green';
+        style.border = '2px solid #e53b52';
         copyOfComponent.style = style;
 
         droppedComponents[componentIndex] = copyOfComponent
@@ -238,7 +239,8 @@ class EditProjectComponent extends Component {
     rearangeComponents = (event) => {
         const dropIndex = event.nativeEvent.target.id;
         const draggedComponentIndex = this.state.draggedComponentIndex;
-        if(dropIndex === draggedComponentIndex) {
+        const timeDifference = new Date().getTime() - this.state.swapDate.getTime();
+        if(dropIndex === draggedComponentIndex || timeDifference < 1000) {
             return;
         }
 
@@ -254,7 +256,7 @@ class EditProjectComponent extends Component {
         droppedComponents[firstIndex] = droppedComponents[secondIndex];
         droppedComponents[secondIndex] = swap;
 
-        this.setState({ droppedComponents });
+        this.setState({ droppedComponents, swapDate: new Date() });
     }
 
     render() {
