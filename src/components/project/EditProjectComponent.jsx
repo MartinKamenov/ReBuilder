@@ -209,7 +209,31 @@ class EditProjectComponent extends Component {
     }
 
     componentDragStart = (index) => {
-        this.setState({ draggedComponentIndex: index });
+        const droppedComponents = [...this.state.droppedComponents];
+        const componentIndex = droppedComponents.findIndex(d => d.index === index);
+        const copyOfComponent = Object.assign({}, droppedComponents[componentIndex]);
+        const style = Object.assign({}, copyOfComponent.style);
+        style.border = '2px solid green';
+        copyOfComponent.style = style;
+
+        droppedComponents[componentIndex] = copyOfComponent
+
+        this.setState({ draggedComponentIndex: index, droppedComponents });
+    }
+
+    componentDragEnd = () => {
+        debugger;
+        const droppedComponents = [...this.state.droppedComponents];
+        const componentIndex = droppedComponents
+            .findIndex(d => d.index === this.state.draggedComponentIndex);
+        const copyOfComponent = Object.assign({}, droppedComponents[componentIndex]);
+        const style = Object.assign({}, copyOfComponent.style);
+        delete style.border;
+        copyOfComponent.style = style;
+
+        droppedComponents[componentIndex] = copyOfComponent
+
+        this.setState({ draggedComponentIndex: '', droppedComponents });
     }
 
     rearangeComponents = (event) => {
@@ -287,6 +311,7 @@ class EditProjectComponent extends Component {
                         droppedComponents={this.state.droppedComponents}
                         handleDropComponent={this.handleDropComponent}
                         componentDragStart={this.componentDragStart}
+                        componentDragEnd={this.componentDragEnd}
                         rearangeComponents={this.rearangeComponents}/>
                     <ElementToolbarComponent
                         actions={{

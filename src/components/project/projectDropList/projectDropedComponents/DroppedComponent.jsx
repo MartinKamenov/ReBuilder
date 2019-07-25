@@ -81,7 +81,8 @@ const DroppedComponent = ({
         handleChangeEditMode,
         handleForceExitEditMode,
         componentDragStart,
-        rearangeComponents
+        rearangeComponents,
+        componentDragEnd
     }) => {
     if(droppedComponent.isInEditMode) {
         return (
@@ -153,7 +154,8 @@ const DroppedComponent = ({
     return (
         <Draggable 
             onDragStart={() => componentDragStart(droppedComponent.index)}
-            onDragOver={rearangeComponents}>
+            onDragOver={rearangeComponents}
+            onDragEnd={componentDragEnd}>
             {component}
         </Draggable>
     );
