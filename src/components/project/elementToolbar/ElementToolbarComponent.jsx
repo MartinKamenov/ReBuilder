@@ -10,7 +10,11 @@ const capitalizeFirstLetter = (text) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
-const ElementToolbarComponent = ({component, handleComponentValueChange, actions}) => {
+const ElementToolbarComponent = ({
+    component,
+    handleComponentValueChange,
+    handleComponentImageChange,
+    actions}) => {
     if(!component) {
         return (
             <div className='toolbar-container'>
@@ -22,7 +26,7 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
 
     const inputs = Object.keys(component).filter((c) =>
         (c !== 'style' && c !== 'isInEditMode' &&
-            c !== 'index' && c !== 'name' &&
+            c !== 'index' && c !== 'src' && c !== 'name' &&
             !Array.isArray(component[c + 'Values'])) && !Array.isArray(component[c]));
     const dropdowns = Object.keys(component).filter((c) => (
         Array.isArray(component[c + 'Values'])
@@ -36,6 +40,21 @@ const ElementToolbarComponent = ({component, handleComponentValueChange, actions
                 <div className='toolbar-element-container'>
                     <h3>{component.name}</h3>
                     <h3>Properties</h3>
+                    { component.src ? (
+                        <div
+                            className='component-input-changer-container'>
+                            <label className='component-changer-label'>
+                                Src
+                            </label>
+                            <input
+                                type='file'
+                                className='component-changer-input'
+                                onChange={handleComponentImageChange}>
+                            </input>
+                        </div>
+                    ) : (
+                        <div></div>
+                    ) }
                     {
                         dropdowns.map((dropdown, k) => {
                             const values = component[dropdown + 'Values'];
@@ -157,7 +176,8 @@ ElementToolbarComponent.propTypes = {
         handleForceExitEditMode: PropTypes.func.isRequired,
         handleDeleteComponent: PropTypes.func.isRequired
     }).isRequired,
-    handleComponentValueChange: PropTypes.func.isRequired
+    handleComponentValueChange: PropTypes.func.isRequired,
+    handleComponentImageChange: PropTypes.func.isRequired
 };
  
 export default ElementToolbarComponent;

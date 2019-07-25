@@ -12,6 +12,7 @@ import * as deploymentActions from '../../actions/deploymentActions';
 import uuid from 'uuid';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import apiService from '../../service/api.service';
 
 import './EditProjectComponent.css';
 import ButtonComponent from '../common/ButtonComponent';
@@ -142,6 +143,7 @@ class EditProjectComponent extends Component {
     }
 
     handleComponentValueChange = (value, field) => {
+        debugger;
         const droppedComponents = this.state.droppedComponents;
         let {componentInEditMode, index} = this.getComponentInEditMode();
         componentInEditMode = Object.assign({}, componentInEditMode);
@@ -161,6 +163,25 @@ class EditProjectComponent extends Component {
         droppedComponents[index] = componentInEditMode;
 
         this.setState({ droppedComponents });
+    }
+
+    handleComponentImageChange = async (event) => {
+        debugger;
+        const target = event.target;
+        if (!target.files || !target.files[0]) {
+            return;
+        }
+
+        const file = target.files[0];
+        const formData = new FormData();
+        formData.append('image', file, file.name);
+
+        try {
+            const res = await apiService.uploadImage(formData);
+            this.handleComponentValueChange(res.data.data.link, 'style.src');
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     handleSaveProject = () => {
@@ -295,7 +316,8 @@ class EditProjectComponent extends Component {
                             handleDeleteComponent: this.handleDeleteComponent
                         }}
                         component={componentInEditMode}
-                        handleComponentValueChange={this.handleComponentValueChange}/>
+                        handleComponentValueChange={this.handleComponentValueChange}
+                        handleComponentImageChange={this.handleComponentImageChange}/>
                 </div>
             </div>
         );
