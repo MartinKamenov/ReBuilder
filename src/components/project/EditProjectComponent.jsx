@@ -143,7 +143,6 @@ class EditProjectComponent extends Component {
     }
 
     handleComponentValueChange = (value, field) => {
-        debugger;
         const droppedComponents = this.state.droppedComponents;
         let {componentInEditMode, index} = this.getComponentInEditMode();
         componentInEditMode = Object.assign({}, componentInEditMode);
@@ -166,7 +165,6 @@ class EditProjectComponent extends Component {
     }
 
     handleComponentImageChange = async (event) => {
-        debugger;
         const target = event.target;
         if (!target.files || !target.files[0]) {
             return;
@@ -178,7 +176,7 @@ class EditProjectComponent extends Component {
 
         try {
             const res = await apiService.uploadImage(formData);
-            this.handleComponentValueChange(res.data.data.link, 'style.src');
+            this.handleComponentValueChange(res.data.data.link, 'src');
         } catch(error) {
             console.log(error);
         }
