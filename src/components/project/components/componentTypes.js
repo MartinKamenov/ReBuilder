@@ -117,6 +117,29 @@ const componentObjects = [
             paddingTop: '0px',
             paddingBottom: '0px'
         }
+    },
+    {
+        name: 'Container',
+        children: [],
+        style: {
+            color: '#000000',
+            backgroundColor: '#ffffff',
+            fontSize: '16px',
+            height: '60px',
+            width: '50%',
+            textAlign: 'center',
+            display: 'block',
+            marginLeft: 'auto',
+            marginRigth: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRigth: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px',
+            border: '1px solid black',
+            borderRadius: '5px'
+        }
     }
 ];
 
@@ -126,7 +149,8 @@ export const componentTypes = {
     Grid: 'Grid',
     Input: 'Input',
     Image: 'Image',
-    RoutingLink: 'RoutingLink'
+    RoutingLink: 'RoutingLink',
+    Container: 'Container'
 };
 
 export default componentObjects;

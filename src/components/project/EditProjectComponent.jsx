@@ -278,6 +278,10 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents, swapDate: new Date() });
     }
 
+    handleDropContainerComponent = () => {
+        alert('dropped');
+    }
+
     render() {
         if(this.state.isLoading) {
             return <LoadingComponent message='Fetching project' />;
@@ -332,6 +336,7 @@ class EditProjectComponent extends Component {
                         handleDropComponent={this.handleDropComponent}
                         componentDragStart={this.componentDragStart}
                         componentDragEnd={this.componentDragEnd}
+                        handleDropContainerComponent={this.handleDropContainerComponent}
                         rearangeComponents={this.rearangeComponents}/>
                     <ElementToolbarComponent
                         actions={{
