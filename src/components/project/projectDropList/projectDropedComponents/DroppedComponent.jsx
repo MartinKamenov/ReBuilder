@@ -67,13 +67,18 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                 <Droppable
                     style={droppedComponent.style}
                     types={['component']} // <= allowed drop types
-                    onDrop={handleDropContainerComponent}>
+                    onDrop={(event) => 
+                        handleDropContainerComponent(event, droppedComponent.index)}>
                     <div
                         id={droppedComponent.index}
                         style={droppedComponent.style}
                         onClick={() => handleChangeEditMode(droppedComponent.index)}
                         className='droped-component'>
-                        {droppedComponent.innerText}
+                        {
+                            droppedComponent.children.map((c) => (
+                                getComponent(c, handleChangeEditMode, handleDropContainerComponent)
+                            ))
+                        }
                     </div>
                 </Droppable>)
             break;

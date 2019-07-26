@@ -278,8 +278,18 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents, swapDate: new Date() });
     }
 
-    handleDropContainerComponent = () => {
-        alert('dropped');
+    handleDropContainerComponent = (event, index) => {
+        debugger;
+        const draggableComponents = [...this.state.draggableComponents];
+        const foundElement = draggableComponents
+            .find((draggableComponent) => draggableComponent.name === event.component);
+        const droppedComponent = Object.assign({}, foundElement);
+        const droppedComponents = [...this.state.droppedComponents];
+        const containerIndex = droppedComponents.findIndex((c) => c.index === index);
+
+        droppedComponents[containerIndex].children.push(droppedComponent);
+
+        this.setState({ droppedComponent });
     }
 
     render() {
