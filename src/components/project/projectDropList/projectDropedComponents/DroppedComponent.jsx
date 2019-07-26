@@ -65,10 +65,9 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
         case componentTypes.Container:
             component = (
                 <Droppable
-                    style={droppedComponent.style}
                     types={['component']} // <= allowed drop types
-                    onDrop={(event) => 
-                        handleDropContainerComponent(event, droppedComponent.index)}>
+                    onDrop={(event, nativeEvent) => 
+                        handleDropContainerComponent(event, nativeEvent, droppedComponent.index)}>
                     <div
                         id={droppedComponent.index}
                         style={droppedComponent.style}

@@ -278,8 +278,8 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents, swapDate: new Date() });
     }
 
-    handleDropContainerComponent = (event, index) => {
-        debugger;
+    handleDropContainerComponent = (event, nativeEvent, index) => {
+        nativeEvent.stopPropagation();
         const draggableComponents = [...this.state.draggableComponents];
         const foundElement = draggableComponents
             .find((draggableComponent) => draggableComponent.name === event.component);

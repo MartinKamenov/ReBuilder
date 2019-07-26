@@ -125,7 +125,7 @@ const componentObjects = [
             color: '#000000',
             backgroundColor: '#ffffff',
             fontSize: '16px',
-            height: '60px',
+            height: '200px',
             width: '50%',
             textAlign: 'center',
             display: 'block',
