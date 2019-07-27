@@ -225,14 +225,25 @@ class EditProjectComponent extends Component {
         this.props.actions.deployProject(this.state.id, this.props.user.token);
     }
     getComponentInEditMode = () => {
+        debugger;
         let index = -1;
-        let component = this.state.droppedComponents.find((c, i) => {
+        const droppedComponents = this.state.droppedComponents;
+        let component = droppedComponents.find((c, i) => {
             if(c.isInEditMode) {
                 index = i;
             }
 
             return c.isInEditMode;
         });
+
+        if(!component) {
+            const children = [];
+            droppedComponents.filter(c => c.children)
+                .map(c => c.children)
+                .forEach(c => children.push(...c));
+
+            component = children.find((c) => c.isInEditMode);
+        }
 
         return { componentInEditMode: component, index };
     }
