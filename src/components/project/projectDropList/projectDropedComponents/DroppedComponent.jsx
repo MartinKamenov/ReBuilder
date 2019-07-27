@@ -22,7 +22,10 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                 <h1
                     id={droppedComponent.index}
                     style={droppedComponent.style}
-                    onClick={() => handleChangeEditMode(droppedComponent.index)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        handleChangeEditMode(droppedComponent.index)
+                    }}
                     className='droped-component'>
                     {droppedComponent.innerText}
                 </h1>)
@@ -32,7 +35,10 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                 <div
                     id={droppedComponent.index}
                     style={droppedComponent.style}
-                    onClick={() => handleChangeEditMode(droppedComponent.index)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        handleChangeEditMode(droppedComponent.index);
+                    }}
                     className='droped-component'>
                     {droppedComponent.innerText}
                 </div>);
@@ -45,7 +51,10 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                     alt='component'
                     src={droppedComponent.src}
                     style={droppedComponent.style}
-                    onClick={() => handleChangeEditMode(droppedComponent.index)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        handleChangeEditMode(droppedComponent.index);
+                    }}
                     className='droped-component'/>);
             break;
         case componentTypes.RoutingLink:
@@ -71,7 +80,10 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                     <div
                         id={droppedComponent.index}
                         style={droppedComponent.style}
-                        onClick={() => handleChangeEditMode(droppedComponent.index)}
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            handleChangeEditMode(droppedComponent.index);
+                        }}
                         className='droped-component'>
                         {
                             droppedComponent.children.map((c) => (

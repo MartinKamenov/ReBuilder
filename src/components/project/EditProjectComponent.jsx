@@ -109,11 +109,30 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents });
     }
 
+    findChildByIndex = (components, index) => {
+        const children = [];
+        components.filter(c => c.children)
+            .map(c => c.children)
+            .forEach(c => children.push(...c));
+        if(!children.length) {
+            return null;
+        }
+
+        let component = children.find((c) => c.index === index);
+
+        return component;
+    }
     handleChangeEditMode = (index) => {
+        debugger;
         const droppedComponents = [...this.state.droppedComponents];
 
-        droppedComponents.find(c => c.index === index)
-            .isInEditMode = !droppedComponents.find(c => c.index === index).isInEditMode;
+        let foundComponent = droppedComponents.find(c => c.index === index);
+        if(!foundComponent) {
+            foundComponent = this.findChildByIndex(droppedComponents, index)
+        }
+
+        foundComponent.isInEditMode = !foundComponent.isInEditMode;
+
         droppedComponents.forEach((component) => {
             if(component.index !== index) {
                 component.isInEditMode = false;
@@ -283,11 +302,14 @@ class EditProjectComponent extends Component {
         const draggableComponents = [...this.state.draggableComponents];
         const foundElement = draggableComponents
             .find((draggableComponent) => draggableComponent.name === event.component);
+        foundElement.index = uuid.v1();
         const droppedComponent = Object.assign({}, foundElement);
         const droppedComponents = [...this.state.droppedComponents];
         const containerIndex = droppedComponents.findIndex((c) => c.index === index);
+        const container = Object.assign({}, droppedComponents[containerIndex]);
 
-        droppedComponents[containerIndex].children.push(droppedComponent);
+        container.children.push(droppedComponent);
+        droppedComponents[containerIndex] = container;
 
         this.setState({ droppedComponent });
     }
