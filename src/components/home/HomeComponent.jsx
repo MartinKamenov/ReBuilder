@@ -8,12 +8,11 @@ class HomeComponent extends Component {
   render() { 
     return (  
       <div>
-
-        <section className="probootstrap-intro" style={{backgroundImage: 'url(img/hero_bg_2.jpg)'}} data-stellar-background-ratio="0.5">
+        <section className="probootstrap-intro" style={{backgroundImage: 'url(https://images.pexels.com/photos/374023/pexels-photo-374023.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)'}} data-stellar-background-ratio="0.5">
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-7 probootstrap-intro-text">
-                <h1>We're creative agency based in London and New York</h1>
+                <h1>Create your own website without the pain of knowing how to code</h1>
                 <div className="probootstrap-subtitle probootstrap-animate">
                   <h2>A free html website template for creative agency like you! brought to you by <a href="https://uicookies.com/" target="_blank">uicookies.com</a></h2>
                 </div>
