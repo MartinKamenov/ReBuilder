@@ -180,7 +180,31 @@ class EditProjectComponent extends Component {
         } else {
             componentInEditMode[field] = value;
         }
-        droppedComponents[index] = componentInEditMode;
+
+        if(index !== -1) {
+            droppedComponents[index] = componentInEditMode;
+        } else {
+            // Update child after changed is made
+            let childIndex = -1;
+            const componentIndex = droppedComponents
+                .findIndex(c => {
+                    if(!c.children) {
+                        return false;
+                    }
+                    return c.children.find((child, i) => {
+                        if(child.index === componentInEditMode.index) {
+                            childIndex = i;
+                            return true;
+                        }
+
+                        return false;
+                    });
+                });
+
+            const editedComponent = droppedComponents[componentIndex];
+            editedComponent.children[childIndex] = componentInEditMode;
+            droppedComponents[componentIndex] = editedComponent;
+        }
 
         this.setState({ droppedComponents });
     }
