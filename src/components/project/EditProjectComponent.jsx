@@ -163,6 +163,7 @@ class EditProjectComponent extends Component {
     }
 
     handleComponentValueChange = (value, field) => {
+        debugger;
         const droppedComponents = this.state.droppedComponents;
         let {componentInEditMode, index} = this.getComponentInEditMode();
         componentInEditMode = Object.assign({}, componentInEditMode);
@@ -225,7 +226,6 @@ class EditProjectComponent extends Component {
         this.props.actions.deployProject(this.state.id, this.props.user.token);
     }
     getComponentInEditMode = () => {
-        debugger;
         let index = -1;
         const droppedComponents = this.state.droppedComponents;
         let component = droppedComponents.find((c, i) => {
