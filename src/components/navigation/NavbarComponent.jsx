@@ -16,11 +16,11 @@ class NavbarComponent extends Component {
             <div className="mobile-menu-overlay" />
             <nav role="navigation" className="probootstrap-nav hidden-xs">
               <ul className="probootstrap-main-nav">
-                <li><Link className="active"><a to="/">Home</a></Link></li>
-                <li><Link><a to="/dashboard">Dashboard</a></Link></li>
-                <li><Link><a to="products.html">Product</a></Link></li>
-                <li><Link><a to="about.html">About</a></Link></li>
-                <li><Link><a to="contact.html">Contact</a></Link></li>
+                <li><Link className="active" to="/">Home</Link></li>
+                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><Link to="/products.html">Product</Link></li>
+                <li><Link to="/about.html">About</Link></li>
+                <li><Link to="/contact.html">Contact</Link></li>
               </ul>
               <div className="extra-text visible-xs">
                 <a href="#" className="probootstrap-burger-menu"><i>Menu</i></a>
