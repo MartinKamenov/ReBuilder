@@ -1,3 +1,8 @@
 .main-container {
-    background-color: #F9F9F9;
+    background-color: #FFFFFF;
+}
+
+.navbar-container-margin {
+    padding-top: 70px;
+    background-color: #4A3E9E;
 }

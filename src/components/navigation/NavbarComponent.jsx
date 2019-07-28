@@ -15,8 +15,8 @@ class NavbarComponent extends Component {
         const user = this.props.user;
         const routes = [...this.state.routes];
         if(user.id) {
-            routes.push({ route: `/users/${user.id}`, text: 'My profile' });
             routes.push({ route: '/dashboard', text: 'Dashboard' });
+            routes.push({ route: `/users/${user.id}`, text: 'My profile' });
         } else {
             routes.push({ route: `/login`, text: 'Sign in' });
             routes.push({ route: `/register`, text: 'Sign up' });
@@ -29,8 +29,8 @@ class NavbarComponent extends Component {
         return ( 
           <header role="banner" className="probootstrap-header">
                 <div className="container-fluid">
-                    <a href="index.html" className="probootstrap-logo">ReBuilder</a>
-                    <a href="#" className="probootstrap-burger-menu visible-xs"><i>Menu</i></a>
+                    <Link to='/' className="probootstrap-logo">ReBuilder</Link>
+                    <a href="#" className="probootstrap-burger-menu visible-xs"><i></i></a>
                     <div className="mobile-menu-overlay" />
                     <nav role="navigation" className="probootstrap-nav hidden-xs">
                     <ul className="probootstrap-main-nav">
