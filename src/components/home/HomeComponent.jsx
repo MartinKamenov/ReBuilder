@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import "../theme/css/styles-merged.css"
-import "../theme/css/style.min.css"
-import "../theme/css/custom.css"
+import "../../theme/css/styles-merged.css"
+import "../../theme/css/style.min.css"
+import "../../theme/css/custom.css"
 
 
 class HomeComponent extends Component {
