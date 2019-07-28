@@ -7,7 +7,11 @@ const DroppedListComponent = ({
         droppedComponents,
         handleComponentValueChange,
         handleChangeEditMode,
-        handleForceExitEditMode
+        handleForceExitEditMode,
+        componentDragStart,
+        componentDragEnd,
+        rearangeComponents,
+        handleDropContainerComponent
     }) => {
     return (
         <div className='droped-components-container vertical-scrollable-container'>
@@ -18,7 +22,11 @@ const DroppedListComponent = ({
                         droppedComponent={component}
                         handleComponentValueChange={handleComponentValueChange}
                         handleChangeEditMode={handleChangeEditMode}
-                        handleForceExitEditMode={handleForceExitEditMode} />
+                        handleForceExitEditMode={handleForceExitEditMode}
+                        componentDragStart={componentDragStart}
+                        componentDragEnd={componentDragEnd}
+                        rearangeComponents={rearangeComponents}
+                        handleDropContainerComponent={handleDropContainerComponent}/>
                 ))
             }
         </div>

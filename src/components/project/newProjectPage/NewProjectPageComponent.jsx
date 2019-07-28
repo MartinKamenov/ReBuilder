@@ -5,14 +5,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoadingComponent from '../../common/LoadingComponent';
 import ButtonComponent from '../../common/ButtonComponent';
-
+import apiService from '../../../service/api.service';
 
 import './NewProjectPageComponent.css';
 
 class NewProjectPageComponent extends Component {
     state = { 
         name: '',
-        projectImage: '',
+        imageUrl: 'https://cdn3.iconfinder.com/data/icons/lifestyle/100/Noun_Project_20Icon_10px_grid-01-512.png',
         isLoading: false,
         isCreated: false
     }
@@ -41,11 +41,29 @@ class NewProjectPageComponent extends Component {
     }
 
     handleCreateProject = () => {
-        if(!this.state.name || !this.state.projectImage || !this.props) {
+        if(!this.state.name || !this.state.imageUrl) {
             return;
         }
         this.setState({ isLoading: true, isCreated: true });
-        this.props.actions.createProject(this.state.name, this.state.projectImage, this.props.user.token);
+        this.props.actions.createProject(this.state.name, this.state.imageUrl, this.props.user.token);
+    }
+
+    changeImage = async(event) => {
+        const target = event.target;
+        if (!target.files || !target.files[0]) {
+            return;
+        }
+
+        const file = target.files[0];
+        const formData = new FormData();
+        formData.append('image', file, file.name);
+
+        try {
+            const res = await apiService.uploadImage(formData);
+            this.setState({ imageUrl: res.data.data.link });
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     render() {
@@ -55,6 +73,24 @@ class NewProjectPageComponent extends Component {
 
         return (
             <div className='center-container' onKeyDown={(event) => this.handleEnterPressed(event.key)}>
+                <img
+                    className='new-project-image'
+                    alt='Project'
+                    src={this.state.imageUrl}/>
+                <input
+                    id='change-element-image'
+                    className='change-element-image'
+                    type='file'
+                    placeholder='Add url here'
+                    onChange={this.changeImage}/>
+                <ButtonComponent
+                    onClick={(event) => {
+                            const element = document.getElementById('change-element-image');
+                            element.click(event);
+                        }
+                    }
+                    type='success'
+                    title='Upload image'/>
                 <div>
                     <label className='project-page-label'>Project name</label>
                     <input
@@ -63,19 +99,11 @@ class NewProjectPageComponent extends Component {
                         value={this.state.name}
                         onChange={(event) => this.handleChangeInput(event.target.value, 'name')}/>
                 </div>
-                <div>
-                    <label className='project-page-label'>Project image</label>
-                    <input
-                        className='project-page-input'
-                        placeholder='Add url here'
-                        value={this.state.projectImage}
-                        onChange={(event) => this.handleChangeInput(event.target.value, 'projectImage')}/>
-                </div>
-                     <ButtonComponent
-                        title='Create new project'
-                        className='submit-btn'
-                        type='success'
-                        onClick={this.handleCreateProject}/>
+                <ButtonComponent
+                    title='Create new project'
+                    className='submit-btn'
+                    type='success'
+                    onClick={this.handleCreateProject}/>
             </div>
         );
     }

@@ -9,7 +9,11 @@ const ProjectPageComponent = ({
         handleDropComponent,
         handleComponentValueChange,
         handleChangeEditMode,
-        handleForceExitEditMode
+        handleForceExitEditMode,
+        componentDragStart,
+        componentDragEnd,
+        rearangeComponents,
+        handleDropContainerComponent
     }) => {
     return (
         <div className="project-page-container">
@@ -21,7 +25,11 @@ const ProjectPageComponent = ({
                         handleComponentValueChange={handleComponentValueChange}
                         handleChangeEditMode={handleChangeEditMode}
                         handleForceExitEditMode={handleForceExitEditMode}
-                        droppedComponents={droppedComponents}/>
+                        droppedComponents={droppedComponents}
+                        componentDragStart={componentDragStart}
+                        componentDragEnd={componentDragEnd}
+                        rearangeComponents={rearangeComponents}
+                        handleDropContainerComponent={handleDropContainerComponent}/>
             </Droppable>
         </div>
     );

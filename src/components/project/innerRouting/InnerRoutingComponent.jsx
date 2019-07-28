@@ -126,7 +126,6 @@ class InnerRoutingComponent extends Component {
 
     isValid = (field) => {
         const value = this.state[field];
-        debugger;
         switch(field) {
             case 'newPageName':
                 if(!value || !value.match("^[A-z0-9]+$") ||
@@ -140,6 +139,8 @@ class InnerRoutingComponent extends Component {
                     return false;
                 }
                 return true;
+            default:
+                return false;
         }
     }
 

@@ -12,6 +12,7 @@ import * as deploymentActions from '../../actions/deploymentActions';
 import uuid from 'uuid';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import apiService from '../../service/api.service';
 
 import './EditProjectComponent.css';
 import ButtonComponent from '../common/ButtonComponent';
@@ -26,6 +27,8 @@ class EditProjectComponent extends Component {
         draggableComponents: componentObjects,
         droppedComponents: [],
         previousComponent: {},
+        draggedComponentIndex: '',
+        swapDate: new Date(),
         isInitialyLoaded: true,
         isLoading: true
     }
@@ -106,11 +109,29 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents });
     }
 
+    findChildByIndex = (components, index) => {
+        const children = [];
+        components.filter(c => c.children)
+            .map(c => c.children)
+            .forEach(c => children.push(...c));
+        if(!children.length) {
+            return null;
+        }
+
+        let component = children.find((c) => c.index === index);
+
+        return component;
+    }
     handleChangeEditMode = (index) => {
         const droppedComponents = [...this.state.droppedComponents];
 
-        droppedComponents.find(c => c.index === index)
-            .isInEditMode = !droppedComponents.find(c => c.index === index).isInEditMode;
+        let foundComponent = droppedComponents.find(c => c.index === index);
+        if(!foundComponent) {
+            foundComponent = this.findChildByIndex(droppedComponents, index)
+        }
+
+        foundComponent.isInEditMode = !foundComponent.isInEditMode;
+
         droppedComponents.forEach((component) => {
             if(component.index !== index) {
                 component.isInEditMode = false;
@@ -157,9 +178,51 @@ class EditProjectComponent extends Component {
         } else {
             componentInEditMode[field] = value;
         }
-        droppedComponents[index] = componentInEditMode;
+
+        if(index !== -1) {
+            droppedComponents[index] = componentInEditMode;
+        } else {
+            // Update child after changed is made
+            let childIndex = -1;
+            const componentIndex = droppedComponents
+                .findIndex(c => {
+                    if(!c.children) {
+                        return false;
+                    }
+                    return c.children.find((child, i) => {
+                        if(child.index === componentInEditMode.index) {
+                            childIndex = i;
+                            return true;
+                        }
+
+                        return false;
+                    });
+                });
+
+            const editedComponent = droppedComponents[componentIndex];
+            editedComponent.children[childIndex] = componentInEditMode;
+            droppedComponents[componentIndex] = editedComponent;
+        }
 
         this.setState({ droppedComponents });
+    }
+
+    handleComponentImageChange = async (event) => {
+        const target = event.target;
+        if (!target.files || !target.files[0]) {
+            return;
+        }
+
+        const file = target.files[0];
+        const formData = new FormData();
+        formData.append('image', file, file.name);
+
+        try {
+            const res = await apiService.uploadImage(formData);
+            this.handleComponentValueChange(res.data.data.link, 'src');
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     handleSaveProject = () => {
@@ -186,13 +249,23 @@ class EditProjectComponent extends Component {
     }
     getComponentInEditMode = () => {
         let index = -1;
-        let component = this.state.droppedComponents.find((c, i) => {
+        const droppedComponents = this.state.droppedComponents;
+        let component = droppedComponents.find((c, i) => {
             if(c.isInEditMode) {
                 index = i;
             }
 
             return c.isInEditMode;
         });
+
+        if(!component) {
+            const children = [];
+            droppedComponents.filter(c => c.children)
+                .map(c => c.children)
+                .forEach(c => children.push(...c));
+
+            component = children.find((c) => c.isInEditMode);
+        }
 
         return { componentInEditMode: component, index };
     }
@@ -205,6 +278,73 @@ class EditProjectComponent extends Component {
         const history = this.props.history;
         history.push(`/projects/${this.state.id}`);
         return;
+    }
+
+    componentDragStart = (index) => {
+        const droppedComponents = [...this.state.droppedComponents];
+        const componentIndex = droppedComponents.findIndex(d => d.index === index);
+        const copyOfComponent = Object.assign({}, droppedComponents[componentIndex]);
+        const style = Object.assign({}, copyOfComponent.style);
+        style.border = '2px solid #e53b52';
+        copyOfComponent.style = style;
+
+        droppedComponents[componentIndex] = copyOfComponent
+
+        this.setState({ draggedComponentIndex: index, droppedComponents });
+    }
+
+    componentDragEnd = () => {
+        const droppedComponents = [...this.state.droppedComponents];
+        const componentIndex = droppedComponents
+            .findIndex(d => d.index === this.state.draggedComponentIndex);
+        const copyOfComponent = Object.assign({}, droppedComponents[componentIndex]);
+        const style = Object.assign({}, copyOfComponent.style);
+        delete style.border;
+        copyOfComponent.style = style;
+
+        droppedComponents[componentIndex] = copyOfComponent
+
+        this.setState({ draggedComponentIndex: '', droppedComponents });
+    }
+
+    rearangeComponents = (event) => {
+        const dropIndex = event.nativeEvent.target.id;
+        const draggedComponentIndex = this.state.draggedComponentIndex;
+        const timeDifference = new Date().getTime() - this.state.swapDate.getTime();
+        if(dropIndex === draggedComponentIndex || timeDifference < 1000) {
+            return;
+        }
+
+        const droppedComponents = [...this.state.droppedComponents];
+
+        const firstIndex = droppedComponents.findIndex((c) => c.index === dropIndex);
+        const secondIndex = droppedComponents.findIndex((c) => c.index === draggedComponentIndex);
+        if(firstIndex === -1 || secondIndex === -1) {
+            return;
+        }
+
+        const swap = droppedComponents[firstIndex];
+        droppedComponents[firstIndex] = droppedComponents[secondIndex];
+        droppedComponents[secondIndex] = swap;
+
+        this.setState({ droppedComponents, swapDate: new Date() });
+    }
+
+    handleDropContainerComponent = (event, nativeEvent, index) => {
+        nativeEvent.stopPropagation();
+        const draggableComponents = [...this.state.draggableComponents];
+        const foundElement = draggableComponents
+            .find((draggableComponent) => draggableComponent.name === event.component);
+        foundElement.index = uuid.v1();
+        const droppedComponent = Object.assign({}, foundElement);
+        const droppedComponents = [...this.state.droppedComponents];
+        const containerIndex = droppedComponents.findIndex((c) => c.index === index);
+        const container = Object.assign({}, droppedComponents[containerIndex]);
+
+        container.children.push(droppedComponent);
+        droppedComponents[containerIndex] = container;
+
+        this.setState({ droppedComponent });
     }
 
     render() {
@@ -258,7 +398,11 @@ class EditProjectComponent extends Component {
                         handleChangeEditMode={this.handleChangeEditMode}
                         handleForceExitEditMode={this.handleForceExitEditMode}
                         droppedComponents={this.state.droppedComponents}
-                        handleDropComponent={this.handleDropComponent}/>
+                        handleDropComponent={this.handleDropComponent}
+                        componentDragStart={this.componentDragStart}
+                        componentDragEnd={this.componentDragEnd}
+                        handleDropContainerComponent={this.handleDropContainerComponent}
+                        rearangeComponents={this.rearangeComponents}/>
                     <ElementToolbarComponent
                         actions={{
                             handleChangeEditMode: this.handleChangeEditMode,
@@ -266,7 +410,8 @@ class EditProjectComponent extends Component {
                             handleDeleteComponent: this.handleDeleteComponent
                         }}
                         component={componentInEditMode}
-                        handleComponentValueChange={this.handleComponentValueChange}/>
+                        handleComponentValueChange={this.handleComponentValueChange}
+                        handleComponentImageChange={this.handleComponentImageChange}/>
                 </div>
             </div>
         );
