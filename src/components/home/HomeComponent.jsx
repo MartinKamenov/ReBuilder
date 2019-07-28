@@ -4,7 +4,6 @@ import '../../theme/css/style.min.css'
 import '../../theme/css/custom.css'
 
 class HomeComponent extends Component {
-  state = {  }
   render() {
     return (
       <div>
