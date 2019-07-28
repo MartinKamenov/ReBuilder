@@ -78,10 +78,20 @@ class NewProjectPageComponent extends Component {
                     alt='Project'
                     src={this.state.imageUrl}/>
                 <input
+                    id='change-element-image'
+                    style={{display: 'none'}}
                     type='file'
                     className='image-input'
                     placeholder='Add url here'
                     onChange={this.changeImage}/>
+                <ButtonComponent
+                    onClick={(event) => {
+                            const element = document.getElementById('change-element-image');
+                            element.click(event);
+                        }
+                    }
+                    type='success'
+                    title='Upload image'/>
                 <div>
                     <label className='project-page-label'>Project name</label>
                     <input

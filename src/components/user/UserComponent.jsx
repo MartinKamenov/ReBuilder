@@ -78,7 +78,20 @@ class UserComponent extends Component {
                     className='user-component-user-image'
                     alt='User'
                     src={this.state.imageUrl}/>
-                <input onChange={this.changeImage} type='file' name='pic' accept='image/*'/>
+                <input
+                    id='change-element-image'
+                    style={{ display: 'none' }}
+                    onChange={this.changeImage}
+                    type='file'
+                    accept='image/*'/>
+                <ButtonComponent
+                    onClick={(event) => {
+                            const element = document.getElementById('change-element-image');
+                            element.click(event);
+                        }
+                    }
+                    type='success'
+                    title='Upload image'/>
                 <h3>
                     {user.username}
                 </h3>
