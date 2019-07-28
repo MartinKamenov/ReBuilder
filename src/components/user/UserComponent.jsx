@@ -80,7 +80,7 @@ class UserComponent extends Component {
                     src={this.state.imageUrl}/>
                 <input
                     id='change-element-image'
-                    style={{ display: 'none' }}
+                    className='change-element-image'
                     onChange={this.changeImage}
                     type='file'
                     accept='image/*'/>

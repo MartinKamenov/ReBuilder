@@ -79,9 +79,8 @@ class NewProjectPageComponent extends Component {
                     src={this.state.imageUrl}/>
                 <input
                     id='change-element-image'
-                    style={{display: 'none'}}
+                    className='change-element-image'
                     type='file'
-                    className='image-input'
                     placeholder='Add url here'
                     onChange={this.changeImage}/>
                 <ButtonComponent

@@ -48,9 +48,8 @@ const ElementToolbarComponent = ({
                             </label>
                             <input
                                 id='change-element-image'
-                                style={{ display: 'none' }}
                                 type='file'
-                                className='component-changer-input'
+                                className='change-element-image'
                                 onChange={handleComponentImageChange}>
                             </input>
                             <ButtonComponent

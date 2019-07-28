@@ -23,3 +23,7 @@ code {
 .btn {
   cursor: pointer !important;
 }
+
+.change-element-image {
+  display: none !important;
+}
