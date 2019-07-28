@@ -123,7 +123,6 @@ class EditProjectComponent extends Component {
         return component;
     }
     handleChangeEditMode = (index) => {
-        debugger;
         const droppedComponents = [...this.state.droppedComponents];
 
         let foundComponent = droppedComponents.find(c => c.index === index);
@@ -163,7 +162,6 @@ class EditProjectComponent extends Component {
     }
 
     handleComponentValueChange = (value, field) => {
-        debugger;
         const droppedComponents = this.state.droppedComponents;
         let {componentInEditMode, index} = this.getComponentInEditMode();
         componentInEditMode = Object.assign({}, componentInEditMode);
