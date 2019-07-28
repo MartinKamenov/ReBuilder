@@ -47,10 +47,19 @@ const ElementToolbarComponent = ({
                                 Src
                             </label>
                             <input
+                                id='change-element-image'
                                 type='file'
-                                className='component-changer-input'
+                                className='change-element-image'
                                 onChange={handleComponentImageChange}>
                             </input>
+                            <ButtonComponent
+                                onClick={(event) => {
+                                    const element = document.getElementById('change-element-image');
+                                    element.click(event);
+                                }
+                                }
+                                type='success'
+                                title='Upload image'/>
                         </div>
                     ) : (
                         <div></div>
