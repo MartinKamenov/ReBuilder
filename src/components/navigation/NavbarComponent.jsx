@@ -11,9 +11,10 @@ class NavbarComponent extends Component {
           { route: '/', text: 'Home' }
         ]
     }
-    componentDidMount() {
-        const user = this.props.user;
-        const routes = [...this.state.routes];
+
+    getRoutes = (props) => {
+        const user = props ? props.user : this.props.user;
+        const routes = [{ route: '/', text: 'Home' }];
         if(user.id) {
             routes.push({ route: '/dashboard', text: 'Dashboard' });
             routes.push({ route: `/users/${user.id}`, text: 'My profile' });
@@ -24,8 +25,14 @@ class NavbarComponent extends Component {
 
         this.setState({ routes });
     }
+    componentDidMount() {
+        this.getRoutes();
+    }
+
+    componentWillReceiveProps = (props) => {
+        this.getRoutes(props);
+    }
     render() {
-        debugger;
         return ( 
           <header role="banner" className="probootstrap-header">
                 <div className="container-fluid">
