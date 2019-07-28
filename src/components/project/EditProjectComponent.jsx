@@ -109,11 +109,29 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents });
     }
 
+    findChildByIndex = (components, index) => {
+        const children = [];
+        components.filter(c => c.children)
+            .map(c => c.children)
+            .forEach(c => children.push(...c));
+        if(!children.length) {
+            return null;
+        }
+
+        let component = children.find((c) => c.index === index);
+
+        return component;
+    }
     handleChangeEditMode = (index) => {
         const droppedComponents = [...this.state.droppedComponents];
 
-        droppedComponents.find(c => c.index === index)
-            .isInEditMode = !droppedComponents.find(c => c.index === index).isInEditMode;
+        let foundComponent = droppedComponents.find(c => c.index === index);
+        if(!foundComponent) {
+            foundComponent = this.findChildByIndex(droppedComponents, index)
+        }
+
+        foundComponent.isInEditMode = !foundComponent.isInEditMode;
+
         droppedComponents.forEach((component) => {
             if(component.index !== index) {
                 component.isInEditMode = false;
@@ -160,7 +178,31 @@ class EditProjectComponent extends Component {
         } else {
             componentInEditMode[field] = value;
         }
-        droppedComponents[index] = componentInEditMode;
+
+        if(index !== -1) {
+            droppedComponents[index] = componentInEditMode;
+        } else {
+            // Update child after changed is made
+            let childIndex = -1;
+            const componentIndex = droppedComponents
+                .findIndex(c => {
+                    if(!c.children) {
+                        return false;
+                    }
+                    return c.children.find((child, i) => {
+                        if(child.index === componentInEditMode.index) {
+                            childIndex = i;
+                            return true;
+                        }
+
+                        return false;
+                    });
+                });
+
+            const editedComponent = droppedComponents[componentIndex];
+            editedComponent.children[childIndex] = componentInEditMode;
+            droppedComponents[componentIndex] = editedComponent;
+        }
 
         this.setState({ droppedComponents });
     }
@@ -207,13 +249,23 @@ class EditProjectComponent extends Component {
     }
     getComponentInEditMode = () => {
         let index = -1;
-        let component = this.state.droppedComponents.find((c, i) => {
+        const droppedComponents = this.state.droppedComponents;
+        let component = droppedComponents.find((c, i) => {
             if(c.isInEditMode) {
                 index = i;
             }
 
             return c.isInEditMode;
         });
+
+        if(!component) {
+            const children = [];
+            droppedComponents.filter(c => c.children)
+                .map(c => c.children)
+                .forEach(c => children.push(...c));
+
+            component = children.find((c) => c.isInEditMode);
+        }
 
         return { componentInEditMode: component, index };
     }
@@ -278,6 +330,23 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents, swapDate: new Date() });
     }
 
+    handleDropContainerComponent = (event, nativeEvent, index) => {
+        nativeEvent.stopPropagation();
+        const draggableComponents = [...this.state.draggableComponents];
+        const foundElement = draggableComponents
+            .find((draggableComponent) => draggableComponent.name === event.component);
+        foundElement.index = uuid.v1();
+        const droppedComponent = Object.assign({}, foundElement);
+        const droppedComponents = [...this.state.droppedComponents];
+        const containerIndex = droppedComponents.findIndex((c) => c.index === index);
+        const container = Object.assign({}, droppedComponents[containerIndex]);
+
+        container.children.push(droppedComponent);
+        droppedComponents[containerIndex] = container;
+
+        this.setState({ droppedComponent });
+    }
+
     render() {
         if(this.state.isLoading) {
             return <LoadingComponent message='Fetching project' />;
@@ -332,6 +401,7 @@ class EditProjectComponent extends Component {
                         handleDropComponent={this.handleDropComponent}
                         componentDragStart={this.componentDragStart}
                         componentDragEnd={this.componentDragEnd}
+                        handleDropContainerComponent={this.handleDropContainerComponent}
                         rearangeComponents={this.rearangeComponents}/>
                     <ElementToolbarComponent
                         actions={{

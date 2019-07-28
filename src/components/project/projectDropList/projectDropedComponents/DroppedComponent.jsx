@@ -7,21 +7,26 @@ import { componentTypes } from '../../components/componentTypes';
 import ButtonComponent from '../../../common/ButtonComponent';
 import { Draggable } from 'react-drag-and-drop';
 import { Resizable } from 're-resizable';
+import { Droppable } from 'react-drag-and-drop';
 
 const initialSizes = {
     width: '0px',
     height: '0px'
 };
 
-const getComponent = (droppedComponent, handleChangeEditMode) => {
+const getComponent = (droppedComponent, handleChangeEditMode, handleDropContainerComponent) => {
     let component = null;
     switch (droppedComponent.name) {
         case componentTypes.Header:
             component = (
                 <h1
+                    key={droppedComponent.index}
                     id={droppedComponent.index}
                     style={droppedComponent.style}
-                    onClick={() => handleChangeEditMode(droppedComponent.index)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        handleChangeEditMode(droppedComponent.index)
+                    }}
                     className='droped-component'>
                     {droppedComponent.innerText}
                 </h1>)
@@ -29,9 +34,13 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         case componentTypes.Text:
             component = (
                 <div
+                    key={droppedComponent.index}
                     id={droppedComponent.index}
                     style={droppedComponent.style}
-                    onClick={() => handleChangeEditMode(droppedComponent.index)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        handleChangeEditMode(droppedComponent.index);
+                    }}
                     className='droped-component'>
                     {droppedComponent.innerText}
                 </div>);
@@ -39,17 +48,22 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
         case componentTypes.Image:
             component = (
                 <img
+                    key={droppedComponent.index}
                     draggable={false}
                     id={droppedComponent.index}
                     alt='component'
                     src={droppedComponent.src}
                     style={droppedComponent.style}
-                    onClick={() => handleChangeEditMode(droppedComponent.index)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        handleChangeEditMode(droppedComponent.index);
+                    }}
                     className='droped-component'/>);
             break;
         case componentTypes.RoutingLink:
             component = (
                 <a
+                    key={droppedComponent.index}
                     id={droppedComponent.index}
                     href={droppedComponent.to}
                     alt='component'
@@ -61,9 +75,33 @@ const getComponent = (droppedComponent, handleChangeEditMode) => {
                     {droppedComponent.innerText}
                 </a>);
             break;
+        case componentTypes.Container:
+            component = (
+                <Droppable
+                    key={droppedComponent.index}
+                    types={['component']} // <= allowed drop types
+                    onDrop={(event, nativeEvent) => 
+                        handleDropContainerComponent(event, nativeEvent, droppedComponent.index)}>
+                    <div
+                        id={droppedComponent.index}
+                        style={droppedComponent.style}
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            handleChangeEditMode(droppedComponent.index);
+                        }}
+                        className='droped-component'>
+                        {
+                            droppedComponent.children.map((c) => (
+                                getComponent(c, handleChangeEditMode, handleDropContainerComponent)
+                            ))
+                        }
+                    </div>
+                </Droppable>)
+            break;
         default:
             component = (
             <div
+                key={droppedComponent.index}
                 id={droppedComponent.index}
                 style={droppedComponent.style}
                 onClick={() => handleChangeEditMode(droppedComponent.index)}
@@ -83,7 +121,8 @@ const DroppedComponent = ({
         handleForceExitEditMode,
         componentDragStart,
         rearangeComponents,
-        componentDragEnd
+        componentDragEnd,
+        handleDropContainerComponent
     }) => {
     if(droppedComponent.isInEditMode) {
         return (
@@ -116,6 +155,25 @@ const DroppedComponent = ({
                                         src={droppedComponent.src}
                                         style={droppedComponent.style}
                                         className='edit-input'/>
+                                );
+                                break;
+                            case componentTypes.Container:
+                                element = (
+                                    <div
+                                        alt='component'
+                                        src={droppedComponent.src}
+                                        style={droppedComponent.style}
+                                        className='edit-input'>
+                                        {
+                                            droppedComponent.children.map((c) => (
+                                                getComponent(
+                                                    c,
+                                                    handleChangeEditMode,
+                                                    handleDropContainerComponent
+                                                )
+                                            ))
+                                        }
+                                        </div>
                                 );
                                 break;
                             default:
@@ -152,7 +210,11 @@ const DroppedComponent = ({
             </div>
         );
     }
-    const component = getComponent(droppedComponent, handleChangeEditMode);
+    const component = getComponent(
+        droppedComponent,
+        handleChangeEditMode,
+        handleDropContainerComponent
+    );
     return (
         <Draggable 
             onDragStart={() => componentDragStart(droppedComponent.index)}
