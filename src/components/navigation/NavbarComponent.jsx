@@ -6,24 +6,47 @@ import { connect } from 'react-redux';
 import './NavbarComponent.css';
 
 class NavbarComponent extends Component {
+    state = {
+        routes: [
+          { route: '/', text: 'Home' }
+        ]
+    }
+    componentDidMount() {
+        const user = this.props.user;
+        const routes = [...this.state.routes];
+        if(user.id) {
+            routes.push({ route: `/users/${user.id}`, text: 'My profile' });
+            routes.push({ route: '/dashboard', text: 'Dashboard' });
+        } else {
+            routes.push({ route: `/login`, text: 'Sign in' });
+            routes.push({ route: `/register`, text: 'Sign up' });
+        }
+
+        this.setState({ routes });
+    }
     render() {
+        debugger;
         return ( 
-        <header role="banner" className="probootstrap-header">
-          <div className="container-fluid">
-            <a href="index.html" className="probootstrap-logo">ReBuilder</a>
-            <a href="#" className="probootstrap-burger-menu visible-xs"><i>Menu</i></a>
-            <div className="mobile-menu-overlay" />
-            <nav role="navigation" className="probootstrap-nav hidden-xs">
-              <ul className="probootstrap-main-nav">
-                <li><Link className="active" to="/">Home</Link></li>
-                <li><Link to="/dashboard">Dashboard</Link></li>
-                <li><Link to="/products.html">Product</Link></li>
-                <li><Link to="/login">Sign in</Link></li>
-                <li><Link to="/register">Sign up</Link></li>
-              </ul>
-            </nav>
-          </div>
-        </header>
+          <header role="banner" className="probootstrap-header">
+                <div className="container-fluid">
+                    <a href="index.html" className="probootstrap-logo">ReBuilder</a>
+                    <a href="#" className="probootstrap-burger-menu visible-xs"><i>Menu</i></a>
+                    <div className="mobile-menu-overlay" />
+                    <nav role="navigation" className="probootstrap-nav hidden-xs">
+                    <ul className="probootstrap-main-nav">
+                    {
+                        this.state.routes.map((route, i) => {
+                          return (
+                            <li key={i}>
+                                <Link className="active" to={route.route}>{route.text}</Link>
+                            </li>
+                          );
+                        })
+                    }
+                    </ul>
+                  </nav>
+              </div>
+          </header>
         );
     }
 }
