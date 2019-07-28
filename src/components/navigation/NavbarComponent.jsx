@@ -9,46 +9,32 @@ import './NavbarComponent.css';
 class NavbarComponent extends Component {
     render() {
         return ( 
-            <Fragment>
-                <Navbar inverse collapseOnSelect className="main-navbar sticky">
-                    <Navbar.Header>
-                        <Navbar.Brand className="main-header-container">
-                            <Link className="navbar-brand main-header" to="/">ReBuilder</Link>
-                        </Navbar.Brand>
-                        <Navbar.Toggle>Menu</Navbar.Toggle>
-                    </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Nav>
-                            <NavItem componentClass='span' className="nav-link-container">
-                                <Link className="nav-link navbar_element" to="/">Home</Link>
-                            </NavItem>
-                        </Nav>
-                        { this.props.user.username ? (
-                            <Nav pullRight>
-                                <NavItem componentClass='span' className="nav-link-container">
-                                    <Link className="nav-link navbar_element"
-                                        to={"/users/" + this.props.user.id}>
-                                        Hello, {this.props.user.username}
-                                    </Link>
-                                </NavItem>
-                            </Nav>  
-                        ) : (
-                            <Nav pullRight>
-                                <Nav>
-                                    <NavItem componentClass='span' className="nav-link-container">
-                                        <Link className="nav-link navbar_element" to="/login">Sign in</Link>
-                                    </NavItem>
-                                </Nav>
-                                <Nav>
-                                    <NavItem componentClass='span' className="nav-link-container">
-                                        <Link className="nav-link navbar_element" to="/register">Sign up</Link>
-                                    </NavItem>
-                                </Nav>
-                            </Nav>
-                        ) } 
-                    </Navbar.Collapse>
-                </Navbar>
-            </Fragment>
+        <header role="banner" className="probootstrap-header">
+          <div className="container-fluid">
+            <a href="index.html" className="probootstrap-logo">Format<span>.</span></a>
+            <a href="#" className="probootstrap-burger-menu visible-xs"><i>Menu</i></a>
+            <div className="mobile-menu-overlay" />
+            <nav role="navigation" className="probootstrap-nav hidden-xs">
+              <ul className="probootstrap-main-nav">
+                <li><Link className="active"><a to="/">Home</a></Link></li>
+                <li><Link><a to="/dashboard">Dashboard</a></Link></li>
+                <li><Link><a to="products.html">Product</a></Link></li>
+                <li><Link><a to="about.html">About</a></Link></li>
+                <li><Link><a to="contact.html">Contact</a></Link></li>
+              </ul>
+              <div className="extra-text visible-xs">
+                <a href="#" className="probootstrap-burger-menu"><i>Menu</i></a>
+                <h5>Social</h5>
+                <ul className="social-buttons">
+                  <li><a href="#"><i className="icon-twitter" /></a></li>
+                  <li><a href="#"><i className="icon-facebook" /></a></li>
+                  <li><a href="#"><i className="icon-instagram2" /></a></li>
+                </ul>
+                <p><small>© Copyright 2017 uiCookies:Format. All Rights Reserved.</small></p>
+              </div>
+            </nav>
+          </div>
+        </header>
         );
     }
 }

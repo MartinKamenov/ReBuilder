@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import DashboardComponent from '../dashboard/DashboardComponent';
+import HomeComponent from '../../theme/HomeComponent';
 import NavbarComponent from '../navigation/NavbarComponent';
 import LoginComponent from '../auth/login/LoginComponent';
 import RegisterComponent from '../auth/register/RegisterComponent';
@@ -45,7 +46,8 @@ class AppRouterComponent extends Component {
                 (
                     <div className='main-container'>
                         <NavbarComponent/>
-                        <Route exact path="/" component={DashboardComponent} />
+                        <Route exact path="/" component={HomeComponent} />
+                        <Route exact path="/dashboard" component={DashboardComponent} />
                         <Route exact path="/login" component={LoginComponent} />
                         <Route exact path="/register" component={RegisterComponent} />
                         <Route exact path="/projects/:id" component={InnerRoutingComponent} />
