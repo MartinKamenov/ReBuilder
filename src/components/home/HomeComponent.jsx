@@ -76,6 +76,18 @@ class HomeComponent extends Component {
             </div>
           </div>
         </section>
+        {
+          function () {
+              let script = document.createElement('script');
+              script.src = "/scripts.min.js";
+              document.body.appendChild(script);
+              let script2 = document.createElement('script');
+              script2.src = "/main.min.js";
+              document.body.appendChild(script2);
+              let script3 = document.createElement('script');
+          }()
+        }
+        
       </div>
      );
   }
