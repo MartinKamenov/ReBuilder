@@ -11,11 +11,26 @@
   </head>
   <body>
 
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="%PUBLIC_URL%/scripts.min.js"></script>
-    <script src="%PUBLIC_URL%/main.min.js"></script>
-    <script src="%PUBLIC_URL%/custom.js"></script>
+    <script defer type="text/javascript"
+    src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+    crossorigin="anonymous"></script></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.5/waypoints.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"></script>
+    <script defer>
+      window.onload = function () {
+        console.log($);
+          let script = document.createElement('script');
+          script.src = "%PUBLIC_URL%/scripts.min.js";
+          document.body.appendChild(script);
+          let script2 = document.createElement('script');
+          script2.src = "%PUBLIC_URL%/main.min.js";
+          document.body.appendChild(script2);
+          let script3 = document.createElement('script');
+          script3.src = "%PUBLIC_URL%/custom.js";
+          document.body.appendChild(script3);
+      }
+    </script>
   </body>
 </html>
