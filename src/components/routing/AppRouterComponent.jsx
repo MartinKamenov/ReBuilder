@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import DashboardComponent from '../dashboard/DashboardComponent';
+import HomeComponent from '../home/HomeComponent';
 import NavbarComponent from '../navigation/NavbarComponent';
 import LoginComponent from '../auth/login/LoginComponent';
 import RegisterComponent from '../auth/register/RegisterComponent';
@@ -15,6 +16,7 @@ import LoadingComponent from '../common/LoadingComponent';
 import UserComponent from '../user/UserComponent';
 
 import 'react-toastify/dist/ReactToastify.css';
+import './AppRouterComponent.css';
 
 class AppRouterComponent extends Component {
     state = {
@@ -45,14 +47,19 @@ class AppRouterComponent extends Component {
                 (
                     <div className='main-container'>
                         <NavbarComponent/>
-                        <Route exact path="/" component={DashboardComponent} />
-                        <Route exact path="/login" component={LoginComponent} />
-                        <Route exact path="/register" component={RegisterComponent} />
-                        <Route exact path="/projects/:id" component={InnerRoutingComponent} />
-                        <Route exact path="/users/:id" component={UserComponent} />
-                        <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
-                        <div className='container'>
-                            <Route exact path="/project/new" component={NewProjectPageComponent} />
+                        <Route exact path="/" component={HomeComponent} />
+                        <div className='navbar-container-margin'>
+                            <div className='main-container'>
+                                <Route exact path="/dashboard" component={DashboardComponent} />
+                                <Route exact path="/login" component={LoginComponent} />
+                                <Route exact path="/register" component={RegisterComponent} />
+                                <Route exact path="/projects/:id" component={InnerRoutingComponent} />
+                                <Route exact path="/users/:id" component={UserComponent} />
+                                <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
+                                <div className='container'>
+                                    <Route exact path="/project/new" component={NewProjectPageComponent} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}

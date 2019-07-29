@@ -9,7 +9,7 @@ const projectGenerator = {
         templates.forEach((templateObject) => {
             zip.file(templateObject.filePath, templateObject.template);
         });
-        zip.generateAsync({type: "blob"}).then(function(content) {
+        zip.generateAsync({type: 'blob'}).then(function(content) {
             FileSaver.saveAs(content, `${name}.zip`);
         });
     }

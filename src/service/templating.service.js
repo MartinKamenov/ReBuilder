@@ -4,7 +4,7 @@ const templatingService = {
     getAllTemplates: (name, pages) => {
         const templates = [
             {
-                filePath: "src/index.js",
+                filePath: 'src/index.js',
                 template: 
 `import React from 'react';
 import ReactDOM from 'react-dom';
@@ -13,7 +13,7 @@ import App from './App';
 ReactDOM.render(<App />, document.getElementById('root'));`
             },
             {
-                filePath: "src/App.js",
+                filePath: 'src/App.js',
                 template: 
 `import React from 'react';
 import MainComponent from './components/MainComponent.jsx';
@@ -28,7 +28,7 @@ export default App;
 `
             },
             {
-                filePath: "package.json",
+                filePath: 'package.json',
                 template: 
 `{
     "name": "simplest",
@@ -65,7 +65,7 @@ export default App;
 `
             },
             {
-                filePath: "public/index.html",
+                filePath: 'public/index.html',
                 template: 
 `<!DOCTYPE html>
 <html lang="en">
@@ -83,7 +83,7 @@ export default App;
 </html>`
             },
             {
-                filePath: "./src/components/main.css",
+                filePath: './src/components/main.css',
                 template: 
 `.element-center {
     text-align: center;
@@ -92,13 +92,13 @@ export default App;
 `
             },
             {
-                filePath: `./src/components/MainComponent.jsx`,
+                filePath: './src/components/MainComponent.jsx',
                 template: 
 `import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 ${pages.map(page => (
-    `import ${page.name} from './${page.name}';`
-)).join('\n')}
+        `import ${page.name} from './${page.name}';`
+    )).join('\n')}
 import './main.css';
 
 class MainComponent extends Component {
@@ -107,8 +107,8 @@ render() {
     return (
         <Router>
             ${pages.map(page => (
-                `<Route exact path='${page.route}' component={${page.name}} />`
-            )).join('\n           ')}
+        `<Route exact path='${page.route}' component={${page.name}} />`
+    )).join('\n           ')}
         </Router>
     );
 }
