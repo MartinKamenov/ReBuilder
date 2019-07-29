@@ -69,7 +69,7 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                     alt='component'
                     style={droppedComponent.style}
                     onClick={(e) => {
-                        e.preventDefault(); 
+                        e.preventDefault();
                         handleChangeEditMode(droppedComponent.index)}}
                     className='droped-component'>
                     {droppedComponent.innerText}

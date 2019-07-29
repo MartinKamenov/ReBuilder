@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../theme/css/styles-merged.css'
 import '../../theme/css/style.min.css'
 import '../../theme/css/custom.css'
+import { Link } from 'react-router-dom';
 
 class HomeComponent extends Component {
   render() {
@@ -70,7 +71,7 @@ class HomeComponent extends Component {
             <div className='row'>
               <div className='col-md-4 col-md-offset-4 probootstrap-animate'>
                 <p className='text-center'>
-                  <a href='#' className='btn btn-primary btn-lg btn-block' role='button'>View All Services</a>
+                  <Link to='#' className='btn btn-primary btn-lg btn-block' role='button'>View All Services</Link>
                 </p>
               </div>
             </div>
@@ -84,7 +85,6 @@ class HomeComponent extends Component {
               let script2 = document.createElement('script');
               script2.src = "/main.min.js";
               document.body.appendChild(script2);
-              let script3 = document.createElement('script');
           }()
         }
         

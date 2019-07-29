@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as authenticationActions from '../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
@@ -37,7 +37,7 @@ class NavbarComponent extends Component {
           <header role="banner" className="probootstrap-header">
                 <div className="container-fluid">
                     <Link to='/' className="probootstrap-logo">ReBuilder</Link>
-                    <a href="#" className="probootstrap-burger-menu visible-xs"><i></i></a>
+                    <Link to='#' className="probootstrap-burger-menu visible-xs"><i></i></Link>
                     <div className="mobile-menu-overlay" />
                     <nav role="navigation" className="probootstrap-nav hidden-xs">
                     <ul className="probootstrap-main-nav">
