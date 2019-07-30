@@ -10,6 +10,10 @@
     width: 20%; 
 }
 
+.component-list-container-inactive {
+    display: none;
+}
+
 .rearange-btn {
     margin: auto;
     display: block;

@@ -1,6 +1,6 @@
 .toolbar-container {
     display: block;
-    right: 0;
+    right: 8px;
     background-color: #aaaaaaaa;
     position: absolute;
     border: 1px solid black;
@@ -8,6 +8,10 @@
     height: calc(100vh - 192px);
     text-align: center;
     flex-direction: column;
+}
+
+.toolbar-container-inactive {
+    display: none;
 }
 
 .toolbar-scrollable {

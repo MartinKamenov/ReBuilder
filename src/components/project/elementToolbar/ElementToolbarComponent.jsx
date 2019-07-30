@@ -17,7 +17,7 @@ const ElementToolbarComponent = ({
     actions}) => {
     if(!component) {
         return (
-            <div className='toolbar-container'>
+            <div className='toolbar-container-inactive'>
                 <h3>Toolbar</h3>
                 <div>Select an element by clicking on it</div>
             </div>

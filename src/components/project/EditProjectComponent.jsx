@@ -30,7 +30,8 @@ class EditProjectComponent extends Component {
         draggedComponentIndex: '',
         swapDate: new Date(),
         isInitialyLoaded: true,
-        isLoading: true
+        isLoading: true,
+        dragContainerActive: false
     }
 
     componentDidMount() {
@@ -391,7 +392,16 @@ class EditProjectComponent extends Component {
                     </div>
                 </div>
                 <div className="drag-drop-container">
+                    <button 
+                        className='draggable-container-btn' 
+                        onClick={() => 
+                        this.setState({
+                            dragContainerActive: !this.state.dragContainerActive
+                        })}>
+                            Show draggable elements
+                    </button>
                     <ProjectComponentsList
+                        active={this.state.dragContainerActive}
                         draggableComponents={this.state.draggableComponents}/>
                     <ProjectPageComponent
                         handleComponentValueChange={this.handleComponentValueChange}
