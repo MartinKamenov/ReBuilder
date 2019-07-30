@@ -1,10 +1,9 @@
 .project-page-container {
     display: inline-block;
-    width: 60%;
-    height: 500px;
+    width: 100%;
+    height: calc(100vh - 192px);
     background-color: white;
     border: 1px solid black;
-    border-radius: 10px;
 }
 
 .droped-components-container {

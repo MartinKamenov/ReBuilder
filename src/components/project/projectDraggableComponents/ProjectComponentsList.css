@@ -1,10 +1,12 @@
 .component-list-container {
-    display: inline-block;
+    position: absolute;
+    display: block;
+    float: left;
     border: 1px solid black;
-    border-radius: 10px;
+    background-color: #aaaaaaaa;
     text-align: center;
     padding: 10px;
-    height: 500px;
+    height: calc(100vh - 192px);
     width: 20%; 
 }
 
