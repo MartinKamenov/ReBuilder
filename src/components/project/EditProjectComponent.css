@@ -25,11 +25,13 @@
 }
 
 .generate-project-btn-container {
-    float: right;
+    float: center;
+    height: 100px;
 }
 
 .generate-project-btn {
-    width: 150px;
+    width: 300px;
+    height: 40px;
 }
 
 .new-project-btn-text {
