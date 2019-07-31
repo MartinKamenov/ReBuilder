@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import DraggableComponent from './DraggableComponent';
 import './ProjectComponentsList.css';
 
-const ProjectComponentsList = ({ draggableComponents }) => {
+const ProjectComponentsList = ({ draggableComponents, active }) => {
     return (
-        <div className='component-list-container vertical-scrollable-container'>
+        <div 
+            className=
+            {`component-list-container${active ? '' : '-inactive'} vertical-scrollable-container`}>
             <h3>Draggable element</h3>
             {
                 draggableComponents.map((component, i) => 

@@ -1,11 +1,17 @@
 .toolbar-container {
-    display: inline-block;
+    display: block;
+    right: 8px;
+    background-color: #aaaaaaaa;
+    position: absolute;
     border: 1px solid black;
-    border-radius: 10px;
     width: 20%;
-    height: 500px;
+    height: calc(100vh - 192px);
     text-align: center;
     flex-direction: column;
+}
+
+.toolbar-container-inactive {
+    display: none;
 }
 
 .toolbar-scrollable {

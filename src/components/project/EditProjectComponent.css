@@ -34,6 +34,29 @@
     height: 40px;
 }
 
+.draggable-container-btn {
+    z-index: 1;
+    position: absolute;
+    display: inline-block;
+    text-decoration: none;
+    color: #4A3E9E;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    border-radius: 50%;
+    border: solid 2px #4A3E9E;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    font-weight: bold;
+    transition: 2s;
+}
+
+.draggable-container-btn:hover {
+    color: white;
+    background-image: linear-gradient(+90deg, #5D3A5F , #4A3E9E);
+}
+
 .new-project-btn-text {
     margin-left: 5px;
 }
