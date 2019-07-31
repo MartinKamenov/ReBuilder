@@ -13,7 +13,8 @@ const ProjectPageComponent = ({
         componentDragStart,
         componentDragEnd,
         rearangeComponents,
-        handleDropContainerComponent
+        handleDropContainerComponent,
+        componentInEditMode
     }) => {
     return (
         <div className="project-page-container">
@@ -29,7 +30,8 @@ const ProjectPageComponent = ({
                         componentDragStart={componentDragStart}
                         componentDragEnd={componentDragEnd}
                         rearangeComponents={rearangeComponents}
-                        handleDropContainerComponent={handleDropContainerComponent}/>
+                        handleDropContainerComponent={handleDropContainerComponent}
+                        componentInEditMode={componentInEditMode}/>
             </Droppable>
         </div>
     );
@@ -40,7 +42,8 @@ ProjectPageComponent.propTypes = {
     handleDropComponent: PropTypes.func.isRequired,
     handleComponentValueChange: PropTypes.func.isRequired,
     handleChangeEditMode: PropTypes.func.isRequired,
-    handleForceExitEditMode: PropTypes.func.isRequired
+    handleForceExitEditMode: PropTypes.func.isRequired,
+    componentInEditMode: PropTypes.bool.isRequired
 };
  
 export default ProjectPageComponent;

@@ -404,6 +404,7 @@ class EditProjectComponent extends Component {
                         active={this.state.dragContainerActive}
                         draggableComponents={this.state.draggableComponents}/>
                     <ProjectPageComponent
+                        componentInEditMode={componentInEditMode ? true : false}
                         handleComponentValueChange={this.handleComponentValueChange}
                         handleChangeEditMode={this.handleChangeEditMode}
                         handleForceExitEditMode={this.handleForceExitEditMode}

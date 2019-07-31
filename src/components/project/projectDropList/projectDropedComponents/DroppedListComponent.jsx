@@ -11,10 +11,12 @@ const DroppedListComponent = ({
         componentDragStart,
         componentDragEnd,
         rearangeComponents,
-        handleDropContainerComponent
+        handleDropContainerComponent,
+        componentInEditMode
     }) => {
+        debugger;
     return (
-        <div className='droped-components-container vertical-scrollable-container'>
+        <div className={`droped-components-container${componentInEditMode ? '-edit-mode' : ''} vertical-scrollable-container`}>
             {
                 droppedComponents.map((component, i) => (
                     <DroppedComponent
@@ -37,7 +39,8 @@ DroppedListComponent.propTypes = {
     droppedComponents: PropTypes.array.isRequired,
     handleComponentValueChange: PropTypes.func.isRequired,
     handleChangeEditMode: PropTypes.func.isRequired,
-    handleForceExitEditMode: PropTypes.func.isRequired
+    handleForceExitEditMode: PropTypes.func.isRequired,
+    componentInEditMode: PropTypes.bool.isRequired
 };
  
 export default DroppedListComponent;
