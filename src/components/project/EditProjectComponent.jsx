@@ -398,7 +398,7 @@ class EditProjectComponent extends Component {
                         this.setState({
                             dragContainerActive: !this.state.dragContainerActive
                         })}>
-                            Show draggable elements
+                            {this.state.dragContainerActive ? 'Hide': 'Show'}
                     </button>
                     <ProjectComponentsList
                         active={this.state.dragContainerActive}
