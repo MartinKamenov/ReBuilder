@@ -14,7 +14,6 @@ const DroppedListComponent = ({
         handleDropContainerComponent,
         componentInEditMode
     }) => {
-        debugger;
     return (
         <div className={`droped-components-container${componentInEditMode ? '-edit-mode' : ''} vertical-scrollable-container`}>
             {
