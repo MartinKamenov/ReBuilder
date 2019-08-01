@@ -14,7 +14,12 @@ const initialSizes = {
     height: '0px'
 };
 
-const getComponent = (droppedComponent, handleChangeEditMode, handleDropContainerComponent) => {
+const getComponent = (
+        droppedComponent,
+        handleChangeEditMode,
+        handleDropContainerComponent,
+        elementStyle
+    ) => {
     let component = null;
     switch (droppedComponent.name) {
         case componentTypes.Header:
@@ -22,7 +27,7 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                 <h1
                     key={droppedComponent.index}
                     id={droppedComponent.index}
-                    style={droppedComponent.style}
+                    style={elementStyle}
                     onClick={(event) => {
                         event.stopPropagation();
                         handleChangeEditMode(droppedComponent.index)
@@ -36,7 +41,7 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                 <div
                     key={droppedComponent.index}
                     id={droppedComponent.index}
-                    style={droppedComponent.style}
+                    style={elementStyle}
                     onClick={(event) => {
                         event.stopPropagation();
                         handleChangeEditMode(droppedComponent.index);
@@ -53,7 +58,7 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                     id={droppedComponent.index}
                     alt='component'
                     src={droppedComponent.src}
-                    style={droppedComponent.style}
+                    style={elementStyle}
                     onClick={(event) => {
                         event.stopPropagation();
                         handleChangeEditMode(droppedComponent.index);
@@ -67,7 +72,7 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                     id={droppedComponent.index}
                     href={droppedComponent.to}
                     alt='component'
-                    style={droppedComponent.style}
+                    style={elementStyle}
                     onClick={(e) => {
                         e.preventDefault();
                         handleChangeEditMode(droppedComponent.index)}}
@@ -84,7 +89,7 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
                         handleDropContainerComponent(event, nativeEvent, droppedComponent.index)}>
                     <div
                         id={droppedComponent.index}
-                        style={droppedComponent.style}
+                        style={elementStyle}
                         onClick={(event) => {
                             event.stopPropagation();
                             handleChangeEditMode(droppedComponent.index);
@@ -103,7 +108,7 @@ const getComponent = (droppedComponent, handleChangeEditMode, handleDropContaine
             <div
                 key={droppedComponent.index}
                 id={droppedComponent.index}
-                style={droppedComponent.style}
+                style={elementStyle}
                 onClick={() => handleChangeEditMode(droppedComponent.index)}
                 className='droped-component'>
                 {droppedComponent.innerText}
@@ -128,7 +133,9 @@ const DroppedComponent = ({
         return (
             <div className='edit-component-container'>
                 <Resizable
-                    style={{margin: 'auto'}}
+                    style={{
+                        margin: 'auto'
+                    }}
                     onResizeStart={(event, direction, refToElement, delta) => {
                         initialSizes.width = parseInt(droppedComponent.style.width, 10);
                         initialSizes.height = parseInt(droppedComponent.style.height, 10);
@@ -214,13 +221,29 @@ const DroppedComponent = ({
             </div>
         );
     }
+
+    const draggableStyle = {
+        display: droppedComponent.style.display,
+        width: droppedComponent.style.width
+    };
+    const elementStyle = Object.assign({}, droppedComponent.style);
+    Object.keys(draggableStyle).forEach(k => {
+        delete elementStyle[k];
+    });
+    elementStyle.width = '100%';
     const component = getComponent(
         droppedComponent,
         handleChangeEditMode,
-        handleDropContainerComponent
+        handleDropContainerComponent,
+        elementStyle
     );
+    
     return (
         <Draggable 
+            style={{
+                display: droppedComponent.style.display,
+                width: droppedComponent.style.width
+            }}
             onDragStart={() => componentDragStart(droppedComponent.index)}
             onDragOver={rearangeComponents}
             onDragEnd={componentDragEnd}>
