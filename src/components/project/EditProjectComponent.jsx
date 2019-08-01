@@ -52,6 +52,10 @@ class EditProjectComponent extends Component {
     }
 
     componentWillReceiveProps(props) {
+        if(props.error) {
+            this.setState({ saveStatus: error });
+        }
+
         if(props.project.id && this.state.isInitialyLoaded) {
             const project = Object.assign({}, props.project);
             const page = project.pages.find((p) => this.state.pageId === p.id);
@@ -440,7 +444,8 @@ const mapStateToProps = (state) => {
     return {
         project: state.project,
         user: state.user,
-        projectStatus: state.projectStatus
+        projectStatus: state.projectStatus,
+        error: state.error
     };
 };
 
