@@ -231,6 +231,7 @@ const DroppedComponent = ({
         delete elementStyle[k];
     });
     elementStyle.width = '100%';
+    elementStyle.display = 'inline-block';
     const component = getComponent(
         droppedComponent,
         handleChangeEditMode,
