@@ -16,6 +16,8 @@ import apiService from '../../service/api.service';
 
 import './EditProjectComponent.css';
 import ButtonComponent from '../common/ButtonComponent';
+import SaveStatus from './components/saveStatus';
+import SaveStatusComponent from '../common/SaveStatusComponent';
 
 class EditProjectComponent extends Component {
     state = {
@@ -31,7 +33,8 @@ class EditProjectComponent extends Component {
         swapDate: new Date(),
         isInitialyLoaded: true,
         isLoading: true,
-        dragContainerActive: false
+        dragContainerActive: false,
+        saveStatus: SaveStatus.Saved
     }
 
     componentDidMount() {
@@ -49,6 +52,10 @@ class EditProjectComponent extends Component {
     }
 
     componentWillReceiveProps(props) {
+        if(props.error) {
+            this.setState({ saveStatus: props.error });
+        }
+
         if(props.project.id && this.state.isInitialyLoaded) {
             const project = Object.assign({}, props.project);
             const page = project.pages.find((p) => this.state.pageId === p.id);
@@ -77,6 +84,8 @@ class EditProjectComponent extends Component {
                 isLoading: false
             });
         }
+
+        this.setState({ saveStatus: SaveStatus.Saved });
 
         // Opens window in new tab after project is deployed
         if(props.projectStatus) {
@@ -107,7 +116,7 @@ class EditProjectComponent extends Component {
         componentElement.index = uuid.v1();
         droppedComponents.push(componentElement);
 
-        this.setState({ droppedComponents });
+        this.setState({ droppedComponents, saveStatus: SaveStatus.Updated });
     }
 
     findChildByIndex = (components, index) => {
@@ -152,7 +161,11 @@ class EditProjectComponent extends Component {
         droppedComponents[exitModeComponentIndex] = this.state.previousComponent;
         droppedComponents[exitModeComponentIndex].isInEditMode = false;
 
-        this.setState({ droppedComponents, previousComponent: {} });
+        this.setState({ 
+            droppedComponents,
+            previousComponent: {},
+            saveStatus: SaveStatus.Updated
+        });
     }
 
     handleDeleteComponent = (index) => {
@@ -205,7 +218,7 @@ class EditProjectComponent extends Component {
             droppedComponents[componentIndex] = editedComponent;
         }
 
-        this.setState({ droppedComponents });
+        this.setState({ droppedComponents, saveStatus: SaveStatus.Updated });
     }
 
     handleComponentImageChange = async (event) => {
@@ -240,7 +253,7 @@ class EditProjectComponent extends Component {
         const index = pages.findIndex((p) => p.id === this.state.pageId);
         pages[index] = page;
 
-        this.setState({ page });
+        this.setState({ page, saveStatus: SaveStatus.Saved });
         
         this.props.actions.updateProject(this.state.id, pages, token);
     }
@@ -328,7 +341,11 @@ class EditProjectComponent extends Component {
         droppedComponents[firstIndex] = droppedComponents[secondIndex];
         droppedComponents[secondIndex] = swap;
 
-        this.setState({ droppedComponents, swapDate: new Date() });
+        this.setState({
+            droppedComponents,
+            swapDate: new Date(),
+            saveStatus: SaveStatus.Updated
+        });
     }
 
     handleDropContainerComponent = (event, nativeEvent, index) => {
@@ -356,7 +373,9 @@ class EditProjectComponent extends Component {
         const { componentInEditMode } = this.getComponentInEditMode();
         return (
             <div>
-                <h1 className='project-name-header'>{this.props.project.name}</h1>
+                <h1 className='project-name-header'>
+                    {this.props.project.name} <SaveStatusComponent saveStatus={this.state.saveStatus}/>
+                </h1>
                 <div className='new-project-name-outer-container'>
                     <div className='new-project-name-inner-container'>
                         <div className='generate-project-btn-container'>
@@ -433,7 +452,8 @@ const mapStateToProps = (state) => {
     return {
         project: state.project,
         user: state.user,
-        projectStatus: state.projectStatus
+        projectStatus: state.projectStatus,
+        error: state.error
     };
 };
 
