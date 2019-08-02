@@ -53,7 +53,7 @@ class EditProjectComponent extends Component {
 
     componentWillReceiveProps(props) {
         if(props.error) {
-            this.setState({ saveStatus: error });
+            this.setState({ saveStatus: props.error });
         }
 
         if(props.project.id && this.state.isInitialyLoaded) {
@@ -116,7 +116,7 @@ class EditProjectComponent extends Component {
         componentElement.index = uuid.v1();
         droppedComponents.push(componentElement);
 
-        this.setState({ droppedComponents });
+        this.setState({ droppedComponents, saveStatus: SaveStatus.Updated });
     }
 
     findChildByIndex = (components, index) => {
@@ -161,7 +161,11 @@ class EditProjectComponent extends Component {
         droppedComponents[exitModeComponentIndex] = this.state.previousComponent;
         droppedComponents[exitModeComponentIndex].isInEditMode = false;
 
-        this.setState({ droppedComponents, previousComponent: {} });
+        this.setState({ 
+            droppedComponents,
+            previousComponent: {},
+            saveStatus: SaveStatus.Updated
+        });
     }
 
     handleDeleteComponent = (index) => {
@@ -249,7 +253,7 @@ class EditProjectComponent extends Component {
         const index = pages.findIndex((p) => p.id === this.state.pageId);
         pages[index] = page;
 
-        this.setState({ page, saveStatus: SaveStatus.Saving });
+        this.setState({ page, saveStatus: SaveStatus.Saved });
         
         this.props.actions.updateProject(this.state.id, pages, token);
     }
@@ -337,7 +341,11 @@ class EditProjectComponent extends Component {
         droppedComponents[firstIndex] = droppedComponents[secondIndex];
         droppedComponents[secondIndex] = swap;
 
-        this.setState({ droppedComponents, swapDate: new Date() });
+        this.setState({
+            droppedComponents,
+            swapDate: new Date(),
+            saveStatus: SaveStatus.Updated
+        });
     }
 
     handleDropContainerComponent = (event, nativeEvent, index) => {
