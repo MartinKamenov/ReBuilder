@@ -11,11 +11,11 @@ const componentObjects = [
             textAlign: 'center',
             display: 'block',
             marginLeft: 'auto',
-            marginRigth: 'auto',
+            marginRight: 'auto',
             marginTop: '0px',
             marginBottom: '0px',
             paddingLeft: '0px',
-            paddingRigth: '0px',
+            paddingRight: '0px',
             paddingTop: '0px',
             paddingBottom: '0px'
         }
@@ -32,11 +32,11 @@ const componentObjects = [
             textAlign: 'center',
             display: 'block',
             marginLeft: 'auto',
-            marginRigth: 'auto',
+            marginRight: 'auto',
             marginTop: '0px',
             marginBottom: '0px',
             paddingLeft: '0px',
-            paddingRigth: '0px',
+            paddingRight: '0px',
             paddingTop: '0px',
             paddingBottom: '0px'
         }
@@ -52,11 +52,11 @@ const componentObjects = [
             width: '100%',
             display: 'block',
             marginLeft: 'auto',
-            marginRigth: 'auto',
+            marginRight: 'auto',
             marginTop: '0px',
             marginBottom: '0px',
             paddingLeft: '0px',
-            paddingRigth: '0px',
+            paddingRight: '0px',
             paddingTop: '0px',
             paddingBottom: '0px'
         }
@@ -73,11 +73,11 @@ const componentObjects = [
             textAlign: 'center',
             display: 'block',
             marginLeft: 'auto',
-            marginRigth: 'auto',
+            marginRight: 'auto',
             marginTop: '0px',
             marginBottom: '0px',
             paddingLeft: '0px',
-            paddingRigth: '0px',
+            paddingRight: '0px',
             paddingTop: '0px',
             paddingBottom: '0px'
         }
@@ -91,7 +91,7 @@ const componentObjects = [
             textAlign: 'center',
             display: 'block',
             marginLeft: 'auto',
-            marginRigth: 'auto',
+            marginRight: 'auto',
             marginTop: '0px',
             marginBottom: '0px'
         }
@@ -109,11 +109,11 @@ const componentObjects = [
             textAlign: 'center',
             display: 'block',
             marginLeft: 'auto',
-            marginRigth: 'auto',
+            marginRight: 'auto',
             marginTop: '0px',
             marginBottom: '0px',
             paddingLeft: '0px',
-            paddingRigth: '0px',
+            paddingRight: '0px',
             paddingTop: '0px',
             paddingBottom: '0px'
         }
@@ -130,11 +130,11 @@ const componentObjects = [
             textAlign: 'center',
             display: 'block',
             marginLeft: 'auto',
-            marginRigth: 'auto',
+            marginRight: 'auto',
             marginTop: '0px',
             marginBottom: '0px',
             paddingLeft: '0px',
-            paddingRigth: '0px',
+            paddingRight: '0px',
             paddingTop: '0px',
             paddingBottom: '0px',
             border: '1px solid black',

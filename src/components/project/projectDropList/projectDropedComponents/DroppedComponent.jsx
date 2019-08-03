@@ -224,7 +224,11 @@ const DroppedComponent = ({
 
     const draggableStyle = {
         display: droppedComponent.style.display,
-        width: droppedComponent.style.width
+        width: droppedComponent.style.width,
+        marginTop: droppedComponent.style.marginTop,
+        marginBottom: droppedComponent.style.marginBottom,
+        marginLeft: droppedComponent.style.marginLeft,
+        marginRight: droppedComponent.style.marginRight
     };
     const elementStyle = Object.assign({}, droppedComponent.style);
     Object.keys(draggableStyle).forEach(k => {
@@ -241,10 +245,7 @@ const DroppedComponent = ({
     
     return (
         <Draggable 
-            style={{
-                display: droppedComponent.style.display,
-                width: droppedComponent.style.width
-            }}
+            style={draggableStyle}
             onDragStart={() => componentDragStart(droppedComponent.index)}
             onDragOver={rearangeComponents}
             onDragEnd={componentDragEnd}>
