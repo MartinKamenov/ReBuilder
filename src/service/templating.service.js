@@ -1,7 +1,7 @@
 import elementGenerator from './elementGenerator.service';
 
 const templatingService = {
-    getAllTemplates: (name, pages) => {
+    getAllTemplates: (name, pages, imageUrl) => {
         const templates = [
             {
                 filePath: 'src/index.js',
@@ -71,7 +71,7 @@ export default App;
 <html lang="en">
     <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="shortcut icon" href="${imageUrl}" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />

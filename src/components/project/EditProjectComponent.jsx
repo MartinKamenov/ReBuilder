@@ -101,7 +101,8 @@ class EditProjectComponent extends Component {
         const index = pages.findIndex((p) => p.id === this.state.pageId);
         pages[index] = this.state.page;
 
-        projectGenerator.generateProject(this.props.project.name, pages);
+        const project = Object.assign({}, this.props.project);
+        projectGenerator.generateProject(project.name, pages, project.projectImageUrl);
     }
 
     handleDropComponent = (event) => {
