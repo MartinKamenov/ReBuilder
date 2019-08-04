@@ -66,7 +66,6 @@ const getComponent = (
                     className='droped-component'/>);
             break;
         case componentTypes.RoutingLink:
-            debugger;
             component = (
                 <a
                     key={droppedComponent.index}
