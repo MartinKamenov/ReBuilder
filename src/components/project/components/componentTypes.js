@@ -149,7 +149,7 @@ const componentObjects = [
         }
     },
     {
-        name: 'Container',
+        name: 'NavigationBar',
         title: 'Navigation bar',
         children: [
             {
