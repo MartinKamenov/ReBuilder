@@ -45,7 +45,7 @@ const DraggableComponent = ({draggableComponent}) => {
                     return icon;
                 })()}
                 
-                <span>{draggableComponent.name}</span>
+                <span>{draggableComponent.title}</span>
             </div>
         </Draggable>
     );
