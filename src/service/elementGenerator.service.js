@@ -34,6 +34,7 @@ const getElement = (component) => {
             `<Link to='${component.to}' className='element-center' style={${JSON.stringify(copyOfStyle)}}>${component.innerText}</Link>`
         );
     case componentTypes.Container:
+    case componentTypes.NavigationBar:
         return ( 
             `<div className='element-center' style={${JSON.stringify(copyOfStyle)}}>
 ${component.children.map(c => getElement(c)).join('\n')}
