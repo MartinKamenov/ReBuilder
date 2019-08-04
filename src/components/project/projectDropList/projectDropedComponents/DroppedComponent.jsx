@@ -66,6 +66,7 @@ const getComponent = (
                     className='droped-component'/>);
             break;
         case componentTypes.RoutingLink:
+            debugger;
             component = (
                 <a
                     key={droppedComponent.index}
@@ -120,7 +121,10 @@ const getComponent = (
                         className='droped-component'>
                         {
                             droppedComponent.children.map((c) => (
-                                getComponent(c, handleChangeEditMode, handleDropContainerComponent)
+                                getComponent(c,
+                                    handleChangeEditMode,
+                                    handleDropContainerComponent,
+                                    c.style)
                             ))
                         }
                     </div>
@@ -132,7 +136,10 @@ const getComponent = (
                 key={droppedComponent.index}
                 id={droppedComponent.index}
                 style={elementStyle}
-                onClick={() => handleChangeEditMode(droppedComponent.index)}
+                onClick={(event) => {
+                    event.stopPropagation();
+                    handleChangeEditMode(droppedComponent.index)
+                }}
                 className='droped-component'>
                 {droppedComponent.innerText}
             </div>);

@@ -162,10 +162,10 @@ const componentObjects = [
                     backgroundColor: '#ffffff',
                     fontSize: '16px',
                     height: '30px',
-                    width: '100%',
+                    width: '100px',
                     textAlign: 'center',
                     display: 'block',
-                    marginLeft: 'auto',
+                    marginLeft: '10px',
                     marginRight: 'auto',
                     marginTop: '0px',
                     marginBottom: '0px',
@@ -183,9 +183,9 @@ const componentObjects = [
                 style: {
                     color: '#000000',
                     backgroundColor: '#ffffff',
-                    fontSize: '16px',
+                    fontSize: '24px',
                     height: '30px',
-                    width: '100%',
+                    width: '100px',
                     textAlign: 'center',
                     display: 'block',
                     marginLeft: 'auto',
@@ -208,7 +208,7 @@ const componentObjects = [
                     backgroundColor: '#ffffff',
                     fontSize: '16px',
                     height: '30px',
-                    width: '100%',
+                    width: '100px',
                     textAlign: 'center',
                     display: 'block',
                     marginLeft: 'auto',
@@ -219,7 +219,7 @@ const componentObjects = [
                     paddingRight: '0px',
                     paddingTop: '0px',
                     paddingBottom: '0px'
-                }
+     }
             },
             {
                 name: 'RoutingLink',
@@ -231,7 +231,7 @@ const componentObjects = [
                     backgroundColor: '#ffffff',
                     fontSize: '16px',
                     height: '30px',
-                    width: '100%',
+                    width: '100px',
                     textAlign: 'center',
                     display: 'block',
                     marginLeft: 'auto',
@@ -247,7 +247,7 @@ const componentObjects = [
         ],
         style: {
             color: '#000000',
-            backgroundColor: '#ffffff',
+            backgroundColor: '#513D89',
             fontSize: '16px',
             height: '50px',
             width: '100%',
