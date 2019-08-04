@@ -103,13 +103,43 @@ const getComponent = (
                     </div>
                 </Droppable>)
             break;
+        case componentTypes.NavigationBar:
+        component = (
+                <Droppable
+                    key={droppedComponent.index}
+                    types={['component']} // <= allowed drop types
+                    onDrop={(event, nativeEvent) => 
+                        handleDropContainerComponent(event, nativeEvent, droppedComponent.index)}>
+                    <div
+                        id={droppedComponent.index}
+                        style={elementStyle}
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            handleChangeEditMode(droppedComponent.index);
+                        }}
+                        className='droped-component'>
+                        {
+                            droppedComponent.children.map((c) => (
+                                getComponent(c,
+                                    handleChangeEditMode,
+                                    handleDropContainerComponent,
+                                    c.style
+                                )
+                            ))
+                        }
+                    </div>
+                </Droppable>);
+            break;
         default:
             component = (
             <div
                 key={droppedComponent.index}
                 id={droppedComponent.index}
                 style={elementStyle}
-                onClick={() => handleChangeEditMode(droppedComponent.index)}
+                onClick={(event) => {
+                    event.stopPropagation();
+                    handleChangeEditMode(droppedComponent.index)
+                }}
                 className='droped-component'>
                 {droppedComponent.innerText}
             </div>);
@@ -169,6 +199,7 @@ const DroppedComponent = ({
                                 );
                                 break;
                             case componentTypes.Container:
+                            case componentTypes.NavigationBar:
                                 element = (
                                     <div
                                         alt='component'
@@ -180,7 +211,8 @@ const DroppedComponent = ({
                                                 getComponent(
                                                     c,
                                                     handleChangeEditMode,
-                                                    handleDropContainerComponent
+                                                    handleDropContainerComponent,
+                                                    c.style
                                                 )
                                             ))
                                         }

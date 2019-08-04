@@ -1,6 +1,7 @@
 const componentObjects = [
     {
         name: 'Header',
+        title: 'Header',
         innerText: 'Header',
         style: {
             color: '#000000',
@@ -22,6 +23,7 @@ const componentObjects = [
     },
     {
         name: 'Text',
+        title: 'Text',
         innerText: 'Text',
         style: {
             color: '#000000',
@@ -43,6 +45,7 @@ const componentObjects = [
     },
     {
         name: 'Grid',
+        title: 'Grid',
         rows: 3,
         columns: 1,
         style: {
@@ -63,6 +66,7 @@ const componentObjects = [
     },
     {
         name: 'Input',
+        title: 'Input',
         placeholder: 'Input',
         style: {
             color: '#000000',
@@ -84,6 +88,7 @@ const componentObjects = [
     },
     {
         name: 'Image',
+        title: 'Image',
         src: 'https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png',
         style: {
             height: '100px',
@@ -98,6 +103,7 @@ const componentObjects = [
     },
     {
         name: 'RoutingLink',
+        title: 'Routing Link',
         to: '',
         toValues: [],
         style: {
@@ -108,6 +114,7 @@ const componentObjects = [
             width: '100%',
             textAlign: 'center',
             display: 'block',
+            textDecoration: 'none',
             marginLeft: 'auto',
             marginRight: 'auto',
             marginTop: '0px',
@@ -120,6 +127,7 @@ const componentObjects = [
     },
     {
         name: 'Container',
+        title: 'Container',
         children: [],
         style: {
             color: '#000000',
@@ -127,6 +135,135 @@ const componentObjects = [
             fontSize: '16px',
             height: '200px',
             width: '50%',
+            textAlign: 'center',
+            display: 'block',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRight: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px',
+            border: '1px solid black',
+            borderRadius: '5px'
+        }
+    },
+    {
+        name: 'NavigationBar',
+        title: 'Navigation bar',
+        children: [
+            {
+                name: 'RoutingLink',
+                innerText: 'Website',
+                to: '/',
+                toValues: [],
+                style: {
+                    color: '#ffffff',
+                    backgroundColor: '#00000000',
+                    fontSize: '24px',
+                    height: '50px',
+                    width: '100px',
+                    lineHeight: '50px',
+                    textAlign: 'center',
+                    display: 'block',
+                    textDecoration: 'none',
+                    marginLeft: '10px',
+                    marginRight: 'auto',
+                    marginTop: '0px',
+                    marginBottom: '0px',
+                    paddingLeft: '0px',
+                    paddingRight: '0px',
+                    paddingTop: '0px',
+                    paddingBottom: '0px',
+                    float: 'left'
+                }
+            },
+            {
+                name: 'RoutingLink',
+                innerText: 'Login',
+                to: '/login',
+                toValues: [],
+                style: {
+                    color: '#ffffff',
+                    backgroundColor: '#00000000',
+                    fontSize: '16px',
+                    height: '50px',
+                    lineHeight: '50px',
+                    width: '100px',
+                    textAlign: 'center',
+                    display: 'block',
+                    textDecoration: 'none',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    marginTop: '0px',
+                    marginBottom: '0px',
+                    paddingLeft: '0px',
+                    paddingRight: '0px',
+                    paddingTop: '0px',
+                    paddingBottom: '0px',
+                    float: 'right'
+                }
+            },
+            {
+                name: 'RoutingLink',
+                innerText: 'About',
+                to: '/about',
+                toValues: [],
+                style: {
+                    color: '#ffffff',
+                    backgroundColor: '#00000000',
+                    fontSize: '16px',
+                    height: '50px',
+                    lineHeight: '50px',
+                    width: '100px',
+                    textAlign: 'center',
+                    display: 'block',
+                    textDecoration: 'none',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    marginTop: '0px',
+                    marginBottom: '0px',
+                    paddingLeft: '0px',
+                    paddingRight: '0px',
+                    paddingTop: '0px',
+                    paddingBottom: '0px',
+                    float: 'right'
+                }
+            },
+            {
+                name: 'RoutingLink',
+                innerText: 'Home',
+                to: '/',
+                toValues: [],
+                style: {
+                    color: '#ffffff',
+                    backgroundColor: '#00000000',
+                    fontSize: '16px',
+                    height: '50px',
+                    lineHeight: '50px',
+                    width: '100px',
+                    textAlign: 'center',
+                    display: 'block',
+                    textDecoration: 'none',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    marginTop: '0px',
+                    marginBottom: '0px',
+                    paddingLeft: 'auto',
+                    paddingRight: '0px',
+                    paddingTop: '0px',
+                    paddingBottom: '0px',
+                    float: 'right'
+                }
+            },
+        ],
+        style: {
+            color: '#000000',
+            backgroundColor: '#513D89',
+            fontSize: '16px',
+            height: '50px',
+            width: '100%',
             textAlign: 'center',
             display: 'block',
             marginLeft: 'auto',
@@ -150,7 +287,8 @@ export const componentTypes = {
     Input: 'Input',
     Image: 'Image',
     RoutingLink: 'RoutingLink',
-    Container: 'Container'
+    Container: 'Container',
+    NavigationBar: 'NavigationBar'
 };
 
 export default componentObjects;

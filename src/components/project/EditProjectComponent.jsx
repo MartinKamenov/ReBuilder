@@ -377,6 +377,14 @@ class EditProjectComponent extends Component {
                 <h1 className='project-name-header'>
                     {this.props.project.name} <SaveStatusComponent saveStatus={this.state.saveStatus}/>
                 </h1>
+                <button 
+                    className='draggable-container-btn' 
+                    onClick={() => 
+                    this.setState({
+                        dragContainerActive: !this.state.dragContainerActive
+                    })}>
+                        {this.state.dragContainerActive ? 'Hide': 'Show'}
+                </button>
                 <div className='new-project-name-outer-container'>
                     <div className='new-project-name-inner-container'>
                         <div className='generate-project-btn-container'>
@@ -412,14 +420,6 @@ class EditProjectComponent extends Component {
                     </div>
                 </div>
                 <div className="drag-drop-container">
-                    <button 
-                        className='draggable-container-btn' 
-                        onClick={() => 
-                        this.setState({
-                            dragContainerActive: !this.state.dragContainerActive
-                        })}>
-                            {this.state.dragContainerActive ? 'Hide': 'Show'}
-                    </button>
                     <ProjectComponentsList
                         active={this.state.dragContainerActive}
                         draggableComponents={this.state.draggableComponents}/>
