@@ -158,10 +158,10 @@ const componentObjects = [
                 to: '/',
                 toValues: [],
                 style: {
-                    color: '#513D89',
-                    backgroundColor: '#ffffff',
+                    color: '#ffffff',
+                    backgroundColor: '#00000000',
                     fontSize: '16px',
-                    height: '30px',
+                    height: '50px',
                     width: '100px',
                     textAlign: 'center',
                     display: 'block',
@@ -172,19 +172,20 @@ const componentObjects = [
                     paddingLeft: '0px',
                     paddingRight: '0px',
                     paddingTop: '0px',
-                    paddingBottom: '0px'
+                    paddingBottom: '0px',
+                    float: 'left'
                 }
             },
             {
                 name: 'RoutingLink',
-                innerText: 'Home',
-                to: '/',
+                innerText: 'Login',
+                to: '/login',
                 toValues: [],
                 style: {
-                    color: '#000000',
-                    backgroundColor: '#ffffff',
-                    fontSize: '24px',
-                    height: '30px',
+                    color: '#ffffff',
+                    backgroundColor: '#00000000',
+                    fontSize: '16px',
+                    height: '50px',
                     width: '100px',
                     textAlign: 'center',
                     display: 'block',
@@ -195,7 +196,8 @@ const componentObjects = [
                     paddingLeft: '0px',
                     paddingRight: '0px',
                     paddingTop: '0px',
-                    paddingBottom: '0px'
+                    paddingBottom: '0px',
+                    float: 'right'
                 }
             },
             {
@@ -204,10 +206,10 @@ const componentObjects = [
                 to: '/about',
                 toValues: [],
                 style: {
-                    color: '#000000',
-                    backgroundColor: '#ffffff',
+                    color: '#ffffff',
+                    backgroundColor: '#00000000',
                     fontSize: '16px',
-                    height: '30px',
+                    height: '50px',
                     width: '100px',
                     textAlign: 'center',
                     display: 'block',
@@ -218,19 +220,20 @@ const componentObjects = [
                     paddingLeft: '0px',
                     paddingRight: '0px',
                     paddingTop: '0px',
-                    paddingBottom: '0px'
-     }
+                    paddingBottom: '0px',
+                    float: 'right'
+                }
             },
             {
                 name: 'RoutingLink',
-                innerText: 'Login',
-                to: '/login',
+                innerText: 'Home',
+                to: '/',
                 toValues: [],
                 style: {
-                    color: '#000000',
-                    backgroundColor: '#ffffff',
+                    color: '#ffffff',
+                    backgroundColor: '#00000000',
                     fontSize: '16px',
-                    height: '30px',
+                    height: '50px',
                     width: '100px',
                     textAlign: 'center',
                     display: 'block',
@@ -238,10 +241,11 @@ const componentObjects = [
                     marginRight: 'auto',
                     marginTop: '0px',
                     marginBottom: '0px',
-                    paddingLeft: '0px',
+                    paddingLeft: 'auto',
                     paddingRight: '0px',
                     paddingTop: '0px',
-                    paddingBottom: '0px'
+                    paddingBottom: '0px',
+                    float: 'right'
                 }
             },
         ],

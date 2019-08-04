@@ -124,7 +124,8 @@ const getComponent = (
                                 getComponent(c,
                                     handleChangeEditMode,
                                     handleDropContainerComponent,
-                                    c.style)
+                                    c.style
+                                )
                             ))
                         }
                     </div>
@@ -211,7 +212,8 @@ const DroppedComponent = ({
                                                 getComponent(
                                                     c,
                                                     handleChangeEditMode,
-                                                    handleDropContainerComponent
+                                                    handleDropContainerComponent,
+                                                    c.style
                                                 )
                                             ))
                                         }
