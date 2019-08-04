@@ -8,7 +8,7 @@ class HomeComponent extends Component {
   render() {
     return (
       <div>
-        <section className='probootstrap-intro' style={{backgroundImage: 'url(https://images.pexels.com/photos/374023/pexels-photo-374023.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)'}} data-stellar-background-ratio='0.5'>
+        <section className='probootstrap-intro' style={{backgroundImage: 'url(/assets/homePageBackground.jpeg)'}} data-stellar-background-ratio='0.5'>
           <div className='container-fluid'>
             <div className='row'>
               <div className='col-md-7 probootstrap-intro-text'>
