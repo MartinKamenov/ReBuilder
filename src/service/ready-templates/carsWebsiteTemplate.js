@@ -133,7 +133,22 @@ const templates = [
                             paddingTop: '0px',
                             paddingBottom: '0px'
                         }
-                    }
+                    },
+                    {
+                        name: 'Image',
+                        title: 'Image',
+                        src: 'https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+                        style: {
+                            height: '500px',
+                            width: '100%',
+                            textAlign: 'center',
+                            display: 'block',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            marginTop: '0px',
+                            marginBottom: '0px'
+                        }
+                    },
                 ]
             },
         ]
