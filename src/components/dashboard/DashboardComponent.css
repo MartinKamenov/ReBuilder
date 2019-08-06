@@ -24,6 +24,9 @@
     justify-content: center;
 }
 .vertical-centered {
+    font-weight: bold;
+    color: #4A3E9E;
+    margin-left: 10px;
     margin-right: 12%;
     display: flex;
     flex-direction: row;
