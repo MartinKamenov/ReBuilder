@@ -1,10 +1,16 @@
 import React from 'react';
-import templates from '../../../'
+import templates from '../../../service/ready-templates/';
 import './TemplateSelectPageComponent.css';
 
 const TemplateSelectPageComponent = () => {
     return (
-        <div>Templates</div>
+        <div>
+            {templates.map((template, i) => (
+                <div key={i}>
+                    {template.name}
+                </div>
+            ))}
+        </div>
     );
 }
  
