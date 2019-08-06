@@ -17,6 +17,7 @@ import UserComponent from '../user/UserComponent';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './AppRouterComponent.css';
+import TemplateSelectPageComponent from '../project/newProjectPage/TemplateSelectPageComponent';
 
 class AppRouterComponent extends Component {
     state = {
@@ -56,6 +57,7 @@ class AppRouterComponent extends Component {
                                 <Route exact path="/projects/:id" component={InnerRoutingComponent} />
                                 <Route exact path="/users/:id" component={UserComponent} />
                                 <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
+                                <Route exact path="/templates" component={TemplateSelectPageComponent} />    
                                 <div className='container'>
                                     <Route exact path="/project/new" component={NewProjectPageComponent} />
                                 </div>
