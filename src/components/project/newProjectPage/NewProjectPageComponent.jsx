@@ -104,6 +104,11 @@ class NewProjectPageComponent extends Component {
                     className='submit-btn'
                     type='success'
                     onClick={this.handleCreateProject}/>
+                <ButtonComponent
+                    title='Select a template'
+                    className='submit-btn'
+                    type='warning'
+                    onClick={this.handleCreateProject}/>
             </div>
         );
     }
