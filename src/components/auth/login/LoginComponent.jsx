@@ -22,17 +22,28 @@ class LoginComponent extends Component {
         }
     }
 
+    componentWillMount() {
+        const user = this.props.user;
+        if(user.id) {
+            this.redirectToHome();
+        }
+    }
+
     componentWillReceiveProps(props) {
         if(props.user.id) {
-            this.setState({ isLoading: false });
-            const history = this.props.history;
-            history.push('/');
-            return;
+            this.redirectToHome();
         }
 
         if(props.error) {
             this.setState({ isLoading: false });
         }
+    }
+
+    redirectToHome = () => {
+        this.setState({ isLoading: false });
+        const history = this.props.history;
+        history.push('/dashboard');
+        return;
     }
 
     login = () => {
