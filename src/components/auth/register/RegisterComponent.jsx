@@ -17,6 +17,13 @@ class RegisterComponent extends Component {
         isLoading: false
     }
 
+    componentDidMount = () => {
+        const user = this.props.user;
+        if(user.id) {
+            this.redirectToHome();
+        }
+    }
+
     handleInputChange = (value, field) => {
         this.setState({[field]: value});
     }
@@ -68,13 +75,18 @@ class RegisterComponent extends Component {
         }
     }
 
-    render() {
-        if(this.props.user.id) {
-            this.setState({ isLoading: false });
-            const history = this.props.history;
-            history.push('/');
+    componentWillReceiveProps = (props) => {
+        if(props.user.id) {
+            this.redirectToHome();
         }
+    }
 
+    redirectToHome = () => {
+        this.setState({ isLoading: false });
+        const history = this.props.history;
+        history.push('/dashboard');
+    }
+    render() {
         if(this.state.isLoading) {
             return <LoadingComponent message='Authenticating user' />;
         }
