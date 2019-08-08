@@ -6,7 +6,7 @@ import { createError } from './errorActions';
 export function createProject(projectName, projectUrl, token) {
     return async function(dispatch) {
         try {
-            const res = await apiService.createProject(projectName, projectUrl, token);
+            const res = await apiService.createEmptyProject(projectName, projectUrl, token);
             const project = res.data;
             return dispatch(selectProjectSuccess(project));
         } catch(error) {
