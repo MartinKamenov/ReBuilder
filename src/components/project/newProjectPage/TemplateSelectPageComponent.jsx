@@ -17,12 +17,15 @@ class TemplateSelectPageComponent extends Component {
     }
 
     handleCreateProject = (project) => {
-        if(!this.state.name || !this.state.imageUrl) {
-            return;
-        }
+        debugger;
+
         this.setState({ isLoading: true, isCreated: true });
+        const name = this.props.location.state.name;
+        const imageUrl = this.props.location.state.imageUrl;
+        project.name = name;
+        project.imageUrl = imageUrl;
         this.props.actions
-            .createProject(this.state.name, this.state.imageUrl, this.props.user.token, project);
+            .createProject(name, imageUrl, this.props.user.token, project);
     }
 
     render() { 

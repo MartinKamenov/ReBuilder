@@ -8,7 +8,6 @@ import ButtonComponent from '../../common/ButtonComponent';
 import apiService from '../../../service/api.service';
 
 import './NewProjectPageComponent.css';
-import { Link } from 'react-router-dom';
 
 class NewProjectPageComponent extends Component {
     state = { 
@@ -67,6 +66,15 @@ class NewProjectPageComponent extends Component {
         }
     }
 
+    redirectToTemplates = () => {
+        const history = this.props.history;
+        
+        history.push({
+            state: this.state,
+            pathname: '/templates'
+        });
+    }
+
     render() {
         if(this.state.isLoading) {
             return <LoadingComponent message='Creating project' />;
@@ -105,15 +113,11 @@ class NewProjectPageComponent extends Component {
                     className='submit-btn'
                     type='success'
                     onClick={this.handleCreateProject}/>
-                <Link
-                    style={{ textDecoration: 'none' }}
-                    to='/templates'>
-                    <ButtonComponent
-                        title='Select a template'
-                        className='submit-btn'
-                        type='warning'
-                        onClick={this.handleCreateProject}/>
-                </Link>
+                <ButtonComponent
+                    title='Select a template'
+                    className='submit-btn'
+                    type='warning'
+                    onClick={this.redirectToTemplates}/>
             </div>
         );
     }
