@@ -3,12 +3,13 @@ import apiService from '../service/api.service';
 import { error as toastError } from 'react-toastify-redux';
 import { createError } from './errorActions';
 
-export function createEmptyProject(projectName, projectUrl, token) {
+export function createProject(projectName, projectUrl, token, project) {
     return async function(dispatch) {
         try {
-            const res = await apiService.createEmptyProject(projectName, projectUrl, token);
-            const project = res.data;
-            return dispatch(selectProjectSuccess(project));
+            const res = await apiService
+                .createProject(projectName, projectUrl, token, project);
+            const savedProject = res.data;
+            return dispatch(selectProjectSuccess(savedProject));
         } catch(error) {
             dispatch(toastError(error.message));
             return dispatch(createError(error.message));

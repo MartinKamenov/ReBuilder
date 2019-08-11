@@ -11,7 +11,6 @@ import './TemplateSelectPageComponent.css';
 
 class TemplateSelectPageComponent extends Component {
     selectTemplate = (index) => {
-        debugger;
         const project = templates[index];
         project.id = uuid.v1();
         this.handleCreateProject(project);
@@ -23,7 +22,7 @@ class TemplateSelectPageComponent extends Component {
         }
         this.setState({ isLoading: true, isCreated: true });
         this.props.actions
-            .createProjectByTemplate(this.state.name, this.state.imageUrl, this.props.user.token);
+            .createProject(this.state.name, this.state.imageUrl, this.props.user.token, project);
     }
 
     render() { 

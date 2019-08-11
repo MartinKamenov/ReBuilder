@@ -46,7 +46,7 @@ class NewProjectPageComponent extends Component {
             return;
         }
         this.setState({ isLoading: true, isCreated: true });
-        this.props.actions.createEmptyProject(this.state.name, this.state.imageUrl, this.props.user.token);
+        this.props.actions.createProject(this.state.name, this.state.imageUrl, this.props.user.token);
     }
 
     changeImage = async(event) => {
