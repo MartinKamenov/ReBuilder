@@ -3,7 +3,7 @@ import apiService from '../service/api.service';
 import { error as toastError } from 'react-toastify-redux';
 import { createError } from './errorActions';
 
-export function createProject(projectName, projectUrl, token) {
+export function createEmptyProject(projectName, projectUrl, token) {
     return async function(dispatch) {
         try {
             const res = await apiService.createEmptyProject(projectName, projectUrl, token);

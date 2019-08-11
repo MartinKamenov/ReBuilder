@@ -23,7 +23,7 @@ class TemplateSelectPageComponent extends Component {
         }
         this.setState({ isLoading: true, isCreated: true });
         this.props.actions
-            .createProject(this.state.name, this.state.imageUrl, this.props.user.token);
+            .createProjectByTemplate(this.state.name, this.state.imageUrl, this.props.user.token);
     }
 
     render() { 
