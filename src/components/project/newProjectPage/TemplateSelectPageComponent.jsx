@@ -8,27 +8,41 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import './TemplateSelectPageComponent.css';
+import LoadingComponent from '../../common/LoadingComponent';
 
 class TemplateSelectPageComponent extends Component {
+    state = {
+        isLoading: false
+    }
     selectTemplate = (index) => {
-        const project = templates[index];
+        const project = Object.assign({}, templates[index]);
         project.id = uuid.v1();
         this.handleCreateProject(project);
     }
 
     handleCreateProject = (project) => {
-        debugger;
-
-        this.setState({ isLoading: true, isCreated: true });
+        this.setState({ isLoading: true });
         const name = this.props.location.state.name;
         const imageUrl = this.props.location.state.imageUrl;
         project.name = name;
-        project.imageUrl = imageUrl;
+        project.projectImageUrl = imageUrl;
         this.props.actions
             .createProject(name, imageUrl, this.props.user.token, project);
     }
 
-    render() { 
+    componentWillReceiveProps(props) {
+        if(props.project.id) {
+            this.setState({ isLoading: false });
+            const history = this.props.history;
+            history.push(`projects/${props.project.id}`);
+        }
+    }
+
+    render() {
+        if(this.state.isLoading) {
+            return <LoadingComponent message='Creating project'/>;   
+        }
+
         return (
             <div className='container'>
                 {templates.map((template, i) => (
