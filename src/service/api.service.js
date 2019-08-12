@@ -56,12 +56,15 @@ const apiService = {
         return axios.post(registerUrl, body, sendObject);
     },
 
-    createEmptyProject: (projectName, projectUrl, token) => {
+    createProject: (projectName, projectUrl, token, project) => {
         if(!projectName || !projectUrl) {
             return;
         }
         const newProjectUrl = url + projectsPath + newProjectPath;
         const body = { name: projectName, projectImageUrl: projectUrl };
+        if(project) {
+            body.project = project;
+        }
         sendObject.headers.Authorization = 'Bearer ' + token;
 
         return axios.post(newProjectUrl, body, sendObject);
