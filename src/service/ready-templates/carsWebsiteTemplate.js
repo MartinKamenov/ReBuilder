@@ -10,10 +10,12 @@ const carsTemplate =
             route: '/',
             elements: [
                 {
+                    id: uuid.v1(),
                     name: 'NavigationBar',
                     title: 'Navigation bar',
                     children: [
                         {
+                            id: uuid.v1(),
                             name: 'RoutingLink',
                             innerText: 'Website',
                             to: '/',
@@ -40,6 +42,7 @@ const carsTemplate =
                             }
                         },
                         {
+                            id: uuid.v1(),
                             name: 'RoutingLink',
                             innerText: 'About',
                             to: '/about',
@@ -66,6 +69,7 @@ const carsTemplate =
                             }
                         },
                         {
+                            id: uuid.v1(),
                             name: 'RoutingLink',
                             innerText: 'Home',
                             to: '/',
@@ -113,6 +117,7 @@ const carsTemplate =
                     }
                 },
                 {
+                    id: uuid.v1(),
                     name: 'Header',
                     title: 'Header',
                     innerText: 'Cars',
@@ -135,6 +140,7 @@ const carsTemplate =
                     }
                 },
                 {
+                    id: uuid.v1(),
                     name: 'Image',
                     title: 'Image',
                     src: 'https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
