@@ -67,6 +67,10 @@ class NewProjectPageComponent extends Component {
     }
 
     redirectToTemplates = () => {
+        if(!this.state.name || !this.state.imageUrl) {
+            return;
+        }
+        
         const history = this.props.history;
         
         history.push({
