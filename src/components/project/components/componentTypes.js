@@ -89,10 +89,10 @@ const componentObjects = [
     {
         name: 'Image',
         title: 'Image',
-        src: 'https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png',
+        src: 'https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
         style: {
-            height: '100px',
-            width: '200px',
+            height: '400px',
+            width: '100%',
             textAlign: 'center',
             display: 'block',
             marginLeft: 'auto',
