@@ -13,6 +13,11 @@ code {
   text-align: center;
 }
 
+.center {
+  text-align: center;
+  margin: auto;
+}
+
 .vertical-scrollable-container {
   overflow: auto;
 }
