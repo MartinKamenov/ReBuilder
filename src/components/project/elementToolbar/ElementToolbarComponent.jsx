@@ -40,7 +40,6 @@ const ElementToolbarComponent = ({
     const styleDropdowns = Object.keys(component.style).filter((c) => (
         Array.isArray(component.style[c + 'Values'])
     ));
-    debugger;
 
     return (
         <div className='toolbar-container'>

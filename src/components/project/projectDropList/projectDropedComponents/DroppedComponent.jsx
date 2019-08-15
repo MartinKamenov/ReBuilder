@@ -74,7 +74,6 @@ const getComponent = (
                     alt='component'
                     style={elementStyle}
                     onClick={(e) => {
-                        debugger;
                         e.preventDefault();
                         handleChangeEditMode(droppedComponent.index)}}
                     className='droped-component'>
