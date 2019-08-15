@@ -74,6 +74,7 @@ const getComponent = (
                     alt='component'
                     style={elementStyle}
                     onClick={(e) => {
+                        debugger;
                         e.preventDefault();
                         handleChangeEditMode(droppedComponent.index)}}
                     className='droped-component'>
@@ -289,7 +290,7 @@ const DroppedComponent = ({
 DroppedComponent.propTypes = {
     droppedComponent: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        innerText: PropTypes.string.isRequired,
+        innerText: PropTypes.string,
         isInEditMode: PropTypes.bool.isRequired,
         index: PropTypes.string.isRequired
     }).isRequired,

@@ -178,7 +178,8 @@ const ElementToolbarComponent = ({
 ElementToolbarComponent.propTypes = {
     component: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        innerText: PropTypes.string.isRequired
+        innerText: PropTypes.string,
+        index: PropTypes.string.isRequired
     }),
     actions: PropTypes.shape({
         handleChangeEditMode: PropTypes.func.isRequired,
