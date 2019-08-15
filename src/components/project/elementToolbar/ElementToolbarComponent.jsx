@@ -31,8 +31,15 @@ const ElementToolbarComponent = ({
     const dropdowns = Object.keys(component).filter((c) => (
         Array.isArray(component[c + 'Values'])
     ));
+
     const styles = Object.keys(component.style)
-        .filter((c) => (c !== 'color' && c !== 'backgroundColor'));
+        .filter((c) => (c !== 'color' && c !== 'backgroundColor' && 
+            !Array.isArray(component.style[c + 'Values'])) &&
+            !Array.isArray(component.style[c]));
+    
+    const styleDropdowns = Object.keys(component.style).filter((c) => (
+        Array.isArray(component.style[c + 'Values'])
+    ));
 
     return (
         <div className='toolbar-container'>
@@ -113,6 +120,34 @@ const ElementToolbarComponent = ({
                     }
                     <h3>Styles</h3>
                     {
+                        styleDropdowns.map((dropdown, k) => {
+                            const values = component.style[dropdown + 'Values'];
+                            return (
+                                <div
+                                    key={k}
+                                    className='component-input-changer-container'>
+                                    <label className='component-changer-label'>
+                                        {capitalizeFirstLetter(dropdown)}
+                                    </label>
+                                    <select
+                                        onChange={(event) => 
+                                            handleComponentValueChange(event.target.value, 'style.' + dropdown)
+                                        }
+                                        className='component-changer-input'
+                                        name={'style.' + dropdown}
+                                        value={component.style[dropdown]}>
+                                        {values.map((value, i) => (
+                                            <option
+                                                key={i}
+                                                value={value}>{value}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            )
+                        })
+                    }
+                    {
                         styles.map((style, i) => {
                             return (
                                 <div
@@ -178,7 +213,8 @@ const ElementToolbarComponent = ({
 ElementToolbarComponent.propTypes = {
     component: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        innerText: PropTypes.string.isRequired
+        innerText: PropTypes.string,
+        index: PropTypes.string.isRequired
     }),
     actions: PropTypes.shape({
         handleChangeEditMode: PropTypes.func.isRequired,
