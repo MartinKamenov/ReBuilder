@@ -6,13 +6,16 @@
     background-color: #aaaaaaaa;
     text-align: center;
     padding: 10px;
-    padding-top: 100px;
     height: calc(100vh - 192px);
     width: 20%;
 }
 
 .component-list-container-inactive {
     display: none;
+}
+
+.draggable-container-header {
+    max-width: 100%;
 }
 
 .rearange-btn {

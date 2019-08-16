@@ -1,6 +1,6 @@
 .draggable-element {
     display: flex;
-    width: 200px;
+    max-width: 200px;
     height: 50px;
     margin: auto;
     text-align: center;

@@ -8,7 +8,7 @@ const ProjectComponentsList = ({ draggableComponents, active }) => {
         <div 
             className=
             {`component-list-container${active ? '' : '-inactive'} vertical-scrollable-container`}>
-            <h3>Draggable element</h3>
+            <h3 className='draggable-container-header'>Draggable element</h3>
             {
                 draggableComponents.map((component, i) => 
                     <DraggableComponent key={i} draggableComponent={component}/>
