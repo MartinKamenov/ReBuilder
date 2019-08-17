@@ -160,12 +160,25 @@ const DroppedComponent = ({
         handleDropContainerComponent
     }) => {
     if(droppedComponent.isInEditMode) {
+        const copyOfStyle = Object.assign({}, droppedComponent.style);
+        const resizableStyle = {
+            display: copyOfStyle.display,
+            width: initialSizes.width,
+            width: initialSizes.height,
+            border: '2px solid red',
+            marginLeft: initialSizes.marginLeft,
+            marginLeft: initialSizes.marginLeft,
+        };
+
+        copyOfStyle.display = 'block';
+        copyOfStyle.width = '100%';
+
         return (
-            <div className='edit-component-container'>
+            <div
+                style={resizableStyle}
+                className='edit-component-container'>
                 <Resizable
-                    style={{
-                        margin: 'auto'
-                    }}
+                    style={resizableStyle}
                     onResizeStart={(event, direction, refToElement, delta) => {
                         initialSizes.width = parseInt(droppedComponent.style.width, 10);
                         initialSizes.height = parseInt(droppedComponent.style.height, 10);
@@ -194,7 +207,7 @@ const DroppedComponent = ({
                                     <img
                                         alt='component'
                                         src={droppedComponent.src}
-                                        style={droppedComponent.style}
+                                        style={copyOfStyle}
                                         className='edit-input'/>
                                 );
                                 break;
@@ -204,7 +217,7 @@ const DroppedComponent = ({
                                     <div
                                         alt='component'
                                         src={droppedComponent.src}
-                                        style={droppedComponent.style}
+                                        style={copyOfStyle}
                                         className='edit-input'>
                                         {
                                             droppedComponent.children.map((c) => (
@@ -237,19 +250,6 @@ const DroppedComponent = ({
                     })()
                 }
                 </Resizable>
-                
-                <ButtonComponent
-                    type='success'
-                    onClick={() => handleChangeEditMode(droppedComponent.index)}>
-                    <FontAwesomeIcon icon={faCheck} />
-                    Accept
-                </ButtonComponent>
-                <ButtonComponent
-                    type='warning'
-                    onClick={() => handleForceExitEditMode(droppedComponent.index)}>
-                    <FontAwesomeIcon icon={faUndo} />
-                    Undo
-                </ButtonComponent>
             </div>
         );
     }
