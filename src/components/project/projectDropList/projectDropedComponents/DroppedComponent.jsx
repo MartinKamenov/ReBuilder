@@ -161,13 +161,16 @@ const DroppedComponent = ({
     }) => {
     if(droppedComponent.isInEditMode) {
         const copyOfStyle = Object.assign({}, droppedComponent.style);
-        const resizableStyle = {
+        const editModeContainer = {
+            width: copyOfStyle.width,
+            height: copyOfStyle.height,
+            marginLeft: copyOfStyle.marginLeft,
+            marginRight: copyOfStyle.marginRight,
             display: copyOfStyle.display,
-            width: initialSizes.width,
-            width: initialSizes.height,
-            border: '2px solid red',
-            marginLeft: initialSizes.marginLeft,
-            marginLeft: initialSizes.marginLeft,
+        };
+        const resizableStyle = {
+            width: '100%',
+            height: '100%'
         };
 
         copyOfStyle.display = 'block';
@@ -175,8 +178,8 @@ const DroppedComponent = ({
 
         return (
             <div
-                style={resizableStyle}
-                className='edit-component-container'>
+                className='blinkdiv'
+                style={editModeContainer}>
                 <Resizable
                     style={resizableStyle}
                     onResizeStart={(event, direction, refToElement, delta) => {
