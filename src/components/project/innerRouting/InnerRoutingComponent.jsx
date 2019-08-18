@@ -8,6 +8,8 @@ import uuid from 'uuid';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faSave, faArrowAltCircleUp, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import projectGenerator from '../../../service/projectGenerator.service';
+import SaveStatus from '../components/saveStatus';
 
 import './InnerRoutingComponent.css';
 import './PageElementsStyle.css';
@@ -23,6 +25,7 @@ class InnerRoutingComponent extends Component {
         newPageNameError: '',
         newPageRouteError: ''
     }
+    
     componentDidMount() {
         const token = localStorage.getItem('token');
         if(!this.props.user.id && !token) {
@@ -41,6 +44,38 @@ class InnerRoutingComponent extends Component {
                 this.executeStylesScript();
             });
         }
+    }
+
+    generateProject = () => {
+        const pages = [...this.props.project.pages];
+        const index = pages.findIndex((p) => p.id === this.state.pageId);
+        pages[index] = this.state.page;
+
+        const project = Object.assign({}, this.props.project);
+        projectGenerator.generateProject(project.name, pages, project.projectImageUrl);
+    }
+
+    handleSaveProject = () => {
+        const token = localStorage.getItem('token');
+        if(!token) {
+            return;
+        }
+
+        const droppedComponents = [...this.state.droppedComponents];
+        const page = Object.assign({}, this.state.page);
+        page.elements = droppedComponents;
+
+        const pages = [...this.props.project.pages];
+        const index = pages.findIndex((p) => p.id === this.state.pageId);
+        pages[index] = page;
+
+        this.setState({ page, saveStatus: SaveStatus.Saved });
+        
+        this.props.actions.updateProject(this.state.id, pages, token);
+    }
+
+    handleDeployProject = async () => {
+        this.props.actions.deployProject(this.state.id, this.props.user.token);
     }
 
     executeStylesScript = () => {
@@ -163,13 +198,6 @@ class InnerRoutingComponent extends Component {
                     <div className='new-project-name-outer-container'>
                         <div className='new-project-name-inner-container'>
                             <div className='generate-project-btn-container'>
-                                <ButtonComponent
-                                    type='danger'
-                                    className='col-md-3 col-sm-6 project-action-btn'
-                                    onClick={this.returnToRouting}>
-                                    <FontAwesomeIcon icon={faArrowLeft} /> 
-                                    <span className='new-project-btn-text'>Back to pages</span>
-                                </ButtonComponent>
                                 <ButtonComponent
                                     type='primary'
                                     className='col-md-3 col-sm-6 project-action-btn'
