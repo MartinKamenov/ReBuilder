@@ -167,6 +167,7 @@ const DroppedComponent = ({
             marginLeft: copyOfStyle.marginLeft,
             marginRight: copyOfStyle.marginRight,
             display: copyOfStyle.display,
+            zIndex: 1
         };
         const resizableStyle = {
             width: '100%',
@@ -248,7 +249,7 @@ const DroppedComponent = ({
                 }
                 </Resizable>
 
-                <div className='center-container'>
+                <div className='center-container small-buttons-action-container'>
                     <ButtonComponent	
                         type='success'	
                         onClick={() => handleChangeEditMode(droppedComponent.index)}>	
