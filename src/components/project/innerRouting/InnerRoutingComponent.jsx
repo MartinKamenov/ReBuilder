@@ -200,21 +200,21 @@ class InnerRoutingComponent extends Component {
                             <div className='generate-project-btn-container'>
                                 <ButtonComponent
                                     type='primary'
-                                    className='col-md-3 col-sm-6 project-action-btn'
+                                    className='col-md-4 project-action-btn'
                                     onClick={this.handleSaveProject}>
                                     <FontAwesomeIcon icon={faSave} /> 
                                     <span className='new-project-btn-text'>Save project</span>
                                 </ButtonComponent>
                                 <ButtonComponent
                                     type='warning'
-                                    className='col-md-3 col-sm-6 project-action-btn'
+                                    className='col-md-4 project-action-btn'
                                     onClick={this.generateProject}>
                                     <FontAwesomeIcon icon={faDownload} />
                                     <span className='new-project-btn-text'>Generate project</span>
                                 </ButtonComponent>
                                 <ButtonComponent
                                     type='success'
-                                    className='col-md-3 col-sm-6 project-action-btn'
+                                    className='col-md-4 project-action-btn'
                                     onClick={this.handleDeployProject}>
                                     <FontAwesomeIcon icon={faArrowAltCircleUp} />
                                     <span className='new-project-btn-text'>Deploy project</span>
