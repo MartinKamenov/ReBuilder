@@ -162,15 +162,14 @@ const DroppedComponent = ({
     if(droppedComponent.isInEditMode) {
         const copyOfStyle = Object.assign({}, droppedComponent.style);
         const editModeContainer = {
-            width: copyOfStyle.width,
-            height: copyOfStyle.height,
+            width: `calc(${copyOfStyle.width} - 3px)`,
+            height: `calc(${copyOfStyle.height} - 3px)`,
             marginLeft: copyOfStyle.marginLeft,
             marginRight: copyOfStyle.marginRight,
             display: copyOfStyle.display,
         };
         const resizableStyle = {
             width: '100%',
-            height: '100%'
         };
 
         copyOfStyle.display = 'block';
@@ -196,10 +195,6 @@ const DroppedComponent = ({
                             const newHeight = initialSizes.height + height;
                             handleComponentValueChange(newHeight + 'px', 'style.height');
                         }
-                    }}
-                    size={{
-                        width: droppedComponent.style.width,
-                        height: droppedComponent.style.height 
                     }}>
                 {
                     (() => {
@@ -236,11 +231,10 @@ const DroppedComponent = ({
                                 );
                                 break;
                             default:
-                                const copyOfStyles = Object.assign({}, droppedComponent.style);
-                                copyOfStyles.resize = 'none';
+                                copyOfStyle.resize = 'none';
                                 element = (
                                         <textarea
-                                            style={copyOfStyles}
+                                            style={copyOfStyle}
                                             className='edit-input'
                                             value={droppedComponent.innerText}
                                             onChange={(event) => 
@@ -253,6 +247,21 @@ const DroppedComponent = ({
                     })()
                 }
                 </Resizable>
+
+                <div className='center-container'>
+                    <ButtonComponent	
+                        type='success'	
+                        onClick={() => handleChangeEditMode(droppedComponent.index)}>	
+                        <FontAwesomeIcon icon={faCheck} />	
+                        Accept	
+                    </ButtonComponent>	
+                    <ButtonComponent	
+                        type='warning'	
+                        onClick={() => handleForceExitEditMode(droppedComponent.index)}>	
+                        <FontAwesomeIcon icon={faUndo} />	
+                        Undo	
+                    </ButtonComponent>
+                </div>
             </div>
         );
     }
