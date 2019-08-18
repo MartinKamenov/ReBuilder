@@ -23,7 +23,9 @@ class InnerRoutingComponent extends Component {
         newPageRoute: '',
 
         newPageNameError: '',
-        newPageRouteError: ''
+        newPageRouteError: '',
+
+        saveStatus: SaveStatus.Saved
     }
     
     componentDidMount() {
@@ -61,15 +63,9 @@ class InnerRoutingComponent extends Component {
             return;
         }
 
-        const droppedComponents = [...this.state.droppedComponents];
-        const page = Object.assign({}, this.state.page);
-        page.elements = droppedComponents;
+        const pages = [...this.state.pages];
 
-        const pages = [...this.props.project.pages];
-        const index = pages.findIndex((p) => p.id === this.state.pageId);
-        pages[index] = page;
-
-        this.setState({ page, saveStatus: SaveStatus.Saved });
+        this.setState({ saveStatus: SaveStatus.Saved });
         
         this.props.actions.updateProject(this.state.id, pages, token);
     }
