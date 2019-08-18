@@ -134,7 +134,6 @@ class EditProjectComponent extends Component {
         return component;
     }
     handleChangeEditMode = (index) => {
-        debugger;
         const droppedComponents = [...this.state.droppedComponents];
 
         let foundComponent = droppedComponents.find(c => c.index === index);

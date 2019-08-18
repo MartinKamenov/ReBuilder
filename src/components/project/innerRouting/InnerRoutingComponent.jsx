@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import LoadingComponent from '../../common/LoadingComponent';
 import uuid from 'uuid';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload, faSave, faArrowAltCircleUp, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import './InnerRoutingComponent.css';
 import './PageElementsStyle.css';
@@ -158,6 +160,40 @@ class InnerRoutingComponent extends Component {
         return (
             <div className='inner-routing-container'>
                 <div className='container'>
+                    <div className='new-project-name-outer-container'>
+                        <div className='new-project-name-inner-container'>
+                            <div className='generate-project-btn-container'>
+                                <ButtonComponent
+                                    type='danger'
+                                    className='col-md-3 col-sm-6 project-action-btn'
+                                    onClick={this.returnToRouting}>
+                                    <FontAwesomeIcon icon={faArrowLeft} /> 
+                                    <span className='new-project-btn-text'>Back to pages</span>
+                                </ButtonComponent>
+                                <ButtonComponent
+                                    type='primary'
+                                    className='col-md-3 col-sm-6 project-action-btn'
+                                    onClick={this.handleSaveProject}>
+                                    <FontAwesomeIcon icon={faSave} /> 
+                                    <span className='new-project-btn-text'>Save project</span>
+                                </ButtonComponent>
+                                <ButtonComponent
+                                    type='warning'
+                                    className='col-md-3 col-sm-6 project-action-btn'
+                                    onClick={this.generateProject}>
+                                    <FontAwesomeIcon icon={faDownload} />
+                                    <span className='new-project-btn-text'>Generate project</span>
+                                </ButtonComponent>
+                                <ButtonComponent
+                                    type='success'
+                                    className='col-md-3 col-sm-6 project-action-btn'
+                                    onClick={this.handleDeployProject}>
+                                    <FontAwesomeIcon icon={faArrowAltCircleUp} />
+                                    <span className='new-project-btn-text'>Deploy project</span>
+                                </ButtonComponent>
+                            </div>
+                        </div>
+                    </div>
                     <div className='center-container routing-form-container'  onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                         <div className='routing-form-input-container'>
                             <input
