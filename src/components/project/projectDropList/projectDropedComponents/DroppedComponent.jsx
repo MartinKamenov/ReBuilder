@@ -160,12 +160,28 @@ const DroppedComponent = ({
         handleDropContainerComponent
     }) => {
     if(droppedComponent.isInEditMode) {
+        const copyOfStyle = Object.assign({}, droppedComponent.style);
+        const editModeContainer = {
+            width: `calc(${copyOfStyle.width} - 3px)`,
+            height: `calc(${copyOfStyle.height} - 3px)`,
+            marginLeft: copyOfStyle.marginLeft,
+            marginRight: copyOfStyle.marginRight,
+            display: copyOfStyle.display,
+            zIndex: 1
+        };
+        const resizableStyle = {
+            width: '100%',
+        };
+
+        copyOfStyle.display = 'block';
+        copyOfStyle.width = '100%';
+
         return (
-            <div className='edit-component-container'>
+            <div
+                className='blinkdiv'
+                style={editModeContainer}>
                 <Resizable
-                    style={{
-                        margin: 'auto'
-                    }}
+                    style={resizableStyle}
                     onResizeStart={(event, direction, refToElement, delta) => {
                         initialSizes.width = parseInt(droppedComponent.style.width, 10);
                         initialSizes.height = parseInt(droppedComponent.style.height, 10);
@@ -180,10 +196,6 @@ const DroppedComponent = ({
                             const newHeight = initialSizes.height + height;
                             handleComponentValueChange(newHeight + 'px', 'style.height');
                         }
-                    }}
-                    size={{
-                        width: droppedComponent.style.width,
-                        height: droppedComponent.style.height 
                     }}>
                 {
                     (() => {
@@ -194,7 +206,7 @@ const DroppedComponent = ({
                                     <img
                                         alt='component'
                                         src={droppedComponent.src}
-                                        style={droppedComponent.style}
+                                        style={copyOfStyle}
                                         className='edit-input'/>
                                 );
                                 break;
@@ -204,7 +216,7 @@ const DroppedComponent = ({
                                     <div
                                         alt='component'
                                         src={droppedComponent.src}
-                                        style={droppedComponent.style}
+                                        style={copyOfStyle}
                                         className='edit-input'>
                                         {
                                             droppedComponent.children.map((c) => (
@@ -220,11 +232,10 @@ const DroppedComponent = ({
                                 );
                                 break;
                             default:
-                                const copyOfStyles = Object.assign({}, droppedComponent.style);
-                                copyOfStyles.resize = 'none';
+                                copyOfStyle.resize = 'none';
                                 element = (
                                         <textarea
-                                            style={copyOfStyles}
+                                            style={copyOfStyle}
                                             className='edit-input'
                                             value={droppedComponent.innerText}
                                             onChange={(event) => 
@@ -237,19 +248,21 @@ const DroppedComponent = ({
                     })()
                 }
                 </Resizable>
-                
-                <ButtonComponent
-                    type='success'
-                    onClick={() => handleChangeEditMode(droppedComponent.index)}>
-                    <FontAwesomeIcon icon={faCheck} />
-                    Accept
-                </ButtonComponent>
-                <ButtonComponent
-                    type='warning'
-                    onClick={() => handleForceExitEditMode(droppedComponent.index)}>
-                    <FontAwesomeIcon icon={faUndo} />
-                    Undo
-                </ButtonComponent>
+
+                <div className='center-container small-buttons-action-container'>
+                    <ButtonComponent	
+                        type='success'	
+                        onClick={() => handleChangeEditMode(droppedComponent.index)}>	
+                        <FontAwesomeIcon icon={faCheck} />	
+                        Accept	
+                    </ButtonComponent>	
+                    <ButtonComponent	
+                        type='warning'	
+                        onClick={() => handleForceExitEditMode(droppedComponent.index)}>	
+                        <FontAwesomeIcon icon={faUndo} />	
+                        Undo	
+                    </ButtonComponent>
+                </div>
             </div>
         );
     }
