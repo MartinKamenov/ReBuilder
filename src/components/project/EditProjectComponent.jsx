@@ -4,8 +4,6 @@ import ProjectPageComponent from './projectDropList/ProjectPageComponent';
 import ElementToolbarComponent from './elementToolbar/ElementToolbarComponent';
 import componentObjects, { componentTypes } from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faSave, faArrowAltCircleUp, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import LoadingComponent from '../common/LoadingComponent';
 import * as projectActions from '../../actions/projectActions';
 import * as deploymentActions from '../../actions/deploymentActions';
@@ -15,7 +13,6 @@ import { connect } from 'react-redux';
 import apiService from '../../service/api.service';
 
 import './EditProjectComponent.css';
-import ButtonComponent from '../common/ButtonComponent';
 import SaveStatus from './components/saveStatus';
 import SaveStatusComponent from '../common/SaveStatusComponent';
 import ProjectActionButtonsComponent from '../common/ProjectActionButtonsComponent';
