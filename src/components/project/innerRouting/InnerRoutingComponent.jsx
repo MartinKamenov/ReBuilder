@@ -6,10 +6,13 @@ import { connect } from 'react-redux';
 import LoadingComponent from '../../common/LoadingComponent';
 import uuid from 'uuid';
 import { Link } from 'react-router-dom';
+import projectGenerator from '../../../service/projectGenerator.service';
+import SaveStatus from '../components/saveStatus';
 
 import './InnerRoutingComponent.css';
 import './PageElementsStyle.css';
 import ButtonComponent from '../../common/ButtonComponent';
+import ProjectActionButtonsComponent from '../../common/ProjectActionButtonsComponent';
 
 class InnerRoutingComponent extends Component {
     state = {
@@ -19,8 +22,11 @@ class InnerRoutingComponent extends Component {
         newPageRoute: '',
 
         newPageNameError: '',
-        newPageRouteError: ''
+        newPageRouteError: '',
+
+        saveStatus: SaveStatus.Saved
     }
+    
     componentDidMount() {
         const token = localStorage.getItem('token');
         if(!this.props.user.id && !token) {
@@ -39,6 +45,32 @@ class InnerRoutingComponent extends Component {
                 this.executeStylesScript();
             });
         }
+    }
+
+    generateProject = () => {
+        const pages = [...this.props.project.pages];
+        const index = pages.findIndex((p) => p.id === this.state.pageId);
+        pages[index] = this.state.page;
+
+        const project = Object.assign({}, this.props.project);
+        projectGenerator.generateProject(project.name, pages, project.projectImageUrl);
+    }
+
+    handleSaveProject = () => {
+        const token = localStorage.getItem('token');
+        if(!token) {
+            return;
+        }
+
+        const pages = [...this.state.pages];
+
+        this.setState({ saveStatus: SaveStatus.Saved });
+        
+        this.props.actions.updateProject(this.state.id, pages, token);
+    }
+
+    handleDeployProject = async () => {
+        this.props.actions.deployProject(this.state.id, this.props.user.token);
     }
 
     executeStylesScript = () => {
@@ -158,6 +190,11 @@ class InnerRoutingComponent extends Component {
         return (
             <div className='inner-routing-container'>
                 <div className='container'>
+                    <ProjectActionButtonsComponent
+                        handleSaveProject={this.handleSaveProject}
+                        generateProject={this.generateProject}
+                        handleDeployProject={this.handleDeployProject}
+                    />
                     <div className='center-container routing-form-container'  onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                         <div className='routing-form-input-container'>
                             <input

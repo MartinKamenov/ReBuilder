@@ -4,8 +4,6 @@ import ProjectPageComponent from './projectDropList/ProjectPageComponent';
 import ElementToolbarComponent from './elementToolbar/ElementToolbarComponent';
 import componentObjects, { componentTypes } from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faSave, faArrowAltCircleUp, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import LoadingComponent from '../common/LoadingComponent';
 import * as projectActions from '../../actions/projectActions';
 import * as deploymentActions from '../../actions/deploymentActions';
@@ -15,9 +13,9 @@ import { connect } from 'react-redux';
 import apiService from '../../service/api.service';
 
 import './EditProjectComponent.css';
-import ButtonComponent from '../common/ButtonComponent';
 import SaveStatus from './components/saveStatus';
 import SaveStatusComponent from '../common/SaveStatusComponent';
+import ProjectActionButtonsComponent from '../common/ProjectActionButtonsComponent';
 
 class EditProjectComponent extends Component {
     state = {
@@ -134,7 +132,6 @@ class EditProjectComponent extends Component {
         return component;
     }
     handleChangeEditMode = (index) => {
-        debugger;
         const droppedComponents = [...this.state.droppedComponents];
 
         let foundComponent = droppedComponents.find(c => c.index === index);
@@ -386,40 +383,11 @@ class EditProjectComponent extends Component {
                     })}>
                         {this.state.dragContainerActive ? 'Hide': 'Show'}
                 </button>
-                <div className='new-project-name-outer-container'>
-                    <div className='new-project-name-inner-container'>
-                        <div className='generate-project-btn-container'>
-                            <ButtonComponent
-                                type='danger'
-                                className='col-md-3 col-sm-6 project-action-btn'
-                                onClick={this.returnToRouting}>
-                                <FontAwesomeIcon icon={faArrowLeft} /> 
-                                <span className='new-project-btn-text'>Back to pages</span>
-                            </ButtonComponent>
-                            <ButtonComponent
-                                type='primary'
-                                className='col-md-3 col-sm-6 project-action-btn'
-                                onClick={this.handleSaveProject}>
-                                <FontAwesomeIcon icon={faSave} /> 
-                                <span className='new-project-btn-text'>Save project</span>
-                            </ButtonComponent>
-                            <ButtonComponent
-                                type='warning'
-                                className='col-md-3 col-sm-6 project-action-btn'
-                                onClick={this.generateProject}>
-                                <FontAwesomeIcon icon={faDownload} />
-                                <span className='new-project-btn-text'>Generate project</span>
-                            </ButtonComponent>
-                            <ButtonComponent
-                                type='success'
-                                className='col-md-3 col-sm-6 project-action-btn'
-                                onClick={this.handleDeployProject}>
-                                <FontAwesomeIcon icon={faArrowAltCircleUp} />
-                                <span className='new-project-btn-text'>Deploy project</span>
-                            </ButtonComponent>
-                        </div>
-                    </div>
-                </div>
+                <ProjectActionButtonsComponent
+                    returnToRouting={this.returnToRouting}
+                    handleSaveProject={this.handleSaveProject}
+                    generateProject={this.generateProject}
+                    handleDeployProject={this.handleDeployProject}/>
                 <div className="drag-drop-container">
                     <ProjectComponentsList
                         active={this.state.dragContainerActive}
