@@ -381,8 +381,10 @@ class EditProjectComponent extends Component {
                 <button 
                     className='draggable-container-btn' 
                     onClick={() => {
-                        
-                        if(componentInEditMode) { return };
+                        if(componentInEditMode) {
+                            return
+                        };
+
                         this.setState({
                             dragContainerActive: !this.state.dragContainerActive
                         })}
