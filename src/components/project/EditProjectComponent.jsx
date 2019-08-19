@@ -140,6 +140,9 @@ class EditProjectComponent extends Component {
         }
 
         foundComponent.isInEditMode = !foundComponent.isInEditMode;
+        if(foundComponent.isInEditMode) {
+            this.setState({ dragContainerActive: false });
+        }
 
         droppedComponents.forEach((component) => {
             if(component.index !== index) {
@@ -377,11 +380,14 @@ class EditProjectComponent extends Component {
                 </h1>
                 <button 
                     className='draggable-container-btn' 
-                    onClick={() => 
-                    this.setState({
-                        dragContainerActive: !this.state.dragContainerActive
-                    })}>
-                        {this.state.dragContainerActive ? 'Hide': 'Show'}
+                    onClick={() => {
+                        
+                        if(componentInEditMode) { return };
+                        this.setState({
+                            dragContainerActive: !this.state.dragContainerActive
+                        })}
+                    }>
+                    {this.state.dragContainerActive ? 'Hide': 'Show'}
                 </button>
                 <ProjectActionButtonsComponent
                     returnToRouting={this.returnToRouting}
