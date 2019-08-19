@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import * as projectActions from '../../../actions/projectActions';
 import * as deploymentActions from '../../../actions/deploymentActions';
 import { bindActionCreators } from 'redux';
@@ -23,6 +23,9 @@ class InnerRoutingComponent extends Component {
 
         newPageNameError: '',
         newPageRouteError: '',
+
+        isUpdating: false,
+        updatePage: null,
 
         saveStatus: SaveStatus.Saved
     }
@@ -156,6 +159,10 @@ class InnerRoutingComponent extends Component {
         });
     }
 
+    changeUpdateStatus = () => {
+        this.setState({ isUpdating: !this.state.isUpdating });
+    }
+
     isValid = (field) => {
         const value = this.state[field];
         switch(field) {
@@ -228,13 +235,44 @@ class InnerRoutingComponent extends Component {
                                 )
                             }
                         </div>
-                        <ButtonComponent
-                            rounded={false}
-                            type='success'
-                            onClick={this.addNewPage}
-                            className='routing-from-button'>
-                                Create page
-                        </ButtonComponent>
+                        { this.state.isUpdating ?
+                            (
+                                <>
+                                    <ButtonComponent
+                                        rounded={false}
+                                        type='success'
+                                        onClick={this.addNewPage}
+                                        className='routing-from-button'>
+                                            Save page
+                                    </ButtonComponent>
+                                    <ButtonComponent
+                                        rounded={false}
+                                        type='danger'
+                                        onClick={this.changeUpdateStatus}
+                                        className='routing-from-button'>
+                                            Cancel
+                                    </ButtonComponent>
+                                </>
+                            ) : (
+                                <>
+                                    <ButtonComponent
+                                        rounded={false}
+                                        type='success'
+                                        onClick={this.addNewPage}
+                                        className='routing-from-button'>
+                                            Create page
+                                    </ButtonComponent>
+                                    <ButtonComponent
+                                        rounded={false}
+                                        type='warning'
+                                        onClick={this.changeUpdateStatus}
+                                        className='routing-from-button'>
+                                            Update page
+                                    </ButtonComponent>
+                                </>
+                            ) 
+                        }
+                        
                     </div>
                 </div>
                 <div className='routing-pages-styling-container'>
