@@ -160,6 +160,10 @@ class InnerRoutingComponent extends Component {
     }
 
     changeUpdateStatus = () => {
+        if(this.state.isUpdating) {
+            this.setState({ newPageName: '', newPageRoute: '' });
+        }
+
         this.setState({ isUpdating: !this.state.isUpdating });
     }
 
