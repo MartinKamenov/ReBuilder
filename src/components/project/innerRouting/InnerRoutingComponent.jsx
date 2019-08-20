@@ -287,13 +287,25 @@ class InnerRoutingComponent extends Component {
                         { this.state.isUpdating ?
                             (
                                 <>
-                                    <ButtonComponent
-                                        rounded={false}
-                                        type='success'
-                                        onClick={this.updatePage}
-                                        className='routing-from-button'>
-                                            Save page
-                                    </ButtonComponent>
+                                    {this.state.updatePage ? (
+                                        <>
+                                            <ButtonComponent
+                                                rounded={false}
+                                                type='success'
+                                                onClick={this.updatePage}
+                                                className='routing-from-button'>
+                                                    Save page
+                                            </ButtonComponent>
+                                            <ButtonComponent
+                                                rounded={false}
+                                                type='danger'
+                                                onClick={this.deletePage}
+                                                className='routing-from-button'>
+                                                    Delete page
+                                            </ButtonComponent>
+                                        </>
+                                    ) : (null)}
+                                   
                                     <ButtonComponent
                                         rounded={false}
                                         type='warning'
@@ -301,13 +313,7 @@ class InnerRoutingComponent extends Component {
                                         className='routing-from-button'>
                                             Cancel update
                                     </ButtonComponent>
-                                    <ButtonComponent
-                                        rounded={false}
-                                        type='danger'
-                                        onClick={this.deletePage}
-                                        className='routing-from-button'>
-                                            Delete page
-                                    </ButtonComponent>
+                                    
                                 </>
                             ) : (
                                 <>
