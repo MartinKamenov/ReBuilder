@@ -1,11 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import * as projectActions from '../../../actions/projectActions';
 import * as deploymentActions from '../../../actions/deploymentActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoadingComponent from '../../common/LoadingComponent';
 import uuid from 'uuid';
-import { Link } from 'react-router-dom';
 import projectGenerator from '../../../service/projectGenerator.service';
 import SaveStatus from '../components/saveStatus';
 
@@ -161,7 +160,7 @@ class InnerRoutingComponent extends Component {
 
     changeUpdateStatus = () => {
         if(this.state.isUpdating) {
-            this.setState({ newPageName: '', newPageRoute: '' });
+            this.setState({ newPageName: '', newPageRoute: '', updatePage: null });
         }
 
         this.setState({ isUpdating: !this.state.isUpdating });
@@ -294,7 +293,12 @@ class InnerRoutingComponent extends Component {
                         {this.state.pages.map((page) => (
                             <li
                                 key={page.id}
-                                className='routing-page-styling-li'>
+                                className={'routing-page-styling-li' +
+                                    ((
+                                        this.state.updatePage &&
+                                        this.state.updatePage.id === page.id
+                                    ) ? ' blinkdiv' : '')
+                                    }>
                                 <div
                                     className='normal'
                                     onClick={(event) => {
