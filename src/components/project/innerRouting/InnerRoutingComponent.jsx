@@ -209,7 +209,27 @@ class InnerRoutingComponent extends Component {
         page.id = pages[foundPageIndex].id;
         pages[foundPageIndex] = page;
 
-        this.setState({ pages, isUpdating: false, updatePage: null });
+        this.setState({
+            pages,
+            isUpdating: false,
+            updatePage: null,
+            newPageName: '',
+            newPageRoute: ''
+        });
+    }
+
+    deletePage = () => {
+        const pages = [...this.state.pages];
+        const foundPageIndex = pages.findIndex((p) => p.id === this.state.updatePage.id);
+
+        pages.splice(foundPageIndex, 1);
+        this.setState({
+            pages,
+            isUpdating: false,
+            updatePage: null,
+            newPageName: '',
+            newPageRoute: ''
+        });
     }
 
     isValidClass = (errorField) => {
@@ -276,10 +296,17 @@ class InnerRoutingComponent extends Component {
                                     </ButtonComponent>
                                     <ButtonComponent
                                         rounded={false}
-                                        type='danger'
+                                        type='warning'
                                         onClick={this.changeUpdateStatus}
                                         className='routing-from-button'>
                                             Cancel update
+                                    </ButtonComponent>
+                                    <ButtonComponent
+                                        rounded={false}
+                                        type='danger'
+                                        onClick={this.deletePage}
+                                        className='routing-from-button'>
+                                            Delete page
                                     </ButtonComponent>
                                 </>
                             ) : (
