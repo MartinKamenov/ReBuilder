@@ -232,6 +232,12 @@ class InnerRoutingComponent extends Component {
         });
     }
 
+    navigateToDashboard = () => {
+        this.setState({ isLoading: false });
+        const history = this.props.history;
+        history.push('/dashboard');
+    }
+
     isValidClass = (errorField) => {
         if(this.state[errorField]) {
             return 'routing-form-input-invalid';
@@ -247,6 +253,8 @@ class InnerRoutingComponent extends Component {
             <div className='inner-routing-container'>
                 <div className='container'>
                     <ProjectActionButtonsComponent
+                        returnFunction={this.navigateToDashboard}
+                        returnFunctionText='Back to dashboard'
                         handleSaveProject={this.handleSaveProject}
                         generateProject={this.generateProject}
                         handleDeployProject={this.handleDeployProject}
@@ -305,7 +313,7 @@ class InnerRoutingComponent extends Component {
                                             </ButtonComponent>
                                         </>
                                     ) : (null)}
-                                   
+
                                     <ButtonComponent
                                         rounded={false}
                                         type='warning'
@@ -313,7 +321,6 @@ class InnerRoutingComponent extends Component {
                                         className='routing-from-button'>
                                             Cancel update
                                     </ButtonComponent>
-                                    
                                 </>
                             ) : (
                                 <>
