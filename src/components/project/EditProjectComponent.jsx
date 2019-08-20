@@ -392,7 +392,8 @@ class EditProjectComponent extends Component {
                     {this.state.dragContainerActive ? 'Hide': 'Show'}
                 </button>
                 <ProjectActionButtonsComponent
-                    returnToRouting={this.returnToRouting}
+                    returnFunction={this.returnToRouting}
+                    returnFunctionText='Back to pages'
                     handleSaveProject={this.handleSaveProject}
                     generateProject={this.generateProject}
                     handleDeployProject={this.handleDeployProject}/>

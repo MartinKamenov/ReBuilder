@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 import './ProjectActionButtonsComponent.css';
 
 const ProjectActionButtonsComponent = ({
-        returnToRouting,
+        returnFunction,
+        returnFunctionText,
         handleSaveProject,
         generateProject,
         handleDeployProject
@@ -17,32 +18,32 @@ const ProjectActionButtonsComponent = ({
         <div className='new-project-name-outer-container'>
             <div className='new-project-name-inner-container'>
                 <div className='generate-project-btn-container'>
-                    {returnToRouting ? (
+                    {returnFunction ? (
                         <ButtonComponent
                             type='danger'
                             className={`col-md-3 col-sm-6 project-action-btn`}
-                            onClick={returnToRouting}>
+                            onClick={returnFunction}>
                             <FontAwesomeIcon icon={faArrowLeft} /> 
-                            <span className='new-project-btn-text'>Back to pages</span>
+                            <span className='new-project-btn-text'>{returnFunctionText}</span>
                         </ButtonComponent>
                     ) : null}
                     <ButtonComponent
                         type='primary'
-                        className={`${returnToRouting ? 'col-md-3' : 'col-md-4'} project-action-btn`}
+                        className={`${returnFunction ? 'col-md-3' : 'col-md-4'} project-action-btn`}
                         onClick={handleSaveProject}>
                         <FontAwesomeIcon icon={faSave} /> 
                         <span className='new-project-btn-text'>Save project</span>
                     </ButtonComponent>
                     <ButtonComponent
                         type='warning'
-                        className={`${returnToRouting ? 'col-md-3' : 'col-md-4'} project-action-btn`}
+                        className={`${returnFunction ? 'col-md-3' : 'col-md-4'} project-action-btn`}
                         onClick={generateProject}>
                         <FontAwesomeIcon icon={faDownload} />
                         <span className='new-project-btn-text'>Generate project</span>
                     </ButtonComponent>
                     <ButtonComponent
                         type='success'
-                        className={`${returnToRouting ? 'col-md-3' : 'col-md-4'} project-action-btn`}
+                        className={`${returnFunction ? 'col-md-3' : 'col-md-4'} project-action-btn`}
                         onClick={handleDeployProject}>
                         <FontAwesomeIcon icon={faArrowAltCircleUp} />
                         <span className='new-project-btn-text'>Deploy project</span>
@@ -54,7 +55,8 @@ const ProjectActionButtonsComponent = ({
 }
 
 ProjectActionButtonsComponent.propTypes = {
-    returnToRouting: PropTypes.func,
+    returnFunction: PropTypes.func,
+    returnFunctionText: PropTypes.string,
     handleSaveProject: PropTypes.func.isRequired,
     generateProject: PropTypes.func.isRequired,
     handleDeployProject: PropTypes.func.isRequired
