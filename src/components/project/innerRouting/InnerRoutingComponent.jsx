@@ -196,6 +196,22 @@ class InnerRoutingComponent extends Component {
         });
     }
 
+    updatePage = () => {
+        const page = {
+            name: this.state.newPageName,
+            route: this.state.newPageRoute
+        };
+
+        const pages = [...this.state.pages];
+        const foundPageIndex = pages.findIndex((p) => p.id === this.state.updatePage.id);
+
+        page.elements = pages[foundPageIndex].elements;
+        page.id = pages[foundPageIndex].id;
+        pages[foundPageIndex] = page;
+
+        this.setState({ pages, isUpdating: false, updatePage: null });
+    }
+
     isValidClass = (errorField) => {
         if(this.state[errorField]) {
             return 'routing-form-input-invalid';
@@ -254,7 +270,7 @@ class InnerRoutingComponent extends Component {
                                     <ButtonComponent
                                         rounded={false}
                                         type='success'
-                                        onClick={this.addNewPage}
+                                        onClick={this.updatePage}
                                         className='routing-from-button'>
                                             Save page
                                     </ButtonComponent>
