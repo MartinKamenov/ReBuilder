@@ -20,7 +20,7 @@ const ProjectActionButtonsComponent = ({
                 <div className='generate-project-btn-container'>
                     {returnFunction ? (
                         <ButtonComponent
-                            type='danger'
+                            type='theme'
                             className={`col-md-3 col-sm-6 project-action-btn`}
                             onClick={returnFunction}>
                             <FontAwesomeIcon icon={faArrowLeft} /> 
@@ -28,21 +28,21 @@ const ProjectActionButtonsComponent = ({
                         </ButtonComponent>
                     ) : null}
                     <ButtonComponent
-                        type='primary'
+                        type='theme'
                         className={`${returnFunction ? 'col-md-3' : 'col-md-4'} project-action-btn`}
                         onClick={handleSaveProject}>
                         <FontAwesomeIcon icon={faSave} /> 
                         <span className='new-project-btn-text'>Save project</span>
                     </ButtonComponent>
                     <ButtonComponent
-                        type='warning'
+                        type='theme'
                         className={`${returnFunction ? 'col-md-3' : 'col-md-4'} project-action-btn`}
                         onClick={generateProject}>
                         <FontAwesomeIcon icon={faDownload} />
                         <span className='new-project-btn-text'>Generate project</span>
                     </ButtonComponent>
                     <ButtonComponent
-                        type='success'
+                        type='theme'
                         className={`${returnFunction ? 'col-md-3' : 'col-md-4'} project-action-btn`}
                         onClick={handleDeployProject}>
                         <FontAwesomeIcon icon={faArrowAltCircleUp} />
