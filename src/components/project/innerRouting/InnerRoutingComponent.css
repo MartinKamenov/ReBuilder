@@ -68,3 +68,7 @@
 .routing-form-input-invalid {
     border: 1px solid red;
 }
+
+.routing-page-styling-li {
+    cursor: pointer;
+}

@@ -22,16 +22,37 @@
     background-color: #337AB7;
 }
 
+.custom-button-theme {
+    background-color: white;
+    color: #4A3E9D;
+    border: 1px solid #4A3E9D;
+}
+
 .custom-button-success:hover {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
     background-color: #449D44;
 }
 .custom-button-danger:hover {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
     background-color: #C9302C;
 }
 .custom-button-warning:hover {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
     background-color: #EC971F;
 }
 
 .custom-button-primary:hover {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
     background-color: #286090;
+}
+
+.custom-button-theme:hover {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
+    background-color: #4A3E9D;
+    color: white;
 }
