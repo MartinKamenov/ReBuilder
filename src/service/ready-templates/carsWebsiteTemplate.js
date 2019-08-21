@@ -1,4 +1,6 @@
 import uuid from 'uuid';
+import displayValues from '../../components/project/components/displayValues';
+import textAlignValues from '../../components/project/components/textAlignValues';
 
 const carsTemplate =
 {
@@ -28,7 +30,9 @@ const carsTemplate =
                                 width: '100px',
                                 lineHeight: '50px',
                                 textAlign: 'center',
+                                textAlignValues,
                                 display: 'block',
+                                displayValues,
                                 textDecoration: 'none',
                                 marginLeft: '10px',
                                 marginRight: 'auto',
@@ -55,7 +59,9 @@ const carsTemplate =
                                 lineHeight: '50px',
                                 width: '100px',
                                 textAlign: 'center',
+                                textAlignValues,
                                 display: 'block',
+                                displayValues,
                                 textDecoration: 'none',
                                 marginLeft: 'auto',
                                 marginRight: 'auto',
@@ -82,7 +88,9 @@ const carsTemplate =
                                 lineHeight: '50px',
                                 width: '100px',
                                 textAlign: 'center',
+                                textAlignValues,
                                 display: 'block',
+                                displayValues,
                                 textDecoration: 'none',
                                 marginLeft: 'auto',
                                 marginRight: 'auto',
@@ -103,7 +111,9 @@ const carsTemplate =
                         height: '50px',
                         width: '100%',
                         textAlign: 'center',
+                        textAlignValues,
                         display: 'block',
+                        displayValues,
                         marginLeft: 'auto',
                         marginRight: 'auto',
                         marginTop: '0px',
@@ -128,7 +138,9 @@ const carsTemplate =
                         height: '50px',
                         width: '100%',
                         textAlign: 'center',
+                        textAlignValues,
                         display: 'block',
+                        displayValues,
                         marginLeft: 'auto',
                         marginRight: 'auto',
                         marginTop: '0px',
@@ -149,6 +161,7 @@ const carsTemplate =
                         width: '100%',
                         textAlign: 'center',
                         display: 'block',
+                        displayValues,
                         marginLeft: 'auto',
                         marginRight: 'auto',
                         marginTop: '0px',
