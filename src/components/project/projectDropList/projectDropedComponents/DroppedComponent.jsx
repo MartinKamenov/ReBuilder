@@ -20,6 +20,7 @@ const getComponent = (
         handleDropContainerComponent,
         elementStyle
     ) => {
+        debugger;
     let component = null;
     switch (droppedComponent.name) {
         case componentTypes.Header:

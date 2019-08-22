@@ -114,8 +114,6 @@ const componentObjects = [
             fontWeight: 'normal',
             fontWeightValues,
             textAlignValues,
-            fontWeight: 'normal',
-            fontWeightValues,
             display: 'block',
             displayValues,
             marginLeft: 'auto',
@@ -127,6 +125,7 @@ const componentObjects = [
     {
         name: 'RoutingLink',
         title: 'Routing Link',
+        innerText: 'Link',
         to: '',
         toValues: [],
         style: {
