@@ -265,7 +265,7 @@ class EditProjectComponent extends Component {
     }
     getComponentInEditMode = () => {
         let index = -1;
-        const droppedComponents = this.state.droppedComponents;
+        const droppedComponents = [...this.state.droppedComponents];
         let component = droppedComponents.find((c, i) => {
             if(c.isInEditMode) {
                 index = i;
