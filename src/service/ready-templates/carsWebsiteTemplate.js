@@ -1,6 +1,7 @@
 import uuid from 'uuid';
 import displayValues from '../../components/project/components/displayValues';
 import textAlignValues from '../../components/project/components/textAlignValues';
+import fontWeightValues from '../../components/project/components/fontWeightValues';
 
 const carsTemplate =
 {
@@ -31,6 +32,8 @@ const carsTemplate =
                                 lineHeight: '50px',
                                 textAlign: 'center',
                                 textAlignValues,
+                                fontWeight: 'normal',
+                                fontWeightValues,
                                 display: 'block',
                                 displayValues,
                                 textDecoration: 'none',
@@ -60,6 +63,8 @@ const carsTemplate =
                                 width: '100px',
                                 textAlign: 'center',
                                 textAlignValues,
+                                fontWeight: 'normal',
+                                fontWeightValues,
                                 display: 'block',
                                 displayValues,
                                 textDecoration: 'none',
@@ -89,6 +94,8 @@ const carsTemplate =
                                 width: '100px',
                                 textAlign: 'center',
                                 textAlignValues,
+                                fontWeight: 'normal',
+                                fontWeightValues,
                                 display: 'block',
                                 displayValues,
                                 textDecoration: 'none',
@@ -112,6 +119,8 @@ const carsTemplate =
                         width: '100%',
                         textAlign: 'center',
                         textAlignValues,
+                        fontWeight: 'normal',
+                        fontWeightValues,
                         display: 'block',
                         displayValues,
                         marginLeft: 'auto',
@@ -139,6 +148,8 @@ const carsTemplate =
                         width: '100%',
                         textAlign: 'center',
                         textAlignValues,
+                        fontWeight: 'normal',
+                        fontWeightValues,
                         display: 'block',
                         displayValues,
                         marginLeft: 'auto',
