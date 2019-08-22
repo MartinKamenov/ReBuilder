@@ -20,6 +20,7 @@ const getComponent = (
         handleDropContainerComponent,
         elementStyle
     ) => {
+    debugger;
     let component = null;
     switch (droppedComponent.name) {
         case componentTypes.Header:
@@ -96,9 +97,11 @@ const getComponent = (
                         }}
                         className='droped-component'>
                         {
-                            droppedComponent.children.map((c) => (
-                                getComponent(c, handleChangeEditMode, handleDropContainerComponent)
-                            ))
+                            droppedComponent.children.map((c) => {
+                                debugger;
+                                return (
+                                getComponent(c, handleChangeEditMode, handleDropContainerComponent, c.style)
+                            )})
                         }
                     </div>
                 </Droppable>)
