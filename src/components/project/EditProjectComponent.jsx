@@ -171,8 +171,18 @@ class EditProjectComponent extends Component {
     }
 
     handleDeleteComponent = (index) => {
-        const droppedComponents = this.state.droppedComponents
-            .filter((c) => c.index !== index);
+        debugger;
+        let droppedComponents = this.state.droppedComponents;
+        const deleteComponentIndex = droppedComponents.findIndex(c => c.index === index);
+        if(deleteComponentIndex !== -1) {
+            droppedComponents.splice(deleteComponentIndex, 1);
+        } else {
+            const children = [];
+            droppedComponents.filter(c => c.children)
+                .map(c => c.children)
+                .forEach(a => a.forEach(child => children.push(child)));
+            debugger;
+        }
 
         this.setState({ droppedComponents, previousComponent: {} });
     }
@@ -360,6 +370,8 @@ class EditProjectComponent extends Component {
         const droppedComponents = [...this.state.droppedComponents];
         const containerIndex = droppedComponents.findIndex((c) => c.index === index);
         const container = Object.assign({}, droppedComponents[containerIndex]);
+
+        debugger;
 
         container.children.push(droppedComponent);
         droppedComponents[containerIndex] = container;
