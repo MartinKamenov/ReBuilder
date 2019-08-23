@@ -97,7 +97,7 @@ const getComponent = (
                         className='droped-component'>
                         {
                             droppedComponent.children.map((c) => (
-                                getComponent(c, handleChangeEditMode, handleDropContainerComponent)
+                                getComponent(c, handleChangeEditMode, handleDropContainerComponent, c.style)
                             ))
                         }
                     </div>
