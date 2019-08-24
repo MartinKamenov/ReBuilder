@@ -208,7 +208,7 @@ class EditProjectComponent extends Component {
             }
         }
 
-        this.setState({ droppedComponents, previousComponent: {} });
+        this.setState({ droppedComponents, previousComponent: {}, saveStatus: SaveStatus.Updated });
     }
 
     handleComponentValueChange = (value, field) => {
