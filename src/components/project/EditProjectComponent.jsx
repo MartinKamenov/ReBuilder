@@ -134,21 +134,33 @@ class EditProjectComponent extends Component {
     handleChangeEditMode = (index) => {
         const droppedComponents = [...this.state.droppedComponents];
 
-        let foundComponent = droppedComponents.find(c => c.index === index);
-        if(!foundComponent) {
-            foundComponent = this.findChildByIndex(droppedComponents, index)
-        }
+        // const component = Object.assign({}, droppedComponents[0]);
+        // component.isInEditMode = true;
 
-        foundComponent.isInEditMode = !foundComponent.isInEditMode;
-        if(foundComponent.isInEditMode) {
-            this.setState({ dragContainerActive: false });
-        }
+        // droppedComponents[0] = component;
 
-        droppedComponents.forEach((component) => {
-            if(component.index !== index) {
-                component.isInEditMode = false;
+        let foundComponentIndex = droppedComponents.findIndex(c => c.index === index);
+        debugger;
+        if(foundComponentIndex === -1) {
+
+        } else {
+            debugger;
+            const component = Object.assign({}, droppedComponents[foundComponentIndex]);
+            component.isInEditMode = 
+                !component.isInEditMode;
+            
+            droppedComponents[foundComponentIndex] = component;
+            droppedComponents.forEach((component) => {
+                if(component.index !== index) {
+                    component.isInEditMode = false;
+                }
+            });
+            
+            if(droppedComponents[foundComponentIndex].isInEditMode) {
+                this.setState({ dragContainerActive: false });
             }
-        });
+        }
+        
 
         if(this.getComponentFromIndex(index).isInEditMode) {
             this.setState({ previousComponent: this.getComponentFromIndex(index) });
@@ -196,7 +208,7 @@ class EditProjectComponent extends Component {
             }
         }
 
-        this.setState({ droppedComponents, previousComponent: {} });
+        this.setState({ droppedComponents, previousComponent: {}, saveStatus: SaveStatus.Updated });
     }
 
     handleComponentValueChange = (value, field) => {
