@@ -142,9 +142,26 @@ class EditProjectComponent extends Component {
         let foundComponentIndex = droppedComponents.findIndex(c => c.index === index);
         debugger;
         if(foundComponentIndex === -1) {
+            let childIndex = -1;
+            const componentIndex = droppedComponents
+            .findIndex(c => {
+                debugger;
+                const cIndex = c.children.findIndex(child => child.index === index);
+                if(cIndex !== -1) {
+                    childIndex = cIndex;
+                    return true;
+                }
 
+                return false;
+            });
+            if(componentIndex !== -1 && childIndex !== -1) {
+                const component = Object.assign({}, droppedComponents[componentIndex]);
+                const child = Object.assign({}, component.children[childIndex]);
+                child.isInEditMode = !child.isInEditMode;
+                component.children[childIndex] = child;
+                droppedComponents[componentIndex] = component;
+            }
         } else {
-            debugger;
             const component = Object.assign({}, droppedComponents[foundComponentIndex]);
             component.isInEditMode = 
                 !component.isInEditMode;
