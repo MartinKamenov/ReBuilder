@@ -134,18 +134,11 @@ class EditProjectComponent extends Component {
     handleChangeEditMode = (index) => {
         const droppedComponents = [...this.state.droppedComponents];
 
-        // const component = Object.assign({}, droppedComponents[0]);
-        // component.isInEditMode = true;
-
-        // droppedComponents[0] = component;
-
         let foundComponentIndex = droppedComponents.findIndex(c => c.index === index);
-        debugger;
         if(foundComponentIndex === -1) {
             let childIndex = -1;
             const componentIndex = droppedComponents
             .findIndex(c => {
-                debugger;
                 const cIndex = c.children.findIndex(child => child.index === index);
                 if(cIndex !== -1) {
                     childIndex = cIndex;
@@ -209,7 +202,6 @@ class EditProjectComponent extends Component {
             let childIndex = -1;
             const componentIndex = droppedComponents
             .findIndex(c => {
-                debugger;
                 const cIndex = c.children.findIndex(child => child.index === index);
                 if(cIndex !== -1) {
                     childIndex = cIndex;
