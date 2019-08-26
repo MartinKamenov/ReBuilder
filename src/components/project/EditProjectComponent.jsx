@@ -134,17 +134,30 @@ class EditProjectComponent extends Component {
     handleChangeEditMode = (index) => {
         const droppedComponents = [...this.state.droppedComponents];
 
-        // const component = Object.assign({}, droppedComponents[0]);
-        // component.isInEditMode = true;
-
-        // droppedComponents[0] = component;
-
         let foundComponentIndex = droppedComponents.findIndex(c => c.index === index);
-        debugger;
         if(foundComponentIndex === -1) {
+            let childIndex = -1;
+            const componentIndex = droppedComponents
+            .findIndex(c => {
+                const cIndex = c.children.findIndex(child => child.index === index);
+                if(cIndex !== -1) {
+                    childIndex = cIndex;
+                    return true;
+                }
 
+                return false;
+            });
+
+            if(componentIndex !== -1 && childIndex !== -1) {
+                const component = Object.assign({}, droppedComponents[componentIndex]);
+                const children = [...component.children];
+                const child = Object.assign({}, children[childIndex]);
+                child.isInEditMode = !child.isInEditMode;
+                children[childIndex] = child;
+                component.children = children;
+                droppedComponents[componentIndex] = component;
+            }
         } else {
-            debugger;
             const component = Object.assign({}, droppedComponents[foundComponentIndex]);
             component.isInEditMode = 
                 !component.isInEditMode;
@@ -186,7 +199,23 @@ class EditProjectComponent extends Component {
         let droppedComponents = this.state.droppedComponents;
         const deleteComponentIndex = droppedComponents.findIndex(c => c.index === index);
         if(deleteComponentIndex !== -1) {
-            droppedComponents.splice(deleteComponentIndex, 1);
+            let childIndex = -1;
+            const componentIndex = droppedComponents
+            .findIndex(c => {
+                const cIndex = c.children.findIndex(child => child.index === index);
+                if(cIndex !== -1) {
+                    childIndex = cIndex;
+                    return true;
+                }
+
+                return false;
+            });
+
+            if(componentIndex !== -1 && childIndex !== -1) {
+                const component = Object.assign({}, droppedComponents[componentIndex]);
+                component.children.splice(childIndex, 1);
+                droppedComponents[componentIndex] = index;
+            }
         } else {
             let i = 0;
             for(i = 0; i < droppedComponents.length; i++) {
