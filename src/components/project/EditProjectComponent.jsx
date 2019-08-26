@@ -186,7 +186,24 @@ class EditProjectComponent extends Component {
         let droppedComponents = this.state.droppedComponents;
         const deleteComponentIndex = droppedComponents.findIndex(c => c.index === index);
         if(deleteComponentIndex !== -1) {
-            droppedComponents.splice(deleteComponentIndex, 1);
+            let childIndex = -1;
+            const componentIndex = droppedComponents
+            .findIndex(c => {
+                debugger;
+                const cIndex = c.children.findIndex(child => child.index === index);
+                if(cIndex !== -1) {
+                    childIndex = cIndex;
+                    return true;
+                }
+
+                return false;
+            });
+
+            if(componentIndex !== -1 && childIndex !== -1) {
+                const component = Object.assign({}, droppedComponents[componentIndex]);
+                component.children.splice(childIndex, 1);
+                droppedComponents[componentIndex] = index;
+            }
         } else {
             let i = 0;
             for(i = 0; i < droppedComponents.length; i++) {
