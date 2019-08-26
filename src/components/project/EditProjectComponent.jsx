@@ -246,7 +246,16 @@ class EditProjectComponent extends Component {
         componentInEditMode = Object.assign({}, componentInEditMode);
         if(value.hex) {
             const style = Object.assign({}, componentInEditMode.style);
+            let opacity = value.rgb.a;
             value = value.hex;
+            const hexOpacities = ['FF', 'F2', 'E6', 'D9', 'CC', 'BF',
+            'B3', 'A6', '99', '8C', '80', '73', '66', '59', '4D',
+            '40', '33', '26', '1A', '0D', '00'];
+            opacity = opacity * 10;
+            opacity = opacity * (hexOpacities.length / 10);
+            opacity = Math.round(opacity);
+            value += hexOpacities[hexOpacities.length - opacity];
+
             style[field] = value;
             componentInEditMode.style = style;
         } else if(field.startsWith('style.')) {
