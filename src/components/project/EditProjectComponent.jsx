@@ -154,11 +154,14 @@ class EditProjectComponent extends Component {
 
                 return false;
             });
+
             if(componentIndex !== -1 && childIndex !== -1) {
                 const component = Object.assign({}, droppedComponents[componentIndex]);
-                const child = Object.assign({}, component.children[childIndex]);
+                const children = [...component.children];
+                const child = Object.assign({}, children[childIndex]);
                 child.isInEditMode = !child.isInEditMode;
-                component.children[childIndex] = child;
+                children[childIndex] = child;
+                component.children = children;
                 droppedComponents[componentIndex] = component;
             }
         } else {
