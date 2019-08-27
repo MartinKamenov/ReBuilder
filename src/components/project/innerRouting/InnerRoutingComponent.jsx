@@ -246,9 +246,25 @@ class InnerRoutingComponent extends Component {
     }
 
     getComponentJSX = (component) => {
+        const style = Object.assign({}, component.style);
+        if(style.height.endsWith('px')) {
+            const height = parseInt(style.height, 10);
+            style.height = (height / document.documentElement.scrollHeight * 200) + 'px';
+        }
+
+        if(style.fontSize) {
+            const fontSize = parseInt(style.fontSize, 10);
+            style.fontSize = parseInt(fontSize / document.documentElement.scrollHeight * 200, 10);
+        }
         switch(component.name) {
             case componentTypes.Image:
-                return <img src={component.src} style={component.style}/>
+                return <img src={component.src} style={style}/>;
+            case componentTypes.Container:
+                return (<div style={style}>{
+                    component.children.map(child => this.getComponentJSX(child))
+                }</div>);
+            default:
+                return <div style={style}>{component.innerText}</div>;
         }
     }
 
