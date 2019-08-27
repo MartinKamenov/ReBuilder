@@ -258,13 +258,15 @@ class InnerRoutingComponent extends Component {
         }
         switch(component.name) {
             case componentTypes.Image:
-                return <img src={component.src} style={style}/>;
+                return <img
+                    alt='element'
+                    key={component.index} src={component.src} style={style}/>;
             case componentTypes.Container:
-                return (<div style={style}>{
+                return (<div key={component.index} style={style}>{
                     component.children.map(child => this.getComponentJSX(child))
                 }</div>);
             default:
-                return <div style={style}>{component.innerText}</div>;
+                return <div key={component.index} style={style}>{component.innerText}</div>;
         }
     }
 
