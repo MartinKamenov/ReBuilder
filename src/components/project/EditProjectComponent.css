@@ -37,3 +37,7 @@
 .project-name-header {
     text-align: center;
 }
+
+.normal {
+    overflow: hidden;
+}
