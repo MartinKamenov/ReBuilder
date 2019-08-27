@@ -258,15 +258,17 @@ class InnerRoutingComponent extends Component {
         }
         switch(component.name) {
             case componentTypes.Image:
-                return <img
+                return (<img
                     alt='element'
-                    key={component.index} src={component.src} style={style}/>;
+                    key={component.index}
+                    src={component.src}
+                    style={style}/>);
             case componentTypes.Container:
                 return (<div key={component.index} style={style}>{
                     component.children.map(child => this.getComponentJSX(child))
                 }</div>);
             default:
-                return <div key={component.index} style={style}>{component.innerText}</div>;
+                return (<div key={component.index} style={style}>{component.innerText}</div>);
         }
     }
 
@@ -391,12 +393,15 @@ class InnerRoutingComponent extends Component {
 
                                         this.navigateToPage(page.id);
                                     }}>
-                                    <div>
+                                    <div className='hover-shadow'>
+                                    </div>
+                                    <div style={{zIndex: 0}}>
                                         {
                                             page.elements
                                                 .map((component) => this.getComponentJSX(component))
                                         }
                                     </div>
+                                    
                                 </div>
                                 <div className='info'>
                                     <h3 className='routing-page-styling-h3'>{page.name}</h3>
