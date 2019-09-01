@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../../theme/css/styles-merged.css'
 import '../../theme/css/style.min.css'
 import '../../theme/css/custom.css'
 import { Link } from 'react-router-dom';
 import './HomeComponent.css';
 
-class HomeComponent extends Component {
-  render() {
-    return (
-      <div>
+const HomeComponent = () => {
+  return (
+    <div>
         <section className='probootstrap-intro' style={{backgroundImage: 'url(/assets/homePageBackground.jpeg)'}} data-stellar-background-ratio='0.5'>
           <div className='container-fluid'>
             <div className='row'>
@@ -38,7 +37,7 @@ class HomeComponent extends Component {
                 <div className='probootstrap-box'>
                   <div className='icon text-center'><i className='icon-tools2' /></div>
                   <h3>Interface Design</h3>
-                  <p className='service-description' className='service-description'>
+                  <p className='service-description'>
                     Drag and drop HTML elements on your customized page.
                   </p>
                   <ul className='text-left with-icon colored'>
@@ -94,9 +93,7 @@ class HomeComponent extends Component {
         }
         
       </div>
-     );
-  }
+  );
 }
  
 export default HomeComponent;
- 
