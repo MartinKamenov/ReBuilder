@@ -3,6 +3,7 @@ import '../../theme/css/styles-merged.css'
 import '../../theme/css/style.min.css'
 import '../../theme/css/custom.css'
 import { Link } from 'react-router-dom';
+import './HomeComponent.css';
 
 class HomeComponent extends Component {
   render() {
@@ -37,7 +38,7 @@ class HomeComponent extends Component {
                 <div className='probootstrap-box'>
                   <div className='icon text-center'><i className='icon-tools2' /></div>
                   <h3>Interface Design</h3>
-                  <p>
+                  <p className='service-description' className='service-description'>
                     Drag and drop HTML elements on your customized page.
                   </p>
                   <ul className='text-left with-icon colored'>
@@ -51,7 +52,7 @@ class HomeComponent extends Component {
                 <div className='probootstrap-box'>
                   <div className='icon text-center'><i className='icon-desktop' /></div>
                   <h3>User Experience</h3>
-                  <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                  <p className='service-description'>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
                   <ul className='text-left with-icon colored'>
                     <li><i className='icon-radio-checked' /> <span>A small river named Duden</span></li>
                     <li><i className='icon-radio-checked' /> <span>Place and supplie</span></li>
@@ -63,7 +64,7 @@ class HomeComponent extends Component {
                 <div className='probootstrap-box'>
                   <div className='icon text-center'><i className='icon-lightbulb' /></div>
                   <h3>Product Strategy</h3>
-                  <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                  <p className='service-description'>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
                   <ul className='text-left with-icon colored'>
                     <li><i className='icon-radio-checked' /> <span>A small river named Duden</span></li>
                     <li><i className='icon-radio-checked' /> <span>Place and supplie</span></li>
