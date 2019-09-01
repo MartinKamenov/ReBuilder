@@ -11,11 +11,7 @@ class ServicesComponent extends Component {
                 <div className='container-fluid'>
                     <div className='row'>
                     <div className='col-md-7 probootstrap-intro-text'>
-                        <h1>Create your own website without the pain of knowing how to code</h1>
-                        <div className='probootstrap-subtitle probootstrap-animate'>
-                        <h2>A free html website template for creative agency like you! brought to you by</h2>
-                        </div>
-                        <p className='watch-intro probootstrap-animate'><a href='https://vimeo.com/45830194' className='popup-vimeo'>Watch the video <i className='icon-play2' /></a></p>
+                        <h1>Our services</h1>
                     </div>
                     </div>
                 </div>

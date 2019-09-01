@@ -37,7 +37,9 @@ class HomeComponent extends Component {
                 <div className='probootstrap-box'>
                   <div className='icon text-center'><i className='icon-tools2' /></div>
                   <h3>Interface Design</h3>
-                  <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                  <p>
+                    Drag and drop HTML elements on your customized page.
+                  </p>
                   <ul className='text-left with-icon colored'>
                     <li><i className='icon-radio-checked' /> <span>A small river named Duden</span></li>
                     <li><i className='icon-radio-checked' /> <span>Place and supplie</span></li>
