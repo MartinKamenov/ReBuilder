@@ -14,7 +14,7 @@ class HomeComponent extends Component {
               <div className='col-md-7 probootstrap-intro-text'>
                 <h1>Create your own website without the pain of knowing how to code</h1>
                 <div className='probootstrap-subtitle probootstrap-animate'>
-                  <h2>A free html website template for creative agency like you! brought to you by</h2>
+                  <h2>Website template for creative agency like you</h2>
                 </div>
                 <p className='watch-intro probootstrap-animate'><a href='https://vimeo.com/45830194' className='popup-vimeo'>Watch the video <i className='icon-play2' /></a></p>
               </div>
@@ -27,7 +27,9 @@ class HomeComponent extends Component {
             <div className='row'>
               <div className='col-lg-12 col-md-12 mb70 section-heading probootstrap-animate'>
                 <h2>Our Services</h2>
-                <p className='lead'>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                <p className='lead'>
+                  We provide a easy way to build and host your own custom created website 
+                </p>
               </div>
             </div>
             <div className='row mb70'>
@@ -71,7 +73,7 @@ class HomeComponent extends Component {
             <div className='row'>
               <div className='col-md-4 col-md-offset-4 probootstrap-animate'>
                 <p className='text-center'>
-                  <Link to='#' className='btn btn-primary btn-lg btn-block' role='button'>View All Services</Link>
+                  <Link to='/services' className='btn btn-primary btn-lg btn-block' role='button'>View All Services</Link>
                 </p>
               </div>
             </div>
