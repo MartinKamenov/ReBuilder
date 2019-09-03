@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../../theme/css/styles-merged.css'
 import '../../theme/css/style.min.css'
 import '../../theme/css/custom.css'
 import { Link } from 'react-router-dom';
+import './HomeComponent.css';
 
-class HomeComponent extends Component {
-  render() {
-    return (
-      <div>
+const HomeComponent = () => {
+  return (
+    <div>
         <section className='probootstrap-intro' style={{backgroundImage: 'url(/assets/homePageBackground.jpeg)'}} data-stellar-background-ratio='0.5'>
           <div className='container-fluid'>
             <div className='row'>
               <div className='col-md-7 probootstrap-intro-text'>
                 <h1>Create your own website without the pain of knowing how to code</h1>
                 <div className='probootstrap-subtitle probootstrap-animate'>
-                  <h2>A free html website template for creative agency like you! brought to you by</h2>
+                  <h2>Website template for creative agency like you</h2>
                 </div>
                 <p className='watch-intro probootstrap-animate'><a href='https://vimeo.com/45830194' className='popup-vimeo'>Watch the video <i className='icon-play2' /></a></p>
               </div>
@@ -27,7 +27,9 @@ class HomeComponent extends Component {
             <div className='row'>
               <div className='col-lg-12 col-md-12 mb70 section-heading probootstrap-animate'>
                 <h2>Our Services</h2>
-                <p className='lead'>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                <p className='lead'>
+                  We provide a easy way to build and host your own custom created website 
+                </p>
               </div>
             </div>
             <div className='row mb70'>
@@ -35,7 +37,9 @@ class HomeComponent extends Component {
                 <div className='probootstrap-box'>
                   <div className='icon text-center'><i className='icon-tools2' /></div>
                   <h3>Interface Design</h3>
-                  <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                  <p className='service-description'>
+                    Drag and drop HTML elements on your customized page.
+                  </p>
                   <ul className='text-left with-icon colored'>
                     <li><i className='icon-radio-checked' /> <span>A small river named Duden</span></li>
                     <li><i className='icon-radio-checked' /> <span>Place and supplie</span></li>
@@ -47,7 +51,7 @@ class HomeComponent extends Component {
                 <div className='probootstrap-box'>
                   <div className='icon text-center'><i className='icon-desktop' /></div>
                   <h3>User Experience</h3>
-                  <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                  <p className='service-description'>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
                   <ul className='text-left with-icon colored'>
                     <li><i className='icon-radio-checked' /> <span>A small river named Duden</span></li>
                     <li><i className='icon-radio-checked' /> <span>Place and supplie</span></li>
@@ -59,7 +63,7 @@ class HomeComponent extends Component {
                 <div className='probootstrap-box'>
                   <div className='icon text-center'><i className='icon-lightbulb' /></div>
                   <h3>Product Strategy</h3>
-                  <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                  <p className='service-description'>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
                   <ul className='text-left with-icon colored'>
                     <li><i className='icon-radio-checked' /> <span>A small river named Duden</span></li>
                     <li><i className='icon-radio-checked' /> <span>Place and supplie</span></li>
@@ -71,7 +75,7 @@ class HomeComponent extends Component {
             <div className='row'>
               <div className='col-md-4 col-md-offset-4 probootstrap-animate'>
                 <p className='text-center'>
-                  <Link to='#' className='btn btn-primary btn-lg btn-block' role='button'>View All Services</Link>
+                  <Link to='/services' className='btn btn-primary btn-lg btn-block' role='button'>View All Services</Link>
                 </p>
               </div>
             </div>
@@ -89,9 +93,7 @@ class HomeComponent extends Component {
         }
         
       </div>
-     );
-  }
+  );
 }
  
 export default HomeComponent;
- 

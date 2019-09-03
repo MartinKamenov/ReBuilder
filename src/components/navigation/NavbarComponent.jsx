@@ -14,11 +14,16 @@ class NavbarComponent extends Component {
 
     getRoutes = (props) => {
         const user = props ? props.user : this.props.user;
-        const routes = [{ route: '/', text: 'Home' }];
+        const routes = [
+            { route: '/', text: 'Home' }
+        ];
+
         if(user.id) {
             routes.push({ route: '/dashboard', text: 'Dashboard' });
+            routes.push({ route: '/services', text: 'Services' });
             routes.push({ route: `/users/${user.id}`, text: 'My profile' });
         } else {
+            routes.push({ route: '/services', text: 'Services' });
             routes.push({ route: `/login`, text: 'Sign in' });
             routes.push({ route: `/register`, text: 'Sign up' });
         }
