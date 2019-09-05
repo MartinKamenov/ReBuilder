@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://rebuilder-api.herokuapp.com';
+const url = 'http://192.168.0.121:5000';
 const authPath = '/auth';
 const loginPath = '/login';
 const getUser = '/user';
