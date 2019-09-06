@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://192.168.0.121:5000';
+const url = 'https://rebuilder-api.herokuapp.com';
 const authPath = '/auth';
 const loginPath = '/login';
 const getUser = '/user';
@@ -12,7 +12,7 @@ const deployPath = '/deploy';
 
 const sendObject = {
     headers: {
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'https://reactbuilder.herokuapp.com',
         'headers': {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
