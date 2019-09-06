@@ -12,7 +12,7 @@ const deployPath = '/deploy';
 
 const sendObject = {
     headers: {
-        'Access-Control-Allow-Origin': 'https://reactbuilder.herokuapp.com',
+        'Access-Control-Allow-Origin': '*',
         'headers': {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
