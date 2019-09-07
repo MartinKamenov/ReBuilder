@@ -183,8 +183,20 @@ const DroppedComponent = ({
                 <Resizable
                     style={resizableStyle}
                     onResizeStart={(event, direction, refToElement, delta) => {
-                        initialSizes.width = parseInt(droppedComponent.style.width, 10);
-                        initialSizes.height = parseInt(droppedComponent.style.height, 10);
+                        if(droppedComponent.style.width.endsWith('%')) {
+                            initialSizes.width =
+                                6 * parseInt(droppedComponent.style.width, 10);
+                        } else {
+                            initialSizes.width =
+                                parseInt(droppedComponent.style.width, 10);
+                        }
+                        if(droppedComponent.style.height.endsWith('%')) {
+                            initialSizes.height =
+                                3 * parseInt(droppedComponent.style.height, 10);
+                        } else {
+                            initialSizes.height =
+                                parseInt(droppedComponent.style.height, 10);
+                        }
                     }}
                     onResize={(event, direction, refToElement, delta) => {
                         const { width, height } = delta;
