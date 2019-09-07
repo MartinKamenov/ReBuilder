@@ -189,11 +189,17 @@ const DroppedComponent = ({
                     onResize={(event, direction, refToElement, delta) => {
                         const { width, height } = delta;
                         if(width !== 0) {
-                            const newWidth = initialSizes.width + width;
+                            let newWidth = initialSizes.width + width;
+                            if(newWidth < 10) {
+                                newWidth = 10;
+                            }
                             handleComponentValueChange(newWidth + 'px', 'style.width');
                         }
                         if(height !== 0) {
-                            const newHeight = initialSizes.height + height;
+                            let newHeight = initialSizes.height + height;
+                            if(newHeight < 10) {
+                                newHeight = 10;
+                            }
                             handleComponentValueChange(newHeight + 'px', 'style.height');
                         }
                     }}>
