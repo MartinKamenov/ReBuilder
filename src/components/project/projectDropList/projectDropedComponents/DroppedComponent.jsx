@@ -183,17 +183,35 @@ const DroppedComponent = ({
                 <Resizable
                     style={resizableStyle}
                     onResizeStart={(event, direction, refToElement, delta) => {
-                        initialSizes.width = parseInt(droppedComponent.style.width, 10);
-                        initialSizes.height = parseInt(droppedComponent.style.height, 10);
+                        if(droppedComponent.style.width.endsWith('%')) {
+                            initialSizes.width =
+                                6 * parseInt(droppedComponent.style.width, 10);
+                        } else {
+                            initialSizes.width =
+                                parseInt(droppedComponent.style.width, 10);
+                        }
+                        if(droppedComponent.style.height.endsWith('%')) {
+                            initialSizes.height =
+                                3 * parseInt(droppedComponent.style.height, 10);
+                        } else {
+                            initialSizes.height =
+                                parseInt(droppedComponent.style.height, 10);
+                        }
                     }}
                     onResize={(event, direction, refToElement, delta) => {
                         const { width, height } = delta;
                         if(width !== 0) {
-                            const newWidth = initialSizes.width + width;
+                            let newWidth = initialSizes.width + width;
+                            if(newWidth < 10) {
+                                newWidth = 10;
+                            }
                             handleComponentValueChange(newWidth + 'px', 'style.width');
                         }
                         if(height !== 0) {
-                            const newHeight = initialSizes.height + height;
+                            let newHeight = initialSizes.height + height;
+                            if(newHeight < 10) {
+                                newHeight = 10;
+                            }
                             handleComponentValueChange(newHeight + 'px', 'style.height');
                         }
                     }}>
