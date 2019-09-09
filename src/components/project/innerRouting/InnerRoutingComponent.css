@@ -108,9 +108,13 @@
 
 .header-tab:hover, .header-tab.active:hover {
     cursor: pointer;
-    background-color: #cccccc;
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
+    background-color: #4A3E9D;
+    color: white;
 }
 
 .header-tab.active {
-    background-color: #dddddd;
+    background-color: #563C77;
+    color: white;
 }
