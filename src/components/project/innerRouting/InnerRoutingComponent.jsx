@@ -13,6 +13,7 @@ import './PageElementsStyle.css';
 import ButtonComponent from '../../common/ButtonComponent';
 import ProjectActionButtonsComponent from '../../common/ProjectActionButtonsComponent';
 import { componentTypes } from '../components/componentTypes';
+import tabs from './tabs/projectTabs';
 
 class InnerRoutingComponent extends Component {
     state = {
@@ -27,7 +28,8 @@ class InnerRoutingComponent extends Component {
         isUpdating: false,
         updatePage: null,
 
-        saveStatus: SaveStatus.Saved
+        saveStatus: SaveStatus.Saved,
+        tab: tabs[0]
     }
     
     componentDidMount() {
@@ -287,6 +289,15 @@ class InnerRoutingComponent extends Component {
                         generateProject={this.generateProject}
                         handleDeployProject={this.handleDeployProject}
                     />
+                    <div className='center-container'>
+                        { tabs.map((tab, i) => (
+                        <div className='header-tab' style={{
+                            display: 'inline-block',
+                            width: 100 / tabs.length + '%',
+                            height: 30,
+                            border: '1px solid red'
+                        }} key={i}>{tab}</div>)) }
+                    </div>
                     <div className='center-container routing-form-container'  onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                         <div className='routing-form-input-container'>
                             <input
