@@ -315,7 +315,10 @@ class InnerRoutingComponent extends Component {
                                 </div>)}) 
                         }
                     </div>
-                    <div className='center-container routing-form-container'  onKeyDown={(event) => this.handleEnterPressed(event.key)}>
+                    <div className='center-container routing-form-container'
+                        onKeyDown={
+                            (event) => this.handleEnterPressed(event.key)
+                        }>
                         <div className='routing-form-input-container'>
                             <input
                                 value={this.state.newPageName}
@@ -400,45 +403,7 @@ class InnerRoutingComponent extends Component {
                         
                     </div>
                 </div>
-                <div className='routing-pages-styling-container'>
-                    <ul className='routing-page-styling-ul'>
-                        {this.state.pages.map((page) => (
-                            <li
-                                key={page.id}
-                                className={'routing-page-styling-li' +
-                                    ((
-                                        this.state.updatePage &&
-                                        this.state.updatePage.id === page.id
-                                    ) ? ' blinkdiv' : '')
-                                    }>
-                                <div
-                                    className='normal'
-                                    onClick={() => {
-                                        if(this.state.isUpdating) {
-                                            this.selectPage(page.id);
-                                            return;
-                                        }
-
-                                        this.navigateToPage(page.id);
-                                    }}>
-                                    <div className='hover-shadow'>
-                                    </div>
-                                    <div style={{zIndex: 0}}>
-                                        {
-                                            page.elements
-                                                .map((component) => this.getComponentJSX(component))
-                                        }
-                                    </div>
-                                    
-                                </div>
-                                <div className='info'>
-                                    <h3 className='routing-page-styling-h3'>{page.name}</h3>
-                                    <p>{page.route}</p>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                
             </div>
         );
     }
