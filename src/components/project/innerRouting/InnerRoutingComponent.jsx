@@ -13,6 +13,7 @@ import './PageElementsStyle.css';
 import ButtonComponent from '../../common/ButtonComponent';
 import ProjectActionButtonsComponent from '../../common/ProjectActionButtonsComponent';
 import { componentTypes } from '../components/componentTypes';
+import tabs from './tabs/projectTabs';
 
 class InnerRoutingComponent extends Component {
     state = {
@@ -27,7 +28,8 @@ class InnerRoutingComponent extends Component {
         isUpdating: false,
         updatePage: null,
 
-        saveStatus: SaveStatus.Saved
+        saveStatus: SaveStatus.Saved,
+        tab: tabs[0]
     }
     
     componentDidMount() {
@@ -287,6 +289,32 @@ class InnerRoutingComponent extends Component {
                         generateProject={this.generateProject}
                         handleDeployProject={this.handleDeployProject}
                     />
+                    <div className='center-container tabs-container'>
+                        { 
+                            tabs.map((tab, i) => {
+                                let className = 'header-tab';
+                                if(i === 0) {
+                                    className += ' left-tab';
+                                }
+
+                                if(i === tabs.length - 1) {
+                                    className += ' right-tab';
+                                }
+
+                                if(tab === this.state.tab) {
+                                    className += ' active';
+                                }
+
+                                return (
+                                <div className={className}
+                                    onClick={() => this.setState({ tab })}
+                                    style={{
+                                        width: 100 / tabs.length + '%'
+                                    }} key={i}>
+                                    {tab}
+                                </div>)}) 
+                        }
+                    </div>
                     <div className='center-container routing-form-container'  onKeyDown={(event) => this.handleEnterPressed(event.key)}>
                         <div className='routing-form-input-container'>
                             <input

@@ -81,3 +81,40 @@
     left: 0;
     z-index: 1;
 }
+
+.header-tab {
+    line-height: 50px;
+    display: inline-block;
+    height: 50px;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: #513D88;
+    border: 1px solid #513D88;
+}
+
+.tabs-container {
+    margin-bottom: 20px;
+}
+
+.header-tab.left-tab {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.header-tab.right-tab {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.header-tab:hover, .header-tab.active:hover {
+    cursor: pointer;
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
+    background-color: #4A3E9D;
+    color: white;
+}
+
+.header-tab.active {
+    background-color: #563C77;
+    color: white;
+}
