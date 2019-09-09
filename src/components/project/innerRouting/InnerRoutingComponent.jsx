@@ -13,6 +13,7 @@ import './PageElementsStyle.css';
 import ButtonComponent from '../../common/ButtonComponent';
 import ProjectActionButtonsComponent from '../../common/ProjectActionButtonsComponent';
 import { componentTypes } from '../components/componentTypes';
+import ProjectPageComponent from './tabs/pageTab/PagesTabComponent';
 import tabs from './tabs/projectTabs';
 
 class InnerRoutingComponent extends Component {
@@ -403,7 +404,13 @@ class InnerRoutingComponent extends Component {
                         
                     </div>
                 </div>
-                
+                <ProjectPageComponent
+                    pages={this.state.pages}
+                    updatePage={this.updatePage}
+                    selectPage={this.selectPage}
+                    navigateToPage={this.navigateToPage}
+                    getComponentJSX={this.getComponentJSX}
+                    isUpdating={this.state.isUpdating}/>
             </div>
         );
     }

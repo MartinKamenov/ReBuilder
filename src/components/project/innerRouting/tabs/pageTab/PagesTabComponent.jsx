@@ -8,7 +8,8 @@ const PagesTabComponent = ({
     updatePage,
     selectPage,
     navigateToPage,
-    getComponentJSX
+    getComponentJSX,
+    isUpdating
 }) => (
     <div className='routing-pages-styling-container'>
         <ul className='routing-page-styling-ul'>
@@ -56,7 +57,8 @@ PagesTabComponent.propTypes = {
     updatePage: PropTypes.object.isRequired,
     selectPage: PropTypes.func.isRequired,
     navigateToPage: PropTypes.func.isRequired,
-    getComponentJSX: PropTypes.func.isRequired
+    getComponentJSX: PropTypes.func.isRequired,
+    isUpdating: PropTypes.bool.isRequired
 }
 
 export default PagesTabComponent;
