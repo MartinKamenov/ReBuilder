@@ -13,6 +13,9 @@ import './PageElementsStyle.css';
 import ButtonComponent from '../../common/ButtonComponent';
 import ProjectActionButtonsComponent from '../../common/ProjectActionButtonsComponent';
 import { componentTypes } from '../components/componentTypes';
+import ProjectPageComponent from './tabs/pageTab/PagesTabComponent';
+import DatabaseTabComponent from './tabs/pageTab/DatabaseTabComponent';
+import DeploymentTabComponent from './tabs/pageTab/DeploymentTabComponent';
 import tabs from './tabs/projectTabs';
 
 class InnerRoutingComponent extends Component {
@@ -274,6 +277,39 @@ class InnerRoutingComponent extends Component {
         }
     }
 
+    getTabContent = () => {
+        switch(this.state.tab) {
+            case 'Pages':
+                return (
+                    <ProjectPageComponent
+                    pages={this.state.pages}
+                    updatePage={this.updatePage}
+                    selectPage={this.selectPage}
+                    navigateToPage={this.navigateToPage}
+                    getComponentJSX={this.getComponentJSX}
+                    isUpdating={this.state.isUpdating}/>
+                );
+            case 'Database':
+                return (
+                    <DatabaseTabComponent/>
+                );
+            case 'Deployment':
+                return (
+                    <DeploymentTabComponent/>
+                );
+            default:
+                return (
+                    <ProjectPageComponent
+                    pages={this.state.pages}
+                    updatePage={this.updatePage}
+                    selectPage={this.selectPage}
+                    navigateToPage={this.navigateToPage}
+                    getComponentJSX={this.getComponentJSX}
+                    isUpdating={this.state.isUpdating}/>
+                );
+        }
+    }
+
     render() {
         if(this.state.isLoading) {
             return (<LoadingComponent message='Fetching project'/>);
@@ -315,7 +351,10 @@ class InnerRoutingComponent extends Component {
                                 </div>)}) 
                         }
                     </div>
-                    <div className='center-container routing-form-container'  onKeyDown={(event) => this.handleEnterPressed(event.key)}>
+                    <div className='center-container routing-form-container'
+                        onKeyDown={
+                            (event) => this.handleEnterPressed(event.key)
+                        }>
                         <div className='routing-form-input-container'>
                             <input
                                 value={this.state.newPageName}
@@ -400,45 +439,7 @@ class InnerRoutingComponent extends Component {
                         
                     </div>
                 </div>
-                <div className='routing-pages-styling-container'>
-                    <ul className='routing-page-styling-ul'>
-                        {this.state.pages.map((page) => (
-                            <li
-                                key={page.id}
-                                className={'routing-page-styling-li' +
-                                    ((
-                                        this.state.updatePage &&
-                                        this.state.updatePage.id === page.id
-                                    ) ? ' blinkdiv' : '')
-                                    }>
-                                <div
-                                    className='normal'
-                                    onClick={() => {
-                                        if(this.state.isUpdating) {
-                                            this.selectPage(page.id);
-                                            return;
-                                        }
-
-                                        this.navigateToPage(page.id);
-                                    }}>
-                                    <div className='hover-shadow'>
-                                    </div>
-                                    <div style={{zIndex: 0}}>
-                                        {
-                                            page.elements
-                                                .map((component) => this.getComponentJSX(component))
-                                        }
-                                    </div>
-                                    
-                                </div>
-                                <div className='info'>
-                                    <h3 className='routing-page-styling-h3'>{page.name}</h3>
-                                    <p>{page.route}</p>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                { this.getTabContent() }
             </div>
         );
     }
