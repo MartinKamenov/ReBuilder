@@ -14,6 +14,8 @@ import ButtonComponent from '../../common/ButtonComponent';
 import ProjectActionButtonsComponent from '../../common/ProjectActionButtonsComponent';
 import { componentTypes } from '../components/componentTypes';
 import ProjectPageComponent from './tabs/pageTab/PagesTabComponent';
+import DatabaseTabComponent from './tabs/pageTab/DatabaseTabComponent';
+import DeploymentTabComponent from './tabs/pageTab/DeploymentTabComponent';
 import tabs from './tabs/projectTabs';
 
 class InnerRoutingComponent extends Component {
@@ -288,9 +290,23 @@ class InnerRoutingComponent extends Component {
                     getComponentJSX={this.getComponentJSX}
                     isUpdating={this.state.isUpdating}/>
                 );
+            case 'Database':
+                return (
+                    <DatabaseTabComponent/>
+                );
+            case 'Deployment':
+                return (
+                    <DeploymentTabComponent/>
+                );
             default:
                 return (
-                    <div>b</div>
+                    <ProjectPageComponent
+                    pages={this.state.pages}
+                    updatePage={this.updatePage}
+                    selectPage={this.selectPage}
+                    navigateToPage={this.navigateToPage}
+                    getComponentJSX={this.getComponentJSX}
+                    isUpdating={this.state.isUpdating}/>
                 );
         }
     }
