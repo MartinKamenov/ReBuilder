@@ -275,6 +275,26 @@ class InnerRoutingComponent extends Component {
         }
     }
 
+    getTabContent = () => {
+        debugger;
+        switch(this.state.tab) {
+            case 'Pages':
+                return (
+                    <ProjectPageComponent
+                    pages={this.state.pages}
+                    updatePage={this.updatePage}
+                    selectPage={this.selectPage}
+                    navigateToPage={this.navigateToPage}
+                    getComponentJSX={this.getComponentJSX}
+                    isUpdating={this.state.isUpdating}/>
+                );
+            default:
+                return (
+                    <div>b</div>
+                );
+        }
+    }
+
     render() {
         if(this.state.isLoading) {
             return (<LoadingComponent message='Fetching project'/>);
@@ -404,13 +424,7 @@ class InnerRoutingComponent extends Component {
                         
                     </div>
                 </div>
-                <ProjectPageComponent
-                    pages={this.state.pages}
-                    updatePage={this.updatePage}
-                    selectPage={this.selectPage}
-                    navigateToPage={this.navigateToPage}
-                    getComponentJSX={this.getComponentJSX}
-                    isUpdating={this.state.isUpdating}/>
+                { this.getTabContent() }
             </div>
         );
     }
