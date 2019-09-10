@@ -278,7 +278,6 @@ class InnerRoutingComponent extends Component {
     }
 
     getTabContent = () => {
-        debugger;
         switch(this.state.tab) {
             case 'Pages':
                 return (
