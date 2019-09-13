@@ -30,7 +30,7 @@
     "react-loading": "^2.0.3",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.1.1",
     "react-toastify": "^5.3.1",
     "react-toastify-redux": "^1.0.0-rc.2",
     "redux": "^4.0.1",
