@@ -17,6 +17,10 @@ steps:
 
 - script: |
     npm install
-    npm run lint
+    npm run lint # Mapped to `eslint src` in package.json
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    npm run slint # `stylelint src` in package.json
     npm run build
   displayName: 'npm install and build'
