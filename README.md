@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Build Status](https://dev.azure.com/martinkamenov10/ReBuilder/_apis/build/status/MartinKamenov.ReBuilder?branchName=master)](https://dev.azure.com/martinkamenov10/ReBuilder/_build/latest?definitionId=2&branchName=master)
 
 ## Available Scripts
 
