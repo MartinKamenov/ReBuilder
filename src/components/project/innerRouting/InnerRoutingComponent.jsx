@@ -47,6 +47,12 @@ class InnerRoutingComponent extends Component {
         this.props.actions.updateProject(id, null, token);
     }
 
+    componentDidUpdate() {
+        if(this.state.tab == tabs[0]) {
+            this.executeStylesScript();
+        }
+    }
+
     componentWillReceiveProps(props) {
         if(props.project.pages) {
             this.setState({ pages: props.project.pages, isLoading: false }, () => {
@@ -342,13 +348,15 @@ class InnerRoutingComponent extends Component {
                                 }
 
                                 return (
-                                <div className={className}
-                                    onClick={() => this.setState({ tab })}
-                                    style={{
-                                        width: 100 / tabs.length + '%'
-                                    }} key={i}>
-                                    {tab}
-                                </div>)}) 
+                                    <div
+                                        className={className}
+                                        onClick={() => this.setState({ tab })}
+                                        style={{
+                                            width: 100 / tabs.length + '%'
+                                        }} key={i}>
+                                        {tab}
+                                    </div>
+                                )}) 
                         }
                     </div>
                     <div className='center-container routing-form-container'
