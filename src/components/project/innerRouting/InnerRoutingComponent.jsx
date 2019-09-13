@@ -48,7 +48,7 @@ class InnerRoutingComponent extends Component {
     }
 
     componentDidUpdate() {
-        if(this.state.tab == tabs[0]) {
+        if(this.state.tab === tabs[0]) {
             this.executeStylesScript();
         }
     }
