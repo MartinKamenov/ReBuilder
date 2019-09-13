@@ -182,6 +182,6 @@ const carsTemplate =
             ]
         },
     ]
-}
+};
 
 export default carsTemplate;
