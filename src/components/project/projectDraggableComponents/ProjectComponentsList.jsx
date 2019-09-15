@@ -7,7 +7,7 @@ const ProjectComponentsList = ({ draggableComponents, active }) => {
     return (
         <div 
             className=
-            {`component-list-container${active ? '' : '-inactive'} vertical-scrollable-container`}>
+                {`component-list-container${active ? '' : '-inactive'} vertical-scrollable-container`}>
             <h3 className='draggable-container-header'>Draggable element</h3>
             {
                 draggableComponents.map((component, i) => 
@@ -16,7 +16,7 @@ const ProjectComponentsList = ({ draggableComponents, active }) => {
             }
         </div>
     );
-}
+};
 
 ProjectComponentsList.propTypes = {
     draggableComponents: PropTypes.array.isRequired

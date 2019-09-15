@@ -12,7 +12,7 @@ const ButtonComponent = ({ title, style, type, onClick, className, rounded, chil
             <button
                 style={style}
                 className={
-                `custom-button ${className} custom-button-${type} ${rounded ? 'custom-buttom-rounded':''}`
+                    `custom-button ${className} custom-button-${type} ${rounded ? 'custom-buttom-rounded':''}`
                 }
                 onClick={onClick}>
                 {children}
@@ -24,7 +24,7 @@ const ButtonComponent = ({ title, style, type, onClick, className, rounded, chil
         <button
             style={style}
             className={
-            `custom-button ${className} custom-button-${type} ${rounded ? 'custom-buttom-rounded':''}`
+                `custom-button ${className} custom-button-${type} ${rounded ? 'custom-buttom-rounded':''}`
             }
             onClick={onClick}>
             {title}

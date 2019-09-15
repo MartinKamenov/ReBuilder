@@ -21,7 +21,7 @@ const PagesTabComponent = ({
                             updatePage &&
                             updatePage.id === page.id
                         ) ? ' blinkdiv' : '')
-                        }>
+                    }>
                     <div
                         className='normal'
                         onClick={() => {
@@ -59,6 +59,6 @@ PagesTabComponent.propTypes = {
     navigateToPage: PropTypes.func.isRequired,
     getComponentJSX: PropTypes.func.isRequired,
     isUpdating: PropTypes.bool.isRequired
-}
+};
 
 export default PagesTabComponent;
