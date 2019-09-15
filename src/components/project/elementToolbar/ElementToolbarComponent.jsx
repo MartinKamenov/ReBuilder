@@ -21,7 +21,7 @@ const ElementToolbarComponent = ({
                 <h3>Toolbar</h3>
                 <div>Select an element by clicking on it</div>
             </div>
-        )
+        );
     }
 
     const inputs = Object.keys(component).filter((c) =>
@@ -96,7 +96,7 @@ const ElementToolbarComponent = ({
                                         ))}
                                     </select>
                                 </div>
-                            )
+                            );
                         })
                     }
                     {
@@ -115,7 +115,7 @@ const ElementToolbarComponent = ({
                                         placeholder={input}>
                                     </input>
                                 </div>
-                            )
+                            );
                         })
                     }
                     <h3>Styles</h3>
@@ -144,7 +144,7 @@ const ElementToolbarComponent = ({
                                         ))}
                                     </select>
                                 </div>
-                            )
+                            );
                         })
                     }
                     {
@@ -163,7 +163,7 @@ const ElementToolbarComponent = ({
                                         placeholder={style}>
                                     </input>
                                 </div>
-                            )
+                            );
                         })
                     }
                 </div>
@@ -208,7 +208,7 @@ const ElementToolbarComponent = ({
             </div>
         </div>
     );
-}
+};
 
 ElementToolbarComponent.propTypes = {
     component: PropTypes.shape({

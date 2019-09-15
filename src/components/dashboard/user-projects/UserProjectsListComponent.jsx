@@ -19,9 +19,9 @@ const UserProjectsListComponent = ({projects}) => {
             </ul>
         </div>
     );
-}
+};
 UserProjectComponent.PropTypes = {
     projects: PropTypes.array.isRequired
-}
+};
  
 export default UserProjectsListComponent;

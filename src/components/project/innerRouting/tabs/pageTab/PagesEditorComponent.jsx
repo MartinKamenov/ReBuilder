@@ -119,6 +119,6 @@ PagesEditorComponent.propTypes = {
         isUpdating: PropTypes.bool.isRequired,
         updatePage: PropTypes.object
     }).isRequired
-}
+};
  
 export default PagesEditorComponent;

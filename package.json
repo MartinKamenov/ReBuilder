@@ -45,8 +45,8 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src",
-    "lint-fix": "eslint --fix ./src",
+    "lint": "eslint ./src --ext .jsx --ext .js",
+    "lint-fix": "eslint --fix ./src --ext .jsx --ext .js",
     "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {

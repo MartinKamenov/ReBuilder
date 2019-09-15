@@ -89,7 +89,7 @@ class EditProjectComponent extends Component {
         if(props.projectStatus) {
             setTimeout(() => {
                 const url = props.projectStatus.projectUrl;
-                window.open(url, "_blank");
+                window.open(url, '_blank');
             }, 20000);
         }
     }
@@ -138,15 +138,15 @@ class EditProjectComponent extends Component {
         if(foundComponentIndex === -1) {
             let childIndex = -1;
             const componentIndex = droppedComponents
-            .findIndex(c => {
-                const cIndex = c.children.findIndex(child => child.index === index);
-                if(cIndex !== -1) {
-                    childIndex = cIndex;
-                    return true;
-                }
+                .findIndex(c => {
+                    const cIndex = c.children.findIndex(child => child.index === index);
+                    if(cIndex !== -1) {
+                        childIndex = cIndex;
+                        return true;
+                    }
 
-                return false;
-            });
+                    return false;
+                });
 
             if(componentIndex !== -1 && childIndex !== -1) {
                 const component = Object.assign({}, droppedComponents[componentIndex]);
@@ -201,15 +201,15 @@ class EditProjectComponent extends Component {
         if(deleteComponentIndex !== -1) {
             let childIndex = -1;
             const componentIndex = droppedComponents
-            .findIndex(c => {
-                const cIndex = c.children.findIndex(child => child.index === index);
-                if(cIndex !== -1) {
-                    childIndex = cIndex;
-                    return true;
-                }
+                .findIndex(c => {
+                    const cIndex = c.children.findIndex(child => child.index === index);
+                    if(cIndex !== -1) {
+                        childIndex = cIndex;
+                        return true;
+                    }
 
-                return false;
-            });
+                    return false;
+                });
 
             if(componentIndex !== -1 && childIndex !== -1) {
                 const component = Object.assign({}, droppedComponents[componentIndex]);
@@ -249,8 +249,8 @@ class EditProjectComponent extends Component {
             let opacity = value.rgb.a;
             value = value.hex;
             const hexOpacities = ['FF', 'F2', 'E6', 'D9', 'CC', 'BF',
-            'B3', 'A6', '99', '8C', '80', '73', '66', '59', '4D',
-            '40', '33', '26', '1A', '0D', '00'];
+                'B3', 'A6', '99', '8C', '80', '73', '66', '59', '4D',
+                '40', '33', '26', '1A', '0D', '00'];
             opacity = opacity * 10;
             opacity = opacity * (hexOpacities.length / 10);
             opacity = Math.round(opacity);
@@ -376,7 +376,7 @@ class EditProjectComponent extends Component {
         style.border = '2px solid #e53b52';
         copyOfComponent.style = style;
 
-        droppedComponents[componentIndex] = copyOfComponent
+        droppedComponents[componentIndex] = copyOfComponent;
 
         this.setState({ draggedComponentIndex: index, droppedComponents });
     }
@@ -390,7 +390,7 @@ class EditProjectComponent extends Component {
         delete style.border;
         copyOfComponent.style = style;
 
-        droppedComponents[componentIndex] = copyOfComponent
+        droppedComponents[componentIndex] = copyOfComponent;
 
         this.setState({ draggedComponentIndex: '', droppedComponents });
     }
@@ -454,12 +454,12 @@ class EditProjectComponent extends Component {
                     className='draggable-container-btn' 
                     onClick={() => {
                         if(componentInEditMode) {
-                            return
-                        };
+                            return;
+                        }
 
                         this.setState({
                             dragContainerActive: !this.state.dragContainerActive
-                        })}
+                        });}
                     }>
                     {this.state.dragContainerActive ? 'Hide': 'Show'}
                 </button>
