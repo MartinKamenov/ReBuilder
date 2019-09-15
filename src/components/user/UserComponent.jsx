@@ -86,9 +86,9 @@ class UserComponent extends Component {
                     accept='image/*'/>
                 <ButtonComponent
                     onClick={(event) => {
-                            const element = document.getElementById('change-element-image');
-                            element.click(event);
-                        }
+                        const element = document.getElementById('change-element-image');
+                        element.click(event);
+                    }
                     }
                     type='success'
                     title='Upload image'/>

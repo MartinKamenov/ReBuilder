@@ -20,32 +20,32 @@ const DraggableComponent = ({draggableComponent}) => {
         <Draggable type="component" data={draggableComponent.name}>
             <div className='draggable-element'>
                 {(() => {
-                        let icon = <FontAwesomeIcon className='action-icon' icon={faFont} />;
-                        switch(draggableComponent.name) {
-                            case componentTypes.Header:
-                                icon = <FontAwesomeIcon className='action-icon' icon={faHeading} />;
-                                break;
-                            case componentTypes.Text:
-                                icon = <FontAwesomeIcon className='action-icon' icon={faFont} />;
-                                break;
-                            case componentTypes.Grid:
-                                icon = <FontAwesomeIcon className='action-icon' icon={faBorderAll} />;
-                                break;
-                            case componentTypes.Input:
-                                icon = <FontAwesomeIcon className='action-icon' icon={faItalic} />;
-                                break;
-                            case componentTypes.RoutingLink:
-                                icon = <FontAwesomeIcon className='action-icon' icon={faLink} />;
-                                break;
-                            case componentTypes.Container:
-                                icon = <FontAwesomeIcon className='action-icon' icon={faBox} />;
-                                break;
-                            case componentTypes.NavigationBar:
-                                icon = <FontAwesomeIcon className='action-icon' icon={faRoute} />;
-                                break;
-                            default:
-                                break;
-                        }
+                    let icon = <FontAwesomeIcon className='action-icon' icon={faFont} />;
+                    switch(draggableComponent.name) {
+                    case componentTypes.Header:
+                        icon = <FontAwesomeIcon className='action-icon' icon={faHeading} />;
+                        break;
+                    case componentTypes.Text:
+                        icon = <FontAwesomeIcon className='action-icon' icon={faFont} />;
+                        break;
+                    case componentTypes.Grid:
+                        icon = <FontAwesomeIcon className='action-icon' icon={faBorderAll} />;
+                        break;
+                    case componentTypes.Input:
+                        icon = <FontAwesomeIcon className='action-icon' icon={faItalic} />;
+                        break;
+                    case componentTypes.RoutingLink:
+                        icon = <FontAwesomeIcon className='action-icon' icon={faLink} />;
+                        break;
+                    case componentTypes.Container:
+                        icon = <FontAwesomeIcon className='action-icon' icon={faBox} />;
+                        break;
+                    case componentTypes.NavigationBar:
+                        icon = <FontAwesomeIcon className='action-icon' icon={faRoute} />;
+                        break;
+                    default:
+                        break;
+                    }
                     return icon;
                 })()}
                 

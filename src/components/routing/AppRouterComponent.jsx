@@ -46,27 +46,27 @@ class AppRouterComponent extends Component {
                 { this.state.isLoading ? (
                     <LoadingComponent message='Fetching user'/>
                 ) : 
-                (
-                    <div className='main-container'>
-                        <NavbarComponent/>
-                        <Route exact path="/" component={HomeComponent} />
-                        <Route exact path="/services" component={ServicesComponent} />
-                        <div className='navbar-container-margin'>
-                            <div className='main-container'>
-                                <Route exact path="/dashboard" component={DashboardComponent} />
-                                <Route exact path="/login" component={LoginComponent} />
-                                <Route exact path="/register" component={RegisterComponent} />
-                                <Route exact path="/projects/:id" component={InnerRoutingComponent} />
-                                <Route exact path="/users/:id" component={UserComponent} />
-                                <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
-                                <Route exact path="/templates" component={TemplateSelectPageComponent} />
-                                <div className='container'>
-                                    <Route exact path="/project/new" component={NewProjectPageComponent} />
+                    (
+                        <div className='main-container'>
+                            <NavbarComponent/>
+                            <Route exact path="/" component={HomeComponent} />
+                            <Route exact path="/services" component={ServicesComponent} />
+                            <div className='navbar-container-margin'>
+                                <div className='main-container'>
+                                    <Route exact path="/dashboard" component={DashboardComponent} />
+                                    <Route exact path="/login" component={LoginComponent} />
+                                    <Route exact path="/register" component={RegisterComponent} />
+                                    <Route exact path="/projects/:id" component={InnerRoutingComponent} />
+                                    <Route exact path="/users/:id" component={UserComponent} />
+                                    <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
+                                    <Route exact path="/templates" component={TemplateSelectPageComponent} />
+                                    <div className='container'>
+                                        <Route exact path="/project/new" component={NewProjectPageComponent} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
                 
             </Router>
         );

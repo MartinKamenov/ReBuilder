@@ -15,7 +15,7 @@ class DashboardComponent extends Component {
                     <p>Please log in using your credentials</p>
                     <Link to='/login' className='nav-link navbar_element'>Log In</Link>
                 </div>
-            )
+            );
         }
         return ( 
             <div>
@@ -33,12 +33,12 @@ class DashboardComponent extends Component {
                         </Link>
                     </button>
                     <div id='addButton' className='vertical-centered'>
-                    <Link
-                        to='/project/new'
-                        type='button'
-                        className='btn btn-outline-dark'>
+                        <Link
+                            to='/project/new'
+                            type='button'
+                            className='btn btn-outline-dark'>
                             New <FontAwesomeIcon icon={faPlusCircle} />
-                    </Link>
+                        </Link>
                     </div>
                 </nav>
                 <UserProjectsListComponent projects={this.props.user.projects}/>
