@@ -54,7 +54,7 @@ const PagesTabComponent = ({
 
 PagesTabComponent.propTypes = {
     pages: PropTypes.array.isRequired,
-    updatePage: PropTypes.object.isRequired,
+    updatePage: PropTypes.func.isRequired,
     selectPage: PropTypes.func.isRequired,
     navigateToPage: PropTypes.func.isRequired,
     getComponentJSX: PropTypes.func.isRequired,

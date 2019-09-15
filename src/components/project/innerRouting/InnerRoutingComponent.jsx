@@ -10,12 +10,12 @@ import SaveStatus from '../components/saveStatus';
 
 import './InnerRoutingComponent.css';
 import './PageElementsStyle.css';
-import ButtonComponent from '../../common/ButtonComponent';
 import ProjectActionButtonsComponent from '../../common/ProjectActionButtonsComponent';
 import { componentTypes } from '../components/componentTypes';
 import ProjectPageComponent from './tabs/pageTab/PagesTabComponent';
-import DatabaseTabComponent from './tabs/pageTab/DatabaseTabComponent';
-import DeploymentTabComponent from './tabs/pageTab/DeploymentTabComponent';
+import PagesEditorComponent from './tabs/pageTab/PagesEditorComponent';
+import DatabaseTabComponent from './tabs/databaseTab/DatabaseTabComponent';
+import DeploymentTabComponent from './tabs/deploymentTab/DeploymentTabComponent';
 import tabs from './tabs/projectTabs';
 
 class InnerRoutingComponent extends Component {
@@ -287,13 +287,24 @@ class InnerRoutingComponent extends Component {
         switch(this.state.tab) {
         case 'Pages':
             return (
-                <ProjectPageComponent
-                    pages={this.state.pages}
-                    updatePage={this.updatePage}
-                    selectPage={this.selectPage}
-                    navigateToPage={this.navigateToPage}
-                    getComponentJSX={this.getComponentJSX}
-                    isUpdating={this.state.isUpdating}/>
+                    <>
+                        <PagesEditorComponent
+                            handleEnterPressed={this.handleEnterPressed}
+                            updateNewPageValue={this.updateNewPageValue}
+                            isValidClass={this.isValidClass}
+                            addNewPage={this.addNewPage}
+                            updatePage={this.updatePage}
+                            deletePage={this.deletePage}
+                            changeUpdateStatus={this.changeUpdateStatus}
+                            state={this.state}/>
+                        <ProjectPageComponent
+                            pages={this.state.pages}
+                            updatePage={this.updatePage}
+                            selectPage={this.selectPage}
+                            navigateToPage={this.navigateToPage}
+                            getComponentJSX={this.getComponentJSX}
+                            isUpdating={this.state.isUpdating}/>
+                    </>
             );
         case 'Database':
             return (
@@ -358,93 +369,6 @@ class InnerRoutingComponent extends Component {
                                     </div>
                                 );}) 
                         }
-                    </div>
-                    <div className='center-container routing-form-container'
-                        onKeyDown={
-                            (event) => this.handleEnterPressed(event.key)
-                        }>
-                        <div className='routing-form-input-container'>
-                            <input
-                                value={this.state.newPageName}
-                                onChange={(event) => this.updateNewPageValue('newPageName', event.target.value)}
-                                className={'routing-form-input ' + this.isValidClass('newPageNameError')}
-                                placeholder='Page name'/>
-                            {
-                                this.state.newPageNameError ? (
-                                    <div className='routing-form-input-error'>
-                                        {this.state.newPageNameError}
-                                    </div>
-                                ) : (
-                                    <div></div>
-                                )
-                            }
-                        </div>
-                        <div className='routing-form-input-container'>
-                            <input
-                                value={this.state.newPageRoute}
-                                onChange={(event) => this.updateNewPageValue('newPageRoute', event.target.value)}
-                                className={'routing-form-input ' + this.isValidClass('newPageRouteError')}
-                                placeholder='Page route'/>
-                            {
-                                this.state.newPageRouteError ? (
-                                    <div className='routing-form-input-error'>
-                                        {this.state.newPageRouteError}
-                                    </div>
-                                ) : (
-                                    <div></div>
-                                )
-                            }
-                        </div>
-                        { this.state.isUpdating ?
-                            (
-                                <>
-                                    {this.state.updatePage ? (
-                                        <>
-                                            <ButtonComponent
-                                                rounded={false}
-                                                type='success'
-                                                onClick={this.updatePage}
-                                                className='routing-from-button'>
-                                                    Save page
-                                            </ButtonComponent>
-                                            <ButtonComponent
-                                                rounded={false}
-                                                type='danger'
-                                                onClick={this.deletePage}
-                                                className='routing-from-button'>
-                                                    Delete page
-                                            </ButtonComponent>
-                                        </>
-                                    ) : (null)}
-
-                                    <ButtonComponent
-                                        rounded={false}
-                                        type='warning'
-                                        onClick={this.changeUpdateStatus}
-                                        className='routing-from-button'>
-                                            Cancel update
-                                    </ButtonComponent>
-                                </>
-                            ) : (
-                                <>
-                                    <ButtonComponent
-                                        rounded={false}
-                                        type='success'
-                                        onClick={this.addNewPage}
-                                        className='routing-from-button'>
-                                            Create page
-                                    </ButtonComponent>
-                                    <ButtonComponent
-                                        rounded={false}
-                                        type='warning'
-                                        onClick={this.changeUpdateStatus}
-                                        className='routing-from-button'>
-                                            Update page
-                                    </ButtonComponent>
-                                </>
-                            ) 
-                        }
-                        
                     </div>
                 </div>
                 { this.getTabContent() }
