@@ -4,16 +4,16 @@ import './DroppedListComponent.css';
 import DroppedComponent from './DroppedComponent';
 
 const DroppedListComponent = ({
-        droppedComponents,
-        handleComponentValueChange,
-        handleChangeEditMode,
-        handleForceExitEditMode,
-        componentDragStart,
-        componentDragEnd,
-        rearangeComponents,
-        handleDropContainerComponent,
-        componentInEditMode
-    }) => {
+    droppedComponents,
+    handleComponentValueChange,
+    handleChangeEditMode,
+    handleForceExitEditMode,
+    componentDragStart,
+    componentDragEnd,
+    rearangeComponents,
+    handleDropContainerComponent,
+    componentInEditMode
+}) => {
     return (
         <div className={`droped-components-container${componentInEditMode ? '-edit-mode' : ''} vertical-scrollable-container`}>
             {

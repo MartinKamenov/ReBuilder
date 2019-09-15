@@ -8,7 +8,7 @@ import './NavbarComponent.css';
 class NavbarComponent extends Component {
     state = {
         routes: [
-          { route: '/', text: 'Home' }
+            { route: '/', text: 'Home' }
         ]
     }
 
@@ -24,8 +24,8 @@ class NavbarComponent extends Component {
             routes.push({ route: `/users/${user.id}`, text: 'My profile' });
         } else {
             routes.push({ route: '/services', text: 'Services' });
-            routes.push({ route: `/login`, text: 'Sign in' });
-            routes.push({ route: `/register`, text: 'Sign up' });
+            routes.push({ route: '/login', text: 'Sign in' });
+            routes.push({ route: '/register', text: 'Sign up' });
         }
 
         this.setState({ routes });
@@ -39,26 +39,26 @@ class NavbarComponent extends Component {
     }
     render() {
         return ( 
-          <header role="banner" className="probootstrap-header">
+            <header role="banner" className="probootstrap-header">
                 <div className="container-fluid">
                     <Link to='/' className="probootstrap-logo">ReBuilder</Link>
                     <Link to='#' className="probootstrap-burger-menu visible-xs"><i></i></Link>
                     <div className="mobile-menu-overlay" />
                     <nav role="navigation" className="probootstrap-nav hidden-xs">
-                    <ul className="probootstrap-main-nav">
-                    {
-                        this.state.routes.map((route, i) => {
-                          return (
-                            <li key={i}>
-                                <Link className="active" to={route.route}>{route.text}</Link>
-                            </li>
-                          );
-                        })
-                    }
-                    </ul>
-                  </nav>
-              </div>
-          </header>
+                        <ul className="probootstrap-main-nav">
+                            {
+                                this.state.routes.map((route, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <Link className="active" to={route.route}>{route.text}</Link>
+                                        </li>
+                                    );
+                                })
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </header>
         );
     }
 }

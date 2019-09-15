@@ -8,12 +8,12 @@ import PropTypes from 'prop-types';
 import './ProjectActionButtonsComponent.css';
 
 const ProjectActionButtonsComponent = ({
-        returnFunction,
-        returnFunctionText,
-        handleSaveProject,
-        generateProject,
-        handleDeployProject
-    }) => {
+    returnFunction,
+    returnFunctionText,
+    handleSaveProject,
+    generateProject,
+    handleDeployProject
+}) => {
     return (
         <div className='new-project-name-outer-container'>
             <div className='new-project-name-inner-container'>
@@ -50,7 +50,7 @@ const ProjectActionButtonsComponent = ({
             </div>
         </div>
     );
-}
+};
 
 ProjectActionButtonsComponent.propTypes = {
     returnFunction: PropTypes.func,

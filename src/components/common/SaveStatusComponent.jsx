@@ -8,7 +8,7 @@ const SaveStatusComponent = ({ saveStatus }) => {
             Status: {saveStatus}
         </span>
     );
-}
+};
 
 SaveStatusComponent.propTypes = {
     saveStatus: PropTypes.string.isRequired

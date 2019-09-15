@@ -17,7 +17,7 @@ class LoginComponent extends Component {
         this.setState({[field]: value});
     }
     handleEnterPressed = (key) => {
-        if (key === "Enter") {
+        if (key === 'Enter') {
             this.login();
         }
     }
@@ -58,7 +58,7 @@ class LoginComponent extends Component {
     
     render() {
         if(this.state.isLoading) {
-            return <LoadingComponent message='Authenticating user' />
+            return <LoadingComponent message='Authenticating user' />;
         }
         
         return (

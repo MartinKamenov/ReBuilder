@@ -13,13 +13,13 @@ const UserProjectComponent = ({projectDetails}) => {
             </Link>
         </div>
     );
-}
+};
 
 UserProjectComponent.propTypes = {
     projectDetails: PropTypes.shape({
         projectImageUrl: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired
     }).isRequired,
-}
+};
  
 export default UserProjectComponent;

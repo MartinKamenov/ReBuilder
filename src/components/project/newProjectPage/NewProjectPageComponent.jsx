@@ -35,7 +35,7 @@ class NewProjectPageComponent extends Component {
     }
 
     handleEnterPressed = (key) => {
-        if (key === "Enter") {
+        if (key === 'Enter') {
             this.handleCreateProject();
         }
     }
@@ -98,9 +98,9 @@ class NewProjectPageComponent extends Component {
                     onChange={this.changeImage}/>
                 <ButtonComponent
                     onClick={(event) => {
-                            const element = document.getElementById('change-element-image');
-                            element.click(event);
-                        }
+                        const element = document.getElementById('change-element-image');
+                        element.click(event);
+                    }
                     }
                     type='success'
                     title='Upload image'/>

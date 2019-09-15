@@ -93,13 +93,13 @@ class InnerRoutingComponent extends Component {
         const classNames = ['in', 'out'].map((p) => Object.values(directions).map((d) => `${p}-${d}`)).reduce((a, b) => a.concat(b));
 
         const getDirectionKey = (ev, node) => {
-        const { width, height, top, left } = node.getBoundingClientRect();
-        const l = ev.pageX - (left + window.pageXOffset);
-        const t = ev.pageY - (top + window.pageYOffset);
-        const x = (l - (width/2) * (width > height ? (height/width) : 1));
-        const y = (t - (height/2) * (height > width ? (width/height) : 1));
-        return Math.round(Math.atan2(y, x) / 1.57079633 + 5) % 4;
-        }
+            const { width, height, top, left } = node.getBoundingClientRect();
+            const l = ev.pageX - (left + window.pageXOffset);
+            const t = ev.pageY - (top + window.pageYOffset);
+            const x = (l - (width/2) * (width > height ? (height/width) : 1));
+            const y = (t - (height/2) * (height > width ? (width/height) : 1));
+            return Math.round(Math.atan2(y, x) / 1.57079633 + 5) % 4;
+        };
 
         class Item {
             constructor(element) {
@@ -128,7 +128,7 @@ class InnerRoutingComponent extends Component {
         history.push(`/projects/${project.id}/${pageId}`);
     }
     handleEnterPressed = (key) => {
-        if (key === "Enter") {
+        if (key === 'Enter') {
             this.addNewPage();
         }
     }
@@ -146,7 +146,7 @@ class InnerRoutingComponent extends Component {
         this.setState({ newPageNameError: '' });
 
         if(!this.isValid('newPageRoute')) {
-            this.setState({ newPageRouteError: `Please provide unique route, which starts with "/" symbol.` });
+            this.setState({ newPageRouteError: 'Please provide unique route, which starts with "/" symbol.' });
             return;
         }
 
@@ -181,20 +181,20 @@ class InnerRoutingComponent extends Component {
     isValid = (field) => {
         const value = this.state[field];
         switch(field) {
-            case 'newPageName':
-                if(!value || !value.match("^[A-z0-9]+$") ||
+        case 'newPageName':
+            if(!value || !value.match('^[A-z0-9]+$') ||
                     this.state.pages.find((p => p.name.toLowerCase() === value.toLowerCase()))) {
-                    return false;
-                }
-                return true;
-            case 'newPageRoute':
-                if(!value || !value.match("^[A-z0-9/]+$") || !value.startsWith('/') ||
-                    this.state.pages.find((p => p.route.toLowerCase() === value.toLowerCase()))) {
-                    return false;
-                }
-                return true;
-            default:
                 return false;
+            }
+            return true;
+        case 'newPageRoute':
+            if(!value || !value.match('^[A-z0-9/]+$') || !value.startsWith('/') ||
+                    this.state.pages.find((p => p.route.toLowerCase() === value.toLowerCase()))) {
+                return false;
+            }
+            return true;
+        default:
+            return false;
         }
     }
 
@@ -268,25 +268,25 @@ class InnerRoutingComponent extends Component {
             style.fontSize = parseInt(fontSize / document.documentElement.scrollHeight * 200, 10);
         }
         switch(component.name) {
-            case componentTypes.Image:
-                return (<img
-                    alt='element'
-                    key={component.index}
-                    src={component.src}
-                    style={style}/>);
-            case componentTypes.Container:
-                return (<div key={component.index} style={style}>{
-                    component.children.map(child => this.getComponentJSX(child))
-                }</div>);
-            default:
-                return (<div key={component.index} style={style}>{component.innerText}</div>);
+        case componentTypes.Image:
+            return (<img
+                alt='element'
+                key={component.index}
+                src={component.src}
+                style={style}/>);
+        case componentTypes.Container:
+            return (<div key={component.index} style={style}>{
+                component.children.map(child => this.getComponentJSX(child))
+            }</div>);
+        default:
+            return (<div key={component.index} style={style}>{component.innerText}</div>);
         }
     }
 
     getTabContent = () => {
         switch(this.state.tab) {
-            case 'Pages':
-                return (
+        case 'Pages':
+            return (
                     <>
                         <PagesEditorComponent
                             handleEnterPressed={this.handleEnterPressed}
@@ -305,25 +305,25 @@ class InnerRoutingComponent extends Component {
                             getComponentJSX={this.getComponentJSX}
                             isUpdating={this.state.isUpdating}/>
                     </>
-                );
-            case 'Database':
-                return (
-                    <DatabaseTabComponent/>
-                );
-            case 'Deployment':
-                return (
-                    <DeploymentTabComponent/>
-                );
-            default:
-                return (
-                    <ProjectPageComponent
+            );
+        case 'Database':
+            return (
+                <DatabaseTabComponent/>
+            );
+        case 'Deployment':
+            return (
+                <DeploymentTabComponent/>
+            );
+        default:
+            return (
+                <ProjectPageComponent
                     pages={this.state.pages}
                     updatePage={this.updatePage}
                     selectPage={this.selectPage}
                     navigateToPage={this.navigateToPage}
                     getComponentJSX={this.getComponentJSX}
                     isUpdating={this.state.isUpdating}/>
-                );
+            );
         }
     }
 
@@ -367,7 +367,7 @@ class InnerRoutingComponent extends Component {
                                         }} key={i}>
                                         {tab}
                                     </div>
-                                )}) 
+                                );}) 
                         }
                     </div>
                 </div>
