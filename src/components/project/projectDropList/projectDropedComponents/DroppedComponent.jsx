@@ -213,6 +213,7 @@ const DroppedComponent = ({
                                 newHeight = 10;
                             }
                             handleComponentValueChange(newHeight + 'px', 'style.height');
+                            handleComponentValueChange(newHeight + 'px', 'style.lineHeight');
                         }
                     }}>
                     {

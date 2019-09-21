@@ -268,8 +268,6 @@ class InnerRoutingComponent extends Component {
             style.fontSize = parseInt(fontSize / document.documentElement.scrollHeight * 200, 10);
         }
 
-        style.lineHeight = style.height;
-
         switch(component.name) {
         case componentTypes.Image:
             return (<img
