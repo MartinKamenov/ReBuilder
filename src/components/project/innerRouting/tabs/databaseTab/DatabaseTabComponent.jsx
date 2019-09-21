@@ -6,16 +6,14 @@ import './DatabaseTabComponent.css';
 const DatabaseTabComponent = () => (
     <div className='center-container'>
         <input
+            className='table-name-input'
             placeholder='Table name'
             style={{
                 height: '40px'
             }}/>
         <ButtonComponent
+            className='create-table-btn'
             type='primary'
-            style={{
-                width: '100px',
-                height: '40px'
-            }}
             title='Add table'/>
     </div>
 );
