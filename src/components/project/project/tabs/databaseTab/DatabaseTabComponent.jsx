@@ -7,10 +7,7 @@ const DatabaseTabComponent = () => (
     <div className='center-container'>
         <input
             className='table-name-input'
-            placeholder='Table name'
-            style={{
-                height: '40px'
-            }}/>
+            placeholder='Table name'/>
         <ButtonComponent
             className='create-table-btn'
             type='primary'
