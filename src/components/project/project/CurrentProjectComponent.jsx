@@ -267,6 +267,7 @@ class CurrentProjectComponent extends Component {
             const fontSize = parseInt(style.fontSize, 10);
             style.fontSize = parseInt(fontSize / document.documentElement.scrollHeight * 200, 10);
         }
+
         switch(component.name) {
         case componentTypes.Image:
             return (<img
