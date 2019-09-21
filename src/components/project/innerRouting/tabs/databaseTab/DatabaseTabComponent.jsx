@@ -1,10 +1,20 @@
 import React from 'react';
+import ButtonComponent from '../../../../common/ButtonComponent';
 
 import './DatabaseTabComponent.css';
 
 const DatabaseTabComponent = () => (
     <div className='center-container'>
-        <h1>Database</h1>
+        <input
+            className='table-name-input'
+            placeholder='Table name'
+            style={{
+                height: '40px'
+            }}/>
+        <ButtonComponent
+            className='create-table-btn'
+            type='primary'
+            title='Add table'/>
     </div>
 );
  
