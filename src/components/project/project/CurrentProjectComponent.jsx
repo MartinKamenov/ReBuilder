@@ -8,7 +8,7 @@ import uuid from 'uuid';
 import projectGenerator from '../../../service/projectGenerator.service';
 import SaveStatus from '../components/saveStatus';
 
-import './InnerRoutingComponent.css';
+import './CurrentProjectComponent.css';
 import './PageElementsStyle.css';
 import ProjectActionButtonsComponent from '../../common/ProjectActionButtonsComponent';
 import { componentTypes } from '../components/componentTypes';
@@ -18,7 +18,7 @@ import DatabaseTabComponent from './tabs/databaseTab/DatabaseTabComponent';
 import DeploymentTabComponent from './tabs/deploymentTab/DeploymentTabComponent';
 import tabs from './tabs/projectTabs';
 
-class InnerRoutingComponent extends Component {
+class CurrentProjectComponent extends Component {
     state = {
         isLoading: true,
         pages: [],
@@ -306,7 +306,7 @@ class InnerRoutingComponent extends Component {
                             isUpdating={this.state.isUpdating}/>
                     </>
             );
-        case 'Database':
+        case 'Tables':
             return (
                 <DatabaseTabComponent/>
             );
@@ -394,4 +394,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(InnerRoutingComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentProjectComponent);
