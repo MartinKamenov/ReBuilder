@@ -467,8 +467,7 @@ class EditProjectComponent extends Component {
                     returnFunction={this.returnToRouting}
                     returnFunctionText='Back to pages'
                     handleSaveProject={this.handleSaveProject}
-                    generateProject={this.generateProject}
-                    handleDeployProject={this.handleDeployProject}/>
+                    generateProject={this.generateProject}/>
                 <div className="drag-drop-container">
                     <ProjectComponentsList
                         active={this.state.dragContainerActive}
