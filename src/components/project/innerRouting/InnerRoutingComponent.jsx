@@ -341,7 +341,6 @@ class InnerRoutingComponent extends Component {
                         returnFunctionText='Back to dashboard'
                         handleSaveProject={this.handleSaveProject}
                         generateProject={this.generateProject}
-                        handleDeployProject={this.handleDeployProject}
                     />
                     <div className='center-container tabs-container'>
                         { 
