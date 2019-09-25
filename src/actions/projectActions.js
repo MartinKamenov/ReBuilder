@@ -50,7 +50,7 @@ export function getDeployment(projectId, token) {
 }
 
 export function getDeploymentSuccess(deployment) {
-    return { type: types.SELECT_PROJECT_SUCCESS, project };
+    return { type: types.SELECT_PROJECT_SUCCESS, deployment };
 }
 
 export function selectProjectSuccess(project) {
