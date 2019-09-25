@@ -313,7 +313,8 @@ class InnerRoutingComponent extends Component {
             );
         case 'Deployment':
             return (
-                <DeploymentTabComponent/>
+                <DeploymentTabComponent
+                    handleDeployProject={this.handleDeployProject}/>
             );
         default:
             return (
@@ -341,7 +342,6 @@ class InnerRoutingComponent extends Component {
                         returnFunctionText='Back to dashboard'
                         handleSaveProject={this.handleSaveProject}
                         generateProject={this.generateProject}
-                        handleDeployProject={this.handleDeployProject}
                     />
                     <div className='center-container tabs-container'>
                         { 
