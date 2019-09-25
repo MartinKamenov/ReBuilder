@@ -11,20 +11,20 @@ const DeploymentTabComponent = ({ handleDeployProject, deploymentInformation }) 
         }
 
         return (<div>We are having deployment info</div>);
-    }
+    };
 
     return (
-    <div className='center-container'>
-        {deploymentInformation ?
-            (visualizeDeploymentInformation()):
-            (<div>Fetching deployment info...</div>)}
-        <ButtonComponent
-            style={{ width: '250px' }}
-            onClick={handleDeployProject}
-            title='Deploy project'
-            type='primary'/>
-    </div>
-)};
+        <div className='center-container'>
+            {deploymentInformation ?
+                (visualizeDeploymentInformation()):
+                (<div>Fetching deployment info...</div>)}
+            <ButtonComponent
+                style={{ width: '250px' }}
+                onClick={handleDeployProject}
+                title='Deploy project'
+                type='primary'/>
+        </div>
+    );};
 
 DeploymentTabComponent.propTypes = {
     handleDeployProject: PropTypes.func.isRequired,
