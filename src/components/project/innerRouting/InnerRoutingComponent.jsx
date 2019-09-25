@@ -313,7 +313,8 @@ class InnerRoutingComponent extends Component {
             );
         case 'Deployment':
             return (
-                <DeploymentTabComponent/>
+                <DeploymentTabComponent
+                    handleDeployProject={this.handleDeployProject}/>
             );
         default:
             return (

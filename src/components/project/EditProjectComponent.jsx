@@ -331,10 +331,6 @@ class EditProjectComponent extends Component {
         
         this.props.actions.updateProject(this.state.id, pages, token);
     }
-
-    handleDeployProject = async () => {
-        this.props.actions.deployProject(this.state.id, this.props.user.token);
-    }
     getComponentInEditMode = () => {
         let index = -1;
         const droppedComponents = this.state.droppedComponents;
