@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 
 import './DeploymentTabComponent.css';
 
-const DeploymentTabComponent = ({ handleDeployProject }) => (
+const DeploymentTabComponent = ({ handleDeployProject, deploymentInformation }) => (
     <div className='center-container'>
+        {deploymentInformation ? 
+            (<div>deploymentInformation</div>):
+            (<div>No deployment info</div>)}
         <ButtonComponent
+            style={{ width: '250px' }}
             onClick={handleDeployProject}
             title='Deploy project'
             type='primary'/>
@@ -14,7 +18,8 @@ const DeploymentTabComponent = ({ handleDeployProject }) => (
 );
 
 DeploymentTabComponent.propTypes = {
-    handleDeployProject: PropTypes.func.isRequired
+    handleDeployProject: PropTypes.func.isRequired,
+    deploymentInformation: PropTypes.object
 };
  
 export default DeploymentTabComponent;
