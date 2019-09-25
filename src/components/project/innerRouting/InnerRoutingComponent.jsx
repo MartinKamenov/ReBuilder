@@ -57,10 +57,8 @@ class InnerRoutingComponent extends Component {
     }
 
     componentWillReceiveProps(props) {
-        debugger;
-        if(props.deployment) {
-            debugger;
-            this.setState({ deploymentInformation: props.deployment });
+        if(props.deploymentInformation) {
+            this.setState({ deploymentInformation: props.deploymentInformation });
         }
         if(props.project.pages) {
             this.setState({ pages: props.project.pages, isLoading: false }, () => {
@@ -293,7 +291,6 @@ class InnerRoutingComponent extends Component {
     }
 
     getDeploymentInformation = () => {
-        debugger;
         const id = this.props.project.id;
         const token = 'bla';
         this.props.actions.getDeployment(id, token);
@@ -399,7 +396,8 @@ const mapStateToProps = (state) => {
     return {
         project: state.project,
         user: state.user,
-        projectStatus: state.projectStatus
+        projectStatus: state.projectStatus,
+        deploymentInformation: state.deployment
     };
 };
 
