@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as projectActions from '../../../actions/projectActions';
 import * as deploymentActions from '../../../actions/deploymentActions';
+import * as getDeploymentActions from '../../../actions/getDeploymentActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoadingComponent from '../../common/LoadingComponent';
@@ -32,7 +33,9 @@ class InnerRoutingComponent extends Component {
         updatePage: null,
 
         saveStatus: SaveStatus.Saved,
-        tab: tabs[0]
+        tab: tabs[0],
+
+        deploymentInformation: null
     }
     
     componentDidMount() {
@@ -54,6 +57,9 @@ class InnerRoutingComponent extends Component {
     }
 
     componentWillReceiveProps(props) {
+        if(props.deploymentInformation) {
+            this.setState({ deploymentInformation: props.deploymentInformation });
+        }
         if(props.project.pages) {
             this.setState({ pages: props.project.pages, isLoading: false }, () => {
                 this.executeStylesScript();
@@ -284,6 +290,12 @@ class InnerRoutingComponent extends Component {
         }
     }
 
+    getDeploymentInformation = () => {
+        const id = this.props.project.id;
+        const token = 'bla';
+        this.props.actions.getDeployment(id, token);
+    }
+
     getTabContent = () => {
         switch(this.state.tab) {
         case 'Pages':
@@ -312,8 +324,11 @@ class InnerRoutingComponent extends Component {
                 <DatabaseTabComponent/>
             );
         case 'Deployment':
+            this.getDeploymentInformation();
             return (
-                <DeploymentTabComponent/>
+                <DeploymentTabComponent
+                    deploymentInformation={this.state.deploymentInformation}
+                    handleDeployProject={this.handleDeployProject}/>
             );
         default:
             return (
@@ -341,7 +356,6 @@ class InnerRoutingComponent extends Component {
                         returnFunctionText='Back to dashboard'
                         handleSaveProject={this.handleSaveProject}
                         generateProject={this.generateProject}
-                        handleDeployProject={this.handleDeployProject}
                     />
                     <div className='center-container tabs-container'>
                         { 
@@ -382,14 +396,15 @@ const mapStateToProps = (state) => {
     return {
         project: state.project,
         user: state.user,
-        projectStatus: state.projectStatus
+        projectStatus: state.projectStatus,
+        deploymentInformation: state.deployment
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(
-            Object.assign({}, projectActions, deploymentActions),
+            Object.assign({}, projectActions, deploymentActions, getDeploymentActions),
             dispatch
         )
     };
