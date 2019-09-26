@@ -331,10 +331,6 @@ class EditProjectComponent extends Component {
         
         this.props.actions.updateProject(this.state.id, pages, token);
     }
-
-    handleDeployProject = async () => {
-        this.props.actions.deployProject(this.state.id, this.props.user.token);
-    }
     getComponentInEditMode = () => {
         let index = -1;
         const droppedComponents = this.state.droppedComponents;
@@ -467,8 +463,7 @@ class EditProjectComponent extends Component {
                     returnFunction={this.returnToRouting}
                     returnFunctionText='Back to pages'
                     handleSaveProject={this.handleSaveProject}
-                    generateProject={this.generateProject}
-                    handleDeployProject={this.handleDeployProject}/>
+                    generateProject={this.generateProject}/>
                 <div className="drag-drop-container">
                     <ProjectComponentsList
                         active={this.state.dragContainerActive}
