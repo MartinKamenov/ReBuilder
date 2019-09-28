@@ -267,6 +267,8 @@ class InnerRoutingComponent extends Component {
         if(style.height.endsWith('px')) {
             const height = parseInt(style.height, 10);
             style.height = (height / document.documentElement.scrollHeight * 200) + 'px';
+            const lineHeight = parseInt(style.lineHeight, 10);
+            style.lineHeight = (lineHeight / document.documentElement.scrollHeight * 200) + 'px';
         }
 
         if(style.fontSize) {

@@ -132,7 +132,6 @@ class EditProjectComponent extends Component {
         return component;
     }
     handleChangeEditMode = (index) => {
-        debugger;
         const droppedComponents = [...this.state.droppedComponents];
 
         let foundComponentIndex = droppedComponents.findIndex(c => c.index === index);
@@ -180,17 +179,12 @@ class EditProjectComponent extends Component {
             if(component.isInEditMode) {
                 this.setState({ previousComponent: this.getComponentFromIndex(index) });
             }
-        }
-        
-
-        debugger;
-        
+        }        
 
         this.setState({ droppedComponents });
     }
 
     handleForceExitEditMode = (index) => {
-        debugger;
         const droppedComponents = [...this.state.droppedComponents];
         const exitModeComponentIndex = droppedComponents.findIndex(c => c.index === index);
         droppedComponents[exitModeComponentIndex] = this.state.previousComponent;
@@ -204,7 +198,6 @@ class EditProjectComponent extends Component {
     }
 
     handleDeleteComponent = (index) => {
-        debugger;
         let droppedComponents = [...this.state.droppedComponents];
         const deleteComponentIndex = droppedComponents.findIndex(c => c.index === index);
         if(deleteComponentIndex !== -1) {
