@@ -29,7 +29,7 @@ const DeploymentTabComponent = ({ handleDeployProject, deploymentInformation }) 
 DeploymentTabComponent.propTypes = {
     handleDeployProject: PropTypes.func.isRequired,
     deploymentInformation: PropTypes.oneOfType(
-        PropTypes.object, PropTypes.string
+        [ PropTypes.object, PropTypes.string ]
     )
 };
  

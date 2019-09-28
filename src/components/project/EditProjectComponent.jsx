@@ -132,9 +132,11 @@ class EditProjectComponent extends Component {
         return component;
     }
     handleChangeEditMode = (index) => {
+        debugger;
         const droppedComponents = [...this.state.droppedComponents];
 
         let foundComponentIndex = droppedComponents.findIndex(c => c.index === index);
+        // Update children
         if(foundComponentIndex === -1) {
             let childIndex = -1;
             const componentIndex = droppedComponents
@@ -157,7 +159,9 @@ class EditProjectComponent extends Component {
                 component.children = children;
                 droppedComponents[componentIndex] = component;
             }
-        } else {
+        } 
+        // Update component which is in main array of components
+        else {
             const component = Object.assign({}, droppedComponents[foundComponentIndex]);
             component.isInEditMode = 
                 !component.isInEditMode;
@@ -172,17 +176,21 @@ class EditProjectComponent extends Component {
             if(droppedComponents[foundComponentIndex].isInEditMode) {
                 this.setState({ dragContainerActive: false });
             }
+
+            if(component.isInEditMode) {
+                this.setState({ previousComponent: this.getComponentFromIndex(index) });
+            }
         }
         
 
-        if(this.getComponentFromIndex(index).isInEditMode) {
-            this.setState({ previousComponent: this.getComponentFromIndex(index) });
-        }
+        debugger;
+        
 
         this.setState({ droppedComponents });
     }
 
     handleForceExitEditMode = (index) => {
+        debugger;
         const droppedComponents = [...this.state.droppedComponents];
         const exitModeComponentIndex = droppedComponents.findIndex(c => c.index === index);
         droppedComponents[exitModeComponentIndex] = this.state.previousComponent;
@@ -196,26 +204,11 @@ class EditProjectComponent extends Component {
     }
 
     handleDeleteComponent = (index) => {
-        let droppedComponents = this.state.droppedComponents;
+        debugger;
+        let droppedComponents = [...this.state.droppedComponents];
         const deleteComponentIndex = droppedComponents.findIndex(c => c.index === index);
         if(deleteComponentIndex !== -1) {
-            let childIndex = -1;
-            const componentIndex = droppedComponents
-                .findIndex(c => {
-                    const cIndex = c.children.findIndex(child => child.index === index);
-                    if(cIndex !== -1) {
-                        childIndex = cIndex;
-                        return true;
-                    }
-
-                    return false;
-                });
-
-            if(componentIndex !== -1 && childIndex !== -1) {
-                const component = Object.assign({}, droppedComponents[componentIndex]);
-                component.children.splice(childIndex, 1);
-                droppedComponents[componentIndex] = index;
-            }
+            droppedComponents.splice(deleteComponentIndex, 1);
         } else {
             let i = 0;
             for(i = 0; i < droppedComponents.length; i++) {
