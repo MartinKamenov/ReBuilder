@@ -5,14 +5,26 @@ import websocketService from '../../../../../service/websocket.service';
 
 import './DeploymentTabComponent.css';
 
-const DeploymentTabComponent = ({ handleDeployProject, deploymentInformation }) => {
+const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation }) => {
     const [deploymentMessages, setDeploymentMessages] = useState([]);
+    const [connection, setConnection] = useState({});
 
     useEffect(() => {
-        
+        websocketService.connectDeployment(id).then((res) => {
+            debugger;
+            const createdConnection = res;
+            createdConnection.onMessage = addDeploymentMessage;
+            setConnection(createdConnection);
+        }).catch(er => {
+            debugger;
+            console.log(er);
+        });
     }, []);
 
-    const addDeploymentMessage = (message) => {
+    const addDeploymentMessage = (evt) => {
+        const data = evt.data;
+        const message = JSON.parse(data);
+
         const deploymentMessagesCopy = [...deploymentMessages];
 
         deploymentMessagesCopy.push(message);
@@ -47,6 +59,7 @@ const DeploymentTabComponent = ({ handleDeployProject, deploymentInformation }) 
     );};
 
 DeploymentTabComponent.propTypes = {
+    id: PropTypes.string.isRequired,
     handleDeployProject: PropTypes.func.isRequired,
     deploymentInformation: PropTypes.oneOfType(
         [ PropTypes.object, PropTypes.string ]
