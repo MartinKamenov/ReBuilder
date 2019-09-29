@@ -6,8 +6,8 @@ const websocketUrl = `ws://${domain}`;
 
 const websocketService = {
     connectDeployment: (id) => {
-        debugger;
-        const connection = new WebSocket(websocketUrl + '/' + id);
+        const connection = 
+            new WebSocket(websocketUrl + '/' + id + '/deployment/status');
         return connection;
     }
 };

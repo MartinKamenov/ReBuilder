@@ -10,26 +10,20 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
     const [connection, setConnection] = useState({});
 
     useEffect(() => {
-        websocketService.connectDeployment(id).then((res) => {
-            debugger;
-            const createdConnection = res;
-            createdConnection.onMessage = addDeploymentMessage;
-            setConnection(createdConnection);
-        }).catch(er => {
-            debugger;
-            console.log(er);
-        });
+        const createdConnection = websocketService.connectDeployment(id);
+        createdConnection.onmessage = addDeploymentMessage;
+        setConnection(createdConnection);
     }, []);
 
     const addDeploymentMessage = (evt) => {
         const data = evt.data;
         const message = JSON.parse(data);
 
-        const deploymentMessagesCopy = [...deploymentMessages];
-
-        deploymentMessagesCopy.push(message);
-
-        setDeploymentMessages(deploymentMessagesCopy);
+        setDeploymentMessages((prev) => {
+            const arr = [...prev];
+            arr.push(message);
+            return arr;
+        });
     }
 
     const visualizeDeploymentInformation = () => {
