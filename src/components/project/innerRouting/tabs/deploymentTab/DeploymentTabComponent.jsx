@@ -7,12 +7,10 @@ import './DeploymentTabComponent.css';
 
 const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation }) => {
     const [deploymentMessages, setDeploymentMessages] = useState([]);
-    const [connection, setConnection] = useState({});
 
     useEffect(() => {
         const createdConnection = websocketService.connectDeployment(id);
         createdConnection.onmessage = addDeploymentMessage;
-        setConnection(createdConnection);
     }, []);
 
     const addDeploymentMessage = (evt) => {
@@ -24,7 +22,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
             arr.push(message);
             return arr;
         });
-    }
+    };
 
     const visualizeDeploymentInformation = () => {
         if(typeof deploymentInformation === 'string') {
