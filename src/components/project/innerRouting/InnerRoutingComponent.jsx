@@ -329,6 +329,7 @@ class InnerRoutingComponent extends Component {
             this.getDeploymentInformation();
             return (
                 <DeploymentTabComponent
+                    id={this.state.id}
                     deploymentInformation={this.state.deploymentInformation}
                     handleDeployProject={this.handleDeployProject}/>
             );
