@@ -1,6 +1,6 @@
 import { domain } from './api.service';
 
-const websocketUrl = `wss://${domain}`;
+const websocketUrl = `ws://${domain}`;
 
 // TO DO: Implement websocket service for deployment information and deployment logs
 
