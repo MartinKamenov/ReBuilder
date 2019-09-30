@@ -34,7 +34,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
 
     return (
         <div className='center-container'>
-            <div>
+            <div className='deployment-messages-container'>
                 {deploymentMessages.map((message, i) => (
                     <div key={i}>{message}</div>
                 ))}
