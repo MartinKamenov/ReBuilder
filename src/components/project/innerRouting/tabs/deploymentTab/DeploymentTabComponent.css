@@ -1,0 +1,11 @@
+.deployment-messages-container {
+    width: 100%;
+    height: 200px;
+    border: 1px solid black;
+    background-color: #aaaaaaaa;
+    border-radius: 10px;
+    overflow: auto;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
