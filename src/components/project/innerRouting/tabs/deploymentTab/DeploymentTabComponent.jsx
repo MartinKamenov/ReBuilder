@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import ButtonComponent from '../../../../common/ButtonComponent';
 import PropTypes from 'prop-types';
 import websocketService from '../../../../../service/websocket.service';
+import ProgressBarComponent from '../../../../common/ProgressBarComponent';
 
 import './DeploymentTabComponent.css';
 
 const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation }) => {
     const [deploymentMessages, setDeploymentMessages] = useState([]);
+    const [progress, setProgress] = useState(0);
+    const [deploymentStarted, setDeploymentStarted] = useState(false);
+
 
     useEffect(() => {
         const createdConnection = websocketService.connectDeployment(id);
@@ -20,6 +24,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
         setDeploymentMessages((prev) => {
             const arr = [...prev];
             arr.push(message);
+            setProgress(((message.index + 1) / message.count) * 100)
             return arr;
         });
     };
@@ -35,9 +40,10 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
     return (
         <div className='center-container'>
             <h3>Deployment status</h3>
+            <ProgressBarComponent progress={progress}/>
             <div className='deployment-messages-container'>
                 {deploymentMessages.map((message, i) => (
-                    <div key={i}>{message}</div>
+                    <div key={i}>{message.message}</div>
                 ))}
             </div>
             {deploymentInformation ?
