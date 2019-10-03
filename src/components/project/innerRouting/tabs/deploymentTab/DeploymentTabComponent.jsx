@@ -15,7 +15,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
     useEffect(() => {
         const createdConnection = websocketService.connectDeployment(id);
         createdConnection.onmessage = addDeploymentMessage;
-    }, []);
+    }, [id]);
 
     const addDeploymentMessage = (evt) => {
         const data = evt.data;
