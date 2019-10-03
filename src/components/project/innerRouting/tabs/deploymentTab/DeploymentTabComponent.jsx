@@ -24,7 +24,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
         setDeploymentMessages((prev) => {
             const arr = [...prev];
             arr.push(message);
-            setProgress(((message.index + 1) / message.count) * 100)
+            setProgress(parseInt(((message.index + 1) / message.count) * 100), 10);
             return arr;
         });
     };
