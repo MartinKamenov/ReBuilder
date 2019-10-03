@@ -24,7 +24,11 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
         setDeploymentMessages((prev) => {
             const arr = [...prev];
             arr.push(message);
-            setProgress(parseInt(((message.index + 1) / message.count) * 100), 10);
+            const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
+            if(percentage >= 100) {
+                setDeploymentStarted(false);
+            }
+            setProgress(percentage);
             return arr;
         });
     };
@@ -51,7 +55,12 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
                 (<div>Fetching deployment info...</div>)}
             <ButtonComponent
                 style={{ width: '250px' }}
-                onClick={handleDeployProject}
+                onClick={() => {
+                    if(!deploymentStarted) {
+                        setDeploymentStarted(true);
+                        handleDeployProject();
+                    }
+                }}
                 title='Deploy project'
                 type='primary'/>
         </div>
