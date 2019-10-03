@@ -2,16 +2,20 @@ import React, { useState, useEffect } from 'react';
 import ButtonComponent from '../../../../common/ButtonComponent';
 import PropTypes from 'prop-types';
 import websocketService from '../../../../../service/websocket.service';
+import ProgressBarComponent from '../../../../common/ProgressBarComponent';
 
 import './DeploymentTabComponent.css';
 
 const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation }) => {
     const [deploymentMessages, setDeploymentMessages] = useState([]);
+    const [progress, setProgress] = useState(0);
+    const [deploymentStarted, setDeploymentStarted] = useState(false);
+
 
     useEffect(() => {
         const createdConnection = websocketService.connectDeployment(id);
         createdConnection.onmessage = addDeploymentMessage;
-    }, []);
+    }, [id]);
 
     const addDeploymentMessage = (evt) => {
         const data = evt.data;
@@ -20,6 +24,11 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
         setDeploymentMessages((prev) => {
             const arr = [...prev];
             arr.push(message);
+            const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
+            if(percentage >= 100) {
+                setDeploymentStarted(false);
+            }
+            setProgress(percentage);
             return arr;
         });
     };
@@ -34,9 +43,11 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
 
     return (
         <div className='center-container'>
+            <h3>Deployment status</h3>
+            <ProgressBarComponent progress={progress}/>
             <div className='deployment-messages-container'>
                 {deploymentMessages.map((message, i) => (
-                    <div key={i}>{message}</div>
+                    <div key={i}>{message.message}</div>
                 ))}
             </div>
             {deploymentInformation ?
@@ -44,7 +55,12 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
                 (<div>Fetching deployment info...</div>)}
             <ButtonComponent
                 style={{ width: '250px' }}
-                onClick={handleDeployProject}
+                onClick={() => {
+                    if(!deploymentStarted) {
+                        setDeploymentStarted(true);
+                        handleDeployProject();
+                    }
+                }}
                 title='Deploy project'
                 type='primary'/>
         </div>
