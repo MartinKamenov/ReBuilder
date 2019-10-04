@@ -27,7 +27,6 @@ class InnerRoutingComponent extends Component {
         newPageRoute: '',
 
         newPageNameError: '',
-        newPageRouteError: '',
 
         isUpdating: false,
         updatePage: null,
