@@ -21,29 +21,13 @@ const PagesEditorComponent = ({
         <div className='routing-form-input-container'>
             <input
                 value={state.newPageName}
-                onChange={(event) => updateNewPageValue('newPageName', event.target.value)}
+                onChange={updateNewPageValue}
                 className={'routing-form-input ' + isValidClass('newPageNameError')}
                 placeholder='Page name'/>
             {
                 state.newPageNameError ? (
                     <div className='routing-form-input-error'>
                         {state.newPageNameError}
-                    </div>
-                ) : (
-                    <div></div>
-                )
-            }
-        </div>
-        <div className='routing-form-input-container'>
-            <input
-                value={state.newPageRoute}
-                onChange={(event) => updateNewPageValue('newPageRoute', event.target.value)}
-                className={'routing-form-input ' + isValidClass('newPageRouteError')}
-                placeholder='Page route'/>
-            {
-                state.newPageRouteError ? (
-                    <div className='routing-form-input-error'>
-                        {state.newPageRouteError}
                     </div>
                 ) : (
                     <div></div>

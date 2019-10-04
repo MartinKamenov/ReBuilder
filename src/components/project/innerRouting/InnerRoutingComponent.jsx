@@ -27,7 +27,6 @@ class InnerRoutingComponent extends Component {
         newPageRoute: '',
 
         newPageNameError: '',
-        newPageRouteError: '',
 
         isUpdating: false,
         updatePage: null,
@@ -123,8 +122,13 @@ class InnerRoutingComponent extends Component {
         nodes.forEach(node => new Item(node));
     }
 
-    updateNewPageValue = (field, value) => {
-        this.setState({ [field]: value });
+    updateNewPageValue = ({ target: { value }}) => {
+        if(!this.isValid('newPageName', value)) {
+            this.setState({ newPageNameError: 'Name is not valid', newPageName: value });
+            return;
+        }
+
+        this.setState({ newPageNameError: '', newPageName: value, newPageRoute: `/${value.toLowerCase()}` });
     }
 
     navigateToPage = (pageId) => {
@@ -142,21 +146,6 @@ class InnerRoutingComponent extends Component {
     addNewPage = () => {
         const name = this.state.newPageName;
         const route = this.state.newPageRoute;
-        if(!this.isValid('newPageName')) {
-            this.setState({ 
-                newPageNameError: 'Please provide unique name only using symbols and numbers.'
-            });
-            return;
-        }
-
-        this.setState({ newPageNameError: '' });
-
-        if(!this.isValid('newPageRoute')) {
-            this.setState({ newPageRouteError: 'Please provide unique route, which starts with "/" symbol.' });
-            return;
-        }
-
-        this.setState({ newPageRouteError: '' });
 
         const page = {
             id: uuid.v1(),
@@ -184,8 +173,7 @@ class InnerRoutingComponent extends Component {
         this.setState({ isUpdating: !this.state.isUpdating });
     }
 
-    isValid = (field) => {
-        const value = this.state[field];
+    isValid = (field, value) => {
         switch(field) {
         case 'newPageName':
             if(!value || !value.match('^[A-z0-9]+$') ||
@@ -193,14 +181,8 @@ class InnerRoutingComponent extends Component {
                 return false;
             }
             return true;
-        case 'newPageRoute':
-            if(!value || !value.match('^[A-z0-9/]+$') || !value.startsWith('/') ||
-                    this.state.pages.find((p => p.route.toLowerCase() === value.toLowerCase()))) {
-                return false;
-            }
-            return true;
         default:
-            return false;
+            return true;
         }
     }
 
