@@ -21,6 +21,28 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
         const data = evt.data;
         const message = JSON.parse(data);
 
+        if(message.url) {
+            setTimeout(() => {
+                const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
+                if(percentage >= 100) {
+                    setDeploymentStarted(false);
+                }
+                setDeploymentMessages((prev) => {
+                    const arr = [...prev];
+                    arr.push(message);
+                    const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
+                    if(percentage >= 100) {
+                        setDeploymentStarted(false);
+                    }
+                    setProgress(percentage);
+                    return arr;
+                });
+                setProgress(percentage);
+                window.open(message.url, '_blank');
+            }, 20000);
+            return;
+        }
+
         setDeploymentMessages((prev) => {
             const arr = [...prev];
             arr.push(message);
