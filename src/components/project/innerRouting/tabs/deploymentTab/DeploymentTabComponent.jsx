@@ -11,6 +11,9 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
     const [progress, setProgress] = useState(0);
     const [deploymentStarted, setDeploymentStarted] = useState(false);
 
+    const openWebsite = (url) => {
+        window.open(url, '_blank');
+    }
 
     useEffect(() => {
         const createdConnection = websocketService.connectDeployment(id);
@@ -38,7 +41,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
                     return arr;
                 });
                 setProgress(percentage);
-                window.open(message.url, '_blank');
+                openWebsite(message.url);
             }, 20000);
             return;
         }
@@ -60,18 +63,33 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
             return <div>{deploymentInformation}</div>;
         }
 
-        return (<div>We are having deployment info</div>);
+        if(!deploymentInformation.deployUrl) {
+            return <div>{deploymentInformation.status}</div>
+        }
+
+        return (<div style={{ backgroundColor: '#aaaaaaaa' }}>
+            <span>{deploymentInformation.deployUrl}</span>
+            <ButtonComponent
+                onClick={() => openWebsite(deploymentInformation.deployUrl)}
+                type='success'
+                title='Open application'/>
+        </div>);
     };
 
     return (
         <div className='center-container'>
             <h3>Deployment status</h3>
-            <ProgressBarComponent progress={progress}/>
-            <div className='deployment-messages-container'>
-                {deploymentMessages.map((message, i) => (
-                    <div key={i}>{message.message}</div>
-                ))}
-            </div>
+            { deploymentStarted ? (
+                <>
+                    <ProgressBarComponent progress={progress}/>
+                    <div className='deployment-messages-container'>
+                        {deploymentMessages.map((message, i) => (
+                            <div key={i}>{message.message}</div>
+                        ))}
+                    </div>
+                </>
+            ) : null }
+            
             {deploymentInformation ?
                 (visualizeDeploymentInformation()):
                 (<div>Fetching deployment info...</div>)}
