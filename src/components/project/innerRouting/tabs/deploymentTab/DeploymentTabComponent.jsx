@@ -3,6 +3,8 @@ import ButtonComponent from '../../../../common/ButtonComponent';
 import PropTypes from 'prop-types';
 import websocketService from '../../../../../service/websocket.service';
 import ProgressBarComponent from '../../../../common/ProgressBarComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 import './DeploymentTabComponent.css';
 
@@ -13,7 +15,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
 
     const openWebsite = (url) => {
         window.open(url, '_blank');
-    }
+    };
 
     useEffect(() => {
         const createdConnection = websocketService.connectDeployment(id);
@@ -64,7 +66,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
         }
 
         if(!deploymentInformation.deployUrl) {
-            return <div>{deploymentInformation.status}</div>
+            return <div>{deploymentInformation.status}</div>;
         }
 
         return (
@@ -72,7 +74,10 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
                 className='open-deployment-btn'
                 onClick={() => openWebsite(deploymentInformation.deployUrl)}
                 type='success'
-                title='Open application'/>);
+                title='Open application'>
+                <FontAwesomeIcon icon={faPowerOff} />
+                <span className='new-project-btn-text'>Open application</span>    
+            </ButtonComponent>);
     };
 
     return (
@@ -100,8 +105,10 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
                         handleDeployProject();
                     }
                 }}
-                title='Deploy project'
-                type='primary'/>
+                type='primary'>
+                <FontAwesomeIcon icon={faArrowUp} />
+                <span className='new-project-btn-text'>Deploy project</span>
+            </ButtonComponent>
         </div>
     );};
 
