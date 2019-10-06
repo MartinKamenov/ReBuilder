@@ -73,42 +73,44 @@ class UserComponent extends Component {
 
         const user = this.props.user;
         return (
-            <div className='center-container user-container'>
-                <img
-                    className='user-component-user-image'
-                    alt='User'
-                    src={this.state.imageUrl}/>
-                <input
-                    id='change-element-image'
-                    className='change-element-image'
-                    onChange={this.changeImage}
-                    type='file'
-                    accept='image/*'/>
-                <ButtonComponent
-                    onClick={(event) => {
-                        const element = document.getElementById('change-element-image');
-                        element.click(event);
-                    }
-                    }
-                    type='success'
-                    title='Upload image'/>
-                <h3>
-                    {user.username}
-                </h3>
-                <ButtonComponent
-                    className='logout-btn'
-                    type='success'
-                    onClick={this.updateUser}>
-                    <FontAwesomeIcon className='action-icon' icon={faSave} />
-                    Save changes
-                </ButtonComponent>
-                <ButtonComponent
-                    className='logout-btn'
-                    type='danger'
-                    onClick={this.logout}>
-                    <FontAwesomeIcon className='action-icon' icon={faUndo} />
-                    Logout
-                </ButtonComponent>
+            <div className='user-container'>
+                <div className='center-container user-details'>
+                    <img
+                        className='user-component-user-image'
+                        alt='User'
+                        src={this.state.imageUrl}/>
+                    <input
+                        id='change-element-image'
+                        className='change-element-image'
+                        onChange={this.changeImage}
+                        type='file'
+                        accept='image/*'/>
+                    <ButtonComponent
+                        onClick={(event) => {
+                            const element = document.getElementById('change-element-image');
+                            element.click(event);
+                        }
+                        }
+                        type='success'
+                        title='Upload image'/>
+                    <h3 style={{ fontWeight: 'bold' }}>
+                        {user.username}
+                    </h3>
+                    <ButtonComponent
+                        className='logout-btn'
+                        type='success'
+                        onClick={this.updateUser}>
+                        <FontAwesomeIcon className='action-icon' icon={faSave} />
+                        Save changes
+                    </ButtonComponent>
+                    <ButtonComponent
+                        className='logout-btn'
+                        type='danger'
+                        onClick={this.logout}>
+                        <FontAwesomeIcon className='action-icon' icon={faUndo} />
+                        Logout
+                    </ButtonComponent>
+                </div>
             </div>
         );
     }
