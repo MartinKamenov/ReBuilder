@@ -9,3 +9,9 @@
     text-align: center;
     padding: 10px;
 }
+
+.open-deployment-btn {
+    display: block;
+    width: 250px;
+    margin: auto;
+}

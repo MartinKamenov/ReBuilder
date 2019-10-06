@@ -67,13 +67,12 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
             return <div>{deploymentInformation.status}</div>
         }
 
-        return (<div style={{ backgroundColor: '#aaaaaaaa' }}>
-            <span>{deploymentInformation.deployUrl}</span>
+        return (
             <ButtonComponent
+                className='open-deployment-btn'
                 onClick={() => openWebsite(deploymentInformation.deployUrl)}
                 type='success'
-                title='Open application'/>
-        </div>);
+                title='Open application'/>);
     };
 
     return (
