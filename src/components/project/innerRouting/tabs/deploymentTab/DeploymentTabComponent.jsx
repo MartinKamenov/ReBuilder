@@ -3,6 +3,8 @@ import ButtonComponent from '../../../../common/ButtonComponent';
 import PropTypes from 'prop-types';
 import websocketService from '../../../../../service/websocket.service';
 import ProgressBarComponent from '../../../../common/ProgressBarComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 import './DeploymentTabComponent.css';
 
@@ -11,6 +13,9 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
     const [progress, setProgress] = useState(0);
     const [deploymentStarted, setDeploymentStarted] = useState(false);
 
+    const openWebsite = (url) => {
+        window.open(url, '_blank');
+    };
 
     useEffect(() => {
         const createdConnection = websocketService.connectDeployment(id);
@@ -38,7 +43,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
                     return arr;
                 });
                 setProgress(percentage);
-                window.open(message.url, '_blank');
+                openWebsite(message.url);
             }, 20000);
             return;
         }
@@ -60,18 +65,35 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
             return <div>{deploymentInformation}</div>;
         }
 
-        return (<div>We are having deployment info</div>);
+        if(!deploymentInformation.deployUrl) {
+            return <div>{deploymentInformation.status}</div>;
+        }
+
+        return (
+            <ButtonComponent
+                className='open-deployment-btn'
+                onClick={() => openWebsite(deploymentInformation.deployUrl)}
+                type='success'
+                title='Open application'>
+                <FontAwesomeIcon icon={faPowerOff} />
+                <span className='new-project-btn-text'>Open application</span>    
+            </ButtonComponent>);
     };
 
     return (
         <div className='center-container'>
             <h3>Deployment status</h3>
-            <ProgressBarComponent progress={progress}/>
-            <div className='deployment-messages-container'>
-                {deploymentMessages.map((message, i) => (
-                    <div key={i}>{message.message}</div>
-                ))}
-            </div>
+            { deploymentStarted ? (
+                <>
+                    <ProgressBarComponent progress={progress}/>
+                    <div className='deployment-messages-container'>
+                        {deploymentMessages.map((message, i) => (
+                            <div key={i}>{message.message}</div>
+                        ))}
+                    </div>
+                </>
+            ) : null }
+            
             {deploymentInformation ?
                 (visualizeDeploymentInformation()):
                 (<div>Fetching deployment info...</div>)}
@@ -83,8 +105,10 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
                         handleDeployProject();
                     }
                 }}
-                title='Deploy project'
-                type='primary'/>
+                type='primary'>
+                <FontAwesomeIcon icon={faArrowUp} />
+                <span className='new-project-btn-text'>Deploy project</span>
+            </ButtonComponent>
         </div>
     );};
 
