@@ -83,16 +83,12 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
     return (
         <div className='center-container'>
             <h3>Deployment status</h3>
-            { deploymentStarted ? (
-                <>
-                    <ProgressBarComponent progress={progress}/>
-                    <div className='deployment-messages-container'>
-                        {deploymentMessages.map((message, i) => (
-                            <div key={i}>{message.message}</div>
-                        ))}
-                    </div>
-                </>
-            ) : null }
+            <ProgressBarComponent progress={progress}/>
+            <div className='deployment-messages-container'>
+                {deploymentMessages.map((message, i) => (
+                    <div key={i}>{message.message}</div>
+                ))}
+            </div>
             
             {deploymentInformation ?
                 (visualizeDeploymentInformation()):
