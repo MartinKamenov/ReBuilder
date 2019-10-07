@@ -12,10 +12,7 @@ const HomeComponent = () => {
                 <div className='container-fluid'>
                     <div className='row'>
                         <div className='col-md-7 probootstrap-intro-text'>
-                            <h1>Create your own website without the pain of knowing how to code</h1>
-                            <div className='probootstrap-subtitle probootstrap-animate'>
-                                <h2>Website template for creative agency like you</h2>
-                            </div>
+                            <h1>Easiest way to create your custom website</h1>
                             <p className='watch-intro probootstrap-animate'><a href='https://vimeo.com/45830194' className='popup-vimeo'>Watch the video <i className='icon-play2' /></a></p>
                         </div>
                     </div>
@@ -33,25 +30,11 @@ const HomeComponent = () => {
                         </div>
                     </div>
                     <div className='row mb70'>
-                        <div className='col-md-4 probootstrap-animate'>
-                            <div className='probootstrap-box'>
-                                <div className='icon text-center'><i className='icon-tools2' /></div>
-                                <h3>Interface Design</h3>
-                                <p className='service-description'>
-                    Drag and drop HTML elements on your customized page.
-                                </p>
-                                <ul className='text-left with-icon colored'>
-                                    <li><i className='icon-radio-checked' /> <span>A small river named Duden</span></li>
-                                    <li><i className='icon-radio-checked' /> <span>Place and supplie</span></li>
-                                    <li><i className='icon-radio-checked' /> <span>Roasted parts of sentences</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className='col-md-4 probootstrap-animate'>
+                        <div className='col-md-6 probootstrap-animate'>
                             <div className='probootstrap-box'>
                                 <div className='icon text-center'><i className='icon-desktop' /></div>
                                 <h3>User Experience</h3>
-                                <p className='service-description'>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                <p className='service-description'>Drag and drop HTML elements on your customized page.</p>
                                 <ul className='text-left with-icon colored'>
                                     <li><i className='icon-radio-checked' /> <span>A small river named Duden</span></li>
                                     <li><i className='icon-radio-checked' /> <span>Place and supplie</span></li>
@@ -59,11 +42,11 @@ const HomeComponent = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className='col-md-4 probootstrap-animate'>
+                        <div className='col-md-6 probootstrap-animate'>
                             <div className='probootstrap-box'>
                                 <div className='icon text-center'><i className='icon-lightbulb' /></div>
                                 <h3>Product Strategy</h3>
-                                <p className='service-description'>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                <p className='service-description'>We want to provide a solution for how to easy create a website.</p>
                                 <ul className='text-left with-icon colored'>
                                     <li><i className='icon-radio-checked' /> <span>A small river named Duden</span></li>
                                     <li><i className='icon-radio-checked' /> <span>Place and supplie</span></li>
