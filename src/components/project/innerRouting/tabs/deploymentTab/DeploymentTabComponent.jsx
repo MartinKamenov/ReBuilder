@@ -82,7 +82,6 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
 
     return (
         <div className='center-container'>
-            <h3>Deployment status</h3>
             <ProgressBarComponent progress={progress}/>
             <div className='deployment-messages-container'>
                 {deploymentMessages.map((message, i) => (

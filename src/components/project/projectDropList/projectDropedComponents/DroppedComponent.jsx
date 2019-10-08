@@ -37,7 +37,7 @@ const getComponent = (
             </h1>);
         break;
     case componentTypes.Input:
-            component = (
+        component = (
             <input 
                 key={droppedComponent.index}
                 style={elementStyle}
@@ -47,8 +47,8 @@ const getComponent = (
                     handleChangeEditMode(droppedComponent.index);
                 }}>
             </input>
-            );
-            break;
+        );
+        break;
     case componentTypes.Text:
         component = (
             <div
