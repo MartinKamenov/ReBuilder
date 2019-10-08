@@ -85,7 +85,7 @@ class UserComponent extends Component {
                             className='user-component-user-image'
                             alt='User'
                             src={this.state.imageUrl}/>
-                        <div class="user-image-overlay">
+                        <div className="user-image-overlay">
                             Upload new image
                         </div>
                     </div>
