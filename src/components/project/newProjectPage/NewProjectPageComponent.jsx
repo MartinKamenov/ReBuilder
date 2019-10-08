@@ -86,24 +86,26 @@ class NewProjectPageComponent extends Component {
 
         return (
             <div className='center-container' onKeyDown={(event) => this.handleEnterPressed(event.key)}>
-                <img
-                    className='new-project-image'
-                    alt='Project'
-                    src={this.state.imageUrl}/>
-                <input
-                    id='change-element-image'
-                    className='change-element-image'
-                    type='file'
-                    placeholder='Add url here'
-                    onChange={this.changeImage}/>
-                <ButtonComponent
+                <div
                     onClick={(event) => {
                         const element = document.getElementById('change-element-image');
                         element.click(event);
-                    }
-                    }
-                    type='success'
-                    title='Upload image'/>
+                    }}
+                    className='project-image-container'>
+                    <img
+                        className='project-component-project-image'
+                        alt='Project'
+                        src={this.state.imageUrl}/>
+                    <div className="project-image-overlay">
+                        Upload new image
+                    </div>
+                    <input
+                        id='change-element-image'
+                        className='change-element-image'
+                        onChange={this.changeImage}
+                        type='file'
+                        accept='image/*'/>
+                </div>
                 <div>
                     <label className='project-page-label'>Project name</label>
                     <input
