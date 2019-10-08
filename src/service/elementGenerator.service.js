@@ -28,7 +28,7 @@ const getElement = (component) => {
         );
     case componentTypes.Input:
         return ( 
-            `<input className='element-center' style={${JSON.stringify(copyOfStyle)}}/>`
+            `<input className='element-center' placeholder='${component.placeholder}' style={${JSON.stringify(copyOfStyle)}}/>`
         );
     case componentTypes.Image:
         return ( 
