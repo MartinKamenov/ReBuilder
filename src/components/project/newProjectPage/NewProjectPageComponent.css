@@ -53,9 +53,9 @@
     font-size: 13px;
     transition: .3s ease;
     background-color: #00000088;
+    color: white;
 }
 
 .project-image-container:hover .project-image-overlay {
     opacity: 1;
-    color: white;
 }
