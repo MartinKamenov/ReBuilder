@@ -83,14 +83,14 @@ const componentObjects = [
     {
         name: 'Input',
         title: 'Input',
-        placeholder: 'Input',
+        placeholder: 'Placeholder',
         style: {
             color: '#000000',
             backgroundColor: '#ffffff',
             fontSize: '16px',
             height: '30px',
             lineHeight: '30px',
-            width: '100%',
+            width: '200px',
             textAlign: 'center',
             textAlignValues,
             fontWeight: 'normal',

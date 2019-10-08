@@ -109,7 +109,9 @@ class EditProjectComponent extends Component {
             .find((draggableComponent) => draggableComponent.name === event.component);
         const componentElement = Object.assign({}, foundElement);
         const droppedComponents = this.state.droppedComponents;
-        componentElement.innerText = componentElement.name;
+        if (componentElement.name !== componentTypes.Input) {
+            componentElement.innerText = componentElement.name;
+        }
         
         componentElement.isInEditMode = false;
         componentElement.index = uuid.v1();
