@@ -36,6 +36,19 @@ const getComponent = (
                 {droppedComponent.innerText}
             </h1>);
         break;
+    case componentTypes.Input:
+            component = (
+            <input 
+                key={droppedComponent.index}
+                style={elementStyle}
+                placeholder={droppedComponent.placeholder}
+                onClick={(event) => {
+                    event.stopPropagation();
+                    handleChangeEditMode(droppedComponent.index);
+                }}>
+            </input>
+            );
+            break;
     case componentTypes.Text:
         component = (
             <div
@@ -227,6 +240,15 @@ const DroppedComponent = ({
                                         src={droppedComponent.src}
                                         style={copyOfStyle}
                                         className='edit-input'/>
+                                );
+                                break;
+                            case componentTypes.Input:
+                                element = (
+                                    <input 
+                                        key={droppedComponent.index}
+                                        style={copyOfStyle}
+                                        placeholder={droppedComponent.placeholder}>
+                                    </input>
                                 );
                                 break;
                             case componentTypes.Container:
