@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import apiService from '../service/api.service';
-import { error as toastError } from 'react-toastify-redux';
+import { error as toastError, success as toastSuccess } from 'react-toastify-redux';
 import { createError } from './errorActions';
 
 export function login(username, password) {
@@ -13,6 +13,7 @@ export function login(username, password) {
                 return dispatch(createError(res.data));
             }
             user.token = res.data.token;
+            dispatch(toastSuccess('Successfull login'));
             return dispatch(loginSuccess(user));
         } catch(error) {
             dispatch(toastError(error.message));
@@ -21,12 +22,15 @@ export function login(username, password) {
     };
 }
 
-export function loginByToken(token) {
+export function loginByToken(token, message) {
     return async function(dispatch) {
         try {
             const res = await apiService.loginByToken(token);
             const user = res.data;
             user.token = token;
+            if(message) {
+                dispatch(toastSuccess(message));
+            }
             return dispatch(loginSuccess(user));
         } catch(error) {
             dispatch(toastError(error.message));
@@ -73,6 +77,7 @@ export function register(username, password, email, imageUrl) {
                 return dispatch(createError(res.data));
             }
             user.token = res.data.token;
+            dispatch(toastSuccess('Successfull registation'));
             return dispatch(loginSuccess(user));
         } catch(error) {
             dispatch(toastError(error.message));

@@ -63,7 +63,7 @@ class UserComponent extends Component {
 
         await apiService.updateUser(userInformation, token);
 
-        this.props.actions.loginByToken(token);
+        this.props.actions.loginByToken(token, 'Updated successfully');
     }
 
     render() {
