@@ -9,6 +9,7 @@ import './UserComponent.css';
 import ButtonComponent from '../common/ButtonComponent';
 import apiService from '../../service/api.service';
 import LoadingComponent from '../common/LoadingComponent';
+import successMessages from '../../constants/successMessages';
 
 class UserComponent extends Component {
     state = {
@@ -63,7 +64,7 @@ class UserComponent extends Component {
 
         await apiService.updateUser(userInformation, token);
 
-        this.props.actions.loginByToken(token, 'Updated successfully');
+        this.props.actions.loginByToken(token, successMessages.PROFILE_SAVED);
     }
 
     render() {

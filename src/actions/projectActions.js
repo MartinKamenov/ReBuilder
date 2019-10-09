@@ -2,6 +2,7 @@ import * as types from './actionTypes';
 import apiService from '../service/api.service';
 import { error as toastError, success as toastSuccess } from 'react-toastify-redux';
 import { createError } from './errorActions';
+import successMessages from '../constants/successMessages';
 
 export function createProject(projectName, projectUrl, token, project) {
     return async function(dispatch) {
@@ -9,7 +10,7 @@ export function createProject(projectName, projectUrl, token, project) {
             const res = await apiService
                 .createProject(projectName, projectUrl, token, project);
             const savedProject = res.data;
-            dispatch(toastSuccess('Project was created'));
+            dispatch(toastSuccess(successMessages.PROJECT_CREATED));
             return dispatch(selectProjectSuccess(savedProject));
         } catch(error) {
             dispatch(toastError(error.message));
@@ -24,7 +25,7 @@ export function updateProject(projectId, pages, token) {
             let res;
             if(pages) {
                 await apiService.updateProject(projectId, pages, token);
-                dispatch(toastSuccess('Project was saved'));
+                dispatch(toastSuccess(successMessages.PROJECT_SAVED));
             } else {
                 res = await apiService.getProject(projectId, token);
                 const project = res.data;
