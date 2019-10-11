@@ -22,32 +22,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
         createdConnection.onmessage = addDeploymentMessage;
     }, [id]);
 
-    const addDeploymentMessage = (evt) => {
-        const data = evt.data;
-        const message = JSON.parse(data);
-
-        if(message.url) {
-            setTimeout(() => {
-                const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
-                if(percentage >= 100) {
-                    setDeploymentStarted(false);
-                }
-                setDeploymentMessages((prev) => {
-                    const arr = [...prev];
-                    arr.push(message);
-                    const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
-                    if(percentage >= 100) {
-                        setDeploymentStarted(false);
-                    }
-                    setProgress(percentage);
-                    return arr;
-                });
-                setProgress(percentage);
-                openWebsite(message.url);
-            }, 20000);
-            return;
-        }
-
+    const deploymentCallback = (message) => {
         setDeploymentMessages((prev) => {
             const arr = [...prev];
             arr.push(message);
@@ -58,6 +33,26 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
             setProgress(percentage);
             return arr;
         });
+    };
+
+    const addDeploymentMessage = async(evt) => {
+        const data = evt.data;
+        const message = JSON.parse(data);
+        const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
+
+        if(message.url) {
+            setTimeout(() => {
+                if(percentage >= 100) {
+                    setDeploymentStarted(false);
+                }
+                deploymentCallback(message);
+                setProgress(percentage);
+                openWebsite(message.url);
+            }, 20000);
+            return;
+        }
+
+        deploymentCallback(message);
     };
 
     const visualizeDeploymentInformation = () => {
