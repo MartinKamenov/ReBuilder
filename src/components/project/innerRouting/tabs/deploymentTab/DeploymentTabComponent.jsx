@@ -33,15 +33,15 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
             setProgress(percentage);
             return arr;
         });
-    } 
+    };
 
-    const addDeploymentMessage = (evt) => {
+    const addDeploymentMessage = async(evt) => {
         const data = evt.data;
         const message = JSON.parse(data);
+        const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
 
         if(message.url) {
             setTimeout(() => {
-                const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
                 if(percentage >= 100) {
                     setDeploymentStarted(false);
                 }
