@@ -413,7 +413,7 @@ class EditProjectComponent extends Component {
             .find((draggableComponent) => draggableComponent.name === event.component);
         foundElement.index = uuid.v1();
         const droppedComponent = Object.assign({}, foundElement);
-        const droppedComponents = [...this.state.droppedComponents];
+        const droppedComponents = JSON.parse(JSON.stringify(this.state.droppedComponents));
         const containerIndex = droppedComponents.findIndex((c) => c.index === index);
         const container = Object.assign({}, droppedComponents[containerIndex]);
 
