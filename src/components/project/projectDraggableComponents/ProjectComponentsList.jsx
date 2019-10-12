@@ -6,9 +6,7 @@ import './ProjectComponentsList.css';
 const ProjectComponentsList = ({ draggableComponents, active }) => {
     return (
         <div 
-            className=
-                {`component-list-container${active ? '' : '-inactive'} vertical-scrollable-container`}>
-            <h3 className='draggable-container-header'>Draggable element</h3>
+            className='component-list-container'>
             {
                 draggableComponents.map((component, i) => 
                     <DraggableComponent key={i} draggableComponent={component}/>
