@@ -1,5 +1,5 @@
 .toolbar-container {
-    display: block;
+    display: inline-block;
     right: 8px;
     background-color: #aaaaaaaa;
     position: absolute;

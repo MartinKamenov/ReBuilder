@@ -2,18 +2,13 @@
     width: 80%;
     text-align: center;
     margin: auto;
-    padding: 5px;
+    min-height: 50px;
 }
 
 .new-project-name-inner-container {
     width: 100%;
     text-align: center;
     margin: auto;
-}
-
-.generate-project-btn-container {
-    float: center;
-    height: 100px;
 }
 
 .project-action-btn {
