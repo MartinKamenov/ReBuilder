@@ -25,7 +25,7 @@ const DraggableComponent = ({draggableComponent}) => {
                 marginRight: '2px',
                 borderRadius: '50%'
             }}
-            title={draggableComponent.name}>
+            title={`${draggableComponent.name}\n${draggableComponent.description}`}>
             <div className='draggable-element'>
                 {(() => {
                     let icon = <FontAwesomeIcon icon={faFont} />;

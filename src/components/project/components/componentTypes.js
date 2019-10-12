@@ -7,6 +7,7 @@ const componentObjects = [
         name: 'Header',
         title: 'Header',
         innerText: 'Header',
+        description: 'Add header to your page',
         style: {
             color: '#000000',
             backgroundColor: '#ffffff',
@@ -34,6 +35,7 @@ const componentObjects = [
         name: 'Text',
         title: 'Text',
         innerText: 'Text',
+        description: 'You can change the text\nby changing the inner text attribute',
         style: {
             color: '#000000',
             backgroundColor: '#ffffff',
@@ -62,6 +64,7 @@ const componentObjects = [
         title: 'Grid',
         rows: 3,
         columns: 1,
+        description: 'Allows you to create a container\nwhere you can drop other elements and\naligning them in rows and columns',
         style: {
             color: '#000000',
             backgroundColor: '#ffffff',
@@ -84,6 +87,7 @@ const componentObjects = [
         name: 'Input',
         title: 'Input',
         placeholder: 'Placeholder',
+        description: 'Add an input element to your page',
         style: {
             color: '#000000',
             backgroundColor: '#ffffff',
@@ -111,6 +115,7 @@ const componentObjects = [
         name: 'Image',
         title: 'Image',
         src: 'https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+        description: 'Add an image and\nchange the default picture by uploading your own',
         style: {
             height: '400px',
             lineHeight: '400px',
@@ -133,6 +138,7 @@ const componentObjects = [
         innerText: 'Link',
         to: '',
         toValues: [],
+        description: 'Add a link to another page\nthat you have already created',
         style: {
             color: '#000000',
             backgroundColor: '#ffffff',
@@ -161,6 +167,7 @@ const componentObjects = [
         name: 'Container',
         title: 'Container',
         children: [],
+        description: 'Allows you to create a container\nwhere you can drop other elements',
         style: {
             color: '#000000',
             backgroundColor: '#ffffff',
@@ -189,6 +196,7 @@ const componentObjects = [
     {
         name: 'NavigationBar',
         title: 'Navigation bar',
+        description: 'Add a default navigation bar\nwhich you can later customize',
         children: [
             {
                 name: 'RoutingLink',
