@@ -2,8 +2,8 @@
     height: 40px;
     border: 1px solid white;
     color: white;
+    cursor: pointer;
 }
-
 .custom-buttom-rounded {
     border-radius: 10px;
 }
