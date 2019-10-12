@@ -17,7 +17,15 @@ import { componentTypes } from '../components/componentTypes';
 
 const DraggableComponent = ({draggableComponent}) => {
     return (
-        <Draggable type="component" data={draggableComponent.name} style={{ display: 'inline-block' }}>
+        <Draggable type="component"
+            data={draggableComponent.name}
+            style={{
+                display: 'inline-block',
+                marginLeft: '2px',
+                marginRight: '2px',
+                borderRadius: '50%'
+            }}
+            title={draggableComponent.name}>
             <div className='draggable-element'>
                 {(() => {
                     let icon = <FontAwesomeIcon icon={faFont} />;

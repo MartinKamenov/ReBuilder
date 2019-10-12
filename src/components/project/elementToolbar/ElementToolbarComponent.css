@@ -5,7 +5,7 @@
     position: absolute;
     border: 1px solid black;
     width: 20%;
-    height: calc(100vh - 192px);
+    height: calc(100vh - 122px);
     text-align: center;
     flex-direction: column;
 }

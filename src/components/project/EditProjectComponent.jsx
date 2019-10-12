@@ -431,29 +431,31 @@ class EditProjectComponent extends Component {
                     returnFunctionText='Back to pages'
                     handleSaveProject={this.handleSaveProject}
                     generateProject={this.generateProject}/>
-                <div className="drag-drop-container">
-                    <ProjectComponentsList
-                        draggableComponents={this.state.draggableComponents}/>
-                    <ProjectPageComponent
-                        componentInEditMode={componentInEditMode ? true : false}
-                        handleComponentValueChange={this.handleComponentValueChange}
-                        handleChangeEditMode={this.handleChangeEditMode}
-                        handleForceExitEditMode={this.handleForceExitEditMode}
-                        droppedComponents={this.state.droppedComponents}
-                        handleDropComponent={this.handleDropComponent}
-                        componentDragStart={this.componentDragStart}
-                        componentDragEnd={this.componentDragEnd}
-                        handleDropContainerComponent={this.handleDropContainerComponent}
-                        rearangeComponents={this.rearangeComponents}/>
-                    <ElementToolbarComponent
-                        actions={{
-                            handleChangeEditMode: this.handleChangeEditMode,
-                            handleForceExitEditMode: this.handleForceExitEditMode,
-                            handleDeleteComponent: this.handleDeleteComponent
-                        }}
-                        component={componentInEditMode}
-                        handleComponentValueChange={this.handleComponentValueChange}
-                        handleComponentImageChange={this.handleComponentImageChange}/>
+                <div style={{ width: '100%' }}>
+                    <div className="drag-drop-container">
+                        <ProjectComponentsList
+                            draggableComponents={this.state.draggableComponents}/>
+                        <ProjectPageComponent
+                            componentInEditMode={componentInEditMode ? true : false}
+                            handleComponentValueChange={this.handleComponentValueChange}
+                            handleChangeEditMode={this.handleChangeEditMode}
+                            handleForceExitEditMode={this.handleForceExitEditMode}
+                            droppedComponents={this.state.droppedComponents}
+                            handleDropComponent={this.handleDropComponent}
+                            componentDragStart={this.componentDragStart}
+                            componentDragEnd={this.componentDragEnd}
+                            handleDropContainerComponent={this.handleDropContainerComponent}
+                            rearangeComponents={this.rearangeComponents}/>
+                        <ElementToolbarComponent
+                            actions={{
+                                handleChangeEditMode: this.handleChangeEditMode,
+                                handleForceExitEditMode: this.handleForceExitEditMode,
+                                handleDeleteComponent: this.handleDeleteComponent
+                            }}
+                            component={componentInEditMode}
+                            handleComponentValueChange={this.handleComponentValueChange}
+                            handleComponentImageChange={this.handleComponentImageChange}/>
+                    </div>
                 </div>
             </div>
         );
