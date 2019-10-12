@@ -135,14 +135,15 @@ class EditProjectComponent extends Component {
     }
     handleChangeEditMode = (index) => {
         const droppedComponents = [...this.state.droppedComponents];
-
+        // Check if it is a parent or a child that is being updated 
         let foundComponentIndex = droppedComponents.findIndex(c => c.index === index);
-        // Update children
+        //  It is a child , update children
         if(foundComponentIndex === -1) {
             let childIndex = -1;
             const componentIndex = droppedComponents
                 .findIndex(c => {
-                    const cIndex = c.children.findIndex(child => child.index === index);
+                    //check if a parent has children before updating them
+                    const cIndex = c.children? c.children.findIndex(child => child.index === index) : -1;
                     if(cIndex !== -1) {
                         childIndex = cIndex;
                         return true;
@@ -161,7 +162,7 @@ class EditProjectComponent extends Component {
                 droppedComponents[componentIndex] = component;
             }
         } 
-        // Update component which is in main array of components
+        // Update a parent component which is in the main array of components
         else {
             const component = Object.assign({}, droppedComponents[foundComponentIndex]);
             component.isInEditMode = 
