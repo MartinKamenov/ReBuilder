@@ -31,7 +31,6 @@ class EditProjectComponent extends Component {
         swapDate: new Date(),
         isInitialyLoaded: true,
         isLoading: true,
-        dragContainerActive: false,
         saveStatus: SaveStatus.Saved
     }
 
@@ -109,9 +108,6 @@ class EditProjectComponent extends Component {
             .find((draggableComponent) => draggableComponent.name === event.component);
         const componentElement = Object.assign({}, foundElement);
         const droppedComponents = this.state.droppedComponents;
-        if (componentElement.name !== componentTypes.Input) {
-            componentElement.innerText = componentElement.name;
-        }
         
         componentElement.isInEditMode = false;
         componentElement.index = uuid.v1();
@@ -173,10 +169,6 @@ class EditProjectComponent extends Component {
                     component.isInEditMode = false;
                 }
             });
-            
-            if(droppedComponents[foundComponentIndex].isInEditMode) {
-                this.setState({ dragContainerActive: false });
-            }
 
             if(component.isInEditMode) {
                 this.setState({ previousComponent: this.getComponentFromIndex(index) });
@@ -434,19 +426,6 @@ class EditProjectComponent extends Component {
                 <h1 className='project-name-header'>
                     {this.props.project.name} <SaveStatusComponent saveStatus={this.state.saveStatus}/>
                 </h1>
-                <button 
-                    className='draggable-container-btn' 
-                    onClick={() => {
-                        if(componentInEditMode) {
-                            return;
-                        }
-
-                        this.setState({
-                            dragContainerActive: !this.state.dragContainerActive
-                        });}
-                    }>
-                    {this.state.dragContainerActive ? 'Hide': 'Show'}
-                </button>
                 <ProjectActionButtonsComponent
                     returnFunction={this.returnToRouting}
                     returnFunctionText='Back to pages'
@@ -454,7 +433,6 @@ class EditProjectComponent extends Component {
                     generateProject={this.generateProject}/>
                 <div className="drag-drop-container">
                     <ProjectComponentsList
-                        active={this.state.dragContainerActive}
                         draggableComponents={this.state.draggableComponents}/>
                     <ProjectPageComponent
                         componentInEditMode={componentInEditMode ? true : false}
