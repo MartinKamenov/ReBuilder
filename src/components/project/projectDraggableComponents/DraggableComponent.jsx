@@ -10,7 +10,8 @@ import {
     faItalic,
     faLink,
     faBox,
-    faRoute
+    faRoute,
+    faImage
 } from '@fortawesome/free-solid-svg-icons';
 
 import { componentTypes } from '../components/componentTypes';
@@ -35,6 +36,9 @@ const DraggableComponent = ({draggableComponent}) => {
                         break;
                     case componentTypes.Text:
                         icon = <FontAwesomeIcon icon={faFont} />;
+                        break;
+                    case componentTypes.Image:
+                        icon = <FontAwesomeIcon icon={faImage} />;
                         break;
                     case componentTypes.Grid:
                         icon = <FontAwesomeIcon icon={faBorderAll} />;
