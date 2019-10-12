@@ -13,6 +13,7 @@
 }
 
 .droped-components-container-edit-mode {
+    display: inline-block;
     width: 80%;
     height: 100%;
     margin-right: auto;
