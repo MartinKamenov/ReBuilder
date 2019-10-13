@@ -32,7 +32,7 @@ const pagingService = {
     },
 
     getTotalPagesCount: (collection) => {
-        return Math.floor(collection.length / elementsOnPage);
+        return Math.ceil(collection.length / elementsOnPage);
     },
 
     fillInArray: function(start, end) {
