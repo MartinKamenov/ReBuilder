@@ -6,6 +6,7 @@ import UserProjectsListComponent from './user-projects/UserProjectsListComponent
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PagingComponent from '../common/PagingComponent';
+import pagingService from '../../service/paging.service';
 
 class DashboardComponent extends Component {
     render() {
@@ -42,8 +43,11 @@ class DashboardComponent extends Component {
                         </Link>
                     </div>
                 </nav>
-                <UserProjectsListComponent projects={this.props.user.projects}/>
-                <PagingComponent page={1} pagesNumbers={[ 1, 2, 3 ]}/>
+                <UserProjectsListComponent 
+                    projects={pagingService
+                        .getCollectionByPage(this.props.user.projects, 1)}/>
+                <PagingComponent page={1}
+                    pagesNumbers={pagingService.getPagesNumbers(this.props.user.projects, 1)}/>
             </div>
         );
     }
