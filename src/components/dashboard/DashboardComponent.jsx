@@ -18,6 +18,10 @@ class DashboardComponent extends Component {
         const page = parseInt(queryObject.page, 10);
         this.setState({ page: page || 1 });
     }
+
+    changePage = (page) => {
+        this.setState({ page });
+    }
     render() {
         if (!this.props.user.id) {
             return (
@@ -58,7 +62,8 @@ class DashboardComponent extends Component {
                 <PagingComponent
                     page={this.state.page}
                     pagesNumbers={pagingService.getPagesNumbers(this.props.user.projects, this.state.page)}
-                    totalPagesCount={pagingService.getTotalPagesCount(this.props.user.projects)}/>
+                    totalPagesCount={pagingService.getTotalPagesCount(this.props.user.projects)}
+                    changePage={this.changePage}/>
             </div>
         );
     }
