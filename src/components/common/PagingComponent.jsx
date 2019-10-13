@@ -2,30 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './PagingComponent.css';
+import { Link } from 'react-router-dom';
 
 const PagingComponent = ({ page, pagesNumbers, totalPagesCount }) => {
     return (
         <div className='container'>
             <div className='paging-container'>
-                <div
-                    className='paging-element'
-                    key='first'>
-                    {'<<'}
-                </div>
+                <a href='/dashboard/1'>
+                    <div
+                        className='paging-element'
+                        key='first'>
+                        {'<<'}
+                    </div>
+                </a>
                 {
                     pagesNumbers.map(number => (
-                        <div
-                            className='paging-element'
-                            key={number}>
-                            {number}
-                        </div>
+                        <a href={`/dashboard/${number}`}>
+                            <div
+                                className='paging-element'
+                                key={number}>
+                                {number}
+                            </div>
+                        </a>
                     ))
                 }
-                <div
-                    className='paging-element'
-                    key='last'>
-                    {'>>'}
-                </div>
+                <a href={`/dashboard/${totalPagesCount}`}>
+                    <div
+                        className='paging-element'
+                        key='last'>
+                        {'>>'}
+                    </div>
+                </a>
             </div>
         </div>
     );
@@ -33,7 +40,8 @@ const PagingComponent = ({ page, pagesNumbers, totalPagesCount }) => {
 
 PagingComponent.propTypes = {
     page: PropTypes.number.isRequired,
-    pagesNumbers: PropTypes.array.isRequired
+    pagesNumbers: PropTypes.array.isRequired,
+    totalPagesCount: PropTypes.number.isRequired
 };
  
 export default PagingComponent;

@@ -5,11 +5,22 @@
 
 .paging-element {
     display: inline-block;
-    border: 1px solid black;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    border-radius: 4px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 2px;
+    margin-right: 2px;
     font-weight: bold;
+    background-color: white;
+    color: #4A3E9D;
+    border: 1px solid #4A3E9D;
+    cursor: pointer;
+}
 
+.paging-element:hover {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
+    background-color: #4A3E9D;
+    color: white;
 }

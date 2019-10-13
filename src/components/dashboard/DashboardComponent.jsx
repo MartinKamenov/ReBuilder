@@ -9,6 +9,13 @@ import PagingComponent from '../common/PagingComponent';
 import pagingService from '../../service/paging.service';
 
 class DashboardComponent extends Component {
+    state = {
+        page: 1
+    }
+    componentDidMount() {
+        const page = parseInt(this.props.match.params.page, 10);
+        this.setState({ page: page || 1 });
+    }
     render() {
         if (!this.props.user.id) {
             return (
@@ -43,11 +50,13 @@ class DashboardComponent extends Component {
                         </Link>
                     </div>
                 </nav>
-                <UserProjectsListComponent 
+                <UserProjectsListComponent
                     projects={pagingService
-                        .getCollectionByPage(this.props.user.projects, 1)}/>
-                <PagingComponent page={1}
-                    pagesNumbers={pagingService.getPagesNumbers(new Array(25), 4)}/>
+                        .getCollectionByPage(this.props.user.projects, this.state.page)}/>
+                <PagingComponent
+                    page={this.state.page}
+                    pagesNumbers={pagingService.getPagesNumbers(this.props.user.projects, this.state.page)}
+                    totalPagesCount={pagingService.getTotalPagesCount(this.props.user.projects)}/>
             </div>
         );
     }
