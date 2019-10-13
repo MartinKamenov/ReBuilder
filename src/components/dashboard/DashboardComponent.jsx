@@ -7,13 +7,15 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PagingComponent from '../common/PagingComponent';
 import pagingService from '../../service/paging.service';
+import queryString from 'query-string';
 
 class DashboardComponent extends Component {
     state = {
         page: 1
     }
     componentDidMount() {
-        const page = parseInt(this.props.match.params.page, 10);
+        let queryObject = queryString.parse(this.props.location.search);
+        const page = parseInt(queryObject.page, 10);
         this.setState({ page: page || 1 });
     }
     render() {

@@ -53,8 +53,7 @@ class AppRouterComponent extends Component {
                             <Route exact path="/services" component={ServicesComponent} />
                             <div className='navbar-container-margin'>
                                 <div className='main-container'>
-                                    <Route exact path="/dashboard/:page" component={DashboardComponent} />
-                                    <Route exact path="/dashboard" component={DashboardComponent} />
+                                    <Route path="/dashboard" component={DashboardComponent} />
                                     <Route exact path="/login" component={LoginComponent} />
                                     <Route exact path="/register" component={RegisterComponent} />
                                     <Route exact path="/projects/:id" component={InnerRoutingComponent} />
