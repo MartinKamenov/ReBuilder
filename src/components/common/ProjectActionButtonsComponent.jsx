@@ -15,31 +15,27 @@ const ProjectActionButtonsComponent = ({
 }) => {
     return (
         <div className='new-project-name-outer-container'>
-            <div className='new-project-name-inner-container'>
-                <div className='generate-project-btn-container'>
-                    <ButtonComponent
-                        type='theme'
-                        className='col-md-4 col-sm-4 col-xs-12 project-action-btn'
-                        onClick={returnFunction}>
-                        <FontAwesomeIcon icon={faArrowLeft} /> 
-                        <span className='new-project-btn-text'>{returnFunctionText}</span>
-                    </ButtonComponent>
-                    <ButtonComponent
-                        type='theme'
-                        className='col-md-4 col-sm-4 col-xs-12 project-action-btn'
-                        onClick={handleSaveProject}>
-                        <FontAwesomeIcon icon={faSave} /> 
-                        <span className='new-project-btn-text'>Save project</span>
-                    </ButtonComponent>
-                    <ButtonComponent
-                        type='theme'
-                        className='col-md-4 col-sm-4 col-xs-12 project-action-btn'
-                        onClick={generateProject}>
-                        <FontAwesomeIcon icon={faDownload} />
-                        <span className='new-project-btn-text'>Generate project</span>
-                    </ButtonComponent>
-                </div>
-            </div>
+            <ButtonComponent
+                type='theme'
+                className='col-md-4 col-sm-4 col-xs-12 project-action-btn'
+                onClick={returnFunction}>
+                <FontAwesomeIcon icon={faArrowLeft} /> 
+                <span className='new-project-btn-text'>{returnFunctionText}</span>
+            </ButtonComponent>
+            <ButtonComponent
+                type='theme'
+                className='col-md-4 col-sm-4 col-xs-12 project-action-btn'
+                onClick={handleSaveProject}>
+                <FontAwesomeIcon icon={faSave} /> 
+                <span className='new-project-btn-text'>Save project</span>
+            </ButtonComponent>
+            <ButtonComponent
+                type='theme'
+                className='col-md-4 col-sm-4 col-xs-12 project-action-btn'
+                onClick={generateProject}>
+                <FontAwesomeIcon icon={faDownload} />
+                <span className='new-project-btn-text'>Generate project</span>
+            </ButtonComponent>
         </div>
     );
 };

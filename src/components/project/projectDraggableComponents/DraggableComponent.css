@@ -1,11 +1,21 @@
 .draggable-element {
-    display: flex;
-    max-width: 200px;
+    width: 50px;
     height: 50px;
+    line-height: 50px;
     margin: auto;
     text-align: center;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
-    border-radius: 10px;
+    border: 1px solid white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.draggable-element:hover {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
+    background-color: white;
+    color: #4A3E9D;
+    border: 1px solid #4A3E9D;
 }
