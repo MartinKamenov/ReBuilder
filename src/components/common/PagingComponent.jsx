@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './PagingComponent.css';
-import { Link } from 'react-router-dom';
 
 const PagingComponent = ({ page, pagesNumbers, totalPagesCount }) => {
     return (
         <div className='container'>
             <div className='paging-container'>
-                <a href='/dashboard/1'>
+                <a href='/dashboard?page=1'>
                     <div
                         className='paging-element'
                         key='first'>
@@ -17,16 +16,16 @@ const PagingComponent = ({ page, pagesNumbers, totalPagesCount }) => {
                 </a>
                 {
                     pagesNumbers.map(number => (
-                        <a href={`/dashboard/${number}`}>
+                        <a href={`/dashboard?page=${number}`}>
                             <div
-                                className='paging-element'
+                                className={`paging-element ${((number === page) ? ' active-page': '')}`}
                                 key={number}>
                                 {number}
                             </div>
                         </a>
                     ))
                 }
-                <a href={`/dashboard/${totalPagesCount}`}>
+                <a href={`/dashboard?page=${totalPagesCount}`}>
                     <div
                         className='paging-element'
                         key='last'>

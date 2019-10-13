@@ -18,6 +18,11 @@
     cursor: pointer;
 }
 
+.active-page { 
+    background-color: #563C77;
+    color: white;
+}
+
 .paging-element:hover {
     transition: all .8s ease;
     -webkit-transition: all .8s ease;
