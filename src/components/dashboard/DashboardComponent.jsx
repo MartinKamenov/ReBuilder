@@ -5,6 +5,7 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import UserProjectsListComponent from './user-projects/UserProjectsListComponent';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PagingComponent from '../common/PagingComponent';
 
 class DashboardComponent extends Component {
     render() {
@@ -42,6 +43,7 @@ class DashboardComponent extends Component {
                     </div>
                 </nav>
                 <UserProjectsListComponent projects={this.props.user.projects}/>
+                <PagingComponent page={1} pagesNumbers={[ 1, 2, 3 ]}/>
             </div>
         );
     }
