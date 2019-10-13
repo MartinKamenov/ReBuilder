@@ -12,7 +12,6 @@ const pagingService = {
     },
 
     getPagesNumbers: function(collection, page) {
-        debugger;
         const totalCountOfPages = Math.ceil(collection.length / elementsOnPage);
         page = parseInt(page, 10);
         let result = [];

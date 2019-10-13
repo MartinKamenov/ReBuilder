@@ -36,7 +36,7 @@ const PagingComponent = ({ page, pagesNumbers, totalPagesCount }) => {
             </div>
         </div>
     );
-}
+};
 
 PagingComponent.propTypes = {
     page: PropTypes.number.isRequired,
