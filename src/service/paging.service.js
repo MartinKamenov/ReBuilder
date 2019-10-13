@@ -11,34 +11,38 @@ const pagingService = {
         return collection.slice((page - 1) * elementsOnPage, page * elementsOnPage);
     },
 
-    getPagesNumbers: (collection, page) => {
-        const totalCountOfPages = Math.floor(collection / elementsOnPage);
+    getPagesNumbers: function(collection, page) {
+        debugger;
+        const totalCountOfPages = Math.ceil(collection.length / elementsOnPage);
         page = parseInt(page, 10);
+        let result = [];
 
-        if(page < Math.floor(totalCountOfPages / 2) || totalCountOfPages <= pagesMinimalCount) {
-            return new Array(totalCountOfPages);
+        if(page <= Math.ceil(pagesMinimalCount / 2) || totalCountOfPages <= pagesMinimalCount) {
+            const lastPage = Math.min(pagesMinimalCount, totalCountOfPages);
+            result = this.fillInArray(1, lastPage);
+            return result;
         }
 
-        let result = [];
-        if(page >= totalCountOfPages - parseInt(totalCountOfPages / 2, 10)) {
-            for(let i = totalCountOfPages - pagesMinimalCount; i <= totalCountOfPages; i++) {
-                result.push(i);
-            }
+        if(page >= (totalCountOfPages - parseInt(pagesMinimalCount / 2, 10))) {
+            result = this.fillInArray(totalCountOfPages + 1 - pagesMinimalCount, totalCountOfPages);
 
             return result;
         }
 
-        result.push(page);
-        for(let i = 1; i < Math.floor(pagesMinimalCount / 2); i++) {
-            result.push(page + 1);
-            result.push(page - 1);
-        }
-
-        return result.sort();
+        return this.fillInArray(page - parseInt(pagesMinimalCount / 2, 10), page + parseInt(pagesMinimalCount / 2, 10));
     },
 
     getTotalPagesCount: (collection) => {
-        return Math.floor(collection / elementsOnPage);
+        return Math.floor(collection.length / elementsOnPage);
+    },
+
+    fillInArray: function(start, end) {
+        const result = [];
+        for(let i = start; i <= end; i++) {
+            result.push(i);
+        }
+
+        return result;
     }
 };
 

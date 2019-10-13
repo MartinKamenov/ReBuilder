@@ -47,7 +47,7 @@ class DashboardComponent extends Component {
                     projects={pagingService
                         .getCollectionByPage(this.props.user.projects, 1)}/>
                 <PagingComponent page={1}
-                    pagesNumbers={pagingService.getPagesNumbers(this.props.user.projects, 1)}/>
+                    pagesNumbers={pagingService.getPagesNumbers(new Array(25), 4)}/>
             </div>
         );
     }
