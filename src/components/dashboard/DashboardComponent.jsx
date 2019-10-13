@@ -5,8 +5,23 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import UserProjectsListComponent from './user-projects/UserProjectsListComponent';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PagingComponent from '../common/PagingComponent';
+import pagingService from '../../service/paging.service';
+import queryString from 'query-string';
 
 class DashboardComponent extends Component {
+    state = {
+        page: 1
+    }
+    componentDidMount() {
+        let queryObject = queryString.parse(this.props.location.search);
+        const page = parseInt(queryObject.page, 10);
+        this.setState({ page: page || 1 });
+    }
+
+    changePage = (page) => {
+        this.setState({ page });
+    }
     render() {
         if (!this.props.user.id) {
             return (
@@ -41,7 +56,14 @@ class DashboardComponent extends Component {
                         </Link>
                     </div>
                 </nav>
-                <UserProjectsListComponent projects={this.props.user.projects}/>
+                <UserProjectsListComponent
+                    projects={pagingService
+                        .getCollectionByPage(this.props.user.projects, this.state.page)}/>
+                <PagingComponent
+                    page={this.state.page}
+                    pagesNumbers={pagingService.getPagesNumbers(this.props.user.projects, this.state.page)}
+                    totalPagesCount={pagingService.getTotalPagesCount(this.props.user.projects)}
+                    changePage={this.changePage}/>
             </div>
         );
     }
