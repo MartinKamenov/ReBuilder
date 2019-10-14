@@ -7,8 +7,14 @@ const UserProjectComponent = ({projectDetails}) => {
     return (
         <div className="user-project">
             <Link to={ '/projects/' + projectDetails.id }>
-                <div>
-                    <img alt='Project' src={projectDetails.projectImageUrl} /> {projectDetails.name}
+                <div className='dashboard-project-component'>
+                    <img
+                        className='dashboard-project-image'
+                        alt='Project'
+                        src={projectDetails.projectImageUrl} />
+                    <div className='dashboard-project-text'>
+                        {projectDetails.name}
+                    </div>
                 </div>
             </Link>
         </div>
