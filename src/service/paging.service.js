@@ -1,4 +1,4 @@
-const elementsOnPage = 5;
+const elementsOnPage = 6;
 const pagesMinimalCount = 5;
 
 const pagingService = {
