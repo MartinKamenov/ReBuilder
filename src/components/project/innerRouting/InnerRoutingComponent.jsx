@@ -265,6 +265,11 @@ class InnerRoutingComponent extends Component {
                 key={component.index}
                 src={component.src}
                 style={style}/>);
+        case componentTypes.Input:
+            return (<input
+                placeholder={component.placeholder}
+                key={component.index}
+                style={style}/>);
         case componentTypes.Container:
             return (<div key={component.index} style={style}>{
                 component.children.map(child => this.getComponentJSX(child))
