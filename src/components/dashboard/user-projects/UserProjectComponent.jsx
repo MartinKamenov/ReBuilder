@@ -5,19 +5,19 @@ import { Link } from 'react-router-dom';
 
 const UserProjectComponent = ({projectDetails}) => {
     return (
-        <div className="user-project">
-            <Link to={ '/projects/' + projectDetails.id }>
-                <div className='dashboard-project-component'>
+        <Link className='normal-a' to={ '/projects/' + projectDetails.id }>
+            <div className='dashboard-project-component'>
+                <div className='dashboard-project-image-container'>
                     <img
                         className='dashboard-project-image'
                         alt='Project'
                         src={projectDetails.projectImageUrl} />
-                    <div className='dashboard-project-text'>
-                        {projectDetails.name}
-                    </div>
                 </div>
-            </Link>
-        </div>
+                <div className='dashboard-project-text'>
+                    {projectDetails.name}
+                </div>
+            </div>
+        </Link>
     );
 };
 
