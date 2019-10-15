@@ -6,30 +6,28 @@ import { Link } from 'react-router-dom';
 
 const PagingComponent = ({ page, pagesNumbers, totalPagesCount, changePage }) => {
     return (
-        <div className='container'>
-            <div className='paging-container'>
-                <div
-                    onClick={() => changePage(1)}
-                    className='paging-element'
-                    key='first'>
-                    {'<<'}
-                </div>
-                {
-                    pagesNumbers.map(number => (
-                        <div
-                            onClick={() => changePage(number)}
-                            className={`paging-element ${((number === page) ? ' active-page': '')}`}
-                            key={number}>
-                            {number}
-                        </div>
-                    ))
-                }
-                <div
-                    onClick={() => changePage(totalPagesCount)}
-                    className='paging-element'
-                    key='last'>
-                    {'>>'}
-                </div>
+        <div className='container paging-container'>
+            <div
+                onClick={() => changePage(1)}
+                className='paging-element'
+                key='first'>
+                {'<<'}
+            </div>
+            {
+                pagesNumbers.map(number => (
+                    <div
+                        onClick={() => changePage(number)}
+                        className={`paging-element ${((number === page) ? ' active-page': '')}`}
+                        key={number}>
+                        {number}
+                    </div>
+                ))
+            }
+            <div
+                onClick={() => changePage(totalPagesCount)}
+                className='paging-element'
+                key='last'>
+                {'>>'}
             </div>
         </div>
     );
