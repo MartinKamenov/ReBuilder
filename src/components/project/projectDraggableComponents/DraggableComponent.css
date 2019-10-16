@@ -1,4 +1,6 @@
 .draggable-element {
+    transition: border, background-color, color .8s ease;
+    -webkit-transition: border, background-color, color .8s ease;
     width: 50px;
     height: 50px;
     line-height: 50px;
@@ -7,9 +9,12 @@
     justify-content: center;
     align-items: center;
     border: 1px solid white;
+    background-color: transparent;
+    color: white;
     border-radius: 50%;
     font-weight: bold;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .draggable-element:hover {

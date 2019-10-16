@@ -83,6 +83,8 @@
 }
 
 .header-tab {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
     line-height: 50px;
     display: inline-block;
     height: 50px;

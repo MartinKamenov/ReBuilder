@@ -40,6 +40,7 @@ const getComponent = (
         component = (
             <input 
                 key={droppedComponent.index}
+                id={droppedComponent.index}
                 style={elementStyle}
                 placeholder={droppedComponent.placeholder}
                 onClick={(event) => {
