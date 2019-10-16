@@ -117,9 +117,9 @@ const componentObjects = [
         src: 'https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
         description: 'Add an image and\nchange the default picture by uploading your own',
         style: {
-            height: '400px',
+            height: '150px',
             lineHeight: '400px',
-            width: '100%',
+            width: '200px',
             textAlign: 'center',
             fontWeight: 'normal',
             fontWeightValues,

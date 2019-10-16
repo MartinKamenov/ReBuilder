@@ -9,20 +9,30 @@
 }
 
 .custom-button-success {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
     background-color: #5CB85C;
 }
 .custom-button-danger {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
     background-color: #D9534F;
 }
 .custom-button-warning {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
     background-color: #F0AD4E;
 }
 
 .custom-button-primary {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
     background-color: #337AB7;
 }
 
 .custom-button-theme {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
     background-color: white;
     color: #4A3E9D;
     border: 1px solid #4A3E9D;
