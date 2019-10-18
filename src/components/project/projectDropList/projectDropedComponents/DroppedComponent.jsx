@@ -64,6 +64,20 @@ const getComponent = (
                 {droppedComponent.innerText}
             </div>);
         break;
+    case componentTypes.Button:
+        component = (
+            <button
+                key={droppedComponent.index}
+                id={droppedComponent.index}
+                style={elementStyle}
+                onClick={(event) => {
+                    event.stopPropagation();
+                    handleChangeEditMode(droppedComponent.index);
+                }}
+                className='droped-component'>
+                {droppedComponent.innerText}
+            </button>);
+        break;
     case componentTypes.Image:
         component = (
             <img
@@ -248,8 +262,19 @@ const DroppedComponent = ({
                                     <input 
                                         key={droppedComponent.index}
                                         style={copyOfStyle}
-                                        placeholder={droppedComponent.placeholder}>
+                                        placeholder={droppedComponent.placeholder}
+                                        className='edit-input'>
                                     </input>
+                                );
+                                break;
+                            case componentTypes.Button:
+                                element = (
+                                    <button
+                                        key={droppedComponent.index}
+                                        style={copyOfStyle}
+                                        className='edit-input'>
+                                        {droppedComponent.innerText}
+                                    </button>
                                 );
                                 break;
                             case componentTypes.Container:
