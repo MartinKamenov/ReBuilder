@@ -22,6 +22,10 @@ const getElement = (component) => {
         return ( 
             `<div className='element-center' style={${JSON.stringify(copyOfStyle)}}>${component.innerText}</div>`
         );
+    case componentTypes.Text:
+        return ( 
+            `<button className='element-center' style={${JSON.stringify(copyOfStyle)}}>${component.innerText}</div>`
+        );
     case componentTypes.Grid:
         return ( 
             `<div className='element-center' style={${JSON.stringify(copyOfStyle)}}>${component.innerText}</div>`
