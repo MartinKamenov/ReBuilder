@@ -269,8 +269,8 @@ class InnerRoutingComponent extends Component {
             return (<button
                 key={component.index}
                 style={style}>
-                    {component.innerText}
-                </button>);
+                {component.innerText}
+            </button>);
         case componentTypes.Input:
             return (<input
                 placeholder={component.placeholder}

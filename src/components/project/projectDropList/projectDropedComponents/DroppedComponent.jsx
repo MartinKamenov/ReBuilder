@@ -64,7 +64,7 @@ const getComponent = (
                 {droppedComponent.innerText}
             </div>);
         break;
-    case componentTypes.Text:
+    case componentTypes.Button:
         component = (
             <button
                 key={droppedComponent.index}
