@@ -60,6 +60,34 @@ const componentObjects = [
         }
     },
     {
+        name: 'Button',
+        title: 'Button',
+        innerText: 'Button',
+        description: 'You add button component.\nFeel free to set the click function as you like',
+        style: {
+            color: '#000000',
+            backgroundColor: '#ffffff',
+            fontSize: '16px',
+            height: '30px',
+            lineHeight: '30px',
+            width: '200px',
+            textAlign: 'center',
+            textAlignValues,
+            fontWeight: 'normal',
+            fontWeightValues,
+            display: 'block',
+            displayValues,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRight: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
+        }
+    },
+    {
         name: 'Grid',
         title: 'Grid',
         rows: 3,
@@ -349,6 +377,7 @@ const componentObjects = [
 export const componentTypes = {
     Header: 'Header',
     Text: 'Text',
+    Button: 'Button',
     Grid: 'Grid',
     Input: 'Input',
     Image: 'Image',
