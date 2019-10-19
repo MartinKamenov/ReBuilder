@@ -15,13 +15,23 @@
     background: #DDDDDD;
 }
 .navbar-brand.user-image {
-    padding: 5px 5px;
+    padding: 5px 0 5px 20px;
 }
-.user-profile{
+.user-profile {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+.user-profile:hover {
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
+    background-color: #4A3E9D;
+}
+.user-profile:hover > .username-hover{
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
+    color: white; 
 }
 .vertical-centered {
     font-weight: bold;
@@ -32,6 +42,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
 }
 .vertical-centered svg {
     margin-left: 3%;
