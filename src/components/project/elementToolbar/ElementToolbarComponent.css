@@ -1,11 +1,12 @@
 .toolbar-container {
-    display: inline-block;
+    position: fixed;
+    top: calc(50vh - 250px);
+    left: 40%;
     right: 8px;
     background-color: #aaaaaaaa;
-    position: absolute;
     border: 1px solid black;
     width: 20%;
-    height: calc(100vh - 192px);
+    height: 500px;
     text-align: center;
     flex-direction: column;
 }
