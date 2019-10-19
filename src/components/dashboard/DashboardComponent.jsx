@@ -36,9 +36,9 @@ class DashboardComponent extends Component {
             <div>
                 <nav id='user-navbar'>
                     <Link
-                    className='user-profile'
-                    style={{ textDecoration: 'none' }}
-                    to={`/users/${this.props.user.id}`}>
+                        className='user-profile'
+                        style={{ textDecoration: 'none' }}
+                        to={`/users/${this.props.user.id}`}>
                         <div className='navbar-brand user-image'>
                             <img src={this.props.user.imageUrl} height='100%' alt='user avatar' />
                         </div>
