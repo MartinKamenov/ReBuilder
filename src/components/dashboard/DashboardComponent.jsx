@@ -9,7 +9,9 @@ import PagingComponent from '../common/PagingComponent';
 import pagingService from '../../service/paging.service';
 import queryString from 'query-string';
 
+const collectionByPage = 6;
 class DashboardComponent extends Component {
+
     state = {
         page: 1
     }
@@ -57,11 +59,11 @@ class DashboardComponent extends Component {
                 </nav>
                 <UserProjectsListComponent
                     projects={pagingService
-                        .getCollectionByPage(this.props.user.projects, this.state.page)}/>
+                        .getCollectionByPage(this.props.user.projects, this.state.page, collectionByPage)}/>
                 <PagingComponent
                     page={this.state.page}
-                    pagesNumbers={pagingService.getPagesNumbers(this.props.user.projects, this.state.page)}
-                    totalPagesCount={pagingService.getTotalPagesCount(this.props.user.projects)}
+                    pagesNumbers={pagingService.getPagesNumbers(this.props.user.projects, this.state.page, collectionByPage)}
+                    totalPagesCount={pagingService.getTotalPagesCount(this.props.user.projects, collectionByPage)}
                     changePage={this.changePage}/>
             </div>
         );
