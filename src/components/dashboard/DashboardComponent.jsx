@@ -35,18 +35,17 @@ class DashboardComponent extends Component {
         return ( 
             <div>
                 <nav id='user-navbar'>
-                    <button className='user-profile'>
+                    <Link
+                    className='user-profile'
+                    style={{ textDecoration: 'none' }}
+                    to={`/users/${this.props.user.id}`}>
                         <div className='navbar-brand user-image'>
                             <img src={this.props.user.imageUrl} height='100%' alt='user avatar' />
                         </div>
-                        <Link
-                            style={{ textDecoration: 'none' }}
-                            to={`/users/${this.props.user.id}`}>
-                            <h4 className='vertical-centered'>
-                                {this.props.user.username}
-                            </h4>
-                        </Link>
-                    </button>
+                        <h4 className='vertical-centered username-hover'>
+                            {this.props.user.username}
+                        </h4>
+                    </Link>
                     <div id='addButton' className='vertical-centered'>
                         <Link
                             to='/project/new'
