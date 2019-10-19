@@ -15,9 +15,9 @@
     background: #DDDDDD;
 }
 .navbar-brand.user-image {
-    padding: 5px 5px 5px 20px;
+    padding: 5px 0 5px 20px;
 }
-.user-profile{
+.user-profile {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -42,6 +42,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    transition: all .8s ease;
+    -webkit-transition: all .8s ease;
 }
 .vertical-centered svg {
     margin-left: 3%;
