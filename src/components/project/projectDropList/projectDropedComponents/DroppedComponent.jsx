@@ -349,15 +349,15 @@ const DroppedComponent = ({
                         if(newWidth < 10) {
                             newWidth = 10;
                         }
-                        handleComponentValueChange(newWidth + 'px', 'style.width');
+                        handleComponentValueChange(newWidth + 'px', 'style.width', droppedComponent.index);
                     }
                     if(height !== 0) {
                         let newHeight = initialSizes.height + height;
                         if(newHeight < 10) {
                             newHeight = 10;
                         }
-                        handleComponentValueChange(newHeight + 'px', 'style.height');
-                        handleComponentValueChange(newHeight + 'px', 'style.lineHeight');
+                        handleComponentValueChange(newHeight + 'px', 'style.height', droppedComponent.index);
+                        handleComponentValueChange(newHeight + 'px', 'style.lineHeight', droppedComponent.index);
                     }
             }}>
                 {component}
