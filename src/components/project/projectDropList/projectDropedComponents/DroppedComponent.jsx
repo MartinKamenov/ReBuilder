@@ -197,9 +197,6 @@ const DroppedComponent = ({
             display: copyOfStyle.display,
             zIndex: 1
         };
-        const resizableStyle = {
-            width: '100%',
-        };
 
         copyOfStyle.display = 'block';
         copyOfStyle.width = '100%';
@@ -208,113 +205,76 @@ const DroppedComponent = ({
             <div
                 className='blinkdiv'
                 style={editModeContainer}>
-                <Resizable
-                    style={resizableStyle}
-                    onResizeStart={(event, direction, refToElement, delta) => {
-                        if(droppedComponent.style.width.endsWith('%')) {
-                            initialSizes.width =
-                                6 * parseInt(droppedComponent.style.width, 10);
-                        } else {
-                            initialSizes.width =
-                                parseInt(droppedComponent.style.width, 10);
+                {
+                    (() => {
+                        let element;
+                        switch(droppedComponent.name) {
+                        case componentTypes.Image:
+                            element = (
+                                <img
+                                    alt='component'
+                                    src={droppedComponent.src}
+                                    style={copyOfStyle}
+                                    className='edit-input'/>
+                            );
+                            break;
+                        case componentTypes.Input:
+                            element = (
+                                <input 
+                                    key={droppedComponent.index}
+                                    style={copyOfStyle}
+                                    placeholder={droppedComponent.placeholder}
+                                    className='edit-input'>
+                                </input>
+                            );
+                            break;
+                        case componentTypes.Button:
+                            element = (
+                                <button
+                                    key={droppedComponent.index}
+                                    style={copyOfStyle}
+                                    className='edit-input'>
+                                    {droppedComponent.innerText}
+                                </button>
+                            );
+                            break;
+                        case componentTypes.Container:
+                        case componentTypes.NavigationBar:
+                            element = (
+                                <div
+                                    alt='component'
+                                    src={droppedComponent.src}
+                                    style={copyOfStyle}
+                                    className='edit-input'>
+                                    {
+                                        droppedComponent.children.map((c) => (
+                                            getComponent(
+                                                c,
+                                                handleChangeEditMode,
+                                                handleDropContainerComponent,
+                                                c.style
+                                            )
+                                        ))
+                                    }
+                                </div>
+                            );
+                            break;
+                        default:
+                            copyOfStyle.resize = 'none';
+                            element = (
+                                <textarea
+                                    style={copyOfStyle}
+                                    className='edit-input'
+                                    value={droppedComponent.innerText}
+                                    onChange={(event) => 
+                                        handleComponentValueChange(event.target.value, 'innerText')}>
+                                </textarea>
+                            );
+                            break;
                         }
-                        if(droppedComponent.style.height.endsWith('%')) {
-                            initialSizes.height =
-                                3 * parseInt(droppedComponent.style.height, 10);
-                        } else {
-                            initialSizes.height =
-                                parseInt(droppedComponent.style.height, 10);
-                        }
-                    }}
-                    onResize={(event, direction, refToElement, delta) => {
-                        const { width, height } = delta;
-                        if(width !== 0) {
-                            let newWidth = initialSizes.width + width;
-                            if(newWidth < 10) {
-                                newWidth = 10;
-                            }
-                            handleComponentValueChange(newWidth + 'px', 'style.width');
-                        }
-                        if(height !== 0) {
-                            let newHeight = initialSizes.height + height;
-                            if(newHeight < 10) {
-                                newHeight = 10;
-                            }
-                            handleComponentValueChange(newHeight + 'px', 'style.height');
-                            handleComponentValueChange(newHeight + 'px', 'style.lineHeight');
-                        }
-                    }}>
-                    {
-                        (() => {
-                            let element;
-                            switch(droppedComponent.name) {
-                            case componentTypes.Image:
-                                element = (
-                                    <img
-                                        alt='component'
-                                        src={droppedComponent.src}
-                                        style={copyOfStyle}
-                                        className='edit-input'/>
-                                );
-                                break;
-                            case componentTypes.Input:
-                                element = (
-                                    <input 
-                                        key={droppedComponent.index}
-                                        style={copyOfStyle}
-                                        placeholder={droppedComponent.placeholder}
-                                        className='edit-input'>
-                                    </input>
-                                );
-                                break;
-                            case componentTypes.Button:
-                                element = (
-                                    <button
-                                        key={droppedComponent.index}
-                                        style={copyOfStyle}
-                                        className='edit-input'>
-                                        {droppedComponent.innerText}
-                                    </button>
-                                );
-                                break;
-                            case componentTypes.Container:
-                            case componentTypes.NavigationBar:
-                                element = (
-                                    <div
-                                        alt='component'
-                                        src={droppedComponent.src}
-                                        style={copyOfStyle}
-                                        className='edit-input'>
-                                        {
-                                            droppedComponent.children.map((c) => (
-                                                getComponent(
-                                                    c,
-                                                    handleChangeEditMode,
-                                                    handleDropContainerComponent,
-                                                    c.style
-                                                )
-                                            ))
-                                        }
-                                    </div>
-                                );
-                                break;
-                            default:
-                                copyOfStyle.resize = 'none';
-                                element = (
-                                    <textarea
-                                        style={copyOfStyle}
-                                        className='edit-input'
-                                        value={droppedComponent.innerText}
-                                        onChange={(event) => 
-                                            handleComponentValueChange(event.target.value, 'innerText')}>
-                                    </textarea>
-                                );
-                                break;
-                            }
-                            return element;
-                        })()
-                    }
-                </Resizable>
+                        return element;
+                    })()
+                }
 
                 <div className='center-container small-buttons-action-container'>
                     <ButtonComponent	
@@ -354,6 +314,9 @@ const DroppedComponent = ({
         handleDropContainerComponent,
         elementStyle
     );
+    const resizableStyle = {
+        width: '100%',
+    };
     
     return (
         <Draggable 
@@ -361,7 +324,45 @@ const DroppedComponent = ({
             onDragStart={() => componentDragStart(droppedComponent.index)}
             onDragOver={rearangeComponents}
             onDragEnd={componentDragEnd}>
-            {component}
+            <Resizable
+                style={resizableStyle}
+                onResizeStart={(event, direction, refToElement, delta) => {
+                    if(droppedComponent.style.width.endsWith('%')) {
+                        initialSizes.width =
+                            6 * parseInt(droppedComponent.style.width, 10);
+                    } else {
+                        initialSizes.width =
+                            parseInt(droppedComponent.style.width, 10);
+                    }
+                    if(droppedComponent.style.height.endsWith('%')) {
+                        initialSizes.height =
+                            3 * parseInt(droppedComponent.style.height, 10);
+                    } else {
+                        initialSizes.height =
+                            parseInt(droppedComponent.style.height, 10);
+                    }
+                }}
+                onResize={(event, direction, refToElement, delta) => {
+                    const { width, height } = delta;
+                    if(width !== 0) {
+                        let newWidth = initialSizes.width + width;
+                        if(newWidth < 10) {
+                            newWidth = 10;
+                        }
+                        handleComponentValueChange(newWidth + 'px', 'style.width', droppedComponent.index);
+                    }
+                    if(height !== 0) {
+                        let newHeight = initialSizes.height + height;
+                        if(newHeight < 10) {
+                            newHeight = 10;
+                        }
+                        handleComponentValueChange(newHeight + 'px', 'style.height', droppedComponent.index);
+                        handleComponentValueChange(newHeight + 'px', 'style.lineHeight', droppedComponent.index);
+                    }
+            }}>
+                {component}
+            </Resizable>
+            
         </Draggable>
     );
 };
