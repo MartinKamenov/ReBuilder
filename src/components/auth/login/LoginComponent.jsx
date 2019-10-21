@@ -9,14 +9,14 @@ import ButtonComponent from '../../common/ButtonComponent';
 
 const LoginComponent = ({
     history,
-    actions: { login: startLogin },
-    error
+    actions: { login: startLogin }
 }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     const user = useSelector(state => (state.user));
+    const error = useSelector(state => (state.error));
 
     const redirectToHome = () => {
         setIsLoading(false);
