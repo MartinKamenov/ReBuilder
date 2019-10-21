@@ -21,7 +21,7 @@ const UserComponent = ({ history }) => {
     const dispatch = useDispatch();
     const loginByToken = useCallback((token, message) => {
         dispatch(authenticationActions.loginByToken(token, message))
-    }, [token, dispatch]);
+    }, [dispatch]);
 
     const logout = useCallback(() => {
         dispatch(authenticationActions.logout());
