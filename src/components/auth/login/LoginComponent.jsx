@@ -21,11 +21,14 @@ const LoginComponent = ({
         [dispatch, username, password]
     );
 
-    const redirectToHome = () => {
-        setIsLoading(false);
-        history.push('/dashboard');
-        return;
-    }
+    const redirectToHome = useCallback(
+        () => {
+            setIsLoading(false);
+            history.push('/dashboard');
+            return;
+        },
+        [history]
+    );
 
     const login = () => {
         if(!username || !password) {
@@ -52,7 +55,7 @@ const LoginComponent = ({
             setIsLoading(false);
             return;
         }
-    }, [user, error]);
+    }, [user, error, redirectToHome]);
 
     if(isLoading) {
         return <LoadingComponent message='Authenticating user' />;
