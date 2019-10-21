@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import * as authenticationActions from '../../../actions/authenticationActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -6,96 +7,81 @@ import './LoginComponent.css';
 import LoadingComponent from '../../common/LoadingComponent';
 import ButtonComponent from '../../common/ButtonComponent';
 
-class LoginComponent extends Component {
-    state = {
-        username: '',
-        password: '',
-        isLoading: false
-    }
+const LoginComponent = ({
+    history,
+    actions: { login: startLogin },
+    error
+}) => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    handleInputChange = (value, field) => {
-        this.setState({[field]: value});
-    }
-    handleEnterPressed = (key) => {
-        if (key === 'Enter') {
-            this.login();
-        }
-    }
+    const user = useSelector(state => (state.user));
 
-    componentWillMount() {
-        const user = this.props.user;
-        if(user.id) {
-            this.redirectToHome();
-        }
-    }
-
-    componentWillReceiveProps(props) {
-        if(props.user.id) {
-            this.redirectToHome();
-        }
-
-        if(props.error) {
-            this.setState({ isLoading: false });
-        }
-    }
-
-    redirectToHome = () => {
-        this.setState({ isLoading: false });
-        const history = this.props.history;
+    const redirectToHome = () => {
+        setIsLoading(false);
         history.push('/dashboard');
         return;
     }
 
-    login = () => {
-        if(!this.state.username || !this.state.password) {
+    const login = () => {
+        if(!username || !password) {
             return;
         }
 
-        this.setState({ isLoading: true });
+        setIsLoading(true);
 
-        this.props.actions.login(this.state.username, this.state.password);
+        startLogin(username, password);
+    }
+
+    const handleEnterPressed = ({ key }) => {
+        if (key === 'Enter' && username && password) {
+            login();
+        }
+    }
+
+    useEffect(() => {
+        if(user.id) {
+            redirectToHome();
+        }
+
+        if(error) {
+            setIsLoading(false);
+            return;
+        }
+    }, [user, error]);
+
+    if(isLoading) {
+        return <LoadingComponent message='Authenticating user' />;
     }
     
-    render() {
-        if(this.state.isLoading) {
-            return <LoadingComponent message='Authenticating user' />;
-        }
-        
-        return (
-            <div className='auth-container'>
-                <div className='login-container'>
-                    <h3 className='auth-header'>Sign in</h3>
-                    <div onKeyDown={(event) => this.handleEnterPressed(event.key)}>
-                        <input
-                            className='form-input'
-                            type='text'
-                            placeholder='Username'
-                            onChange={(event) => this.handleInputChange(event.target.value, 'username')}
-                            value={this.state.username}/>
-                        <input
-                            className='form-input'
-                            type='password'
-                            placeholder='Password'
-                            onChange={(event) => this.handleInputChange(event.target.value, 'password')}
-                            value={this.state.password}/>
-                        <ButtonComponent
-                            title='Log in'
-                            className='submit-btn'
-                            type='success'
-                            onClick={this.login}/>
-                    </div>
+    return (
+        <div className='auth-container'>
+            <div className='login-container'>
+                <h3 className='auth-header'>Sign in</h3>
+                <div onKeyDown={handleEnterPressed}>
+                    <input
+                        className='form-input'
+                        type='text'
+                        placeholder='Username'
+                        onChange={(event) => setUsername(event.target.value)}
+                        value={username}/>
+                    <input
+                        className='form-input'
+                        type='password'
+                        placeholder='Password'
+                        onChange={(event) => setPassword(event.target.value)}
+                        value={password}/>
+                    <ButtonComponent
+                        title='Log in'
+                        className='submit-btn'
+                        type='success'
+                        onClick={login}/>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
-
-const mapStateToProps = (state) => {
-    return {
-        user: state.user,
-        error: state.error
-    };
-};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -103,4 +89,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
  
-export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
+export default connect(null, mapDispatchToProps)(LoginComponent);
