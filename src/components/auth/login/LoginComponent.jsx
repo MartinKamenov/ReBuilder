@@ -38,13 +38,13 @@ const LoginComponent = ({
         setIsLoading(true);
 
         startLogin(username, password);
-    }
+    };
 
     const handleEnterPressed = ({ key }) => {
         if (key === 'Enter' && username && password) {
             login();
         }
-    }
+    };
 
     useEffect(() => {
         if(user.id) {
@@ -87,6 +87,6 @@ const LoginComponent = ({
             </div>
         </div>
     );
-}
+};
  
 export default LoginComponent;

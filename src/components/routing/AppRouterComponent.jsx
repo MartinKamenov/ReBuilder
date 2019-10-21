@@ -71,6 +71,6 @@ const AppRouterComponent = () => {
             
         </Router>
     );
-}
+};
 
 export default AppRouterComponent;

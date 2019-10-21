@@ -45,6 +45,6 @@ const NavbarComponent = () => {
             </div>
         </header>
     );
-}
+};
  
 export default NavbarComponent;

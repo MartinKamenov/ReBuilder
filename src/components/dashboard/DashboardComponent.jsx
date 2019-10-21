@@ -16,7 +16,7 @@ const DashboardComponent = ({ location: { search } }) => {
 
     const changePage = (selectedPage) => {
         setPage(selectedPage);
-    }
+    };
 
     useEffect(() => {
         let queryObject = queryString.parse(search);
@@ -66,6 +66,6 @@ const DashboardComponent = ({ location: { search } }) => {
                 changePage={changePage}/>
         </div>
     );
-}
+};
 
 export default DashboardComponent;
