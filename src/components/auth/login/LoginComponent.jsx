@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import * as authenticationActions from '../../../actions/authenticationActions';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import './LoginComponent.css';
 import LoadingComponent from '../../common/LoadingComponent';
 import ButtonComponent from '../../common/ButtonComponent';
 
 const LoginComponent = ({
-    history,
-    actions: { login: startLogin }
+    history
 }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -17,6 +14,12 @@ const LoginComponent = ({
 
     const user = useSelector(state => (state.user));
     const error = useSelector(state => (state.error));
+    const dispatch = useDispatch();
+    const startLogin = useCallback(
+        () => dispatch(authenticationActions.login(username, password)),
+        // Subscribe to changes username and password
+        [dispatch, username, password]
+    );
 
     const redirectToHome = () => {
         setIsLoading(false);
@@ -82,11 +85,5 @@ const LoginComponent = ({
         </div>
     );
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators(authenticationActions, dispatch)
-    };
-};
  
-export default connect(null, mapDispatchToProps)(LoginComponent);
+export default LoginComponent;
