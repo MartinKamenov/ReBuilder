@@ -41,10 +41,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
     }
 
     const generateProject = () => {
-        const pages = [...project.pages];
-
-        const project = Object.assign({}, project);
-        projectGenerator.generateProject(project.name, pages, project.projectImageUrl);
+        projectGenerator.generateProject(project.name, [...project.pages], project.projectImageUrl);
     }
 
     const handleSaveProject = () => {
@@ -52,10 +49,8 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         if(!token) {
             return;
         }
-
-        const pages = [...pages];
         
-        actions.updateProject(id, pages, token);
+        actions.updateProject(id, [...pages], token);
     }
 
     const handleDeployProject = async () => {
@@ -106,7 +101,6 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
     }
 
     const navigateToPage = (pageId) => {
-        const project = Object.assign({}, project);
         setIsLoading(false);
         history.push(`/projects/${project.id}/${pageId}`);
     }
@@ -127,13 +121,13 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
             elements: []
         };
 
-        const pages = [...pages];
-        pages.push(page);
+        const updatedPages = [...pages];
+        updatedPages.push(page);
 
         const token = localStorage.getItem('token');
 
-        actions.updateProject(project.id, pages, token);
-        setPages(pages);
+        actions.updateProject(project.id, updatedPages, token);
+        setPages(updatedPages);
         setNewPageName('');
         setNewPageRoute('');
 
@@ -165,8 +159,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
     }
 
     const selectPage = (id) => {
-        const pages = [...pages];
-        const page = Object.assign({}, pages.find(p => p.id === id));
+        const page = Object.assign({}, [...pages].find(p => p.id === id));
         setUpdatePage(page);
         setNewPageName(page.name);
         setNewPageRoute(page.route);
@@ -178,22 +171,22 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
             route: newPageRoute
         };
 
-        const pages = [...pages];
-        const foundPageIndex = pages.findIndex((p) => p.id === updatePage.id);
+        const updatedPages = [...pages];
+        const foundPageIndex = updatedPages.findIndex((p) => p.id === updatePage.id);
 
-        page.elements = pages[foundPageIndex].elements;
-        page.id = pages[foundPageIndex].id;
-        pages[foundPageIndex] = page;
+        page.elements = updatedPages[foundPageIndex].elements;
+        page.id = updatedPages[foundPageIndex].id;
+        updatedPages[foundPageIndex] = page;
 
-        clearState(pages);
+        clearState(updatedPages);
     }
 
     const deletePage = () => {
-        const pages = [...pages];
-        const foundPageIndex = pages.findIndex((p) => p.id === updatePage.id);
+        const updatedPages = [...pages];
+        const foundPageIndex = updatedPages.findIndex((p) => p.id === updatePage.id);
 
-        pages.splice(foundPageIndex, 1);
-        clearState(pages);
+        updatedPages.splice(foundPageIndex, 1);
+        clearState(updatedPages);
     }
 
     const navigateToDashboard = () => {
@@ -332,7 +325,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         
         setId(match.params.id);
         actions.updateProject(id, null, token);
-    }, [tab, stateDeployment]);
+    }, [tab, stateDeployment, user]);
 
     if(isLoading) {
         return (<LoadingComponent message='Fetching project'/>);
