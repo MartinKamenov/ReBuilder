@@ -1,151 +1,108 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import LoadingComponent from '../../common/LoadingComponent';
 import * as authenticationActions from '../../../actions/authenticationActions';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import './RegisterComponent.css';
 import ButtonComponent from '../../common/ButtonComponent';
-import apiService from '../../../service/api.service';
 
-class RegisterComponent extends Component {
-    state = {
-        email: '',
-        username: '',
-        password: '',
-        passwordRepeat: '',
-        imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnUMov053v0hONBpUNyQoint83KzTEMW_vXxNWHOEBbaqATtTq',
-        isLoading: false
-    }
-
-    componentDidMount = () => {
-        const user = this.props.user;
-        if(user.id) {
-            this.redirectToHome();
-        }
-    }
-
-    handleInputChange = (value, field) => {
-        this.setState({[field]: value});
-    }
-
-    handleEnterPressed = (key) => {
-        if (key === 'Enter') {
-            this.register();
-        }
-    }
+const RegisterComponent = ({ history }) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordRepeat, setPasswordRepeat] = useState('');
+    const imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnUMov053v0hONBpUNyQoint83KzTEMW_vXxNWHOEBbaqATtTq';
     
-    register = () => {
-        if(!this.state.username ||
-            !this.state.password ||
-            !this.state.passwordRepeat ||
-            !this.state.email ||
-            !this.state.imageUrl) {
+    const user = useSelector((state) => state.user);
+
+    const dispatch = useDispatch();
+
+    const register = useCallback(() => {
+        if(!username ||
+            !password ||
+            !passwordRepeat ||
+            !email) {
             return;
         }
 
-        if(this.state.password !== this.state.passwordRepeat) {
+        if(password !== passwordRepeat) {
             return;
         }
 
-        this.setState({ isLoading: true });
+        setIsLoading(true);
+        debugger;
 
-        this.props.actions.register(
-            this.state.username,
-            this.state.password,
-            this.state.email,
-            this.state.imageUrl
-        );
-    }
+        dispatch(authenticationActions.register(
+            username,
+            password,
+            email,
+            imageUrl
+        ));
+    }, [dispatch, username, password, passwordRepeat, email, imageUrl]);
 
-    changeImage = async(event) => {
-        const target = event.target;
-        if (!target.files || !target.files[0]) {
+    const handleEnterPressed = useCallback(({ key }) => {
+        if (key === 'Enter') {
+            register();
+        }
+    }, [register]);
+
+    const redirectToHome = useCallback(
+        () => {
+            setIsLoading(false);
+            history.push('/dashboard');
             return;
-        }
+        },
+        [history]
+    );
 
-        const file = target.files[0];
-        const formData = new FormData();
-        formData.append('image', file, file.name);
-
-        try {
-            const res = await apiService.uploadImage(formData);
-            this.setState({ imageUrl: res.data.data.link });
-        } catch(error) {
-            console.log(error);
+    useEffect(() => {
+        if(user.id) {
+            redirectToHome();
         }
+    }, [user, redirectToHome]);
+
+    if(isLoading) {
+        return <LoadingComponent message='Authenticating user' />;
     }
 
-    componentWillReceiveProps = (props) => {
-        if(props.user.id) {
-            this.redirectToHome();
-        }
-    }
-
-    redirectToHome = () => {
-        this.setState({ isLoading: false });
-        const history = this.props.history;
-        history.push('/dashboard');
-    }
-    render() {
-        if(this.state.isLoading) {
-            return <LoadingComponent message='Authenticating user' />;
-        }
-
-        return (
-            <div className='auth-container'>
-                <div className='register-container'>
-                    <h3 className='auth-header'>Sign up</h3>
-                    <div onKeyDown={(event) => this.handleEnterPressed(event.key)}>
-                        <input
-                            className='form-input'
-                            type='email'
-                            placeholder='Email'
-                            onChange={(event) => 
-                                this.handleInputChange(event.target.value, 'email')}
-                            value={this.state.email}/>
-                        <input
-                            className='form-input'
-                            type='text'
-                            placeholder='Username'
-                            onChange={(event) => 
-                                this.handleInputChange(event.target.value, 'username')}
-                            value={this.state.username}/>
-                        <input
-                            className='form-input'
-                            type='password'
-                            placeholder='Password'
-                            onChange={(event) => 
-                                this.handleInputChange(event.target.value, 'password')}
-                            value={this.state.password}/>
-                        <input
-                            className='form-input'
-                            type='password'
-                            placeholder='Password repeat'
-                            onChange={(event) => 
-                                this.handleInputChange(event.target.value, 'passwordRepeat')}
-                            value={this.state.passwordRepeat}/>
-                        <ButtonComponent
-                            title='Sign up'
-                            className='submit-btn'
-                            type='success'
-                            onClick={this.register}/>
-                    </div>
+    return (
+        <div className='auth-container'>
+            <div className='register-container'>
+                <h3 className='auth-header'>Sign up</h3>
+                <div onKeyDown={handleEnterPressed}>
+                    <input
+                        className='form-input'
+                        type='email'
+                        placeholder='Email'
+                        onChange={(event) => setEmail(event.target.value)}
+                        value={email}/>
+                    <input
+                        className='form-input'
+                        type='text'
+                        placeholder='Username'
+                        onChange={(event) => setUsername(event.target.value)}
+                        value={username}/>
+                    <input
+                        className='form-input'
+                        type='password'
+                        placeholder='Password'
+                        onChange={(event) => setPassword(event.target.value)}
+                        value={password}/>
+                    <input
+                        className='form-input'
+                        type='password'
+                        placeholder='Password repeat'
+                        onChange={(event) => setPasswordRepeat(event.target.value)}
+                        value={passwordRepeat}/>
+                    <ButtonComponent
+                        title='Sign up'
+                        className='submit-btn'
+                        type='success'
+                        onClick={register}/>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
-
-const mapStateToProps = (state) => {
-    return {
-        user: state.user
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators(authenticationActions, dispatch)
-    };
-};
  
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterComponent);
+export default RegisterComponent;
