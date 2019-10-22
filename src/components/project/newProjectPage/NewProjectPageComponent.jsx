@@ -9,7 +9,7 @@ import apiService from '../../../service/api.service';
 import './NewProjectPageComponent.css';
 
 
-const NewProjectPageComponent = ({ history, actions }) => {
+const NewProjectPageComponent = ({ history }) => {
     const [name, setName] = useState('');
     const [imageUrl, setImageUrl] = useState('https://cdn3.iconfinder.com/data/icons/lifestyle/100/Noun_Project_20Icon_10px_grid-01-512.png');
     const [isLoading, setIsLoading] = useState(false);
