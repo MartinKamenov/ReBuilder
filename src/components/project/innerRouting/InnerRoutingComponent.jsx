@@ -30,7 +30,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
     const [deploymentInformation, setDeploymentInformation] = useState(null);
     const [id, setId] = useState('');
 
-    const { user, deploymentInformation, project } = useSelector((state) => state);
+    const { user, deploymentInformation: stateDeployment, project } = useSelector((state) => state);
 
     const clearState = (pages) => {
         setPages(pages);
@@ -42,8 +42,6 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
 
     const generateProject = () => {
         const pages = [...project.pages];
-        const index = pages.findIndex((p) => p.id === pageId);
-        pages[index] = page;
 
         const project = Object.assign({}, project);
         projectGenerator.generateProject(project.name, pages, project.projectImageUrl);
@@ -80,14 +78,15 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
 
         class Item {
             constructor(element) {
-                element = element;    
-                element.addEventListener('mouseover', (ev) => update(ev, 'in'));
-                element.addEventListener('mouseout', (ev) => update(ev, 'out'));
+                this.element = element;    
+                this.element.addEventListener('mouseover', (ev) => this.update(ev, 'in'));
+                this.element.addEventListener('mouseout', (ev) => this.update(ev, 'out'));
             }
             
             update(ev, prefix) {
-                element.classList.remove(...classNames);
-                element.classList.add(`${prefix}-${directions[getDirectionKey(ev, element)]}`);
+                this.element.classList.remove(...classNames);
+                this.element.classList
+                    .add(`${prefix}-${directions[getDirectionKey(ev, this.element)]}`);
             }
         }
 
@@ -173,7 +172,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         setNewPageRoute(page.route);
     }
 
-    const updatePage = () => {
+    const handleUpdatePage = () => {
         const page = {
             name: newPageName,
             route: newPageRoute
@@ -202,8 +201,8 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         history.push('/dashboard');
     }
 
-    const isValidClass = (errorField) => {
-        if(state[errorField]) {
+    const isValidClass = () => {
+        if(newPageNameError) {
             return 'routing-form-input-invalid';
         }
     }
@@ -265,13 +264,18 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
                             updateNewPageValue={updateNewPageValue}
                             isValidClass={isValidClass}
                             addNewPage={addNewPage}
-                            updatePage={updatePage}
+                            updatePage={handleUpdatePage}
                             deletePage={deletePage}
                             changeUpdateStatus={changeUpdateStatus}
-                            state={state}/>
+                            state={{
+                                newPageName,
+                                newPageNameError,
+                                isUpdating,
+                                updatePage
+                            }}/>
                         <ProjectPageComponent
                             pages={pages}
-                            updatePage={updatePage}
+                            updatePage={handleUpdatePage}
                             selectPage={selectPage}
                             navigateToPage={navigateToPage}
                             getComponentJSX={getComponentJSX}
@@ -294,7 +298,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
             return (
                 <ProjectPageComponent
                     pages={pages}
-                    updatePage={updatePage}
+                    updatePage={handleUpdatePage}
                     selectPage={selectPage}
                     navigateToPage={navigateToPage}
                     getComponentJSX={getComponentJSX}
@@ -304,13 +308,13 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
     }
 
     useEffect(() => {
-        if(tab === tabs[0]) {
+        if(tab === tabTypes[0]) {
             executeStylesScript();
             return;
         }
 
-        if(deploymentInformation) {
-            setDeploymentInformation(deploymentInformation);
+        if(stateDeployment) {
+            setDeploymentInformation(stateDeployment);
         }
         if(project.pages) {
             setPages(project.pages);
@@ -328,7 +332,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         
         setId(match.params.id);
         actions.updateProject(id, null, token);
-    }, [tab]);
+    }, [tab, stateDeployment]);
 
     if(isLoading) {
         return (<LoadingComponent message='Fetching project'/>);
@@ -345,13 +349,13 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
                 />
                 <div className='center-container tabs-container'>
                     { 
-                        tabs.map((tabElement, i) => {
+                        tabTypes.map((tabElement, i) => {
                             let className = 'header-tab';
                             if(i === 0) {
                                 className += ' left-tab';
                             }
 
-                            if(i === tabs.length - 1) {
+                            if(i === tabTypes.length - 1) {
                                 className += ' right-tab';
                             }
 
@@ -364,7 +368,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
                                     className={className}
                                     onClick={() => setTab(tabElement)}
                                     style={{
-                                        width: 100 / tabs.length + '%'
+                                        width: 100 / tabTypes.length + '%'
                                     }} key={i}>
                                     {tabElement}
                                 </div>
@@ -377,15 +381,6 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        project: project,
-        user: user,
-        projectStatus: projectStatus,
-        deploymentInformation: deployment
-    };
-};
-
 const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(
@@ -395,4 +390,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(InnerRoutingComponent);
+export default connect(null, mapDispatchToProps)(InnerRoutingComponent);
