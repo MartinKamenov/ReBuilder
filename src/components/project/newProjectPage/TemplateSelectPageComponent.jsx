@@ -26,7 +26,7 @@ const TemplateSelectPageComponent = ({ history, location }) => {
         // TO DO: Update user's projects
         // const token = localStorage.getItem('token');
         // dispatch(authenticationActions.loginByToken(token));
-    }, [dispatch, location, user])
+    }, [dispatch, location, user]);
 
     const selectTemplate = (index) => {
         const project = Object.assign({}, templates[index]);
