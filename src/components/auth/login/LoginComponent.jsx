@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as authenticationActions from '../../../actions/authenticationActions';
-import './LoginComponent.css';
 import LoadingComponent from '../../common/LoadingComponent';
 import ButtonComponent from '../../common/ButtonComponent';
+import PropTypes from 'prop-types';
+import './LoginComponent.css';
 
 const LoginComponent = ({
     history
@@ -87,6 +88,12 @@ const LoginComponent = ({
             </div>
         </div>
     );
+};
+
+LoginComponent.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired
+    }).isRequired
 };
  
 export default LoginComponent;

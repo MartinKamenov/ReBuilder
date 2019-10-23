@@ -5,6 +5,7 @@ import uuid from 'uuid';
 // import * as authenticationActions from '../../../actions/authenticationActions';
 import * as projectActions from '../../../actions/projectActions';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './TemplateSelectPageComponent.css';
 import LoadingComponent from '../../common/LoadingComponent';
@@ -58,5 +59,17 @@ const TemplateSelectPageComponent = ({ history, location }) => {
         </div>
     );
 };
- 
+
+TemplateSelectPageComponent.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired
+    }).isRequired,
+    location: PropTypes.shape({
+        state: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            imageUrl: PropTypes.string.isRequired
+        }).isRequired
+    }).isRequired
+};
+
 export default TemplateSelectPageComponent;
