@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUndo, faSave } from '@fortawesome/free-solid-svg-icons';
 
-import './UserComponent.css';
 import ButtonComponent from '../common/ButtonComponent';
 import apiService from '../../service/api.service';
 import LoadingComponent from '../common/LoadingComponent';
 import successMessages from '../../constants/successMessages';
+import PropTypes from 'prop-types';
+
+import './UserComponent.css';
 
 const UserComponent = ({ history }) => {
     const [imageUrl, setImageUrl] = useState('');
@@ -118,5 +120,11 @@ const UserComponent = ({ history }) => {
         </div>
     );
 };
- 
+
+UserComponent.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired
+    }).isRequired
+};
+
 export default UserComponent;
