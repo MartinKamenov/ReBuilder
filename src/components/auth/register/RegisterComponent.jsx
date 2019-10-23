@@ -3,6 +3,7 @@ import LoadingComponent from '../../common/LoadingComponent';
 import * as authenticationActions from '../../../actions/authenticationActions';
 import { useSelector, useDispatch } from 'react-redux';
 import './RegisterComponent.css';
+import PropTypes from 'prop-types';
 import ButtonComponent from '../../common/ButtonComponent';
 
 const RegisterComponent = ({ history }) => {
@@ -102,6 +103,12 @@ const RegisterComponent = ({ history }) => {
             </div>
         </div>
     );
+};
+
+RegisterComponent.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired
+    }).isRequired
 };
  
 export default RegisterComponent;
