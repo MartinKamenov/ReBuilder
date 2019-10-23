@@ -1,75 +1,62 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import templates from '../../../service/ready-templates/';
 import ButtonComponent from '../../common/ButtonComponent';
 import uuid from 'uuid';
+// import * as authenticationActions from '../../../actions/authenticationActions';
 import * as projectActions from '../../../actions/projectActions';
-import * as authenticationActions from '../../../actions/authenticationActions';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './TemplateSelectPageComponent.css';
 import LoadingComponent from '../../common/LoadingComponent';
 
-class TemplateSelectPageComponent extends Component {
-    state = {
-        isLoading: false
-    }
-    selectTemplate = (index) => {
-        const project = Object.assign({}, templates[index]);
-        project.id = uuid.v1();
-        this.handleCreateProject(project);
-    }
+const TemplateSelectPageComponent = ({ history, location }) => {
+    const [isLoading, setIsLoading] = useState(false);
 
-    handleCreateProject = (project) => {
-        this.setState({ isLoading: true });
-        const name = this.props.location.state.name;
-        const imageUrl = this.props.location.state.imageUrl;
+    const { user, project } = useSelector((state) => state);
+
+    const dispatch = useDispatch();
+
+    const handleCreateProject = useCallback((project) => {
+        setIsLoading(true);
+        const name = location.state.name;
+        const imageUrl = location.state.imageUrl;
         project.name = name;
         project.projectImageUrl = imageUrl;
-        this.props.actions
-            .createProject(name, imageUrl, this.props.user.token, project);
-    }
+        dispatch(projectActions.createProject(name, imageUrl, user.token, project));
+        // TO DO: Update user's projects
+        // const token = localStorage.getItem('token');
+        // dispatch(authenticationActions.loginByToken(token));
+    }, [dispatch, location, user]);
 
-    componentWillReceiveProps(props) {
-        if(props.project.id) {
-            this.setState({ isLoading: false });
-            const history = this.props.history;
-            history.push(`projects/${props.project.id}`);
-        }
-    }
-
-    render() {
-        if(this.state.isLoading) {
-            return <LoadingComponent message='Creating project'/>;   
-        }
-
-        return (
-            <div className='container'>
-                {templates.map((template, i) => (
-                    <ButtonComponent
-                        type='success'
-                        onClick={() => this.selectTemplate(i)}
-                        key={i}>
-                        {template.name}
-                    </ButtonComponent>
-                ))}
-            </div>
-        );
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        project: state.project,
-        user: state.user,
-        error: state.error
+    const selectTemplate = (index) => {
+        const project = Object.assign({}, templates[index]);
+        project.id = uuid.v1();
+        handleCreateProject(project);
     };
-};
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators(Object.assign({}, projectActions, authenticationActions), dispatch)
-    };
+    useEffect(() => {
+        if(project.id) {
+            setIsLoading(false);
+            history.push(`projects/${project.id}`);
+        }
+    }, [project, history]);
+
+    if(isLoading) {
+        return <LoadingComponent message='Creating project'/>;   
+    }
+
+    return (
+        <div className='container'>
+            {templates.map((template, i) => (
+                <ButtonComponent
+                    type='success'
+                    onClick={() => selectTemplate(i)}
+                    key={i}>
+                    {template.name}
+                </ButtonComponent>
+            ))}
+        </div>
+    );
 };
  
-export default connect(mapStateToProps, mapDispatchToProps)(TemplateSelectPageComponent);
+export default TemplateSelectPageComponent;
