@@ -18,7 +18,7 @@ import DatabaseTabComponent from './tabs/databaseTab/DatabaseTabComponent';
 import DeploymentTabComponent from './tabs/deploymentTab/DeploymentTabComponent';
 import tabTypes from './tabs/projectTabs';
 
-const InnerRoutingComponent = ({ history, match, actions }) => {
+const InnerRoutingComponent = ({ history, match }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [pages, setPages] = useState([]);
     const [newPageName,setNewPageName] = useState('');
@@ -31,6 +31,19 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
     const [id, setId] = useState('');
 
     const { user, deploymentInformation: stateDeployment, project } = useSelector((state) => state);
+
+    const dispatch = useDispatch();
+    const updateProject = useCallback((id, pages, token) => {
+        dispatch(projectActions.updateProject(id, pages, token));
+    }, [dispatch]);
+
+    const deployProject = useCallback((id, token) => {
+        dispatch(deploymentActions.deployProject(id, token));
+    }, dispatch);
+
+    const getDeployment = useCallback((id, token) => {
+        dispatch(getDeploymentActions.getDeployment(id, token));
+    }, [dispatch]);
 
     const clearState = (pages) => {
         setPages(pages);
@@ -50,12 +63,12 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
             return;
         }
         
-        actions.updateProject(id, [...pages], token);
+        actions;
     };
 
-    const handleDeployProject = async () => {
-        actions.deployProject(id, user.token);
-    };
+    const handleDeployProject = useCallback(async () => {
+        deployProject(id, user.token);
+    }, [id, user]);
 
     const executeStylesScript = () => {
         const nodes = [].slice.call(document.querySelectorAll('li'), 0);
@@ -126,7 +139,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
 
         const token = localStorage.getItem('token');
 
-        actions.updateProject(project.id, updatedPages, token);
+        updateProject(project.id, updatedPages, token);
         setPages(updatedPages);
         setNewPageName('');
         setNewPageRoute('');
@@ -244,8 +257,8 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
     const getDeploymentInformation = (() => {
         const id = project.id;
         const token = 'bla';
-        actions.getDeployment(id, token);
-    }, [actions, project]);
+        getDeployment(id, token);
+    }, [project, getDeployment]);
 
     const getTabContent = () => {
         switch(tab) {
@@ -324,7 +337,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         }
         
         setId(match.params.id);
-        actions.updateProject(id, null, token);
+        updateProject(id, null, token);
     }, [tab, stateDeployment, user, history, actions, match, id]);
 
     if(isLoading) {
@@ -374,13 +387,4 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
     );
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators(
-            Object.assign({}, projectActions, deploymentActions, getDeploymentActions),
-            dispatch
-        )
-    };
-};
-
-export default connect(null, mapDispatchToProps)(InnerRoutingComponent);
+export default InnerRoutingComponent;
