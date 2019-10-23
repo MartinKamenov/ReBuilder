@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import PagingComponent from '../common/PagingComponent';
 import pagingService from '../../service/paging.service';
 import queryString from 'query-string';
+import PropTypes from 'prop-types';
 
 const DashboardComponent = ({ location: { search } }) => {
     const [page, setPage] = useState(1);
@@ -66,6 +67,12 @@ const DashboardComponent = ({ location: { search } }) => {
                 changePage={changePage}/>
         </div>
     );
+};
+
+DashboardComponent.propTypes = {
+    location: PropTypes.shape({
+        search: PropTypes.string.isRequired
+    }).isRequired
 };
 
 export default DashboardComponent;
