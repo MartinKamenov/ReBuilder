@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import * as projectActions from '../../../actions/projectActions';
 import * as deploymentActions from '../../../actions/deploymentActions';
 import * as getDeploymentActions from '../../../actions/getDeploymentActions';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import LoadingComponent from '../../common/LoadingComponent';
 import uuid from 'uuid';
 import projectGenerator from '../../../service/projectGenerator.service';
-import SaveStatus from '../components/saveStatus';
 
 import './InnerRoutingComponent.css';
 import './PageElementsStyle.css';
@@ -17,82 +16,48 @@ import ProjectPageComponent from './tabs/pageTab/PagesTabComponent';
 import PagesEditorComponent from './tabs/pageTab/PagesEditorComponent';
 import DatabaseTabComponent from './tabs/databaseTab/DatabaseTabComponent';
 import DeploymentTabComponent from './tabs/deploymentTab/DeploymentTabComponent';
-import tabs from './tabs/projectTabs';
+import tabTypes from './tabs/projectTabs';
 
-class InnerRoutingComponent extends Component {
-    state = {
-        isLoading: true,
-        pages: [],
-        newPageName: '',
-        newPageRoute: '',
+const InnerRoutingComponent = ({ history, match, actions }) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [pages, setPages] = useState([]);
+    const [newPageName,setNewPageName] = useState('');
+    const [newPageRoute, setNewPageRoute] = useState('');
+    const [newPageNameError, setNewPageNameError] = useState('');
+    const [isUpdating, setIsUpdating] = useState(false);
+    const [updatePage, setUpdatePage] = useState(null);
+    const [tab, setTab] = useState(tabTypes[0]);
+    const [deploymentInformation, setDeploymentInformation] = useState(null);
+    const [id, setId] = useState('');
 
-        newPageNameError: '',
+    const { user, deploymentInformation: stateDeployment, project } = useSelector((state) => state);
 
-        isUpdating: false,
-        updatePage: null,
+    const clearState = (pages) => {
+        setPages(pages);
+        setIsUpdating(false);
+        setUpdatePage(null);
+        setNewPageName('');
+        setNewPageRoute('');
+    };
 
-        saveStatus: SaveStatus.Saved,
-        tab: tabs[0],
+    const generateProject = () => {
+        projectGenerator.generateProject(project.name, [...project.pages], project.projectImageUrl);
+    };
 
-        deploymentInformation: null
-    }
-    
-    componentDidMount() {
-        const token = localStorage.getItem('token');
-        if(!this.props.user.id && !token) {
-            const history = this.props.history;
-            history.push('/');
-            return;
-        }
-        const id = this.props.match.params.id;
-        this.setState({ id });
-        this.props.actions.updateProject(id, null, token);
-    }
-
-    componentDidUpdate() {
-        if(this.state.tab === tabs[0]) {
-            this.executeStylesScript();
-        }
-    }
-
-    componentWillReceiveProps(props) {
-        if(props.deploymentInformation) {
-            this.setState({ deploymentInformation: props.deploymentInformation });
-        }
-        if(props.project.pages) {
-            this.setState({ pages: props.project.pages, isLoading: false }, () => {
-                this.executeStylesScript();
-            });
-        }
-    }
-
-    generateProject = () => {
-        const pages = [...this.props.project.pages];
-        const index = pages.findIndex((p) => p.id === this.state.pageId);
-        pages[index] = this.state.page;
-
-        const project = Object.assign({}, this.props.project);
-        projectGenerator.generateProject(project.name, pages, project.projectImageUrl);
-    }
-
-    handleSaveProject = () => {
+    const handleSaveProject = () => {
         const token = localStorage.getItem('token');
         if(!token) {
             return;
         }
-
-        const pages = [...this.state.pages];
-
-        this.setState({ saveStatus: SaveStatus.Saved });
         
-        this.props.actions.updateProject(this.state.id, pages, token);
-    }
+        actions.updateProject(id, [...pages], token);
+    };
 
-    handleDeployProject = async () => {
-        this.props.actions.deployProject(this.state.id, this.props.user.token);
-    }
+    const handleDeployProject = async () => {
+        actions.deployProject(id, user.token);
+    };
 
-    executeStylesScript = () => {
+    const executeStylesScript = () => {
         const nodes = [].slice.call(document.querySelectorAll('li'), 0);
         const directions  = { 0: 'top', 1: 'right', 2: 'bottom', 3: 'left' };
         const classNames = ['in', 'out'].map((p) => Object.values(directions).map((d) => `${p}-${d}`)).reduce((a, b) => a.concat(b));
@@ -115,37 +80,39 @@ class InnerRoutingComponent extends Component {
             
             update(ev, prefix) {
                 this.element.classList.remove(...classNames);
-                this.element.classList.add(`${prefix}-${directions[getDirectionKey(ev, this.element)]}`);
+                this.element.classList
+                    .add(`${prefix}-${directions[getDirectionKey(ev, this.element)]}`);
             }
         }
 
         nodes.forEach(node => new Item(node));
-    }
+    };
 
-    updateNewPageValue = ({ target: { value }}) => {
-        if(!this.isValid('newPageName', value)) {
-            this.setState({ newPageNameError: 'Name is not valid', newPageName: value });
+    const updateNewPageValue = ({ target: { value }}) => {
+        if(!isValid('newPageName', value)) {
+            setNewPageNameError('Name is not valid');
+            setNewPageName(value);
             return;
         }
 
-        this.setState({ newPageNameError: '', newPageName: value, newPageRoute: `/${value.toLowerCase()}` });
-    }
+        setNewPageNameError('');
+        setNewPageName(value);
+        setNewPageRoute(`/${value.toLowerCase()}`);
+    };
 
-    navigateToPage = (pageId) => {
-        const project = Object.assign({}, this.props.project);
-        this.setState({ isLoading: false });
-        const history = this.props.history;
+    const navigateToPage = (pageId) => {
+        setIsLoading(false);
         history.push(`/projects/${project.id}/${pageId}`);
-    }
-    handleEnterPressed = (key) => {
+    };
+    const handleEnterPressed = (key) => {
         if (key === 'Enter') {
-            this.addNewPage();
+            addNewPage();
         }
-    }
+    };
 
-    addNewPage = () => {
-        const name = this.state.newPageName;
-        const route = this.state.newPageRoute;
+    const addNewPage = () => {
+        const name = newPageName;
+        const route = newPageRoute;
 
         const page = {
             id: uuid.v1(),
@@ -154,97 +121,86 @@ class InnerRoutingComponent extends Component {
             elements: []
         };
 
-        const pages = [...this.state.pages];
-        pages.push(page);
+        const updatedPages = [...pages];
+        updatedPages.push(page);
 
         const token = localStorage.getItem('token');
 
-        this.props.actions.updateProject(this.props.project.id, pages, token);
-        this.setState({ pages, newPageName: '', newPageRoute: '' }, () => {
-            this.executeStylesScript();
-        });
-    }
+        actions.updateProject(project.id, updatedPages, token);
+        setPages(updatedPages);
+        setNewPageName('');
+        setNewPageRoute('');
 
-    changeUpdateStatus = () => {
-        if(this.state.isUpdating) {
-            this.setState({ newPageName: '', newPageRoute: '', updatePage: null });
+        // setState callback
+        executeStylesScript();
+    };
+
+    const changeUpdateStatus = () => {
+        if(isUpdating) {
+            setNewPageName('');
+            setNewPageRoute('');
+            setUpdatePage(null);
         }
 
-        this.setState({ isUpdating: !this.state.isUpdating });
-    }
+        setIsUpdating(!isUpdating);
+    };
 
-    isValid = (field, value) => {
+    const isValid = useCallback((field, value) => {
         switch(field) {
         case 'newPageName':
             if(!value || !value.match('^[A-z0-9]+$') ||
-                    this.state.pages.find((p => p.name.toLowerCase() === value.toLowerCase()))) {
+                    pages.find((p => p.name.toLowerCase() === value.toLowerCase()))) {
                 return false;
             }
             return true;
         default:
             return true;
         }
-    }
+    }, [pages]);
 
-    selectPage = (id) => {
-        const pages = [...this.state.pages];
-        const page = Object.assign({}, pages.find(p => p.id === id));
-        this.setState({
-            updatePage: page,
-            newPageName: page.name,
-            newPageRoute: page.route
-        });
-    }
+    const selectPage = useCallback((id) => {
+        const page = Object.assign({}, [...pages].find(p => p.id === id));
+        setUpdatePage(page);
+        setNewPageName(page.name);
+        setNewPageRoute(page.route);
+    }, [pages]);
 
-    updatePage = () => {
+    const handleUpdatePage = useCallback(() => {
         const page = {
-            name: this.state.newPageName,
-            route: this.state.newPageRoute
+            name: newPageName,
+            route: newPageRoute
         };
 
-        const pages = [...this.state.pages];
-        const foundPageIndex = pages.findIndex((p) => p.id === this.state.updatePage.id);
+        const updatedPages = [...pages];
+        const foundPageIndex = updatedPages.findIndex((p) => p.id === updatePage.id);
 
-        page.elements = pages[foundPageIndex].elements;
-        page.id = pages[foundPageIndex].id;
-        pages[foundPageIndex] = page;
+        page.elements = updatedPages[foundPageIndex].elements;
+        page.id = updatedPages[foundPageIndex].id;
+        updatedPages[foundPageIndex] = page;
 
-        this.setState({
-            pages,
-            isUpdating: false,
-            updatePage: null,
-            newPageName: '',
-            newPageRoute: ''
-        });
-    }
+        clearState(updatedPages);
+    }, [pages, newPageName, newPageRoute, updatePage]);
 
-    deletePage = () => {
-        const pages = [...this.state.pages];
-        const foundPageIndex = pages.findIndex((p) => p.id === this.state.updatePage.id);
+    const deletePage = useCallback(() => {
+        const updatedPages = [...pages];
+        const foundPageIndex = updatedPages.findIndex((p) => p.id === updatePage.id);
 
-        pages.splice(foundPageIndex, 1);
-        this.setState({
-            pages,
-            isUpdating: false,
-            updatePage: null,
-            newPageName: '',
-            newPageRoute: ''
-        });
-    }
+        updatedPages.splice(foundPageIndex, 1);
+        clearState(updatedPages);
+    }, [pages, updatePage]);
 
-    navigateToDashboard = () => {
-        this.setState({ isLoading: false });
-        const history = this.props.history;
+    const navigateToDashboard = useCallback(() => {
+        setIsLoading(false);
         history.push('/dashboard');
-    }
+    }, [history]);
 
-    isValidClass = (errorField) => {
-        if(this.state[errorField]) {
+    const isValidClass = () => {
+        if(newPageNameError) {
             return 'routing-form-input-invalid';
         }
-    }
+    };
 
-    getComponentJSX = (component) => {
+    const getComponentJSX = (component) => {
         const style = Object.assign({}, component.style);
         if(style.height.endsWith('px')) {
             const height = parseInt(style.height, 10);
@@ -278,40 +234,45 @@ class InnerRoutingComponent extends Component {
                 style={style}/>);
         case componentTypes.Container:
             return (<div key={component.index} style={style}>{
-                component.children.map(child => this.getComponentJSX(child))
+                component.children.map(child => getComponentJSX(child))
             }</div>);
         default:
             return (<div key={component.index} style={style}>{component.innerText}</div>);
         }
-    }
+    };
 
-    getDeploymentInformation = () => {
-        const id = this.props.project.id;
+    const getDeploymentInformation = (() => {
+        const id = project.id;
         const token = 'bla';
-        this.props.actions.getDeployment(id, token);
-    }
+        actions.getDeployment(id, token);
+    }, [actions, project]);
 
-    getTabContent = () => {
-        switch(this.state.tab) {
+    const getTabContent = () => {
+        switch(tab) {
         case 'Pages':
             return (
                     <>
                         <PagesEditorComponent
-                            handleEnterPressed={this.handleEnterPressed}
-                            updateNewPageValue={this.updateNewPageValue}
-                            isValidClass={this.isValidClass}
-                            addNewPage={this.addNewPage}
-                            updatePage={this.updatePage}
-                            deletePage={this.deletePage}
-                            changeUpdateStatus={this.changeUpdateStatus}
-                            state={this.state}/>
+                            handleEnterPressed={handleEnterPressed}
+                            updateNewPageValue={updateNewPageValue}
+                            isValidClass={isValidClass}
+                            addNewPage={addNewPage}
+                            updatePage={handleUpdatePage}
+                            deletePage={deletePage}
+                            changeUpdateStatus={changeUpdateStatus}
+                            state={{
+                                newPageName,
+                                newPageNameError,
+                                isUpdating,
+                                updatePage
+                            }}/>
                         <ProjectPageComponent
-                            pages={this.state.pages}
-                            updatePage={this.updatePage}
-                            selectPage={this.selectPage}
-                            navigateToPage={this.navigateToPage}
-                            getComponentJSX={this.getComponentJSX}
-                            isUpdating={this.state.isUpdating}/>
+                            pages={pages}
+                            updatePage={handleUpdatePage}
+                            selectPage={selectPage}
+                            navigateToPage={navigateToPage}
+                            getComponentJSX={getComponentJSX}
+                            isUpdating={isUpdating}/>
                     </>
             );
         case 'Database':
@@ -319,82 +280,98 @@ class InnerRoutingComponent extends Component {
                 <DatabaseTabComponent/>
             );
         case 'Deployment':
-            this.getDeploymentInformation();
+            getDeploymentInformation();
             return (
                 <DeploymentTabComponent
-                    id={this.state.id}
-                    deploymentInformation={this.state.deploymentInformation}
-                    handleDeployProject={this.handleDeployProject}/>
+                    id={id}
+                    deploymentInformation={deploymentInformation}
+                    handleDeployProject={handleDeployProject}/>
             );
         default:
             return (
                 <ProjectPageComponent
-                    pages={this.state.pages}
-                    updatePage={this.updatePage}
-                    selectPage={this.selectPage}
-                    navigateToPage={this.navigateToPage}
-                    getComponentJSX={this.getComponentJSX}
-                    isUpdating={this.state.isUpdating}/>
+                    pages={pages}
+                    updatePage={handleUpdatePage}
+                    selectPage={selectPage}
+                    navigateToPage={navigateToPage}
+                    getComponentJSX={getComponentJSX}
+                    isUpdating={isUpdating}/>
             );
         }
-    }
+    };
 
-    render() {
-        if(this.state.isLoading) {
-            return (<LoadingComponent message='Fetching project'/>);
+    useEffect(() => {
+        if(tab === tabTypes[0]) {
+            executeStylesScript();
         }
 
-        return (
-            <div className='inner-routing-container'>
-                <div className='container'>
-                    <ProjectActionButtonsComponent
-                        returnFunction={this.navigateToDashboard}
-                        returnFunctionText='Back to dashboard'
-                        handleSaveProject={this.handleSaveProject}
-                        generateProject={this.generateProject}
-                    />
-                    <div className='center-container tabs-container'>
-                        { 
-                            tabs.map((tab, i) => {
-                                let className = 'header-tab';
-                                if(i === 0) {
-                                    className += ' left-tab';
-                                }
+        if(stateDeployment) {
+            setDeploymentInformation(stateDeployment);
+        }
 
-                                if(i === tabs.length - 1) {
-                                    className += ' right-tab';
-                                }
+        if(project.pages) {
+            setPages(project.pages);
+            setIsLoading(false);
+            // This was wrapped in setState callback
+            // Use callback for setting state
+            executeStylesScript();
+        }
 
-                                if(tab === this.state.tab) {
-                                    className += ' active';
-                                }
+        const token = localStorage.getItem('token');
+        if(!user.id && !token) {
+            history.push('/');
+            return;
+        }
+        
+        setId(match.params.id);
+        actions.updateProject(id, null, token);
+    }, [tab, stateDeployment, user, history, actions, match, id]);
 
-                                return (
-                                    <div
-                                        className={className}
-                                        onClick={() => this.setState({ tab })}
-                                        style={{
-                                            width: 100 / tabs.length + '%'
-                                        }} key={i}>
-                                        {tab}
-                                    </div>
-                                );}) 
-                        }
-                    </div>
-                </div>
-                { this.getTabContent() }
-            </div>
-        );
+    if(isLoading) {
+        return (<LoadingComponent message='Fetching project'/>);
     }
-}
 
-const mapStateToProps = (state) => {
-    return {
-        project: state.project,
-        user: state.user,
-        projectStatus: state.projectStatus,
-        deploymentInformation: state.deployment
-    };
+    return (
+        <div className='inner-routing-container'>
+            <div className='container'>
+                <ProjectActionButtonsComponent
+                    returnFunction={navigateToDashboard}
+                    returnFunctionText='Back to dashboard'
+                    handleSaveProject={handleSaveProject}
+                    generateProject={generateProject}
+                />
+                <div className='center-container tabs-container'>
+                    { 
+                        tabTypes.map((tabElement, i) => {
+                            let className = 'header-tab';
+                            if(i === 0) {
+                                className += ' left-tab';
+                            }
+
+                            if(i === tabTypes.length - 1) {
+                                className += ' right-tab';
+                            }
+
+                            if(tabElement === tab) {
+                                className += ' active';
+                            }
+
+                            return (
+                                <div
+                                    className={className}
+                                    onClick={() => setTab(tabElement)}
+                                    style={{
+                                        width: 100 / tabTypes.length + '%'
+                                    }} key={i}>
+                                    {tabElement}
+                                </div>
+                            );}) 
+                    }
+                </div>
+            </div>
+            { getTabContent() }
+        </div>
+    );
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -406,4 +383,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(InnerRoutingComponent);
+export default connect(null, mapDispatchToProps)(InnerRoutingComponent);
