@@ -55,7 +55,7 @@ const NewProjectPageComponent = ({ history, actions }) => {
             },
             pathname: '/templates'
         });
-    }
+    };
 
     const changeImage = async({ target }) => {
         if (!target.files || !target.files[0]) {
@@ -76,7 +76,7 @@ const NewProjectPageComponent = ({ history, actions }) => {
             setIsLoading(false);
             console.log(error);
         }
-    }
+    };
 
     useEffect(() => {
         if(error) {
@@ -136,6 +136,6 @@ const NewProjectPageComponent = ({ history, actions }) => {
                 onClick={redirectToTemplates}/>
         </div>
     );
-}
+};
 
 export default NewProjectPageComponent;

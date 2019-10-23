@@ -8,8 +8,8 @@ import ButtonComponent from '../../common/ButtonComponent';
 const RegisterComponent = ({ history }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [passwordRepeat, setPasswordRepeat] = useState('');
     const imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnUMov053v0hONBpUNyQoint83KzTEMW_vXxNWHOEBbaqATtTq';
     
@@ -30,7 +30,6 @@ const RegisterComponent = ({ history }) => {
         }
 
         setIsLoading(true);
-        debugger;
 
         dispatch(authenticationActions.register(
             username,
@@ -103,6 +102,6 @@ const RegisterComponent = ({ history }) => {
             </div>
         </div>
     );
-}
+};
  
 export default RegisterComponent;

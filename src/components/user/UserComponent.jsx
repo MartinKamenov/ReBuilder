@@ -20,7 +20,7 @@ const UserComponent = ({ history }) => {
 
     const dispatch = useDispatch();
     const loginByToken = useCallback((token, message) => {
-        dispatch(authenticationActions.loginByToken(token, message))
+        dispatch(authenticationActions.loginByToken(token, message));
     }, [dispatch]);
 
     const logout = useCallback(() => {
@@ -46,7 +46,7 @@ const UserComponent = ({ history }) => {
             setIsLoading(false);
             console.log(error);
         }
-    }
+    };
 
     const updateUser = async () => {
         const token = localStorage.getItem('token');
@@ -60,7 +60,7 @@ const UserComponent = ({ history }) => {
         await apiService.updateUser(userInformation, token);
 
         loginByToken(token, successMessages.PROFILE_SAVED);
-    }
+    };
 
     useEffect(() => {
         if(!user.id && !token) {
@@ -117,6 +117,6 @@ const UserComponent = ({ history }) => {
             </div>
         </div>
     );
-}
+};
  
 export default UserComponent;
