@@ -38,11 +38,11 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         setUpdatePage(null);
         setNewPageName('');
         setNewPageRoute('');
-    }
+    };
 
     const generateProject = () => {
         projectGenerator.generateProject(project.name, [...project.pages], project.projectImageUrl);
-    }
+    };
 
     const handleSaveProject = () => {
         const token = localStorage.getItem('token');
@@ -51,11 +51,11 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         }
         
         actions.updateProject(id, [...pages], token);
-    }
+    };
 
     const handleDeployProject = async () => {
         actions.deployProject(id, user.token);
-    }
+    };
 
     const executeStylesScript = () => {
         const nodes = [].slice.call(document.querySelectorAll('li'), 0);
@@ -86,7 +86,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         }
 
         nodes.forEach(node => new Item(node));
-    }
+    };
 
     const updateNewPageValue = ({ target: { value }}) => {
         if(!isValid('newPageName', value)) {
@@ -97,18 +97,18 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
 
         setNewPageNameError('');
         setNewPageName(value);
-        setNewPageRoute(`/${value.toLowerCase()}`)
-    }
+        setNewPageRoute(`/${value.toLowerCase()}`);
+    };
 
     const navigateToPage = (pageId) => {
         setIsLoading(false);
         history.push(`/projects/${project.id}/${pageId}`);
-    }
+    };
     const handleEnterPressed = (key) => {
         if (key === 'Enter') {
             addNewPage();
         }
-    }
+    };
 
     const addNewPage = () => {
         const name = newPageName;
@@ -133,7 +133,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
 
         // setState callback
         executeStylesScript();
-    }
+    };
 
     const changeUpdateStatus = () => {
         if(isUpdating) {
@@ -143,7 +143,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         }
 
         setIsUpdating(!isUpdating);
-    }
+    };
 
     const isValid = useCallback((field, value) => {
         switch(field) {
@@ -198,7 +198,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         if(newPageNameError) {
             return 'routing-form-input-invalid';
         }
-    }
+    };
 
     const getComponentJSX = (component) => {
         const style = Object.assign({}, component.style);
@@ -239,7 +239,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
         default:
             return (<div key={component.index} style={style}>{component.innerText}</div>);
         }
-    }
+    };
 
     const getDeploymentInformation = (() => {
         const id = project.id;
@@ -298,12 +298,11 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
                     isUpdating={isUpdating}/>
             );
         }
-    }
+    };
 
     useEffect(() => {
         if(tab === tabTypes[0]) {
             executeStylesScript();
-            return;
         }
 
         if(stateDeployment) {
@@ -373,7 +372,7 @@ const InnerRoutingComponent = ({ history, match, actions }) => {
             { getTabContent() }
         </div>
     );
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
