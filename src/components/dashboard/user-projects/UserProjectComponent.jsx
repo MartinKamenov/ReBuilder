@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const UserProjectComponent = ({projectDetails}) => {
     return (
-        <Link className='normal-a' to={ '/projects/' + projectDetails.id }>
+        <Link style={{ textDecoration: 'none' }} to={ '/projects/' + projectDetails.id }>
             <div className='dashboard-project-component'>
                 <div className='dashboard-project-image-container'>
                     <img
