@@ -222,6 +222,7 @@ class EditProjectComponent extends Component {
     }
 
     handleComponentValueChange = (value, field, componentIndex) => {
+        debugger;
         const droppedComponents = this.state.droppedComponents;
         let componentInEditMode;
         let index;
@@ -232,7 +233,7 @@ class EditProjectComponent extends Component {
             componentInEditMode = Object.assign({}, componentInEditMode);
         } else {
             componentInEditMode = this.getComponentFromIndex(componentIndex);
-            index = componentIndex;
+            index = droppedComponents.findIndex(c => c.index === componentIndex);
         }
         if(value.hex) {
             const style = Object.assign({}, componentInEditMode.style);

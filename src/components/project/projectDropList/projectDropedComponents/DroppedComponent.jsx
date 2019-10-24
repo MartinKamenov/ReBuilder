@@ -25,6 +25,7 @@ const getComponent = (
     case componentTypes.Header:
         component = (
             <h1
+                draggable={false}
                 key={droppedComponent.index}
                 id={droppedComponent.index}
                 style={elementStyle}
@@ -38,7 +39,8 @@ const getComponent = (
         break;
     case componentTypes.Input:
         component = (
-            <input 
+            <input
+                draggable={false}
                 key={droppedComponent.index}
                 id={droppedComponent.index}
                 style={elementStyle}
@@ -53,6 +55,7 @@ const getComponent = (
     case componentTypes.Text:
         component = (
             <div
+                draggable={false}
                 key={droppedComponent.index}
                 id={droppedComponent.index}
                 style={elementStyle}
@@ -67,6 +70,7 @@ const getComponent = (
     case componentTypes.Button:
         component = (
             <button
+                draggable={false}
                 key={droppedComponent.index}
                 id={droppedComponent.index}
                 style={elementStyle}
@@ -81,8 +85,8 @@ const getComponent = (
     case componentTypes.Image:
         component = (
             <img
-                key={droppedComponent.index}
                 draggable={false}
+                key={droppedComponent.index}
                 id={droppedComponent.index}
                 alt='component'
                 src={droppedComponent.src}
@@ -96,6 +100,7 @@ const getComponent = (
     case componentTypes.RoutingLink:
         component = (
             <a
+                draggable={false}
                 key={droppedComponent.index}
                 id={droppedComponent.index}
                 href={droppedComponent.to}
@@ -111,6 +116,7 @@ const getComponent = (
     case componentTypes.Container:
         component = (
             <Droppable
+                draggable={false}
                 key={droppedComponent.index}
                 types={['component']} // <= allowed drop types
                 onDrop={(event, nativeEvent) => 
@@ -134,6 +140,7 @@ const getComponent = (
     case componentTypes.NavigationBar:
         component = (
             <Droppable
+                draggable={false}
                 key={droppedComponent.index}
                 types={['component']} // <= allowed drop types
                 onDrop={(event, nativeEvent) => 
@@ -161,6 +168,7 @@ const getComponent = (
     default:
         component = (
             <div
+                draggable={false}
                 key={droppedComponent.index}
                 id={droppedComponent.index}
                 style={elementStyle}
@@ -293,6 +301,7 @@ const DroppedComponent = ({
             </div>
         );
     }
+    
 
     const draggableStyle = {
         display: droppedComponent.style.display,
@@ -303,10 +312,14 @@ const DroppedComponent = ({
         marginRight: droppedComponent.style.marginRight
     };
     const elementStyle = Object.assign({}, droppedComponent.style);
+    const resizableStyle = {
+        width: droppedComponent.style.width,
+        height: droppedComponent.style.height
+    };
     Object.keys(draggableStyle).forEach(k => {
         delete elementStyle[k];
     });
-    elementStyle.width = '100%';
+    elementStyle.width = droppedComponent.style.width;
     elementStyle.display = 'inline-block';
     const component = getComponent(
         droppedComponent,
@@ -314,18 +327,11 @@ const DroppedComponent = ({
         handleDropContainerComponent,
         elementStyle
     );
-    const resizableStyle = {
-        width: '100%',
-    };
     
     return (
-        <Draggable 
-            style={draggableStyle}
-            onDragStart={() => componentDragStart(droppedComponent.index)}
-            onDragOver={rearangeComponents}
-            onDragEnd={componentDragEnd}>
             <Resizable
-                style={resizableStyle}
+                size={resizableStyle}
+                style={droppedComponent.style}
                 onResizeStart={(event, direction, refToElement, delta) => {
                     if(droppedComponent.style.width.endsWith('%')) {
                         initialSizes.width =
@@ -360,10 +366,14 @@ const DroppedComponent = ({
                         handleComponentValueChange(newHeight + 'px', 'style.lineHeight', droppedComponent.index);
                     }
             }}>
-                {component}
+             <Draggable 
+                style={draggableStyle}
+                onDragStart={() => componentDragStart(droppedComponent.index)}
+                onDragOver={rearangeComponents}
+                onDragEnd={componentDragEnd}>
+                    {component}
+                </Draggable>
             </Resizable>
-            
-        </Draggable>
     );
 };
 
