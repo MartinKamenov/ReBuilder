@@ -222,7 +222,6 @@ class EditProjectComponent extends Component {
     }
 
     handleComponentValueChange = (value, field, componentIndex) => {
-        debugger;
         const droppedComponents = this.state.droppedComponents;
         let componentInEditMode;
         let index;

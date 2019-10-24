@@ -329,51 +329,51 @@ const DroppedComponent = ({
     );
     
     return (
-            <Resizable
-                size={resizableStyle}
-                style={droppedComponent.style}
-                onResizeStart={(event, direction, refToElement, delta) => {
-                    if(droppedComponent.style.width.endsWith('%')) {
-                        initialSizes.width =
+        <Resizable
+            size={resizableStyle}
+            style={droppedComponent.style}
+            onResizeStart={(event, direction, refToElement, delta) => {
+                if(droppedComponent.style.width.endsWith('%')) {
+                    initialSizes.width =
                             6 * parseInt(droppedComponent.style.width, 10);
-                    } else {
-                        initialSizes.width =
+                } else {
+                    initialSizes.width =
                             parseInt(droppedComponent.style.width, 10);
-                    }
-                    if(droppedComponent.style.height.endsWith('%')) {
-                        initialSizes.height =
+                }
+                if(droppedComponent.style.height.endsWith('%')) {
+                    initialSizes.height =
                             3 * parseInt(droppedComponent.style.height, 10);
-                    } else {
-                        initialSizes.height =
+                } else {
+                    initialSizes.height =
                             parseInt(droppedComponent.style.height, 10);
+                }
+            }}
+            onResize={(event, direction, refToElement, delta) => {
+                const { width, height } = delta;
+                if(width !== 0) {
+                    let newWidth = initialSizes.width + width;
+                    if(newWidth < 10) {
+                        newWidth = 10;
                     }
-                }}
-                onResize={(event, direction, refToElement, delta) => {
-                    const { width, height } = delta;
-                    if(width !== 0) {
-                        let newWidth = initialSizes.width + width;
-                        if(newWidth < 10) {
-                            newWidth = 10;
-                        }
-                        handleComponentValueChange(newWidth + 'px', 'style.width', droppedComponent.index);
+                    handleComponentValueChange(newWidth + 'px', 'style.width', droppedComponent.index);
+                }
+                if(height !== 0) {
+                    let newHeight = initialSizes.height + height;
+                    if(newHeight < 10) {
+                        newHeight = 10;
                     }
-                    if(height !== 0) {
-                        let newHeight = initialSizes.height + height;
-                        if(newHeight < 10) {
-                            newHeight = 10;
-                        }
-                        handleComponentValueChange(newHeight + 'px', 'style.height', droppedComponent.index);
-                        handleComponentValueChange(newHeight + 'px', 'style.lineHeight', droppedComponent.index);
-                    }
+                    handleComponentValueChange(newHeight + 'px', 'style.height', droppedComponent.index);
+                    handleComponentValueChange(newHeight + 'px', 'style.lineHeight', droppedComponent.index);
+                }
             }}>
-             <Draggable 
+            <Draggable 
                 style={draggableStyle}
                 onDragStart={() => componentDragStart(droppedComponent.index)}
                 onDragOver={rearangeComponents}
                 onDragEnd={componentDragEnd}>
-                    {component}
-                </Draggable>
-            </Resizable>
+                {component}
+            </Draggable>
+        </Resizable>
     );
 };
 
