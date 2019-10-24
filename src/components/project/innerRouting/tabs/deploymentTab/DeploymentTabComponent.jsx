@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ButtonComponent from '../../../../common/ButtonComponent';
 import PropTypes from 'prop-types';
 import websocketService from '../../../../../service/websocket.service';
@@ -17,11 +17,6 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
         window.open(url, '_blank');
     };
 
-    useEffect(() => {
-        const createdConnection = websocketService.connectDeployment(id);
-        createdConnection.onmessage = addDeploymentMessage;
-    }, [id]);
-
     const deploymentCallback = (message) => {
         setDeploymentMessages((prev) => {
             const arr = [...prev];
@@ -35,8 +30,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
         });
     };
 
-    const addDeploymentMessage = async(evt) => {
-        const data = evt.data;
+    const addDeploymentMessage = useCallback(async({ data }) => {
         const message = JSON.parse(data);
         const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
 
@@ -53,7 +47,12 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
         }
 
         deploymentCallback(message);
-    };
+    }, []);
+
+    useEffect(() => {
+        const createdConnection = websocketService.connectDeployment(id);
+        createdConnection.onmessage = addDeploymentMessage;
+    }, [id, addDeploymentMessage]);
 
     const visualizeDeploymentInformation = () => {
         if(typeof deploymentInformation === 'string') {
