@@ -89,7 +89,15 @@ const NewProjectPageComponent = ({ history }) => {
             setIsLoading(false);
             history.push(`/projects/${project.id}`);
         }
-    }, [project, history, error, dispatch, isCreated]);
+    }, [
+        project,
+        history,
+        error,
+        dispatch,
+        isCreated,
+        user,
+        loginByToken
+    ]);
 
     if(isLoading) {
         return <LoadingComponent message='Creating project' />;

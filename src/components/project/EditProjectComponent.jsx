@@ -221,10 +221,20 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents, previousComponent: {}, saveStatus: SaveStatus.Updated });
     }
 
-    handleComponentValueChange = (value, field) => {
+    handleComponentValueChange = (value, field, componentIndex) => {
+        debugger;
         const droppedComponents = this.state.droppedComponents;
-        let {componentInEditMode, index} = this.getComponentInEditMode();
-        componentInEditMode = Object.assign({}, componentInEditMode);
+        let componentInEditMode;
+        let index;
+        if(!componentIndex) {
+            const result = this.getComponentInEditMode();
+            componentInEditMode = result.componentInEditMode;
+            index = result.index;
+            componentInEditMode = Object.assign({}, componentInEditMode);
+        } else {
+            componentInEditMode = this.getComponentFromIndex(componentIndex);
+            index = droppedComponents.findIndex(c => c.index === componentIndex);
+        }
         if(value.hex) {
             const style = Object.assign({}, componentInEditMode.style);
             let opacity = value.rgb.a;
