@@ -14,7 +14,8 @@ const ElementToolbarComponent = ({
     component,
     handleComponentValueChange,
     handleComponentImageChange,
-    actions}) => {
+    actions
+}) => {
     if(!component) {
         return (
             <div className='toolbar-container-inactive'>
