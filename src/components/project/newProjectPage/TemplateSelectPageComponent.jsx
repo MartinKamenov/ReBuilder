@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import templates from '../../../service/ready-templates/';
-import ButtonComponent from '../../common/ButtonComponent';
 import uuid from 'uuid';
 import * as projectActions from '../../../actions/projectActions';
 import * as authenticationActions from '../../../actions/authenticationActions';
@@ -9,6 +8,7 @@ import { connect } from 'react-redux';
 
 import './TemplateSelectPageComponent.css';
 import LoadingComponent from '../../common/LoadingComponent';
+import TemplatesTabComponent from './TemplatesTabComponent';
 
 class TemplateSelectPageComponent extends Component {
     state = {
@@ -42,16 +42,14 @@ class TemplateSelectPageComponent extends Component {
         if(this.state.isLoading) {
             return <LoadingComponent message='Creating project'/>;   
         }
-
         return (
             <div className='container'>
-                {templates.map((template, i) => (
-                    <ButtonComponent
-                        type='success'
-                        onClick={() => this.selectTemplate(i)}
-                        key={i}>
-                        {template.name}
-                    </ButtonComponent>
+                {templates.map((template) => (
+                    <TemplatesTabComponent
+                        selectTemplate={this.selectTemplate}
+                        template={template}
+                        key={template.id}>
+                    </TemplatesTabComponent>
                 ))}
             </div>
         );
