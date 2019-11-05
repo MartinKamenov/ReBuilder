@@ -60,7 +60,7 @@ const DashboardComponent = ({ location: { search } }) => {
             </nav>
             <UserProjectsListComponent
                 projects={pagingService
-                    .getCollectionByPage(user.projects, page)}/>
+                    .getCollectionByPage(user.projects, page, collectionByPage)}/>
             <PagingComponent
                 page={page}
                 pagesNumbers={pagingService.getPagesNumbers(user.projects, page, collectionByPage)}
