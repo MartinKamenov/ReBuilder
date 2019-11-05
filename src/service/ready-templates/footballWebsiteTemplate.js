@@ -3,7 +3,7 @@ import displayValues from '../../components/project/components/displayValues';
 import textAlignValues from '../../components/project/components/textAlignValues';
 import fontWeightValues from '../../components/project/components/fontWeightValues';
 
-const carsTemplate =
+const footballTemplate =
 {
     id: uuid.v1(),
     name: 'Cars website',
@@ -359,4 +359,4 @@ const carsTemplate =
     ]
 };
 
-export default carsTemplate;
+export default footballTemplate;

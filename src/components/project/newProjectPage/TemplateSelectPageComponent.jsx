@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import templates from '../../../service/ready-templates/';
-import ButtonComponent from '../../common/ButtonComponent';
 import uuid from 'uuid';
 // import * as authenticationActions from '../../../actions/authenticationActions';
 import * as projectActions from '../../../actions/projectActions';
@@ -9,6 +8,7 @@ import PropTypes from 'prop-types';
 
 import './TemplateSelectPageComponent.css';
 import LoadingComponent from '../../common/LoadingComponent';
+import TemplatesTabComponent from './TemplatesTabComponent';
 
 const TemplateSelectPageComponent = ({ history, location }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -43,18 +43,17 @@ const TemplateSelectPageComponent = ({ history, location }) => {
     }, [project, history]);
 
     if(isLoading) {
-        return <LoadingComponent message='Creating project'/>;   
+        return <LoadingComponent message='Creating project'/>;
     }
 
     return (
         <div className='container'>
-            {templates.map((template, i) => (
-                <ButtonComponent
-                    type='success'
-                    onClick={() => selectTemplate(i)}
-                    key={i}>
-                    {template.name}
-                </ButtonComponent>
+            {templates.map((template) => (
+                <TemplatesTabComponent
+                    selectTemplate={selectTemplate}
+                    template={template}
+                    key={template.id}>
+                </TemplatesTabComponent>
             ))}
         </div>
     );
