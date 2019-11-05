@@ -10,6 +10,7 @@ import pagingService from '../../service/paging.service';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
 
+const collectionByPage = 6;
 const DashboardComponent = ({ location: { search } }) => {
     const [page, setPage] = useState(1);
 
@@ -62,8 +63,8 @@ const DashboardComponent = ({ location: { search } }) => {
                     .getCollectionByPage(user.projects, page)}/>
             <PagingComponent
                 page={page}
-                pagesNumbers={pagingService.getPagesNumbers(user.projects, page)}
-                totalPagesCount={pagingService.getTotalPagesCount(user.projects)}
+                pagesNumbers={pagingService.getPagesNumbers(user.projects, page, collectionByPage)}
+                totalPagesCount={pagingService.getTotalPagesCount(user.projects, collectionByPage)}
                 changePage={changePage}/>
         </div>
     );

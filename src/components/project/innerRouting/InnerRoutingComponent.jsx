@@ -18,6 +18,9 @@ import PagesEditorComponent from './tabs/pageTab/PagesEditorComponent';
 import DatabaseTabComponent from './tabs/databaseTab/DatabaseTabComponent';
 import DeploymentTabComponent from './tabs/deploymentTab/DeploymentTabComponent';
 import tabs from './tabs/projectTabs';
+import queryString from 'query-string';
+
+const collectionByPage = 8;
 
 class InnerRoutingComponent extends Component {
     state = {
@@ -34,7 +37,9 @@ class InnerRoutingComponent extends Component {
         saveStatus: SaveStatus.Saved,
         tab: tabs[0],
 
-        deploymentInformation: null
+        deploymentInformation: null,
+
+        singlePage: 1
     }
     
     componentDidMount() {
@@ -47,6 +52,10 @@ class InnerRoutingComponent extends Component {
         const id = this.props.match.params.id;
         this.setState({ id });
         this.props.actions.updateProject(id, null, token);
+
+        let queryObject = queryString.parse(this.props.location.search);
+        const page = queryObject.page ? parseInt(queryObject.page, 10) : 1;
+        this.setState({ singlePage: page });
     }
 
     componentDidUpdate() {
@@ -64,6 +73,10 @@ class InnerRoutingComponent extends Component {
                 this.executeStylesScript();
             });
         }
+    }
+
+    changePage = (singlePage) => {
+        this.setState({ singlePage });
     }
 
     generateProject = () => {
@@ -307,6 +320,9 @@ class InnerRoutingComponent extends Component {
                             state={this.state}/>
                         <ProjectPageComponent
                             pages={this.state.pages}
+                            singlePage={this.state.singlePage}
+                            changePage={this.changePage}
+                            collectionByPage={collectionByPage}
                             updatePage={this.updatePage}
                             selectPage={this.selectPage}
                             navigateToPage={this.navigateToPage}
@@ -330,6 +346,9 @@ class InnerRoutingComponent extends Component {
             return (
                 <ProjectPageComponent
                     pages={this.state.pages}
+                    singlePage={this.state.singlePage}
+                    changePage={this.changePage}
+                    collectionByPage={collectionByPage}
                     updatePage={this.updatePage}
                     selectPage={this.selectPage}
                     navigateToPage={this.navigateToPage}

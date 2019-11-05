@@ -1,8 +1,7 @@
-const elementsOnPage = 6;
 const pagesMinimalCount = 5;
 
 const pagingService = {
-    getCollectionByPage: (collection, page) => {
+    getCollectionByPage: (collection, page, elementsOnPage) => {
         page = parseInt(page, 10);
         if(!page) {
             page = 1;
@@ -11,7 +10,7 @@ const pagingService = {
         return collection.slice((page - 1) * elementsOnPage, page * elementsOnPage);
     },
 
-    getPagesNumbers: function(collection, page) {
+    getPagesNumbers: function(collection, page, elementsOnPage) {
         const totalCountOfPages = Math.ceil(collection.length / elementsOnPage);
         page = parseInt(page, 10);
         let result = [];
@@ -31,7 +30,7 @@ const pagingService = {
         return this.fillInArray(page - parseInt(pagesMinimalCount / 2, 10), page + parseInt(pagesMinimalCount / 2, 10));
     },
 
-    getTotalPagesCount: (collection) => {
+    getTotalPagesCount: (collection, elementsOnPage) => {
         return Math.ceil(collection.length / elementsOnPage);
     },
 
