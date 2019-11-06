@@ -99,7 +99,6 @@ PagesEditorComponent.propTypes = {
         newPageName: PropTypes.string.isRequired,
         newPageNameError: PropTypes.string.isRequired,
         newPageRoute: PropTypes.string.isRequired,
-        newPageRouteError: PropTypes.string.isRequired,
         isUpdating: PropTypes.bool.isRequired,
         updatePage: PropTypes.object
     }).isRequired
