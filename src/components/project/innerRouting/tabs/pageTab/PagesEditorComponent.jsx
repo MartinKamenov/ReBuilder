@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonComponent from '../../../../common/ButtonComponent';
+import ButtonComponent from '../../../../common/button/ButtonComponent';
 import PropTypes from 'prop-types';
 
 import './PagesEditorComponent.css';

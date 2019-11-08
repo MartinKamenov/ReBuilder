@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import templates from '../../../service/ready-templates/';
-import ButtonComponent from '../../common/ButtonComponent';
+import ButtonComponent from '../../common/button/ButtonComponent';
 import uuid from 'uuid';
 // import * as authenticationActions from '../../../actions/authenticationActions';
 import * as projectActions from '../../../actions/projectActions';
@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './TemplateSelectPageComponent.css';
-import LoadingComponent from '../../common/LoadingComponent';
+import LoadingComponent from '../../common/loading-page/LoadingComponent';
 
 const TemplateSelectPageComponent = ({ history, location }) => {
     const [isLoading, setIsLoading] = useState(false);

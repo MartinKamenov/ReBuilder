@@ -11,7 +11,7 @@ import InnerRoutingComponent from '../project/innerRouting/InnerRoutingComponent
 import * as authenticationActions from '../../actions/authenticationActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify-redux';
-import LoadingComponent from '../common/LoadingComponent';
+import LoadingComponent from '../common/loading-page/LoadingComponent';
 import UserComponent from '../user/UserComponent';
 import TemplateSelectPageComponent from '../project/newProjectPage/TemplateSelectPageComponent';
 import ServicesComponent from '../services/ServicesComponent';
