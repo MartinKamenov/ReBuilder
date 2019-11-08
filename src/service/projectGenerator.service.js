@@ -12,6 +12,17 @@ const projectGenerator = {
         zip.generateAsync({type: 'blob'}).then(function(content) {
             FileSaver.saveAs(content, `${name}.zip`);
         });
+    },
+
+    generateProjectFiles: (templates, name) => {
+        let zip = new JSZip();
+
+        templates.forEach((templateObject) => {
+            zip.file(templateObject.filePath, templateObject.template);
+        });
+        zip.generateAsync({type: 'blob'}).then(function(content) {
+            FileSaver.saveAs(content, `${name}.zip`);
+        });
     }
 };
 
