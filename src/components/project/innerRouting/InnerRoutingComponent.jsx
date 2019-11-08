@@ -4,14 +4,14 @@ import * as deploymentActions from '../../../actions/deploymentActions';
 import * as getDeploymentActions from '../../../actions/getDeploymentActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import LoadingComponent from '../../common/LoadingComponent';
+import LoadingComponent from '../../common/loading-page/LoadingComponent';
 import uuid from 'uuid';
 import projectGenerator from '../../../service/projectGenerator.service';
 import SaveStatus from '../components/saveStatus';
 
 import './InnerRoutingComponent.css';
 import './PageElementsStyle.css';
-import ProjectActionButtonsComponent from '../../common/ProjectActionButtonsComponent';
+import ProjectActionButtonsComponent from '../../common/project-actions-buttons/ProjectActionButtonsComponent';
 import { componentTypes } from '../components/componentTypes';
 import ProjectPageComponent from './tabs/pageTab/PagesTabComponent';
 import PagesEditorComponent from './tabs/pageTab/PagesEditorComponent';
