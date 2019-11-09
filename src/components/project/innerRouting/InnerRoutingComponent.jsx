@@ -6,8 +6,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoadingComponent from '../../common/loading-page/LoadingComponent';
 import uuid from 'uuid';
-import projectGenerator from '../../../service/projectGenerator.service';
 import SaveStatus from '../components/saveStatus';
+import apiService from '../../../service/api.service';
+import projectGenerator from '../../../service/projectGenerator.service';
 
 import './InnerRoutingComponent.css';
 import './PageElementsStyle.css';
@@ -66,13 +67,12 @@ class InnerRoutingComponent extends Component {
         }
     }
 
-    generateProject = () => {
-        const pages = [...this.props.project.pages];
-        const index = pages.findIndex((p) => p.id === this.state.pageId);
-        pages[index] = this.state.page;
-
-        const project = Object.assign({}, this.props.project);
-        projectGenerator.generateProject(project.name, pages, project.projectImageUrl);
+    generateProject = async () => {
+        const token = localStorage.getItem('token');
+        const response = await apiService.getProjectTemplates(this.props.project.id, token);
+        const templates = response.data;
+        const name = this.props.project.name;
+        projectGenerator.generateProjectFiles(templates, name);
     }
 
     handleSaveProject = () => {

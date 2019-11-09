@@ -93,13 +93,12 @@ class EditProjectComponent extends Component {
         }
     }
 
-    generateProject = () => {
-        const pages = [...this.props.project.pages];
-        const index = pages.findIndex((p) => p.id === this.state.pageId);
-        pages[index] = this.state.page;
-
-        const project = Object.assign({}, this.props.project);
-        projectGenerator.generateProject(project.name, pages, project.projectImageUrl);
+    generateProject = async () => {
+        const token = localStorage.getItem('token');
+        const response = await apiService.getProjectTemplates(this.props.project.id, token);
+        const templates = response.data;
+        const name = this.props.project.name;
+        projectGenerator.generateProjectFiles(templates, name);
     }
 
     handleDropComponent = (event) => {
