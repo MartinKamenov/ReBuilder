@@ -4,11 +4,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .center-container {
   text-align: center;
 }
@@ -31,7 +26,7 @@ code {
 }
 
 * {
-  font-family: Georgia, 'Times New Roman', Times, serif !important;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;
 }
 
 ::-webkit-scrollbar {
