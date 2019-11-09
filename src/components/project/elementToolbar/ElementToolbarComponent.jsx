@@ -27,13 +27,31 @@ const ElementToolbarComponent = ({
         }
     }
 
-    const handleClick = ({ target }) => {
+    const hasToolbarParent = (element) => {
         debugger;
+        if(!element.parentElement) {
+            return false;
+        } else if(element.className === 'toolbar-container') {
+            return true;
+        }
+
+        return hasToolbarParent(element.parentElement);
+    }
+
+    const handleClick = ({ target }) => {
+        if(!hasToolbarParent(target)) {
+            actions.handleChangeEditMode(component.index);
+        }
     }
 
     useEffect(() => {
-        document.addEventListener("click", handleClick);
-        document.addEventListener("keydown", handleEnterPressed);
+        if(component) {
+            document.addEventListener("click", handleClick);
+            document.addEventListener("keydown", handleEnterPressed);
+        } else {
+            document.removeEventListener("click", handleClick);
+            document.removeEventListener("keydown", handleEnterPressed);
+        }
 
         return () => {
             document.removeEventListener("click", handleClick);
