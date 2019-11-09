@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import UserProjectsListComponent from './user-projects/UserProjectsListComponent';
 import { Link } from 'react-router-dom';
-import PagingComponent from '../common/PagingComponent';
+import PagingComponent from '../common/paging/PagingComponent';
 import pagingService from '../../service/paging.service';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';

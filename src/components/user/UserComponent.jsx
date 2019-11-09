@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUndo, faSave } from '@fortawesome/free-solid-svg-icons';
 
-import ButtonComponent from '../common/ButtonComponent';
+import ButtonComponent from '../common/button/ButtonComponent';
 import apiService from '../../service/api.service';
-import LoadingComponent from '../common/LoadingComponent';
+import LoadingComponent from '../common/loading-page/LoadingComponent';
 import successMessages from '../../constants/successMessages';
 import PropTypes from 'prop-types';
 

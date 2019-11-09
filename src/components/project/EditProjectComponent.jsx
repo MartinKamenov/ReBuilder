@@ -4,7 +4,7 @@ import ProjectPageComponent from './projectDropList/ProjectPageComponent';
 import ElementToolbarComponent from './elementToolbar/ElementToolbarComponent';
 import componentObjects, { componentTypes } from './components/componentTypes';
 import projectGenerator from '../../service/projectGenerator.service';
-import LoadingComponent from '../common/LoadingComponent';
+import LoadingComponent from '../common/loading-page/LoadingComponent';
 import * as projectActions from '../../actions/projectActions';
 import * as deploymentActions from '../../actions/deploymentActions';
 import uuid from 'uuid';
@@ -14,8 +14,8 @@ import apiService from '../../service/api.service';
 
 import './EditProjectComponent.css';
 import SaveStatus from './components/saveStatus';
-import SaveStatusComponent from '../common/SaveStatusComponent';
-import ProjectActionButtonsComponent from '../common/ProjectActionButtonsComponent';
+import SaveStatusComponent from '../common/save-status/SaveStatusComponent';
+import ProjectActionButtonsComponent from '../common/project-actions-buttons/ProjectActionButtonsComponent';
 
 class EditProjectComponent extends Component {
     state = {

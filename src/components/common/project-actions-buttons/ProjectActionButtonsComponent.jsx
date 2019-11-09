@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ButtonComponent from './ButtonComponent';
+import ButtonComponent from '../button/ButtonComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faSave, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
