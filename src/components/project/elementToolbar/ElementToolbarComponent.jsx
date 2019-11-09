@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ChromePicker } from 'react-color';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faWindowClose, faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
 import './ElementToolbarComponent.css';
 import ButtonComponent from '../../common/button/ButtonComponent';
 
@@ -27,10 +27,16 @@ const ElementToolbarComponent = ({
         }
     }
 
+    const handleClick = ({ target }) => {
+        debugger;
+    }
+
     useEffect(() => {
+        document.addEventListener("click", handleClick);
         document.addEventListener("keydown", handleEnterPressed);
 
         return () => {
+            document.removeEventListener("click", handleClick);
             document.removeEventListener("keydown", handleEnterPressed);
         };
     }, [component])
@@ -65,6 +71,16 @@ const ElementToolbarComponent = ({
         <div
             className='toolbar-container'
             onBlur={() => actions.handleChangeEditMode(component.index)}>
+            <div className='toolbar-toolbar'>
+                <div
+                    className='close-toolbar-button'
+                    onClick={() => actions.handleChangeEditMode(component.index)}>
+                    <FontAwesomeIcon
+                        color='#ff0000'
+                        size='lg'
+                        icon={faWindowClose} />
+                </div>
+            </div>
             <div className='vertical-scrollable-container toolbar-scrollable'>
                 <div className='toolbar-element-container'>
                     <h3>{component.name}</h3>
