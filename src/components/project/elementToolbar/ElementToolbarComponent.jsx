@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { ChromePicker } from 'react-color';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,19 +16,20 @@ const ElementToolbarComponent = ({
     handleComponentImageChange,
     actions
 }) => {
-    const handleEnterPressed = ({ key }) => {
+    const handleEnterPressed = useCallback(({ key }) => {
         switch(key) {
-            case 'Enter':
-                actions.handleChangeEditMode(component.index)
-                break;
-            case 'Escape':
-                actions.handleForceExitEditMode(component.index)
-                break;
+        case 'Enter':
+            actions.handleChangeEditMode(component.index);
+            break;
+        case 'Escape':
+            actions.handleForceExitEditMode(component.index);
+            break;
+        default:
+            break;
         }
-    }
+    }, [actions, component]);
 
-    const hasToolbarParent = (element) => {
-        debugger;
+    const hasToolbarParent = useCallback((element) => {
         if(!element.parentElement) {
             return false;
         } else if(element.className === 'toolbar-container') {
@@ -36,28 +37,28 @@ const ElementToolbarComponent = ({
         }
 
         return hasToolbarParent(element.parentElement);
-    }
+    }, []);
 
-    const handleClick = ({ target }) => {
+    const handleClick = useCallback(({ target }) => {
         if(!hasToolbarParent(target)) {
             actions.handleChangeEditMode(component.index);
         }
-    }
+    }, [component, hasToolbarParent, actions]);
 
     useEffect(() => {
         if(component) {
-            document.addEventListener("click", handleClick);
-            document.addEventListener("keydown", handleEnterPressed);
+            document.addEventListener('click', handleClick);
+            document.addEventListener('keydown', handleEnterPressed);
         } else {
-            document.removeEventListener("click", handleClick);
-            document.removeEventListener("keydown", handleEnterPressed);
+            document.removeEventListener('click', handleClick);
+            document.removeEventListener('keydown', handleEnterPressed);
         }
 
         return () => {
-            document.removeEventListener("click", handleClick);
-            document.removeEventListener("keydown", handleEnterPressed);
+            document.removeEventListener('click', handleClick);
+            document.removeEventListener('keydown', handleEnterPressed);
         };
-    }, [component])
+    }, [component, handleClick, handleEnterPressed]);
 
     if(!component) {
         return (
