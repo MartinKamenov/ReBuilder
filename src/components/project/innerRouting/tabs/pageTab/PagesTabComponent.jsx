@@ -43,7 +43,7 @@ const PagesTabComponent = ({
                         
                     </div>
                     <div className='info'>
-                        <h3 className='routing-page-styling-h3'>{page.name}</h3>
+                        <h3>{page.name}</h3>
                         <p>{page.route}</p>
                     </div>
                 </li>
