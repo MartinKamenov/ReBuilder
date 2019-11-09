@@ -9,12 +9,13 @@ const NavbarComponent = () => {
     const user = useSelector((state) => (state.user));
 
     useEffect(() => {
-        const routesCopy = [{ route: '/', text: 'Home' }];
+        const routesCopy = [];
         if(user.id) {
             routesCopy.push({ route: '/dashboard', text: 'Dashboard' });
             routesCopy.push({ route: '/services', text: 'Services' });
             routesCopy.push({ route: `/users/${user.id}`, text: 'My profile' });
         } else {
+            routesCopy.push({ route: '/', text: 'Home' });
             routesCopy.push({ route: '/services', text: 'Services' });
             routesCopy.push({ route: '/login', text: 'Sign in' });
             routesCopy.push({ route: '/register', text: 'Sign up' });
