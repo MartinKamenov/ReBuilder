@@ -3,9 +3,9 @@ import FileSaver from 'file-saver';
 import templatingService from './templating.service';
 
 const projectGenerator = {
-    generateProject: (name, pages, imageUrl) => {
+    generateProjectFiles: (templates, name) => {
         let zip = new JSZip();
-        const templates = templatingService.getAllTemplates(name, pages, imageUrl);
+
         templates.forEach((templateObject) => {
             zip.file(templateObject.filePath, templateObject.template);
         });
