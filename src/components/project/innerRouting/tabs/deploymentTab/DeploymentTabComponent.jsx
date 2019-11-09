@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ButtonComponent from '../../../../common/ButtonComponent';
+import ButtonComponent from '../../../../common/button/ButtonComponent';
 import PropTypes from 'prop-types';
 import websocketService from '../../../../../service/websocket.service';
-import ProgressBarComponent from '../../../../common/ProgressBarComponent';
+import ProgressBarComponent from '../../../../common/progress-bar/ProgressBarComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import LoadingComponent from '../../common/LoadingComponent';
+import LoadingComponent from '../../common/loading-page/LoadingComponent';
 import * as authenticationActions from '../../../actions/authenticationActions';
 import { useSelector, useDispatch } from 'react-redux';
 import './RegisterComponent.css';
 import PropTypes from 'prop-types';
-import ButtonComponent from '../../common/ButtonComponent';
+import ButtonComponent from '../../common/button/ButtonComponent';
 
 const RegisterComponent = ({ history }) => {
     const [isLoading, setIsLoading] = useState(false);

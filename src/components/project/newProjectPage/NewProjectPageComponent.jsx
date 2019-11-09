@@ -2,8 +2,8 @@ import React, { useState, useCallback, useEffect} from 'react';
 import * as projectActions from '../../../actions/projectActions';
 import * as authenticationActions from '../../../actions/authenticationActions';
 import { useSelector, useDispatch } from 'react-redux';
-import LoadingComponent from '../../common/LoadingComponent';
-import ButtonComponent from '../../common/ButtonComponent';
+import LoadingComponent from '../../common/loading-page/LoadingComponent';
+import ButtonComponent from '../../common/button/ButtonComponent';
 import apiService from '../../../service/api.service';
 import PropTypes from 'prop-types';
 
