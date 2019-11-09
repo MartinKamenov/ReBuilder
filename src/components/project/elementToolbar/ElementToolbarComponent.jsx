@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { ChromePicker } from 'react-color';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,6 +16,44 @@ const ElementToolbarComponent = ({
     handleComponentImageChange,
     actions
 }) => {
+    const [left, setLeft] = useState('40px');
+    const [top, setTop] = useState('50px');
+
+    const [currentTop, setCurrentTop] = useState(0);
+    const [currentLeft, setCurrentLeft] = useState(0);
+    const [dragHasStarted, setDragHasStarted] = useState(false);
+
+    const handleButtonPress = (ev) => {
+        setCurrentLeft(ev.clientX);
+        setCurrentTop(ev.clientY);
+        setDragHasStarted(true);
+    };
+
+    const handleButtonRelease = () => {
+        setCurrentLeft(0);
+        setCurrentTop(0);
+        setDragHasStarted(false);
+    };
+
+    const handleButtonMove = (ev) => {
+        if(!dragHasStarted) {
+            return;
+        }
+        const diffX = ev.clientX - currentLeft;
+        const diffY = ev.clientY - currentTop;
+        setCurrentLeft(ev.clientX);
+        setCurrentTop(ev.clientY);
+        if(diffX) {
+            const leftNum = parseInt(left, 10) + diffX;
+            setLeft(leftNum + 'px');
+        }
+
+        if(diffY) {
+            const topNum = parseInt(top, 10) + diffY;
+            setTop(topNum + 'px');
+        }
+    };
+
     const handleEnterPressed = useCallback(({ key }) => {
         switch(key) {
         case 'Enter':
@@ -88,9 +126,19 @@ const ElementToolbarComponent = ({
 
     return (
         <div
-            className='toolbar-container'
-            onBlur={() => actions.handleChangeEditMode(component.index)}>
-            <div className='toolbar-toolbar'>
+            style={{
+                top,
+                left
+            }}
+            className='toolbar-container'>
+            <div className='toolbar-toolbar'
+                onTouchStart={handleButtonPress} 
+                onTouchEnd={handleButtonRelease}
+                onTouchMove={handleButtonMove} 
+                onMouseDown={handleButtonPress}
+                onMouseUp={handleButtonRelease} 
+                onMouseLeave={handleButtonRelease}
+                onMouseMove={handleButtonMove}>
                 <div
                     className='close-toolbar-button'
                     onClick={() => actions.handleChangeEditMode(component.index)}>

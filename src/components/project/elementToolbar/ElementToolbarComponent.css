@@ -1,7 +1,5 @@
 .toolbar-container {
     position: fixed;
-    top: calc(50vh - 250px);
-    left: 40%;
     right: 8px;
     background-color: #ffffff;
     border: 1px solid black;
