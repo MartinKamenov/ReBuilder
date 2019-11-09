@@ -204,7 +204,7 @@ const ElementToolbarComponent = ({
                     onClick={() => actions.handleDeleteComponent(component.index)}
                     className='actions-button'>
                     <FontAwesomeIcon className='action-icon' icon={faTrashAlt} />
-                    Delete component
+                    Delete
                 </ButtonComponent>
             </div>
         </div>

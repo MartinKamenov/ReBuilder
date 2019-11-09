@@ -1,8 +1,10 @@
 .custom-button {
     height: 40px;
+    line-height: 40px;
     border: 1px solid white;
     color: white;
     cursor: pointer;
+    font-weight: bold;
 }
 .custom-buttom-rounded {
     border-radius: 10px;
