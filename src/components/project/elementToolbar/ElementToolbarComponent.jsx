@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ChromePicker } from 'react-color';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,6 +16,25 @@ const ElementToolbarComponent = ({
     handleComponentImageChange,
     actions
 }) => {
+    const handleEnterPressed = ({ key }) => {
+        switch(key) {
+            case 'Enter':
+                actions.handleChangeEditMode(component.index)
+                break;
+            case 'Escape':
+                actions.handleForceExitEditMode(component.index)
+                break;
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("keydown", handleEnterPressed);
+
+        return () => {
+            document.removeEventListener("keydown", handleEnterPressed);
+        };
+    }, [component])
+
     if(!component) {
         return (
             <div className='toolbar-container-inactive'>
@@ -43,7 +62,9 @@ const ElementToolbarComponent = ({
     ));
 
     return (
-        <div className='toolbar-container'>
+        <div
+            className='toolbar-container'
+            onBlur={() => actions.handleChangeEditMode(component.index)}>
             <div className='vertical-scrollable-container toolbar-scrollable'>
                 <div className='toolbar-element-container'>
                     <h3>{component.name}</h3>
