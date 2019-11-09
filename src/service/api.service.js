@@ -10,6 +10,7 @@ const registerPath = '/register';
 const projectsPath = '/projects';
 const newProjectPath = '/new';
 const deployPath = '/deploy';
+const templatesPath = '/templates';
 
 const sendObject = {
     headers: {
@@ -103,6 +104,17 @@ const apiService = {
         sendObject.headers.Authorization = 'Bearer ' + token;
 
         return axios.get(deployProjectUrl, sendObject);
+    },
+
+    getProjectTemplates: (projectId, token) => {
+        if(!projectId || !token) {
+            return;
+        }
+
+        const templatesUrl = url + projectsPath + `/${projectId}` + templatesPath;
+        sendObject.headers.Authorization = 'Bearer ' + token;
+
+        return axios.post(templatesUrl, '', sendObject);
     },
 
     deployProject: (projectId, token) => {
