@@ -102,7 +102,7 @@ const ElementToolbarComponent = ({
             </div>
             <div className='vertical-scrollable-container toolbar-scrollable'>
                 <div className='toolbar-element-container'>
-                    <h3>{component.name}</h3>
+                    <h3 className='component-type-header'>{component.name}</h3>
                     <h3>Properties</h3>
                     { component.src ? (
                         <div
