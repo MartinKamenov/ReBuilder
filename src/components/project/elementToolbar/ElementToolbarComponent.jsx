@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
 import './ElementToolbarComponent.css';
-import ButtonComponent from '../../common/ButtonComponent';
+import ButtonComponent from '../../common/button/ButtonComponent';
 
 const capitalizeFirstLetter = (text) => {
     return text.charAt(0).toUpperCase() + text.slice(1);

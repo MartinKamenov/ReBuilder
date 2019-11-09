@@ -4,7 +4,7 @@ import './DroppedComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { componentTypes } from '../../components/componentTypes';
-import ButtonComponent from '../../../common/ButtonComponent';
+import ButtonComponent from '../../../common/button/ButtonComponent';
 import { Draggable } from 'react-drag-and-drop';
 import { Resizable } from 're-resizable';
 import { Droppable } from 'react-drag-and-drop';
