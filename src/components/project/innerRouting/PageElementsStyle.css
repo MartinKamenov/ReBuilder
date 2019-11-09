@@ -298,17 +298,12 @@ body {
   background-color: #fff;
 }
 
-.routing-page-styling-h3 {
-  font-family: 'Bree Serif', serif;
-}
-
 .routing-pages-styling-container {
   max-width: 840px;
   margin: 0 auto;
 }
 
 header {
-  font-family: 'Bree Serif', serif;
   text-align: center;
   margin: 50px 0 25px;
   color: #34495E;

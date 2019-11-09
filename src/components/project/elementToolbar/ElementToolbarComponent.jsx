@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { ChromePicker } from 'react-color';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faWindowClose, faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
 import './ElementToolbarComponent.css';
 import ButtonComponent from '../../common/button/ButtonComponent';
 
@@ -16,6 +16,88 @@ const ElementToolbarComponent = ({
     handleComponentImageChange,
     actions
 }) => {
+    const [left, setLeft] = useState('40px');
+    const [top, setTop] = useState('50px');
+
+    const [currentTop, setCurrentTop] = useState(0);
+    const [currentLeft, setCurrentLeft] = useState(0);
+    const [dragHasStarted, setDragHasStarted] = useState(false);
+
+    const handleButtonPress = (ev) => {
+        setCurrentLeft(ev.clientX);
+        setCurrentTop(ev.clientY);
+        setDragHasStarted(true);
+    };
+
+    const handleButtonRelease = () => {
+        setCurrentLeft(0);
+        setCurrentTop(0);
+        setDragHasStarted(false);
+    };
+
+    const handleButtonMove = (ev) => {
+        if(!dragHasStarted) {
+            return;
+        }
+        const diffX = ev.clientX - currentLeft;
+        const diffY = ev.clientY - currentTop;
+        setCurrentLeft(ev.clientX);
+        setCurrentTop(ev.clientY);
+        if(diffX) {
+            const leftNum = parseInt(left, 10) + diffX;
+            setLeft(leftNum + 'px');
+        }
+
+        if(diffY) {
+            const topNum = parseInt(top, 10) + diffY;
+            setTop(topNum + 'px');
+        }
+    };
+
+    const handleEnterPressed = useCallback(({ key }) => {
+        switch(key) {
+        case 'Enter':
+            actions.handleChangeEditMode(component.index);
+            break;
+        case 'Escape':
+            actions.handleForceExitEditMode(component.index);
+            break;
+        default:
+            break;
+        }
+    }, [actions, component]);
+
+    const hasToolbarParent = useCallback((element) => {
+        if(!element.parentElement) {
+            return false;
+        } else if(element.className === 'toolbar-container') {
+            return true;
+        }
+
+        return hasToolbarParent(element.parentElement);
+    }, []);
+
+    const handleClick = useCallback(({ target }) => {
+        if(!hasToolbarParent(target)) {
+            actions.handleChangeEditMode(component.index);
+        }
+    }, [component, hasToolbarParent, actions]);
+
+    useEffect(() => {
+        if(component) {
+            document.addEventListener('click', handleClick);
+            document.addEventListener('keydown', handleEnterPressed);
+        } else {
+            document.removeEventListener('click', handleClick);
+            document.removeEventListener('keydown', handleEnterPressed);
+        }
+
+        return () => {
+            document.removeEventListener('click', handleClick);
+            document.removeEventListener('keydown', handleEnterPressed);
+        };
+    }, [component, handleClick, handleEnterPressed]);
+
     if(!component) {
         return (
             <div className='toolbar-container-inactive'>
@@ -43,10 +125,32 @@ const ElementToolbarComponent = ({
     ));
 
     return (
-        <div className='toolbar-container'>
+        <div
+            style={{
+                top,
+                left
+            }}
+            className='toolbar-container'>
+            <div className='toolbar-toolbar'
+                onTouchStart={handleButtonPress} 
+                onTouchEnd={handleButtonRelease}
+                onTouchMove={handleButtonMove} 
+                onMouseDown={handleButtonPress}
+                onMouseUp={handleButtonRelease} 
+                onMouseLeave={handleButtonRelease}
+                onMouseMove={handleButtonMove}>
+                <div
+                    className='close-toolbar-button'
+                    onClick={() => actions.handleChangeEditMode(component.index)}>
+                    <FontAwesomeIcon
+                        color='#ff0000'
+                        size='lg'
+                        icon={faWindowClose} />
+                </div>
+            </div>
             <div className='vertical-scrollable-container toolbar-scrollable'>
                 <div className='toolbar-element-container'>
-                    <h3>{component.name}</h3>
+                    <h3 className='component-type-header'>{component.name}</h3>
                     <h3>Properties</h3>
                     { component.src ? (
                         <div
@@ -204,7 +308,7 @@ const ElementToolbarComponent = ({
                     onClick={() => actions.handleDeleteComponent(component.index)}
                     className='actions-button'>
                     <FontAwesomeIcon className='action-icon' icon={faTrashAlt} />
-                    Delete component
+                    Delete
                 </ButtonComponent>
             </div>
         </div>

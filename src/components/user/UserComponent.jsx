@@ -99,7 +99,7 @@ const UserComponent = ({ history }) => {
                     onChange={changeImage}
                     type='file'
                     accept='image/*'/>
-                <h3 style={{ fontWeight: 'bold' }}>
+                <h3 className='username-header'>
                     {user.username}
                 </h3>
                 <ButtonComponent
