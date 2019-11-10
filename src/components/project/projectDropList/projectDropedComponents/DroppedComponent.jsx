@@ -214,74 +214,11 @@ const DroppedComponent = ({
                 className='blinkdiv'
                 style={editModeContainer}>
                 {
-                    (() => {
-                        let element;
-                        switch(droppedComponent.name) {
-                        case componentTypes.Image:
-                            element = (
-                                <img
-                                    alt='component'
-                                    src={droppedComponent.src}
-                                    style={copyOfStyle}
-                                    className='edit-input'/>
-                            );
-                            break;
-                        case componentTypes.Input:
-                            element = (
-                                <input 
-                                    key={droppedComponent.index}
-                                    style={copyOfStyle}
-                                    placeholder={droppedComponent.placeholder}
-                                    className='edit-input'>
-                                </input>
-                            );
-                            break;
-                        case componentTypes.Button:
-                            element = (
-                                <button
-                                    key={droppedComponent.index}
-                                    style={copyOfStyle}
-                                    className='edit-input'>
-                                    {droppedComponent.innerText}
-                                </button>
-                            );
-                            break;
-                        case componentTypes.Container:
-                        case componentTypes.NavigationBar:
-                            element = (
-                                <div
-                                    alt='component'
-                                    src={droppedComponent.src}
-                                    style={copyOfStyle}
-                                    className='edit-input'>
-                                    {
-                                        droppedComponent.children.map((c) => (
-                                            getComponent(
-                                                c,
-                                                handleChangeEditMode,
-                                                handleDropContainerComponent,
-                                                c.style
-                                            )
-                                        ))
-                                    }
-                                </div>
-                            );
-                            break;
-                        default:
-                            copyOfStyle.resize = 'none';
-                            element = (
-                                <textarea
-                                    style={copyOfStyle}
-                                    className='edit-input'
-                                    value={droppedComponent.innerText}
-                                    onChange={(event) => 
-                                        handleComponentValueChange(event.target.value, 'innerText')}>
-                                </textarea>
-                            );
-                            break;
-                        }
-                        return element;
-                    })()
+                    getComponent(
+                        droppedComponent,
+                        handleChangeEditMode,
+                        handleDropContainerComponent,
+                        droppedComponent.style)
                 }
 
                 <div className='center-container small-buttons-action-container'>
