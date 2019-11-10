@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './DroppedComponent.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { componentTypes } from '../../components/componentTypes';
-import ButtonComponent from '../../../common/button/ButtonComponent';
 import { Draggable } from 'react-drag-and-drop';
 import { Resizable } from 're-resizable';
 import { Droppable } from 'react-drag-and-drop';
@@ -234,10 +231,13 @@ const DroppedComponent = ({
         marginRight: droppedComponent.style.marginRight
     };
     const elementStyle = Object.assign({}, droppedComponent.style);
-    const resizableStyle = {
+    const resizableSize = {
         width: droppedComponent.style.width,
         height: droppedComponent.style.height
     };
+
+    const resizableStyle = Object.assign({}, droppedComponent.style);
+    delete resizableStyle.lineHeight;
     Object.keys(draggableStyle).forEach(k => {
         delete elementStyle[k];
     });
@@ -252,8 +252,8 @@ const DroppedComponent = ({
     
     return (
         <Resizable
-            size={resizableStyle}
-            style={droppedComponent.style}
+            size={resizableSize}
+            style={resizableStyle}
             onResizeStart={(event, direction, refToElement, delta) => {
                 if(droppedComponent.style.width.endsWith('%')) {
                     initialSizes.width =
