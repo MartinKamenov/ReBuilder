@@ -63,11 +63,14 @@ const apiService = {
             return;
         }
         const newProjectUrl = url + projectsPath + newProjectPath;
-        const body = { name: projectName, projectImageUrl: projectUrl };
+        const body = { 
+            name: projectName,
+            projectImageUrl: projectUrl,
+            authorization: 'Bearer ' + token
+        };
         if(project) {
             body.project = project;
         }
-        sendObject.headers.Authorization = 'Bearer ' + token;
 
         return axios.post(newProjectUrl, body, sendObject);
     },
@@ -78,9 +81,10 @@ const apiService = {
         }
 
         const getProjectUrl = url + projectsPath + `/${projectId}`;
-        sendObject.headers.Authorization = 'Bearer ' + token;
 
-        return axios.post(getProjectUrl, {}, sendObject);
+        return axios.post(getProjectUrl, {
+            authorization: 'Bearer ' + token
+        });
     },
 
     updateProject: (projectId, pages, token) => {
@@ -89,10 +93,9 @@ const apiService = {
         }
 
         const updateProjectUrl = url + projectsPath + `/${projectId}`;
-        const body = { pages };
-        sendObject.headers.Authorization = 'Bearer ' + token;
+        let body = { pages, authorization: 'Bearer ' + token };
 
-        return axios.post(updateProjectUrl, body, sendObject);
+        return axios.post(updateProjectUrl, body);
     },
 
     getDeploymentInformation: (projectId, token) => {
@@ -101,7 +104,6 @@ const apiService = {
         }
 
         const deployProjectUrl = url + projectsPath + `/${projectId}` + deployPath;
-        sendObject.headers.Authorization = 'Bearer ' + token;
 
         return axios.get(deployProjectUrl, sendObject);
     },
@@ -113,8 +115,11 @@ const apiService = {
 
         const templatesUrl = url + projectsPath + `/${projectId}` + templatesPath;
         sendObject.headers.Authorization = 'Bearer ' + token;
+        const body = {
+            authorization: 'Bearer ' + token
+        }
 
-        return axios.post(templatesUrl, '', sendObject);
+        return axios.post(templatesUrl, body, sendObject);
     },
 
     deployProject: (projectId, token) => {
@@ -123,9 +128,12 @@ const apiService = {
         }
 
         const deployProjectUrl = url + projectsPath + `/${projectId}` + deployPath;
-        sendObject.headers.Authorization = 'Bearer ' + token;
+        
+        const body = {
+            authorization: 'Bearer ' + token
+        }
 
-        return axios.post(deployProjectUrl, {}, sendObject);
+        return axios.post(deployProjectUrl, body, sendObject);
     },
     uploadImage: (formData) => {
         if(!formData) {
