@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import '../../theme/css/styles-merged.css';
 import '../../theme/css/style.min.css';
 import '../../theme/css/custom.css';
 import { Link } from 'react-router-dom';
 import './HomeComponent.css';
+import { useSelector } from 'react-redux';
 
-const HomeComponent = () => {
+const HomeComponent = ({ history }) => {
+    const user = useSelector((state) => (state.user));
+
+    const redirectToDashboard = useCallback(
+        () => {
+            history.push('/dashboard');
+        },
+        [history]
+    );
+
+    if(user.id) {
+        redirectToDashboard();
+    }
+
     return (
         <div>
             <section className='probootstrap-intro' style={{backgroundImage: 'url(/assets/homePageBackground.jpeg)'}} data-stellar-background-ratio='0.5'>
