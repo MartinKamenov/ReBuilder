@@ -12,7 +12,6 @@ const HomeComponent = ({ history }) => {
     const redirectToDashboard = useCallback(
         () => {
             history.push('/dashboard');
-            return;
         },
         [history]
     );

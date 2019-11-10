@@ -198,8 +198,8 @@ const DroppedComponent = ({
     if(droppedComponent.isInEditMode) {
         const copyOfStyle = Object.assign({}, droppedComponent.style);
         const editModeContainer = {
-            width: `calc(${copyOfStyle.width} - 3px)`,
-            height: `calc(${copyOfStyle.height} - 3px)`,
+            width: `calc(${copyOfStyle.width} + 4px)`,
+            height: `calc(${copyOfStyle.height} + 4px)`,
             marginLeft: copyOfStyle.marginLeft,
             marginRight: copyOfStyle.marginRight,
             display: copyOfStyle.display,
@@ -220,21 +220,6 @@ const DroppedComponent = ({
                         handleDropContainerComponent,
                         droppedComponent.style)
                 }
-
-                <div className='center-container small-buttons-action-container'>
-                    <ButtonComponent	
-                        type='success'	
-                        onClick={() => handleChangeEditMode(droppedComponent.index)}>	
-                        <FontAwesomeIcon icon={faCheck} />	
-                        Accept	
-                    </ButtonComponent>	
-                    <ButtonComponent	
-                        type='warning'	
-                        onClick={() => handleForceExitEditMode(droppedComponent.index)}>	
-                        <FontAwesomeIcon icon={faUndo} />	
-                        Undo	
-                    </ButtonComponent>
-                </div>
             </div>
         );
     }
@@ -303,7 +288,7 @@ const DroppedComponent = ({
                     handleComponentValueChange(newHeight + 'px', 'style.lineHeight', droppedComponent.index);
                 }
             }}>
-            <Draggable 
+            <Draggable
                 style={draggableStyle}
                 onDragStart={() => componentDragStart(droppedComponent.index)}
                 onDragOver={rearangeComponents}
