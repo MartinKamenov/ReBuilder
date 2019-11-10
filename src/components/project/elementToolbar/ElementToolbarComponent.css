@@ -1,4 +1,6 @@
 .toolbar-container {
+    left: 40px;
+    top: 50px;
     position: fixed;
     right: 8px;
     background-color: #ffffff;
@@ -7,6 +9,10 @@
     height: 500px;
     text-align: center;
     flex-direction: column;
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
 }
 
 .toolbar-container-inactive {

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useRef } from 'react';
 import { ChromePicker } from 'react-color';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,28 +10,29 @@ const capitalizeFirstLetter = (text) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
+let left = 40;
+let top = 50;
+
+let currentTop = 0;
+let currentLeft = 0;
+
 const ElementToolbarComponent = ({
     component,
     handleComponentValueChange,
     handleComponentImageChange,
     actions
 }) => {
-    const [left, setLeft] = useState('40px');
-    const [top, setTop] = useState('50px');
-
-    const [currentTop, setCurrentTop] = useState(0);
-    const [currentLeft, setCurrentLeft] = useState(0);
+    const inputEl = useRef(null);
+    
     const [dragHasStarted, setDragHasStarted] = useState(false);
 
     const handleButtonPress = (ev) => {
-        setCurrentLeft(ev.clientX);
-        setCurrentTop(ev.clientY);
+        currentLeft = ev.clientX;
+        currentTop = ev.clientY;
         setDragHasStarted(true);
     };
 
     const handleButtonRelease = () => {
-        setCurrentLeft(0);
-        setCurrentTop(0);
         setDragHasStarted(false);
     };
 
@@ -41,16 +42,18 @@ const ElementToolbarComponent = ({
         }
         const diffX = ev.clientX - currentLeft;
         const diffY = ev.clientY - currentTop;
-        setCurrentLeft(ev.clientX);
-        setCurrentTop(ev.clientY);
+        currentLeft = ev.clientX;
+        currentTop = ev.clientY;
         if(diffX) {
-            const leftNum = parseInt(left, 10) + diffX;
-            setLeft(leftNum + 'px');
+            const leftNum = left + diffX;
+            inputEl.current.style.left = leftNum + 'px';
+            left = leftNum;
         }
 
         if(diffY) {
-            const topNum = parseInt(top, 10) + diffY;
-            setTop(topNum + 'px');
+            const topNum = top + diffY;
+            inputEl.current.style.top = topNum + 'px';
+            top = topNum;
         }
     };
 
@@ -126,19 +129,16 @@ const ElementToolbarComponent = ({
 
     return (
         <div
-            style={{
-                top,
-                left
-            }}
+            onTouchStart={handleButtonPress} 
+            onTouchEnd={handleButtonRelease}
+            onTouchMove={handleButtonMove} 
+            onMouseDown={handleButtonPress}
+            onMouseUp={handleButtonRelease} 
+            onMouseLeave={handleButtonRelease}
+            onMouseMove={handleButtonMove}
+            ref={inputEl}
             className='toolbar-container'>
-            <div className='toolbar-toolbar'
-                onTouchStart={handleButtonPress} 
-                onTouchEnd={handleButtonRelease}
-                onTouchMove={handleButtonMove} 
-                onMouseDown={handleButtonPress}
-                onMouseUp={handleButtonRelease} 
-                onMouseLeave={handleButtonRelease}
-                onMouseMove={handleButtonMove}>
+            <div className='toolbar-toolbar'>
                 <div
                     className='close-toolbar-button'
                     onClick={() => actions.handleChangeEditMode(component.index)}>
