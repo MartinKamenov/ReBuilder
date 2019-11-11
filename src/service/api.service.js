@@ -12,17 +12,6 @@ const newProjectPath = '/new';
 const deployPath = '/deploy';
 const templatesPath = '/templates';
 
-const sendObject = {
-    headers: {
-        'Access-Control-Allow-Origin': '*',
-        'headers': {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Credentials': true
-        }
-    }
-};
-
 const apiService = {
     login: (username, password) => {
         if(!username || !password) {
@@ -35,7 +24,7 @@ const apiService = {
         };
         const loginUrl = url + authPath + loginPath;
 
-        return axios.post(loginUrl, body, sendObject);
+        return axios.post(loginUrl, body);
     },
 
     loginByToken: (token) => {
@@ -44,7 +33,7 @@ const apiService = {
         const body = {};
         body.token = token;
 
-        return axios.post(loginUrl, body, sendObject);
+        return axios.post(loginUrl, body);
     },
 
     register: (username, password, email, imageUrl) => {
@@ -55,7 +44,7 @@ const apiService = {
         const registerUrl = url + authPath + registerPath;
         const body = { username, password, email, imageUrl };
 
-        return axios.post(registerUrl, body, sendObject);
+        return axios.post(registerUrl, body);
     },
 
     createProject: (projectName, projectUrl, token, project) => {
@@ -63,13 +52,16 @@ const apiService = {
             return;
         }
         const newProjectUrl = url + projectsPath + newProjectPath;
-        const body = { name: projectName, projectImageUrl: projectUrl };
+        const body = { 
+            name: projectName,
+            projectImageUrl: projectUrl,
+            authorization: `Bearer ${token}`
+        };
         if(project) {
             body.project = project;
         }
-        sendObject.headers.Authorization = 'Bearer ' + token;
 
-        return axios.post(newProjectUrl, body, sendObject);
+        return axios.post(newProjectUrl, body);
     },
 
     getProject: (projectId, token) => {
@@ -78,9 +70,11 @@ const apiService = {
         }
 
         const getProjectUrl = url + projectsPath + `/${projectId}`;
-        sendObject.headers.Authorization = 'Bearer ' + token;
+        const body = {
+            authorization: `Bearer ${token}`
+        };
 
-        return axios.post(getProjectUrl, {}, sendObject);
+        return axios.post(getProjectUrl, body);
     },
 
     updateProject: (projectId, pages, token) => {
@@ -89,10 +83,9 @@ const apiService = {
         }
 
         const updateProjectUrl = url + projectsPath + `/${projectId}`;
-        const body = { pages };
-        sendObject.headers.Authorization = 'Bearer ' + token;
+        let body = { pages, authorization: `Bearer ${token}` };
 
-        return axios.post(updateProjectUrl, body, sendObject);
+        return axios.post(updateProjectUrl, body);
     },
 
     getDeploymentInformation: (projectId, token) => {
@@ -101,9 +94,8 @@ const apiService = {
         }
 
         const deployProjectUrl = url + projectsPath + `/${projectId}` + deployPath;
-        sendObject.headers.Authorization = 'Bearer ' + token;
 
-        return axios.get(deployProjectUrl, sendObject);
+        return axios.get(deployProjectUrl);
     },
 
     getProjectTemplates: (projectId, token) => {
@@ -112,9 +104,11 @@ const apiService = {
         }
 
         const templatesUrl = url + projectsPath + `/${projectId}` + templatesPath;
-        sendObject.headers.Authorization = 'Bearer ' + token;
+        const body = {
+            authorization: `Bearer ${token}`
+        };
 
-        return axios.post(templatesUrl, '', sendObject);
+        return axios.post(templatesUrl, body);
     },
 
     deployProject: (projectId, token) => {
@@ -123,9 +117,12 @@ const apiService = {
         }
 
         const deployProjectUrl = url + projectsPath + `/${projectId}` + deployPath;
-        sendObject.headers.Authorization = 'Bearer ' + token;
+        
+        const body = {
+            authorization: `Bearer ${token}`
+        };
 
-        return axios.post(deployProjectUrl, {}, sendObject);
+        return axios.post(deployProjectUrl, body);
     },
     uploadImage: (formData) => {
         if(!formData) {
@@ -145,7 +142,7 @@ const apiService = {
         userInformation.token = token;
         const updateUserUrl = url + authPath + getUser + updateUser;
 
-        return axios.post(updateUserUrl, userInformation, sendObject);
+        return axios.post(updateUserUrl, userInformation);
     }
 };
 
