@@ -106,7 +106,7 @@ const apiService = {
         const templatesUrl = url + projectsPath + `/${projectId}` + templatesPath;
         const body = {
             authorization: `Bearer ${token}`
-        }
+        };
 
         return axios.post(templatesUrl, body);
     },
@@ -120,7 +120,7 @@ const apiService = {
         
         const body = {
             authorization: `Bearer ${token}`
-        }
+        };
 
         return axios.post(deployProjectUrl, body);
     },
