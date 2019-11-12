@@ -9,6 +9,8 @@ const componentObjects = [
         style: {
             color: '#000000',
             backgroundColor: '#ffffff',
+            width: '100%',
+            height: '100%',
             marginLeft: '0px',
             marginRight: '0px',
             marginTop: '0px',

@@ -21,15 +21,20 @@ const filteredComponents = [...componentObjects];
 const bodyIndex = filteredComponents
     .findIndex((c) => c.name === componentTypes.Body);
 filteredComponents.splice(bodyIndex, 1);
+
 class EditProjectComponent extends Component {
     state = {
         id: '',
         pageId: '',
         page: {
-            elements: []
+            elements: [
+                componentObjects.find((c) => c.name === componentTypes.Body)
+            ]
         },
         draggableComponents: filteredComponents,
-        droppedComponents: [],
+        droppedComponents: [
+            componentObjects.find((c) => c.name === componentTypes.Body)
+        ],
         previousComponent: {},
         draggedComponentIndex: '',
         swapDate: new Date(),
