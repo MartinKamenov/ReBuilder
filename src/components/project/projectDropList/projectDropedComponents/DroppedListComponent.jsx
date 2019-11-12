@@ -27,7 +27,7 @@ const DroppedListComponent = ({
 
                 handleChangeEditMode('body');
             }}
-            >
+        >
             {
                 droppedComponents.map((component, i) => (
                     <DroppedComponent
