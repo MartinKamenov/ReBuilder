@@ -13,7 +13,7 @@ import projectGenerator from '../../../service/projectGenerator.service';
 import './InnerRoutingComponent.css';
 import './PageElementsStyle.css';
 import ProjectActionButtonsComponent from '../../common/project-actions-buttons/ProjectActionButtonsComponent';
-import { componentTypes } from '../components/componentTypes';
+import componentObjects, { componentTypes } from '../components/componentTypes';
 import ProjectPageComponent from './tabs/pageTab/PagesTabComponent';
 import PagesEditorComponent from './tabs/pageTab/PagesEditorComponent';
 import DatabaseTabComponent from './tabs/databaseTab/DatabaseTabComponent';
@@ -146,12 +146,16 @@ class InnerRoutingComponent extends Component {
     addNewPage = () => {
         const name = this.state.newPageName;
         const route = this.state.newPageRoute;
+        const body = {
+            ...componentObjects.find((c) => c.name === componentTypes.Body),
+            index: 'body'
+        };
 
         const page = {
             id: uuid.v1(),
             route,
             name,
-            elements: []
+            elements: [ body ]
         };
 
         const pages = [...this.state.pages];
