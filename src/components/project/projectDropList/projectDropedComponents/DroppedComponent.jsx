@@ -192,6 +192,9 @@ const DroppedComponent = ({
     componentDragEnd,
     handleDropContainerComponent
 }) => {
+    if(droppedComponent.name === componentTypes.Body) {
+        return null;
+    }
     if(droppedComponent.isInEditMode) {
         const copyOfStyle = Object.assign({}, droppedComponent.style);
         const editModeContainer = {
