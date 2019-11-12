@@ -14,7 +14,11 @@ const DroppedListComponent = ({
     handleDropContainerComponent
 }) => {
     return (
-        <div className='droped-components-container vertical-scrollable-container'>
+        <div
+            className='droped-components-container vertical-scrollable-container'
+            onClick={() => {
+                handleChangeEditMode('body');
+            }}>
             {
                 droppedComponents.map((component, i) => (
                     <DroppedComponent
