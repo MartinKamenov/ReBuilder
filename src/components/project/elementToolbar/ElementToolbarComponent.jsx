@@ -80,11 +80,11 @@ const ElementToolbarComponent = ({
         return hasToolbarParent(element.parentElement);
     }, []);
 
-    const handleClick = useCallback(({ target }) => {
+    const handleClick = ({ target }) => {
         if(!hasToolbarParent(target)) {
             actions.handleChangeEditMode(component.index);
         }
-    }, [component, hasToolbarParent, actions]);
+    };
 
     useEffect(() => {
         if(component) {
@@ -99,7 +99,7 @@ const ElementToolbarComponent = ({
             document.removeEventListener('click', handleClick);
             document.removeEventListener('keydown', handleEnterPressed);
         };
-    }, [component, handleClick, handleEnterPressed]);
+    });
 
     if(!component) {
         return (
@@ -291,21 +291,30 @@ const ElementToolbarComponent = ({
             <div className='actions-container'>
                 <ButtonComponent
                     type='success'
-                    onClick={() => actions.handleChangeEditMode(component.index)}
+                    onClick={(ev) => {
+                        ev.stopPropagation();
+                        actions.handleChangeEditMode(component.index);
+                    }}
                     className='actions-button'>
                     <FontAwesomeIcon className='action-icon' icon={faCheck} />
                     Accept changes
                 </ButtonComponent>
                 <ButtonComponent
                     type='warning'
-                    onClick={() => actions.handleForceExitEditMode(component.index)}
+                    onClick={(ev) => {
+                        ev.stopPropagation();
+                        actions.handleForceExitEditMode(component.index);
+                    }}
                     className='actions-button'>
                     <FontAwesomeIcon className='action-icon' icon={faUndo} />
                     Revert changes
                 </ButtonComponent>
                 <ButtonComponent
                     type='danger'
-                    onClick={() => actions.handleDeleteComponent(component.index)}
+                    onClick={(ev) => { 
+                        ev.stopPropagation();
+                        actions.handleDeleteComponent(component.index);
+                    }}
                     className='actions-button'>
                     <FontAwesomeIcon className='action-icon' icon={faTrashAlt} />
                     Delete
