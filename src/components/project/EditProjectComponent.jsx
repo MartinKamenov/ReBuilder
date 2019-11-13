@@ -17,15 +17,24 @@ import SaveStatus from './components/saveStatus';
 import SaveStatusComponent from '../common/save-status/SaveStatusComponent';
 import ProjectActionButtonsComponent from '../common/project-actions-buttons/ProjectActionButtonsComponent';
 
+const filteredComponents = [...componentObjects];
+const bodyIndex = filteredComponents
+    .findIndex((c) => c.name === componentTypes.Body);
+filteredComponents.splice(bodyIndex, 1);
+
 class EditProjectComponent extends Component {
     state = {
         id: '',
         pageId: '',
         page: {
-            elements: []
+            elements: [
+                componentObjects.find((c) => c.name === componentTypes.Body)
+            ]
         },
-        draggableComponents: componentObjects,
-        droppedComponents: [],
+        draggableComponents: filteredComponents,
+        droppedComponents: [
+            componentObjects.find((c) => c.name === componentTypes.Body)
+        ],
         previousComponent: {},
         draggedComponentIndex: '',
         swapDate: new Date(),

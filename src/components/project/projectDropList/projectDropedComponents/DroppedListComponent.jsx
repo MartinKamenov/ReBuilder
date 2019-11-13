@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './DroppedListComponent.css';
 import DroppedComponent from './DroppedComponent';
+import { componentTypes } from '../../components/componentTypes';
 
 const DroppedListComponent = ({
     droppedComponents,
@@ -13,8 +14,20 @@ const DroppedListComponent = ({
     rearangeComponents,
     handleDropContainerComponent
 }) => {
+    const bodyElement = droppedComponents.find((c) => c.name === componentTypes.Body);
     return (
-        <div className='droped-components-container vertical-scrollable-container'>
+        <div
+            id='body-component'
+            style={bodyElement.style}
+            className='droped-components-container vertical-scrollable-container'
+            onClick={(ev) => {
+                if(!ev.target.id === 'body-component' || bodyElement.isInEditMode) {
+                    return;
+                }
+
+                handleChangeEditMode('body');
+            }}
+        >
             {
                 droppedComponents.map((component, i) => (
                     <DroppedComponent

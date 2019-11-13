@@ -4,6 +4,24 @@ import fontWeightValues from './fontWeightValues';
 
 const componentObjects = [
     {
+        name: 'Body',
+        title: 'Body',
+        style: {
+            color: '#000000',
+            backgroundColor: '#ffffff',
+            width: '100%',
+            height: '100%',
+            marginLeft: '0px',
+            marginRight: '0px',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingLeft: '0px',
+            paddingRight: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px'
+        }
+    },
+    {
         name: 'Header',
         title: 'Header',
         innerText: 'Header',
@@ -375,6 +393,7 @@ const componentObjects = [
 ];
 
 export const componentTypes = {
+    Body: 'Body',
     Header: 'Header',
     Text: 'Text',
     Button: 'Button',
