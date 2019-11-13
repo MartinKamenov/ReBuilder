@@ -31,6 +31,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
     };
 
     const addDeploymentMessage = useCallback(async({ data }) => {
+        debugger;
         const message = JSON.parse(data);
         const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
 
