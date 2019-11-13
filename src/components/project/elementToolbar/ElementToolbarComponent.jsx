@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose, faCheck, faTrashAlt, faUndo } from '@fortawesome/free-solid-svg-icons';
 import './ElementToolbarComponent.css';
 import ButtonComponent from '../../common/button/ButtonComponent';
+import { componentTypes } from '../components/componentTypes';
 
 const capitalizeFirstLetter = (text) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
@@ -309,16 +310,18 @@ const ElementToolbarComponent = ({
                     <FontAwesomeIcon className='action-icon' icon={faUndo} />
                     Revert changes
                 </ButtonComponent>
-                <ButtonComponent
-                    type='danger'
-                    onClick={(ev) => { 
-                        ev.stopPropagation();
-                        actions.handleDeleteComponent(component.index);
-                    }}
-                    className='actions-button'>
-                    <FontAwesomeIcon className='action-icon' icon={faTrashAlt} />
-                    Delete
-                </ButtonComponent>
+                { component.name !== componentTypes.Body ? (
+                    <ButtonComponent
+                        type='danger'
+                        onClick={(ev) => { 
+                            ev.stopPropagation();
+                            actions.handleDeleteComponent(component.index);
+                        }}
+                        className='actions-button'>
+                        <FontAwesomeIcon className='action-icon' icon={faTrashAlt} />
+                        Delete
+                    </ButtonComponent>
+                ) : null }
             </div>
         </div>
     );
