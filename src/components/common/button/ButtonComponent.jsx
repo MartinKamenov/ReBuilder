@@ -3,6 +3,19 @@ import PropTypes from 'prop-types';
 import './ButtonComponent.css';
 import Button from '@material-ui/core/Button';
 
+const getColorFromType = (type) => {
+    switch(type) {
+        case 'success':
+        case 'primary':
+            return 'primary';
+        case 'danger':
+        case 'warning':
+            return 'secondary';
+        default:
+            return 'primary';
+    }
+};
+
 const ButtonComponent = ({
     title,
     style,
@@ -18,11 +31,13 @@ const ButtonComponent = ({
         rounded = true;
     }
 
+    console.log(color || getColorFromType(type));
+
     if(children && children.length > 0) {
         return (
             <Button
-                variant={variant}
-                color={color}
+                variant={variant || 'contained'}
+                color={color || getColorFromType(type)}
                 style={style}
                 className={
                     `custom-button ${className} ${rounded ? 'custom-buttom-rounded':''}`
@@ -37,8 +52,8 @@ const ButtonComponent = ({
         <Button
             className={className}
             style={style}
-            variant={variant}
-            color={color}
+            variant={variant || 'contained'}
+            color={color || getColorFromType(type)}
             onClick={onClick}>
             {title}
         </Button>
@@ -48,8 +63,8 @@ const ButtonComponent = ({
 ButtonComponent.propTypes = {
     title: PropTypes.string,
     style: PropTypes.object,
-    color: PropTypes.string.isRequired,
-    variant: PropTypes.string.isRequired,
+    color: PropTypes.string,
+    variant: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     className: PropTypes.string,
     rounded: PropTypes.bool
