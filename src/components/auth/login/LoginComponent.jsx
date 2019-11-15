@@ -82,6 +82,7 @@ const LoginComponent = ({
                     <ButtonComponent
                         title='Log in'
                         className='submit-btn'
+                        variant='contained'
                         type='success'
                         onClick={login}/>
                 </div>
