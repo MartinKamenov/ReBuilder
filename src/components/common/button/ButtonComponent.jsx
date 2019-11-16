@@ -1,41 +1,70 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './ButtonComponent.css';
+import Button from '@material-ui/core/Button';
 
-const ButtonComponent = ({ title, style, type, onClick, className, rounded, children }) => {
+const getColorFromType = (type) => {
+    switch(type) {
+        case 'success':
+        case 'primary':
+            return 'primary';
+        case 'danger':
+        case 'warning':
+            return 'secondary';
+        default:
+            return 'primary';
+    }
+};
+
+const ButtonComponent = ({
+    title,
+    style,
+    color,
+    variant,
+    type,
+    onClick,
+    className,
+    rounded,
+    children
+}) => {
     if(rounded === undefined) {
         rounded = true;
     }
 
+    console.log(color || getColorFromType(type));
+
     if(children && children.length > 0) {
         return (
-            <button
+            <Button
+                variant={variant || 'contained'}
+                color={color || getColorFromType(type)}
                 style={style}
                 className={
-                    `custom-button ${className} custom-button-${type} ${rounded ? 'custom-buttom-rounded':''}`
+                    `custom-button ${className} ${rounded ? 'custom-buttom-rounded':''}`
                 }
                 onClick={onClick}>
                 {children}
-            </button>
+            </Button>
         );
     }
 
     return (
-        <button
+        <Button
+            className={className}
             style={style}
-            className={
-                `custom-button ${className} custom-button-${type} ${rounded ? 'custom-buttom-rounded':''}`
-            }
+            variant={variant || 'contained'}
+            color={color || getColorFromType(type)}
             onClick={onClick}>
             {title}
-        </button>
+        </Button>
     );
 };
 
 ButtonComponent.propTypes = {
     title: PropTypes.string,
     style: PropTypes.object,
-    type: PropTypes.string.isRequired,
+    color: PropTypes.string,
+    variant: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     className: PropTypes.string,
     rounded: PropTypes.bool

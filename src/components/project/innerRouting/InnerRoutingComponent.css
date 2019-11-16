@@ -112,11 +112,11 @@
     cursor: pointer;
     transition: all .8s ease;
     -webkit-transition: all .8s ease;
-    background-color: #4A3E9D;
+    background-color: #2A3642;
     color: white;
 }
 
 .header-tab.active {
-    background-color: #563C77;
+    background-color: #28333F;
     color: white;
 }

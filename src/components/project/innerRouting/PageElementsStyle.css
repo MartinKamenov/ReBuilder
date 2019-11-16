@@ -16,7 +16,7 @@
   left: 0;
   border-radius: 4px;
   pointer-events: none;
-  background-image: linear-gradient(+90deg, #5D3A5F , #4A3E9E);
+  background-image: linear-gradient(+90deg, #2A3642 , #28333F);
 }
 
 .in-top .info {
