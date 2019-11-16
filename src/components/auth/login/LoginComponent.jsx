@@ -23,10 +23,10 @@ const LoginComponent = ({
         [dispatch, username, password]
     );
 
-    const redirectToHome = useCallback(
-        () => {
+    const redirectTo = useCallback(
+        (path) => {
             setIsLoading(false);
-            history.push('/dashboard');
+            history.push(path);
             return;
         },
         [history]
@@ -50,14 +50,14 @@ const LoginComponent = ({
 
     useEffect(() => {
         if(user.id) {
-            redirectToHome();
+            redirectTo('/dashboard');
         }
 
         if(error) {
             setIsLoading(false);
             return;
         }
-    }, [user, error, redirectToHome]);
+    }, [user, error, redirectTo]);
 
     if(isLoading) {
         return <LoadingComponent message='Authenticating user' />;
@@ -87,6 +87,13 @@ const LoginComponent = ({
                         variant='contained'
                         type='success'
                         onClick={login}/>
+                    <p className='auth-suggest'>Not a member yet? Join Now</p>
+                    <ButtonComponent
+                        title='Sign up here'
+                        className='submit-btn'
+                        variant='contained'
+                        color='default'
+                        onClick={() => redirectTo('/register')}/>
                 </div>
             </div>
         </div>
