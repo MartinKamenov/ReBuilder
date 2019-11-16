@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 import './NewProjectPageComponent.css';
 import InputComponent from '../../common/input/InputComponent';
+import LoadingIndicator from '../../common/loading-indicator/LoadingIndicator';
 
 
 const NewProjectPageComponent = ({ history }) => {
@@ -101,7 +102,7 @@ const NewProjectPageComponent = ({ history }) => {
     ]);
 
     if(isLoading) {
-        return <LoadingComponent message='Creating project' />;
+        return <LoadingIndicator message='Creating project' />;
     }
 
     return (

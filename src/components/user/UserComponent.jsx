@@ -6,11 +6,11 @@ import { faUndo, faSave } from '@fortawesome/free-solid-svg-icons';
 
 import ButtonComponent from '../common/button/ButtonComponent';
 import apiService from '../../service/api.service';
-import LoadingComponent from '../common/loading-page/LoadingComponent';
 import successMessages from '../../constants/successMessages';
 import PropTypes from 'prop-types';
 
 import './UserComponent.css';
+import LoadingIndicator from '../common/loading-indicator/LoadingIndicator';
 
 const UserComponent = ({ history }) => {
     const [imageUrl, setImageUrl] = useState('');
@@ -73,7 +73,7 @@ const UserComponent = ({ history }) => {
     }, [user, token, history]);
 
     if(isLoading) {
-        return <LoadingComponent message='Uploading image'/>;
+        return <LoadingIndicator message='Uploading image'/>;
     }
 
     return (
