@@ -3,6 +3,7 @@ import ButtonComponent from '../../../../common/button/ButtonComponent';
 import PropTypes from 'prop-types';
 
 import './PagesEditorComponent.css';
+import InputComponent from '../../../../common/input/InputComponent';
 
 const PagesEditorComponent = ({
     handleEnterPressed,
@@ -19,7 +20,7 @@ const PagesEditorComponent = ({
             (event) => handleEnterPressed(event.key)
         }>
         <div className='routing-form-input-container'>
-            <input
+            <InputComponent
                 value={state.newPageName}
                 onChange={updateNewPageValue}
                 className={'routing-form-input ' + isValidClass('newPageNameError')}

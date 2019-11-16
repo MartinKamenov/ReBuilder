@@ -5,6 +5,7 @@ import LoadingComponent from '../../common/loading-page/LoadingComponent';
 import ButtonComponent from '../../common/button/ButtonComponent';
 import PropTypes from 'prop-types';
 import './LoginComponent.css';
+import InputComponent from '../../common/input/InputComponent';
 
 const LoginComponent = ({
     history
@@ -22,10 +23,10 @@ const LoginComponent = ({
         [dispatch, username, password]
     );
 
-    const redirectToHome = useCallback(
-        () => {
+    const redirectTo = useCallback(
+        (path) => {
             setIsLoading(false);
-            history.push('/dashboard');
+            history.push(path);
             return;
         },
         [history]
@@ -49,14 +50,14 @@ const LoginComponent = ({
 
     useEffect(() => {
         if(user.id) {
-            redirectToHome();
+            redirectTo('/dashboard');
         }
 
         if(error) {
             setIsLoading(false);
             return;
         }
-    }, [user, error, redirectToHome]);
+    }, [user, error, redirectTo]);
 
     if(isLoading) {
         return <LoadingComponent message='Authenticating user' />;
@@ -67,13 +68,14 @@ const LoginComponent = ({
             <div className='login-container'>
                 <h3 className='auth-header'>Sign in</h3>
                 <div onKeyDown={handleEnterPressed}>
-                    <input
+                    <InputComponent
+                        autoFocus
                         className='form-input'
                         type='text'
                         placeholder='Username'
                         onChange={(event) => setUsername(event.target.value)}
                         value={username}/>
-                    <input
+                    <InputComponent
                         className='form-input'
                         type='password'
                         placeholder='Password'
@@ -82,8 +84,16 @@ const LoginComponent = ({
                     <ButtonComponent
                         title='Log in'
                         className='submit-btn'
+                        variant='contained'
                         type='success'
                         onClick={login}/>
+                    <p className='auth-suggest'>Not a member yet? Join Now</p>
+                    <ButtonComponent
+                        title='Sign up here'
+                        className='submit-btn'
+                        variant='contained'
+                        color='default'
+                        onClick={() => redirectTo('/register')}/>
                 </div>
             </div>
         </div>

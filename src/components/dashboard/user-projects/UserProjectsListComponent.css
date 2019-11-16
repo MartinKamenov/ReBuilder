@@ -18,7 +18,7 @@
     border-radius: 15px;
     display: block;
     margin: auto;
-    border: 1px solid #4A3E9D;
+    border: 1px solid #2A3642;
 }
 
 .dashboard-project-text {
@@ -32,8 +32,8 @@
     transition: all .8s ease;
     -webkit-transition: all .8s ease;
     background-color: white;
-    color: #4A3E9D;
-    border: 1px solid #4A3E9D;
+    color: #2A3642;
+    border: 1px solid #2A3642;
     border-radius: 10px;
     width: 100%;
     height: 200px;
@@ -45,7 +45,7 @@
 .dashboard-project-component:hover {
     transition: all .8s ease;
     -webkit-transition: all .8s ease;
-    background-color: #563C77;
+    background-color: #28333F;
     color: white;
     border: 1px solid white;
 }
