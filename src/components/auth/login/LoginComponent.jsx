@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as authenticationActions from '../../../actions/authenticationActions';
-import LoadingComponent from '../../common/loading-page/LoadingComponent';
 import ButtonComponent from '../../common/button/ButtonComponent';
 import PropTypes from 'prop-types';
 import './LoginComponent.css';

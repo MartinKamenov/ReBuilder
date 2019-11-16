@@ -72,12 +72,9 @@ const UserComponent = ({ history }) => {
         setImageUrl(user.imageUrl);
     }, [user, token, history]);
 
-    if(isLoading) {
-        return <LoadingIndicator message='Uploading image'/>;
-    }
-
     return (
         <div className='user-container'>
+            { isLoading ? <LoadingIndicator message='Uploading image' /> : null }
             <div className='center-container user-details'>
                 <div
                     onClick={(event) => {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import LoadingComponent from '../../common/loading-page/LoadingComponent';
 import * as authenticationActions from '../../../actions/authenticationActions';
 import { useSelector, useDispatch } from 'react-redux';
 import './RegisterComponent.css';
@@ -65,7 +64,7 @@ const RegisterComponent = ({ history }) => {
 
     return (
         <div className='auth-container'>
-            { isLoading ? <LoadingIndicator message='Signing up user' /> : null }
+            { isLoading ? <LoadingIndicator message='Signing user' /> : null }
             <div className='register-container'>
                 <h3 className='auth-header'>Sign up</h3>
                 <div onKeyDown={handleEnterPressed}>

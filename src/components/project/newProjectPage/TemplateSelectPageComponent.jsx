@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './TemplateSelectPageComponent.css';
-import LoadingComponent from '../../common/loading-page/LoadingComponent';
 import LoadingIndicator from '../../common/loading-indicator/LoadingIndicator';
 
 const TemplateSelectPageComponent = ({ history, location }) => {
@@ -43,12 +42,9 @@ const TemplateSelectPageComponent = ({ history, location }) => {
         }
     }, [project, history]);
 
-    if(isLoading) {
-        return <LoadingIndicator message='Creating project'/>;   
-    }
-
     return (
         <div className='container'>
+            { isLoading ? <LoadingIndicator message='Uploading image' /> : null }
             {templates.map((template, i) => (
                 <ButtonComponent
                     type='success'
