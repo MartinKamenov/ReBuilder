@@ -90,8 +90,8 @@
     height: 50px;
     font-weight: bold;
     background-color: #ffffff;
-    color: #513D88;
-    border: 1px solid #513D88;
+    color: #2A3642;
+    border: 1px solid #2A3642;
 }
 
 .tabs-container {
@@ -113,10 +113,12 @@
     transition: all .8s ease;
     -webkit-transition: all .8s ease;
     background-color: #2A3642;
+    border: 1px solid white;
     color: white;
 }
 
 .header-tab.active {
+    border: 1px solid white;
     background-color: #28333F;
     color: white;
 }
