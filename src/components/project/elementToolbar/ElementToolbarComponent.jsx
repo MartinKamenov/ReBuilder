@@ -6,6 +6,7 @@ import { faWindowClose, faCheck, faTrashAlt, faUndo } from '@fortawesome/free-so
 import './ElementToolbarComponent.css';
 import ButtonComponent from '../../common/button/ButtonComponent';
 import { componentTypes } from '../components/componentTypes';
+import InputComponent from '../../common/input/InputComponent';
 
 const capitalizeFirstLetter = (text) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
@@ -214,12 +215,12 @@ const ElementToolbarComponent = ({
                                     <label className='component-changer-label'>
                                         {capitalizeFirstLetter(input)}
                                     </label>
-                                    <input
+                                    <InputComponent
                                         className='component-changer-input'
                                         onChange={(event) => handleComponentValueChange(event.target.value, input)}
                                         value={component[input]}
                                         placeholder={input}>
-                                    </input>
+                                    </InputComponent>
                                 </div>
                             );
                         })
@@ -262,12 +263,12 @@ const ElementToolbarComponent = ({
                                     <label className='component-changer-label'>
                                         {capitalizeFirstLetter(style)}
                                     </label>
-                                    <input
+                                    <InputComponent
                                         className='component-changer-input'
                                         onChange={(event) => handleComponentValueChange(event.target.value, 'style.' + style)}
                                         value={component.style[style]}
                                         placeholder={style}>
-                                    </input>
+                                    </InputComponent>
                                 </div>
                             );
                         })

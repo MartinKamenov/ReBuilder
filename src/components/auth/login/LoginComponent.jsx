@@ -5,6 +5,7 @@ import LoadingComponent from '../../common/loading-page/LoadingComponent';
 import ButtonComponent from '../../common/button/ButtonComponent';
 import PropTypes from 'prop-types';
 import './LoginComponent.css';
+import InputComponent from '../../common/input/InputComponent';
 
 const LoginComponent = ({
     history
@@ -67,13 +68,14 @@ const LoginComponent = ({
             <div className='login-container'>
                 <h3 className='auth-header'>Sign in</h3>
                 <div onKeyDown={handleEnterPressed}>
-                    <input
+                    <InputComponent
+                        autoFocus
                         className='form-input'
                         type='text'
                         placeholder='Username'
                         onChange={(event) => setUsername(event.target.value)}
                         value={username}/>
-                    <input
+                    <InputComponent
                         className='form-input'
                         type='password'
                         placeholder='Password'
@@ -82,6 +84,7 @@ const LoginComponent = ({
                     <ButtonComponent
                         title='Log in'
                         className='submit-btn'
+                        variant='contained'
                         type='success'
                         onClick={login}/>
                 </div>
