@@ -16,10 +16,8 @@ input.form-input {
     margin-bottom: 10px;
 }
 
-button.submit-btn {
-    margin: auto;
-    display: block;
-    max-width: 200px;
+.submit-btn {
+    width: 80%;
     margin-top: 10px;
 }
 .auth-container{

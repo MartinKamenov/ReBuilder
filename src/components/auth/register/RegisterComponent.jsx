@@ -97,6 +97,7 @@ const RegisterComponent = ({ history }) => {
                     <ButtonComponent
                         title='Sign up'
                         className='submit-btn'
+                        variant='contained'
                         type='success'
                         onClick={register}/>
                 </div>

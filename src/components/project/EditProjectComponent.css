@@ -13,12 +13,12 @@
     position: absolute;
     float: left;
     text-decoration: none;
-    color: #4A3E9E;
+    color: #28333F;
     width: 60px;
     height: 60px;
     line-height: 60px;
     border-radius: 50%;
-    border: solid 2px #4A3E9E;
+    border: solid 2px #28333F;
     text-align: center;
     vertical-align: middle;
     overflow: hidden;
@@ -28,7 +28,7 @@
 
 .draggable-container-btn:hover {
     color: white;
-    background-image: linear-gradient(+90deg, #5D3A5F , #4A3E9E);
+    background-image: linear-gradient(+90deg, #2A3642 , #28333F);
 }
 
 .project-name-header {
