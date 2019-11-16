@@ -19,6 +19,7 @@ import PagesEditorComponent from './tabs/pageTab/PagesEditorComponent';
 import DatabaseTabComponent from './tabs/databaseTab/DatabaseTabComponent';
 import DeploymentTabComponent from './tabs/deploymentTab/DeploymentTabComponent';
 import tabs from './tabs/projectTabs';
+import InputComponent from '../../common/input/InputComponent';
 
 class InnerRoutingComponent extends Component {
     state = {
@@ -276,7 +277,7 @@ class InnerRoutingComponent extends Component {
                 {component.innerText}
             </button>);
         case componentTypes.Input:
-            return (<input
+            return (<InputComponent
                 placeholder={component.placeholder}
                 key={component.index}
                 style={style}/>);
