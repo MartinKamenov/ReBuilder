@@ -19,7 +19,7 @@ const InputComponent = ({
 }) => {
     return (
         <div className={className}
-        style={style}>
+            style={style}>
             <CustomInput
                 autoFocus={autoFocus}
                 onChange={onChange}

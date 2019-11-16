@@ -47,10 +47,10 @@ const RegisterComponent = ({ history }) => {
         }
     }, [register]);
 
-    const redirectToHome = useCallback(
-        () => {
+    const redirectTo = useCallback(
+        (path) => {
             setIsLoading(false);
-            history.push('/dashboard');
+            history.push(path);
             return;
         },
         [history]
@@ -58,9 +58,9 @@ const RegisterComponent = ({ history }) => {
 
     useEffect(() => {
         if(user.id) {
-            redirectToHome();
+            redirectTo('/dashboard');
         }
-    }, [user, redirectToHome]);
+    }, [user, redirectTo]);
 
     if(isLoading) {
         return <LoadingComponent message='Authenticating user' />;
@@ -102,6 +102,13 @@ const RegisterComponent = ({ history }) => {
                         variant='contained'
                         type='success'
                         onClick={register}/>
+                    <p className='auth-suggest'>Already a member?</p>
+                    <ButtonComponent
+                        title='Sign in here'
+                        className='submit-btn'
+                        variant='contained'
+                        color='default'
+                        onClick={() => redirectTo('/login')}/>
                 </div>
             </div>
         </div>
