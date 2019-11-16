@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './RegisterComponent.css';
 import PropTypes from 'prop-types';
 import ButtonComponent from '../../common/button/ButtonComponent';
+import InputComponent from '../../common/input/InputComponent';
 
 const RegisterComponent = ({ history }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -46,10 +47,10 @@ const RegisterComponent = ({ history }) => {
         }
     }, [register]);
 
-    const redirectToHome = useCallback(
-        () => {
+    const redirectTo = useCallback(
+        (path) => {
             setIsLoading(false);
-            history.push('/dashboard');
+            history.push(path);
             return;
         },
         [history]
@@ -57,9 +58,9 @@ const RegisterComponent = ({ history }) => {
 
     useEffect(() => {
         if(user.id) {
-            redirectToHome();
+            redirectTo('/dashboard');
         }
-    }, [user, redirectToHome]);
+    }, [user, redirectTo]);
 
     if(isLoading) {
         return <LoadingComponent message='Authenticating user' />;
@@ -70,25 +71,26 @@ const RegisterComponent = ({ history }) => {
             <div className='register-container'>
                 <h3 className='auth-header'>Sign up</h3>
                 <div onKeyDown={handleEnterPressed}>
-                    <input
+                    <InputComponent
+                        autoFocus
                         className='form-input'
                         type='email'
                         placeholder='Email'
                         onChange={(event) => setEmail(event.target.value)}
                         value={email}/>
-                    <input
+                    <InputComponent
                         className='form-input'
                         type='text'
                         placeholder='Username'
                         onChange={(event) => setUsername(event.target.value)}
                         value={username}/>
-                    <input
+                    <InputComponent
                         className='form-input'
                         type='password'
                         placeholder='Password'
                         onChange={(event) => setPassword(event.target.value)}
                         value={password}/>
-                    <input
+                    <InputComponent
                         className='form-input'
                         type='password'
                         placeholder='Password repeat'
@@ -97,8 +99,16 @@ const RegisterComponent = ({ history }) => {
                     <ButtonComponent
                         title='Sign up'
                         className='submit-btn'
+                        variant='contained'
                         type='success'
                         onClick={register}/>
+                    <p className='auth-suggest'>Already a member?</p>
+                    <ButtonComponent
+                        title='Sign in here'
+                        className='submit-btn'
+                        variant='contained'
+                        color='default'
+                        onClick={() => redirectTo('/login')}/>
                 </div>
             </div>
         </div>

@@ -8,6 +8,7 @@ import apiService from '../../../service/api.service';
 import PropTypes from 'prop-types';
 
 import './NewProjectPageComponent.css';
+import InputComponent from '../../common/input/InputComponent';
 
 
 const NewProjectPageComponent = ({ history }) => {
@@ -127,7 +128,7 @@ const NewProjectPageComponent = ({ history }) => {
             </div>
             <div>
                 <label className='project-page-label'>Project name</label>
-                <input
+                <InputComponent
                     className='project-page-input'
                     placeholder='Add name here'
                     value={name}

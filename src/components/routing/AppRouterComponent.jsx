@@ -51,7 +51,6 @@ const AppRouterComponent = () => {
                     <div className='main-container'>
                         <NavbarComponent/>
                         <Route exact path="/" component={HomeComponent} />
-                        <Route exact path="/services" component={ServicesComponent} />
                         <div className='navbar-container-margin'>
                             <div className='main-container'>
                                 <Route exact path="/dashboard" component={DashboardComponent} />
@@ -61,6 +60,7 @@ const AppRouterComponent = () => {
                                 <Route exact path="/users/:id" component={UserComponent} />
                                 <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
                                 <Route exact path="/templates" component={TemplateSelectPageComponent} />
+                                <Route exact path="/services" component={ServicesComponent} />
                                 <div className='container'>
                                     <Route exact path="/project/new" component={NewProjectPageComponent} />
                                 </div>

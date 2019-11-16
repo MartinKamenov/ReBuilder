@@ -11,15 +11,18 @@
     font-weight: bold;
 }
 
-input.form-input {
+.form-input {
+    margin: auto;
     width: 80%;
     margin-bottom: 10px;
 }
 
-button.submit-btn {
-    margin: auto;
-    display: block;
-    max-width: 200px;
+.auth-suggest {
+    margin-top: 20px;
+}
+
+.submit-btn {
+    width: 80%;
     margin-top: 10px;
 }
 .auth-container{
