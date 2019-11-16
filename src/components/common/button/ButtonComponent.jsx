@@ -5,14 +5,14 @@ import Button from '@material-ui/core/Button';
 
 const getColorFromType = (type) => {
     switch(type) {
-        case 'success':
-        case 'primary':
-            return 'primary';
-        case 'danger':
-        case 'warning':
-            return 'secondary';
-        default:
-            return 'primary';
+    case 'success':
+    case 'primary':
+        return 'primary';
+    case 'danger':
+    case 'warning':
+        return 'secondary';
+    default:
+        return 'primary';
     }
 };
 
