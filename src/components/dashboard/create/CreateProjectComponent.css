@@ -1,4 +1,7 @@
-.create-project-container {
-    max-width: 200px;
-    height: 200px;
+.MuiTypography-h6 {
+    font-size: 14px !important;
+}
+
+.MuiDialogContent-dividers {
+    height: 300px;
 }
