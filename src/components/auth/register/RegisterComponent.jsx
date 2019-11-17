@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import LoadingComponent from '../../common/loading-page/LoadingComponent';
 import * as authenticationActions from '../../../actions/authenticationActions';
 import { useSelector, useDispatch } from 'react-redux';
 import './RegisterComponent.css';
 import PropTypes from 'prop-types';
 import ButtonComponent from '../../common/button/ButtonComponent';
 import InputComponent from '../../common/input/InputComponent';
+import LoadingIndicator from '../../common/loading-indicator/LoadingIndicator';
 
 const RegisterComponent = ({ history }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -62,12 +62,9 @@ const RegisterComponent = ({ history }) => {
         }
     }, [user, redirectTo]);
 
-    if(isLoading) {
-        return <LoadingComponent message='Authenticating user' />;
-    }
-
     return (
         <div className='auth-container'>
+            { isLoading ? <LoadingIndicator message='Signing user' /> : null }
             <div className='register-container'>
                 <h3 className='auth-header'>Sign up</h3>
                 <div onKeyDown={handleEnterPressed}>
@@ -97,6 +94,7 @@ const RegisterComponent = ({ history }) => {
                         onChange={(event) => setPasswordRepeat(event.target.value)}
                         value={passwordRepeat}/>
                     <ButtonComponent
+                        disabled={isLoading}
                         title='Sign up'
                         className='submit-btn'
                         variant='contained'
@@ -104,6 +102,7 @@ const RegisterComponent = ({ history }) => {
                         onClick={register}/>
                     <p className='auth-suggest'>Already a member?</p>
                     <ButtonComponent
+                        disabled={isLoading}
                         title='Sign in here'
                         className='submit-btn'
                         variant='contained'
