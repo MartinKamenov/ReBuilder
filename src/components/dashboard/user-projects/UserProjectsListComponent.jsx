@@ -3,7 +3,7 @@ import './UserProjectsListComponent.css';
 import UserProjectComponent from './UserProjectComponent';
 import PropTypes from 'prop-types';
 
-const UserProjectsListComponent = ({projects}) => {
+const UserProjectsListComponent = ({projects, user}) => {
     return (
         <div className="user-projects-list">
             <div>
@@ -11,7 +11,7 @@ const UserProjectsListComponent = ({projects}) => {
                     projects.map((project) => {
                         return (
                             <div className='col-md-4 col-sm-6' key={project.id}>
-                                <UserProjectComponent projectDetails={project}/>
+                                <UserProjectComponent user={user} projectDetails={project}/>
                             </div>
                         );
                     })
