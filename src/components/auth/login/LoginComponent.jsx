@@ -79,6 +79,7 @@ const LoginComponent = ({
                         onChange={(event) => setPassword(event.target.value)}
                         value={password}/>
                     <ButtonComponent
+                        disabled={isLoading}
                         title='Log in'
                         className='submit-btn'
                         variant='contained'
@@ -86,6 +87,7 @@ const LoginComponent = ({
                         onClick={login}/>
                     <p className='auth-suggest'>Not a member yet? Join Now</p>
                     <ButtonComponent
+                        disabled={isLoading}
                         title='Sign up here'
                         className='submit-btn'
                         variant='contained'

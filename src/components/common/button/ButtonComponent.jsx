@@ -25,7 +25,8 @@ const ButtonComponent = ({
     onClick,
     className,
     rounded,
-    children
+    children,
+    disabled
 }) => {
     if(rounded === undefined) {
         rounded = true;
@@ -36,6 +37,7 @@ const ButtonComponent = ({
     if(children && children.length > 0) {
         return (
             <Button
+                disabled={disabled}
                 variant={variant || 'contained'}
                 color={color || getColorFromType(type)}
                 style={style}
@@ -50,6 +52,7 @@ const ButtonComponent = ({
 
     return (
         <Button
+            disabled={disabled}
             className={className}
             style={style}
             variant={variant || 'contained'}

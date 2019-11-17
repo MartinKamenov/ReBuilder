@@ -94,6 +94,7 @@ const RegisterComponent = ({ history }) => {
                         onChange={(event) => setPasswordRepeat(event.target.value)}
                         value={passwordRepeat}/>
                     <ButtonComponent
+                        disabled={isLoading}
                         title='Sign up'
                         className='submit-btn'
                         variant='contained'
@@ -101,6 +102,7 @@ const RegisterComponent = ({ history }) => {
                         onClick={register}/>
                     <p className='auth-suggest'>Already a member?</p>
                     <ButtonComponent
+                        disabled={isLoading}
                         title='Sign in here'
                         className='submit-btn'
                         variant='contained'
