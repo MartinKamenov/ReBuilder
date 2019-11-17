@@ -55,7 +55,7 @@ const UserProjectComponent = ({ projectDetails, user }) => {
         <Card className={classes.card}>
             <CardHeader
                 avatar={
-                    <Link style={{ textDecoration: 'none' }} to={ '/projects/' + projectDetails.id }>
+                    <Link style={{ textDecoration: 'none' }} to={ `/users/${user.id}` }>
                         <Avatar src={user.imageUrl} aria-label="recipe" className={classes.avatar} />
                     </Link>
                 }
@@ -67,11 +67,13 @@ const UserProjectComponent = ({ projectDetails, user }) => {
                 title={projectDetails.name}
                 subheader={projectDetails.lastUpdated}
             />
-            <CardMedia
-                className={classes.media}
-                image={projectDetails.projectImageUrl}
-                title={projectDetails.name}
-            />
+            <Link style={{ textDecoration: 'none' }} to={ `/projects/${projectDetails.id}` }>
+                <CardMedia
+                    className={classes.media}
+                    image={projectDetails.projectImageUrl}
+                    title={projectDetails.name}
+                />
+            </Link>
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
           This impressive paella is a perfect party dish and a fun meal to cook together with your
