@@ -17,6 +17,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import dateService, {dateFormatTypes} from '../../../service/date.service';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -55,6 +56,9 @@ const UserProjectComponent = ({ projectDetails, user }) => {
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
+    debugger;
+    const lastUpdated = new Date(projectDetails.lastUpdated);
     return (
         <Card
             className={classes.card}>
@@ -70,7 +74,7 @@ const UserProjectComponent = ({ projectDetails, user }) => {
                     </IconButton>
                 }
                 title={projectDetails.name}
-                subheader={projectDetails.lastUpdated}
+                subheader={dateService.formatDate(lastUpdated, dateFormatTypes.Material)}
             />
             <Link style={{ textDecoration: 'none' }} to={ `/projects/${projectDetails.id}` }>
                 <CardMedia
