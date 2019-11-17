@@ -37,7 +37,7 @@ const dateFormats = {
     materialCardExample: (date) => {
         return `${monthsLong[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}\n${date.getHours()}:${date.getMinutes()}`;
     }
-}
+};
 
 const dateService = {
     formatDate: (date, format) => {

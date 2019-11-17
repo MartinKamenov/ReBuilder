@@ -57,7 +57,6 @@ const UserProjectComponent = ({ projectDetails, user }) => {
         setExpanded(!expanded);
     };
 
-    debugger;
     const lastUpdated = new Date(projectDetails.lastUpdated);
     return (
         <Card
