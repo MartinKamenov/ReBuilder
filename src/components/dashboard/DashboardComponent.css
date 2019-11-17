@@ -1,19 +1,12 @@
 #user-navbar {
+    margin-top: -40px;
     height: 50px;
-    background: #F7F8FB;
     border-bottom: 1px solid #EEEEEE;
     padding-right: 10%;
     padding-left: 10%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-#user-navbar button {
-    border: none;
-    background: #E7E9EE;
-}
-#user-navbar button:hover {
-    background: #DDDDDD;
 }
 .navbar-brand.user-image {
     padding: 5px 0 5px 20px;
