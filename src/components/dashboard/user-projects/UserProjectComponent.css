@@ -16,3 +16,16 @@
     height: 50px;
     width: 70px;
 }
+
+.MuiCardHeader-title {
+    font-size: 16px !important;
+    font-weight: bold !important;
+}
+
+.MuiCardHeader-subheader {
+    font-size: 14px !important;
+}
+
+.MuiCardContent-root p {
+    font-size: 12px !important;
+}
