@@ -12,6 +12,10 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import ButtonComponent from '../../common/button/ButtonComponent';
 import InputComponent from '../../common/input/InputComponent';
 import './CreateProjectComponent.css';
+import apiService from '../../../service/api.service';
+import LoadingIndicator from '../../common/loading-indicator/LoadingIndicator';
+
+const defaultProjectImage = 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
 
 const styles = theme => ({
     root: {
@@ -56,6 +60,8 @@ const CreateProjectComponent = () => {
     const [open, setOpen] = useState(false);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [imageUrl, setImageUrl] = useState(defaultProjectImage);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -63,8 +69,31 @@ const CreateProjectComponent = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const changeImage = async({ target }) => {
+        if (!target.files || !target.files[0]) {
+            return;
+        }
+
+        setIsLoading(true);
+
+        const file = target.files[0];
+        const formData = new FormData();
+        formData.append('image', file, file.name);
+
+        try {
+            const res = await apiService.uploadImage(formData);
+            setImageUrl(res.data.data.link);
+            setIsLoading(false);
+        } catch(error) {
+            setIsLoading(false);
+            console.log(error);
+        }
+    };
+
     return (
         <div className='center-container' style={{ marginTop: '-30px', marginBottom: '10px' }}>
+            { isLoading ? <LoadingIndicator message='Uploading image' /> : null }
             <ButtonComponent
                 style={{
                     width: 200,
@@ -83,9 +112,29 @@ const CreateProjectComponent = () => {
             </ButtonComponent>
             <Dialog fullWidth onClose={handleClose} aria-labelledby='customized-dialog-title' open={open}>
                 <DialogTitle id='customized-dialog-title' onClose={handleClose}>
-            Create new project
+                    Create new project
                 </DialogTitle>
                 <DialogContent dividers>
+                    <div
+                        onClick={(event) => {
+                            const element = document.getElementById('change-element-image');
+                            element.click(event);
+                        }}
+                        className='user-image-container'>
+                        <img
+                            className='user-component-user-image'
+                            alt='User'
+                            src={imageUrl}/>
+                        <div className="user-image-overlay">
+                            Upload new image
+                        </div>
+                    </div>
+                    <input
+                        id='change-element-image'
+                        className='change-element-image'
+                        onChange={changeImage}
+                        type='file'
+                        accept='image/*'/>
                     <InputComponent
                         className='form-input'
                         autoFocus
