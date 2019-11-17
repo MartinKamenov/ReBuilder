@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import './DashboardComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,8 +9,9 @@ import PagingComponent from '../common/paging/PagingComponent';
 import pagingService from '../../service/paging.service';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
+import ButtonComponent from '../common/button/ButtonComponent';
 
-const DashboardComponent = ({ location: { search } }) => {
+const DashboardComponent = ({ location: { search }, history }) => {
     const [page, setPage] = useState(1);
 
     const user = useSelector((state) => state.user);
@@ -24,6 +25,14 @@ const DashboardComponent = ({ location: { search } }) => {
         const queryPage = parseInt(queryObject.page, 10);
         setPage(queryPage || 1);
     }, [user, search]);
+
+    const redirectTo = useCallback(
+        (path) => {
+            history.push(path);
+            return;
+        },
+        [history]
+    );
     
     if (!user.id) {
         return (
@@ -35,7 +44,7 @@ const DashboardComponent = ({ location: { search } }) => {
         );
     }
     return (
-        <div>
+        <div className='auth-container'>
             <nav id='user-navbar'>
                 <Link
                     className='user-profile'
@@ -48,14 +57,16 @@ const DashboardComponent = ({ location: { search } }) => {
                         {user.username}
                     </h4>
                 </Link>
-                <div id='addButton' className='vertical-centered'>
-                    <Link
-                        to='/project/new'
-                        type='button'
-                        className='btn btn-outline-dark'>
-                        New <FontAwesomeIcon icon={faPlusCircle} />
-                    </Link>
-                </div>
+                
+                <ButtonComponent
+                    style={{ width: 200, fontWeight: 'bold', fontSize: 12, height: 50 }}
+                    variant='outlined'
+                    color='secondary'
+                    className='vertical-centered'
+                    onClick={() => redirectTo('/project/new')}>
+                    <FontAwesomeIcon className='action-icon' icon={faPlusCircle} />
+                    Create new project
+                </ButtonComponent>
             </nav>
             <UserProjectsListComponent
                 projects={pagingService
