@@ -18,7 +18,6 @@ const NavbarComponent = () => {
             routesCopy.push({ route: '/', text: 'Home' });
             routesCopy.push({ route: '/services', text: 'Services' });
             routesCopy.push({ route: '/login', text: 'Sign in' });
-            routesCopy.push({ route: '/register', text: 'Sign up' });
         }
 
         setRoutes(routesCopy);
