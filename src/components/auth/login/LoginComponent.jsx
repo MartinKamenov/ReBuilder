@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as authenticationActions from '../../../actions/authenticationActions';
-import LoadingComponent from '../../common/loading-page/LoadingComponent';
 import ButtonComponent from '../../common/button/ButtonComponent';
 import PropTypes from 'prop-types';
 import './LoginComponent.css';
 import InputComponent from '../../common/input/InputComponent';
+import LoadingIndicator from '../../common/loading-indicator/LoadingIndicator';
 
 const LoginComponent = ({
     history
@@ -58,13 +58,10 @@ const LoginComponent = ({
             return;
         }
     }, [user, error, redirectTo]);
-
-    if(isLoading) {
-        return <LoadingComponent message='Authenticating user' />;
-    }
     
     return (
         <div className='auth-container'>
+            { isLoading ? <LoadingIndicator message='Authenticating user' /> : null }
             <div className='login-container'>
                 <h3 className='auth-header'>Sign in</h3>
                 <div onKeyDown={handleEnterPressed}>
