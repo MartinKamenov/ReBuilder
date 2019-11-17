@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './DashboardComponent.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import UserProjectsListComponent from './user-projects/UserProjectsListComponent';
 import { Link } from 'react-router-dom';
 import PagingComponent from '../common/paging/PagingComponent';
 import pagingService from '../../service/paging.service';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
-import ButtonComponent from '../common/button/ButtonComponent';
+import CreateProjectComponent from './create/CreateProjectComponent';
 
-const DashboardComponent = ({ location: { search }, history }) => {
+const DashboardComponent = ({ location: { search } }) => {
     const [page, setPage] = useState(1);
 
     const user = useSelector((state) => state.user);
@@ -25,14 +23,6 @@ const DashboardComponent = ({ location: { search }, history }) => {
         const queryPage = parseInt(queryObject.page, 10);
         setPage(queryPage || 1);
     }, [user, search]);
-
-    const redirectTo = useCallback(
-        (path) => {
-            history.push(path);
-            return;
-        },
-        [history]
-    );
     
     if (!user.id) {
         return (
@@ -45,29 +35,7 @@ const DashboardComponent = ({ location: { search }, history }) => {
     }
     return (
         <div className='auth-container'>
-            <nav id='user-navbar'>
-                <Link
-                    className='user-profile'
-                    style={{ textDecoration: 'none' }}
-                    to={`/users/${user.id}`}>
-                    <div className='navbar-brand user-image'>
-                        <img src={user.imageUrl} height='100%' alt='user avatar' />
-                    </div>
-                    <h4 className='vertical-centered username-hover'>
-                        {user.username}
-                    </h4>
-                </Link>
-                
-                <ButtonComponent
-                    style={{ width: 200, fontWeight: 'bold', fontSize: 12, height: 50 }}
-                    variant='outlined'
-                    color='secondary'
-                    className='vertical-centered'
-                    onClick={() => redirectTo('/project/new')}>
-                    <FontAwesomeIcon className='action-icon' icon={faPlusCircle} />
-                    Create new project
-                </ButtonComponent>
-            </nav>
+            <CreateProjectComponent/>
             <UserProjectsListComponent
                 user={user}
                 projects={pagingService
