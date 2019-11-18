@@ -71,8 +71,8 @@ const CreateProjectComponent = ({ history }) => {
     const dispatch = useDispatch();
 
     const createProject = useCallback(() => {
-        dispatch(projectActions.createProject(name, imageUrl, user.token));
-    }, [dispatch, name, imageUrl, user]);
+        dispatch(projectActions.createProject(name, imageUrl, description, user.token));
+    }, [dispatch, name, imageUrl, user, description]);
 
     const token = localStorage.getItem('token');
 
