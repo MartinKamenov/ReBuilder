@@ -15,12 +15,18 @@ const InputComponent = ({
     placeholder,
     style,
     className,
-    autoFocus
+    autoFocus,
+    rows,
+    variant,
+    multiline
 }) => {
     return (
         <div className={className}
             style={style}>
             <CustomInput
+                multiline={multiline}
+                variant={variant}
+                rows={rows}
                 autoFocus={autoFocus}
                 onChange={onChange}
                 value={value}
