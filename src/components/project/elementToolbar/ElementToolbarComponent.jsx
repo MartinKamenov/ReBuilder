@@ -210,11 +210,8 @@ const ElementToolbarComponent = ({
                         inputs.map((input, i) => {
                             return (
                                 <div
-                                    className='component-input-changer-container'
+                                    className='styles-input'
                                     key={i}>
-                                    <label className='component-changer-label'>
-                                        {capitalizeFirstLetter(input)}
-                                    </label>
                                     <InputComponent
                                         className='component-changer-input'
                                         onChange={(event) => handleComponentValueChange(event.target.value, input)}
@@ -259,12 +256,8 @@ const ElementToolbarComponent = ({
                             return (
                                 <div
                                     key={i}
-                                    className='component-input-changer-container'>
-                                    <label className='component-changer-label'>
-                                        {capitalizeFirstLetter(style)}
-                                    </label>
+                                    className='styles-input'>
                                     <InputComponent
-                                        className='component-changer-input'
                                         onChange={(event) => handleComponentValueChange(event.target.value, 'style.' + style)}
                                         value={component.style[style]}
                                         placeholder={style}>

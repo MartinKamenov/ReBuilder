@@ -32,8 +32,6 @@ const ButtonComponent = ({
         rounded = true;
     }
 
-    console.log(color || getColorFromType(type));
-
     if(children && children.length > 0) {
         return (
             <Button
