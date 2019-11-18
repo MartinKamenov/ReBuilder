@@ -66,6 +66,14 @@
     text-align: center;
 }
 
+.styles-input {
+    width: 80%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+
 .toolbar-toolbar {
     height: 25px;
     background-color: #2A3642;

@@ -34,8 +34,9 @@ const DashboardComponent = ({ location: { search }, history }) => {
         );
     }
 
-    const sortedProjects = user.projects
-        .sort((a, b) => Date.parse(b.lastUpdated) - Date.parse(a.lastUpdated));
+    const sortedProjects = [...user.projects];
+    sortedProjects.sort((a, b) => Date.parse(b.lastUpdated) - Date.parse(a.lastUpdated));
+
     return (
         <div className='auth-container'>
             <CreateProjectComponent history={history}/>
