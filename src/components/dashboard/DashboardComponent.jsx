@@ -9,7 +9,7 @@ import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import CreateProjectComponent from './create/CreateProjectComponent';
 
-const DashboardComponent = ({ location: { search } }) => {
+const DashboardComponent = ({ location: { search }, history }) => {
     const [page, setPage] = useState(1);
 
     const user = useSelector((state) => state.user);
@@ -35,7 +35,7 @@ const DashboardComponent = ({ location: { search } }) => {
     }
     return (
         <div className='auth-container'>
-            <CreateProjectComponent/>
+            <CreateProjectComponent history={history}/>
             <UserProjectsListComponent
                 user={user}
                 projects={pagingService

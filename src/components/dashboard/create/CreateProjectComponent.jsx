@@ -127,6 +127,7 @@ const CreateProjectComponent = ({ history }) => {
         if(project.id  && isCreated) {
             loginByToken(user.token);
             setIsLoading(false);
+            debugger;
             history.push(`/projects/${project.id}`);
         }
     }, [
