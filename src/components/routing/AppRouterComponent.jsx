@@ -6,7 +6,6 @@ import NavbarComponent from '../navigation/NavbarComponent';
 import LoginComponent from '../auth/login/LoginComponent';
 import RegisterComponent from '../auth/register/RegisterComponent';
 import EditProjectComponent from '../project/EditProjectComponent';
-import NewProjectPageComponent from '../project/newProjectPage/NewProjectPageComponent';
 import InnerRoutingComponent from '../project/innerRouting/InnerRoutingComponent';
 import * as authenticationActions from '../../actions/authenticationActions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,9 +60,6 @@ const AppRouterComponent = () => {
                                 <Route exact path="/projects/:id/:pageId" component={EditProjectComponent} />
                                 <Route exact path="/templates" component={TemplateSelectPageComponent} />
                                 <Route exact path="/services" component={ServicesComponent} />
-                                <div className='container'>
-                                    <Route exact path="/project/new" component={NewProjectPageComponent} />
-                                </div>
                             </div>
                         </div>
                     </div>

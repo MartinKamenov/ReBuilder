@@ -4,11 +4,11 @@ import { error as toastError, success as toastSuccess } from 'react-toastify-red
 import { createError } from './errorActions';
 import successMessages from '../constants/successMessages';
 
-export function createProject(projectName, projectUrl, token, project) {
+export function createProject(projectName, projectUrl, description, token, project) {
     return async function(dispatch) {
         try {
             const res = await apiService
-                .createProject(projectName, projectUrl, token, project);
+                .createProject(projectName, projectUrl, description, token, project);
             const savedProject = res.data;
             dispatch(toastSuccess(successMessages.PROJECT_CREATED));
             return dispatch(selectProjectSuccess(savedProject));
