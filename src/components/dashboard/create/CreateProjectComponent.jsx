@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -14,6 +15,8 @@ import InputComponent from '../../common/input/InputComponent';
 import './CreateProjectComponent.css';
 import apiService from '../../../service/api.service';
 import LoadingIndicator from '../../common/loading-indicator/LoadingIndicator';
+import * as projectActions from '../../../actions/projectActions';
+import * as authenticationActions from '../../../actions/authenticationActions';
 
 const defaultProjectImage = 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
 
@@ -56,18 +59,43 @@ const DialogActions = withStyles(theme => ({
         padding: theme.spacing(1),
     },
 }))(MuiDialogActions);
-const CreateProjectComponent = () => {
+const CreateProjectComponent = ({ history }) => {
     const [open, setOpen] = useState(false);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [imageUrl, setImageUrl] = useState(defaultProjectImage);
     const [isLoading, setIsLoading] = useState(false);
+    const [isCreated, setIsCreated] = useState(false);
+
+    const {project, user, error} = useSelector((state) => state);
+    const dispatch = useDispatch();
+
+    const createProject = useCallback(() => {
+        dispatch(projectActions.createProject(name, imageUrl, user.token));
+    }, [dispatch, name, imageUrl, user]);
+
+    const token = localStorage.getItem('token');
+
+    const loginByToken = useCallback(() => {
+        dispatch(authenticationActions.loginByToken(token));
+    }, [dispatch, token]);
+
+    const handleCreateProject = useCallback(() => {
+        setOpen(false);
+        if(!name || !imageUrl) {
+            return;
+        }
+        setIsLoading(true);
+        setIsCreated(true);
+        createProject(name, imageUrl, user.token);
+    }, [name, imageUrl, user, createProject]);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
+
     const handleClose = () => {
-        setOpen(false);
+        setOpen(true);
     };
 
     const changeImage = async({ target }) => {
@@ -90,6 +118,26 @@ const CreateProjectComponent = () => {
             console.log(error);
         }
     };
+
+    useEffect(() => {
+        if(error) {
+            setIsLoading(false);
+        }
+
+        if(project.id  && isCreated) {
+            loginByToken(user.token);
+            setIsLoading(false);
+            history.push(`/projects/${project.id}`);
+        }
+    }, [
+        project,
+        history,
+        error,
+        dispatch,
+        isCreated,
+        user,
+        loginByToken
+    ]);
 
     return (
         <div className='center-container' style={{ marginTop: '-30px', marginBottom: '10px' }}>
@@ -146,13 +194,12 @@ const CreateProjectComponent = () => {
                         className='form-input'
                         rows='4'
                         variant='filled'
-                        autoFocus
                         placeholder='Description'
                         value={description}
                         onChange={({target: {value}}) => setDescription(value)} />
                 </DialogContent>
                 <DialogActions>
-                    <ButtonComponent style={{ fontSize: 12 }} onClick={handleClose} color='secondary'>
+                    <ButtonComponent style={{ fontSize: 12 }} onClick={handleCreateProject} color='secondary'>
                         Create project
                     </ButtonComponent>
                 </DialogActions>
