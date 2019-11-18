@@ -47,7 +47,7 @@ const apiService = {
         return axios.post(registerUrl, body);
     },
 
-    createProject: (projectName, projectUrl, token, project) => {
+    createProject: (projectName, projectUrl, description, token, project) => {
         if(!projectName || !projectUrl) {
             return;
         }
@@ -55,6 +55,7 @@ const apiService = {
         const body = { 
             name: projectName,
             projectImageUrl: projectUrl,
+            description,
             authorization: `Bearer ${token}`
         };
         if(project) {
