@@ -33,13 +33,16 @@ const DashboardComponent = ({ location: { search }, history }) => {
             </div>
         );
     }
+
+    const sortedProjects = user.projects
+        .sort((a, b) => Date.parse(b.lastUpdated) - Date.parse(a.lastUpdated));
     return (
         <div className='auth-container'>
             <CreateProjectComponent history={history}/>
             <UserProjectsListComponent
                 user={user}
                 projects={pagingService
-                    .getCollectionByPage(user.projects, page)}/>
+                    .getCollectionByPage(sortedProjects, page)}/>
             <PagingComponent
                 page={page}
                 pagesNumbers={pagingService.getPagesNumbers(user.projects, page)}
