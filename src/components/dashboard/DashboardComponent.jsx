@@ -65,6 +65,7 @@ const DashboardComponent = ({ location: { search }, history }) => {
             </div>
             <ProjectActionsComponent open={open} setOpen={setOpen} type='create' history={history}/>
             <UserProjectsListComponent
+                history={history}
                 user={user}
                 projects={pagingService
                     .getCollectionByPage(sortedProjects, page)}/>

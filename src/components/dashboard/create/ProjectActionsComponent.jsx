@@ -75,7 +75,14 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
         dispatch(projectActions.updateProjectInformation(
             projectInformation.id, name, imageUrl, description, user.token
         ));
-    }, [dispatch, name, imageUrl, user, description]);
+    }, [
+        projectInformation,
+        dispatch,
+        name,
+        imageUrl,
+        user,
+        description
+    ]);
 
     const token = localStorage.getItem('token');
 
@@ -125,10 +132,14 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
             setIsLoading(false);
         }
 
-        if(project.id  && isCreated) {
+        if(project.id && isCreated && type === 'create') {
             loginByToken(user.token);
             setIsLoading(false);
             history.push(`/projects/${project.id}`);
+        } else if(project.id && isCreated) {
+            loginByToken(user.token);
+            setIsLoading(false);
+            history.push(`/dashboard`);
         }
     }, [
         project,
@@ -137,7 +148,8 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
         dispatch,
         isCreated,
         user,
-        loginByToken
+        loginByToken,
+        type
     ]);
 
     const dialogHeader = (type === 'create') ? 'Create new project' : 'Update current project';
