@@ -8,11 +8,9 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import ButtonComponent from '../../common/button/ButtonComponent';
 import InputComponent from '../../common/input/InputComponent';
-import './CreateProjectComponent.css';
+import './ProjectActionsComponent.css';
 import apiService from '../../../service/api.service';
 import LoadingIndicator from '../../common/loading-indicator/LoadingIndicator';
 import * as projectActions from '../../../actions/projectActions';
@@ -59,11 +57,10 @@ const DialogActions = withStyles(theme => ({
         padding: theme.spacing(1),
     },
 }))(MuiDialogActions);
-const CreateProjectComponent = ({ history }) => {
-    const [open, setOpen] = useState(false);
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [imageUrl, setImageUrl] = useState(defaultProjectImage);
+const ProjectActionsComponent = ({ history, type, projectInformation = {}, open, setOpen }) => {
+    const [name, setName] = useState(projectInformation.name || '');
+    const [description, setDescription] = useState(projectInformation.description || '');
+    const [imageUrl, setImageUrl] = useState(projectInformation.projectImageUrl || defaultProjectImage);
     const [isLoading, setIsLoading] = useState(false);
     const [isCreated, setIsCreated] = useState(false);
 
@@ -74,28 +71,39 @@ const CreateProjectComponent = ({ history }) => {
         dispatch(projectActions.createProject(name, imageUrl, description, user.token));
     }, [dispatch, name, imageUrl, user, description]);
 
+    const updateProjectInformation = useCallback(() => {
+        dispatch(projectActions.updateProjectInformation(
+            projectInformation.id, name, imageUrl, description, user.token
+        ));
+    }, [
+        projectInformation,
+        dispatch,
+        name,
+        imageUrl,
+        user,
+        description
+    ]);
+
     const token = localStorage.getItem('token');
 
     const loginByToken = useCallback(() => {
         dispatch(authenticationActions.loginByToken(token));
     }, [dispatch, token]);
 
-    const handleCreateProject = useCallback(() => {
+    const handleProjectAction = useCallback(() => {
         setOpen(false);
         if(!name || !imageUrl) {
             return;
         }
         setIsLoading(true);
         setIsCreated(true);
-        createProject(name, imageUrl, user.token);
-    }, [name, imageUrl, user, createProject]);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+        type === 'create' ? 
+            createProject() :
+            updateProjectInformation();
+    }, [name, imageUrl, createProject, updateProjectInformation, setOpen, type]);
 
     const handleClose = () => {
-        setOpen(true);
+        setOpen(false);
     };
 
     const changeImage = async({ target }) => {
@@ -124,10 +132,14 @@ const CreateProjectComponent = ({ history }) => {
             setIsLoading(false);
         }
 
-        if(project.id  && isCreated) {
+        if(project.id && isCreated && type === 'create') {
             loginByToken(user.token);
             setIsLoading(false);
             history.push(`/projects/${project.id}`);
+        } else if(project.id && isCreated) {
+            loginByToken(user.token);
+            setIsLoading(false);
+            history.push('/dashboard');
         }
     }, [
         project,
@@ -136,31 +148,24 @@ const CreateProjectComponent = ({ history }) => {
         dispatch,
         isCreated,
         user,
-        loginByToken
+        loginByToken,
+        type
     ]);
 
+    const dialogHeader = (type === 'create') ? 'Create new project' : 'Update current project';
+    const actionButton = (type === 'create') ? 'Create project' : 'Update project';
+
     return (
-        <div className='center-container' style={{ marginTop: '-30px', marginBottom: '10px' }}>
+        <div className='center-container'
+            style={{
+                marginTop: '-30px',
+                marginBottom: '10px',
+                display: 'none'
+            }}>
             { isLoading ? <LoadingIndicator message='Uploading image' /> : null }
-            <ButtonComponent
-                style={{
-                    width: 200,
-                    fontWeight: 'bold',
-                    fontSize: 12,
-                    height: 50,
-                    marginLeft: 'auto',
-                    marginRight: 'auto'
-                }}
-                variant='outlined'
-                color='secondary'
-                className='vertical-centered'
-                onClick={handleClickOpen}>
-                <FontAwesomeIcon className='action-icon' icon={faPlusCircle} />
-            Create new project
-            </ButtonComponent>
             <Dialog fullWidth onClose={handleClose} aria-labelledby='customized-dialog-title' open={open}>
                 <DialogTitle id='customized-dialog-title' onClose={handleClose}>
-                    Create new project
+                    {dialogHeader}
                 </DialogTitle>
                 <DialogContent dividers>
                     <div
@@ -199,8 +204,8 @@ const CreateProjectComponent = ({ history }) => {
                         onChange={({target: {value}}) => setDescription(value)} />
                 </DialogContent>
                 <DialogActions>
-                    <ButtonComponent style={{ fontSize: 12 }} onClick={handleCreateProject} color='secondary'>
-                        Create project
+                    <ButtonComponent style={{ fontSize: 12 }} onClick={handleProjectAction} color='secondary'>
+                        {actionButton}
                     </ButtonComponent>
                 </DialogActions>
             </Dialog>
@@ -208,4 +213,4 @@ const CreateProjectComponent = ({ history }) => {
     );
 };
  
-export default CreateProjectComponent;
+export default ProjectActionsComponent;

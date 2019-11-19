@@ -19,6 +19,21 @@ export function createProject(projectName, projectUrl, description, token, proje
     };
 }
 
+export function updateProjectInformation(id, projectName, projectUrl, description, token, project) {
+    return async function(dispatch) {
+        try {
+            const res = await apiService
+                .updateProjectInformation(id, projectName, projectUrl, description, token, project);
+            const savedProject = res.data;
+            dispatch(toastSuccess(successMessages.PROJECT_CREATED));
+            return dispatch(selectProjectSuccess(savedProject));
+        } catch(error) {
+            dispatch(toastError(error.message));
+            return dispatch(createError(error.message));
+        }
+    };
+}
+
 export function updateProject(projectId, pages, token) {
     return async function(dispatch) {
         try {
