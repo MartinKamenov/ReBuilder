@@ -20,8 +20,10 @@ import './AppRouterComponent.css';
 
 const AppRouterComponent = () => {
     const [isLoading, setIsLoading] = useState(true);
+    const [tried, setTried] = useState(false);
 
     const user = useSelector((state) => state.user);
+    const error = useSelector((state) => state.error);
     const token = localStorage.getItem('token');
 
     const dispatch = useDispatch();
@@ -31,12 +33,13 @@ const AppRouterComponent = () => {
     }, [dispatch, token]);
 
     useEffect(() => {
-        if(!user.id && token) {
+        if(!user.id && token && !tried) {
+            setTried(true);
             loginByToken(token);
         } else {
             setIsLoading(false);
         }
-    }, [user, token, loginByToken]);
+    }, [user, token, loginByToken, error, tried]);
 
     return (
         <Router>
