@@ -60,7 +60,7 @@ const DialogActions = withStyles(theme => ({
 const ProjectActionsComponent = ({ history, type, projectInformation = {}, open, setOpen }) => {
     const [name, setName] = useState(projectInformation.name || '');
     const [description, setDescription] = useState(projectInformation.description || '');
-    const [imageUrl, setImageUrl] = useState(projectInformation.imageUrl || defaultProjectImage);
+    const [imageUrl, setImageUrl] = useState(projectInformation.projectImageUrl || defaultProjectImage);
     const [isLoading, setIsLoading] = useState(false);
     const [isCreated, setIsCreated] = useState(false);
 
@@ -137,7 +137,12 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
     ]);
 
     return (
-        <div className='center-container' style={{ marginTop: '-30px', marginBottom: '10px' }}>
+        <div className='center-container'
+            style={{
+                marginTop: '-30px',
+                marginBottom: '10px',
+                display: 'none'
+            }}>
             { isLoading ? <LoadingIndicator message='Uploading image' /> : null }
             <Dialog fullWidth onClose={handleClose} aria-labelledby='customized-dialog-title' open={open}>
                 <DialogTitle id='customized-dialog-title' onClose={handleClose}>
