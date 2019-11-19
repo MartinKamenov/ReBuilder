@@ -5,6 +5,7 @@
     padding-left: 10%;
     padding-right: 10%;
     overflow-y: auto;
+    margin-bottom: 10px;
 }
 
 .project-description-text {

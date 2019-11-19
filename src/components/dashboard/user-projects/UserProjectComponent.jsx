@@ -98,16 +98,16 @@ const UserProjectComponent = ({ projectDetails, user }) => {
                     <ShareIcon />
                 </IconButton>
                 { hasDescription ? (
-                <IconButton
-                    className={clsx(classes.expand, {
-                        [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                >
-                    <ExpandMoreIcon />
-                </IconButton>
+                    <IconButton
+                        className={clsx(classes.expand, {
+                            [classes.expandOpen]: expanded,
+                        })}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                    >
+                        <ExpandMoreIcon />
+                    </IconButton>
                 ) : null }
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
