@@ -71,25 +71,29 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
         dispatch(projectActions.createProject(name, imageUrl, description, user.token));
     }, [dispatch, name, imageUrl, user, description]);
 
+    const updateProjectInformation = useCallback(() => {
+        dispatch(projectActions.updateProjectInformation(
+            projectInformation.id, name, imageUrl, description, user.token
+        ));
+    }, [dispatch, name, imageUrl, user, description]);
+
     const token = localStorage.getItem('token');
 
     const loginByToken = useCallback(() => {
         dispatch(authenticationActions.loginByToken(token));
     }, [dispatch, token]);
 
-    const handleCreateProject = useCallback(() => {
+    const handleProjectAction = useCallback(() => {
         setOpen(false);
         if(!name || !imageUrl) {
             return;
         }
         setIsLoading(true);
         setIsCreated(true);
-        createProject(name, imageUrl, user.token);
-    }, [name, imageUrl, user, createProject]);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+        type === 'create' ? 
+        createProject() :
+        updateProjectInformation();
+    }, [name, imageUrl, createProject, updateProjectInformation, setOpen, type]);
 
     const handleClose = () => {
         setOpen(false);
@@ -136,6 +140,9 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
         loginByToken
     ]);
 
+    const dialogHeader = (type === 'create') ? 'Create new project' : 'Update current project';
+    const actionButton = (type === 'create') ? 'Create project' : 'Update project';
+
     return (
         <div className='center-container'
             style={{
@@ -146,7 +153,7 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
             { isLoading ? <LoadingIndicator message='Uploading image' /> : null }
             <Dialog fullWidth onClose={handleClose} aria-labelledby='customized-dialog-title' open={open}>
                 <DialogTitle id='customized-dialog-title' onClose={handleClose}>
-                    Create new project
+                    {dialogHeader}
                 </DialogTitle>
                 <DialogContent dividers>
                     <div
@@ -185,8 +192,8 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
                         onChange={({target: {value}}) => setDescription(value)} />
                 </DialogContent>
                 <DialogActions>
-                    <ButtonComponent style={{ fontSize: 12 }} onClick={handleCreateProject} color='secondary'>
-                        Create project
+                    <ButtonComponent style={{ fontSize: 12 }} onClick={handleProjectAction} color='secondary'>
+                        {actionButton}
                     </ButtonComponent>
                 </DialogActions>
             </Dialog>
