@@ -10,7 +10,8 @@ const UserProjectsListComponent = ({projects, user}) => {
                 {
                     projects.map((project) => {
                         return (
-                            <div className='col-md-4 col-sm-6' key={project.id}>
+                            <div className='col-md-4 col-sm-6'
+                                key={project.id}>
                                 <UserProjectComponent user={user} projectDetails={project}/>
                             </div>
                         );
