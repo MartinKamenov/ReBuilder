@@ -9,6 +9,7 @@ const updateUser = '/update';
 const registerPath = '/register';
 const projectsPath = '/projects';
 const newProjectPath = '/new';
+const updateProjectInformationPath = '/update';
 const deployPath = '/deploy';
 const templatesPath = '/templates';
 
@@ -52,6 +53,24 @@ const apiService = {
             return;
         }
         const newProjectUrl = url + projectsPath + newProjectPath;
+        const body = { 
+            name: projectName,
+            projectImageUrl: projectUrl,
+            description,
+            authorization: `Bearer ${token}`
+        };
+        if(project) {
+            body.project = project;
+        }
+
+        return axios.post(newProjectUrl, body);
+    },
+
+    updateProjectInformation: (projectId, projectName, projectUrl, description, token, project) => {
+        if(!projectName || !projectUrl) {
+            return;
+        }
+        const newProjectUrl = url + projectsPath + `/${projectId}` + updateProjectInformationPath;
         const body = { 
             name: projectName,
             projectImageUrl: projectUrl,
