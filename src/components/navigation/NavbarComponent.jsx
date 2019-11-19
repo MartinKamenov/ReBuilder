@@ -13,7 +13,7 @@ const NavbarComponent = () => {
         if(user.id) {
             routesCopy.push({ route: '/dashboard', text: 'Dashboard' });
             routesCopy.push({ route: '/services', text: 'Services' });
-            routesCopy.push({ route: `/users/${user.id}`, text: 'My profile' });
+            routesCopy.push({ route: `/users/${user.id}`, text: 'Settings' });
         } else {
             routesCopy.push({ route: '/', text: 'Home' });
             routesCopy.push({ route: '/services', text: 'Services' });

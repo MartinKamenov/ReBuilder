@@ -7,10 +7,14 @@ import PagingComponent from '../common/paging/PagingComponent';
 import pagingService from '../../service/paging.service';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
-import CreateProjectComponent from './create/CreateProjectComponent';
+import ProjectActionsComponent from './create/ProjectActionsComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import ButtonComponent from '../common/button/ButtonComponent';
 
 const DashboardComponent = ({ location: { search }, history }) => {
     const [page, setPage] = useState(1);
+    const [open, setOpen] = useState(false);
 
     const user = useSelector((state) => state.user);
 
@@ -39,7 +43,27 @@ const DashboardComponent = ({ location: { search }, history }) => {
 
     return (
         <div className='auth-container'>
-            <CreateProjectComponent history={history}/>
+            <div className='center-container' style={{ width: '100%' }}>
+                <ButtonComponent
+                    style={{
+                        width: 200,
+                        fontWeight: 'bold',
+                        fontSize: 12,
+                        height: 50,
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        marginTop: '-30px',
+                        marginBottom: '30px'
+                    }}
+                    variant='outlined'
+                    color='secondary'
+                    className='vertical-centered'
+                    onClick={() => setOpen(true)}>
+                    <FontAwesomeIcon className='action-icon' icon={faPlusCircle} />
+                    Create new project
+                </ButtonComponent>
+            </div>
+            <ProjectActionsComponent open={open} setOpen={setOpen} type='create' history={history}/>
             <UserProjectsListComponent
                 user={user}
                 projects={pagingService
