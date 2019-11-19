@@ -51,7 +51,12 @@ const useStyles = makeStyles(theme => ({
 
 const UserProjectComponent = ({ projectDetails, user }) => {
     const classes = useStyles();
+    const [open, setOpen] = useState(false);
     const [expanded, setExpanded] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    }
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -71,7 +76,7 @@ const UserProjectComponent = ({ projectDetails, user }) => {
                     </Link>
                 }
                 action={
-                    <IconButton aria-label="settings">
+                    <IconButton onClick={handleOpen} aria-label="settings">
                         <MoreVertIcon />
                     </IconButton>
                 }
