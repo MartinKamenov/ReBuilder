@@ -98,8 +98,8 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
         setIsLoading(true);
         setIsCreated(true);
         type === 'create' ? 
-        createProject() :
-        updateProjectInformation();
+            createProject() :
+            updateProjectInformation();
     }, [name, imageUrl, createProject, updateProjectInformation, setOpen, type]);
 
     const handleClose = () => {
@@ -139,7 +139,7 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
         } else if(project.id && isCreated) {
             loginByToken(user.token);
             setIsLoading(false);
-            history.push(`/dashboard`);
+            history.push('/dashboard');
         }
     }, [
         project,

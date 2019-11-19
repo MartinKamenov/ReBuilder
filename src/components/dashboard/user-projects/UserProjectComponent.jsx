@@ -57,7 +57,7 @@ const UserProjectComponent = ({ projectDetails, user, history }) => {
 
     const handleOpen = () => {
         setOpen(true);
-    }
+    };
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -68,63 +68,63 @@ const UserProjectComponent = ({ projectDetails, user, history }) => {
     let description = projectDetails.description || 'This project has no description';
     description = description.substring(0, 100) + (description.length > 100 ? '...' : '');
     return (
-            <Card
-                className={classes.card}>
-                <ProjectActionsComponent projectInformation={projectDetails} open={open} setOpen={setOpen} type='update' history={history}/>
-                <CardHeader
-                    avatar={
-                        <Link style={{ textDecoration: 'none' }} to={ `/users/${user.id}` }>
-                            <Avatar src={user.imageUrl} aria-label="recipe" className={classes.avatar} />
-                        </Link>
-                    }
-                    action={
-                        <IconButton onClick={handleOpen} aria-label="settings">
-                            <MoreVertIcon />
-                        </IconButton>
-                    }
+        <Card
+            className={classes.card}>
+            <ProjectActionsComponent projectInformation={projectDetails} open={open} setOpen={setOpen} type='update' history={history}/>
+            <CardHeader
+                avatar={
+                    <Link style={{ textDecoration: 'none' }} to={ `/users/${user.id}` }>
+                        <Avatar src={user.imageUrl} aria-label="recipe" className={classes.avatar} />
+                    </Link>
+                }
+                action={
+                    <IconButton onClick={handleOpen} aria-label="settings">
+                        <MoreVertIcon />
+                    </IconButton>
+                }
+                title={projectDetails.name}
+                subheader={dateService.formatDate(lastUpdated, dateFormatTypes.Material)}
+            />
+            <Link style={{ textDecoration: 'none' }} to={ `/projects/${projectDetails.id}` }>
+                <CardMedia
+                    className={classes.media}
+                    image={projectDetails.projectImageUrl}
                     title={projectDetails.name}
-                    subheader={dateService.formatDate(lastUpdated, dateFormatTypes.Material)}
                 />
-                <Link style={{ textDecoration: 'none' }} to={ `/projects/${projectDetails.id}` }>
-                    <CardMedia
-                        className={classes.media}
-                        image={projectDetails.projectImageUrl}
-                        title={projectDetails.name}
-                    />
-                </Link>
+            </Link>
+            <CardContent>
+                <Typography className='project-description-text' variant="body2" color="textSecondary" component="p">
+                    {description}
+                </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites">
+                    <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                    <ShareIcon />
+                </IconButton>
+                { hasDescription ? (
+                    <IconButton
+                        className={clsx(classes.expand, {
+                            [classes.expandOpen]: expanded,
+                        })}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                    >
+                        <ExpandMoreIcon />
+                    </IconButton>
+                ) : null }
+            </CardActions>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography className='project-description-text' variant="body2" color="textSecondary" component="p">
-                        {description}
+                    <Typography paragraph>
+                        {projectDetails.description}
                     </Typography>
                 </CardContent>
-                <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
-                    </IconButton>
-                    <IconButton aria-label="share">
-                        <ShareIcon />
-                    </IconButton>
-                    { hasDescription ? (
-                        <IconButton
-                            className={clsx(classes.expand, {
-                                [classes.expandOpen]: expanded,
-                            })}
-                            onClick={handleExpandClick}
-                            aria-expanded={expanded}
-                            aria-label="show more"
-                        >
-                            <ExpandMoreIcon />
-                        </IconButton>
-                    ) : null }
-                </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                        <Typography paragraph>
-                            {projectDetails.description}
-                        </Typography>
-                    </CardContent>
-                </Collapse>
-            </Card>
+            </Collapse>
+        </Card>
     );
 };
 
