@@ -95,7 +95,7 @@ const CreateProjectComponent = ({ history }) => {
     };
 
     const handleClose = () => {
-        setOpen(true);
+        setOpen(false);
     };
 
     const changeImage = async({ target }) => {
