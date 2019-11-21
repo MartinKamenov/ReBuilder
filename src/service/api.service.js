@@ -110,7 +110,6 @@ const apiService = {
     },
 
     deleteProject: (projectId, token) => {
-        debugger;
         if(!projectId || !token) {
             return;
         }

@@ -138,7 +138,6 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
     };
 
     useEffect(() => {
-        debugger;
         if(error) {
             setIsLoading(false);
         }
@@ -148,6 +147,10 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
             setIsLoading(false);
             history.push(`/projects/${project.id}`);
         } else if(project.id && isCreated) {
+            loginByToken(user.token);
+            setIsLoading(false);
+            history.push('/dashboard');
+        } else if(isCreated) {
             loginByToken(user.token);
             setIsLoading(false);
             history.push('/dashboard');
@@ -216,9 +219,9 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
                 </DialogContent>
                 <DialogActions>
                     {type === 'create' ? null : (
-                    <ButtonComponent style={{ fontSize: 12 }} onClick={handleDeleteProject} color='secondary'>
+                        <ButtonComponent style={{ fontSize: 12 }} onClick={handleDeleteProject} color='secondary'>
                         Delete project
-                    </ButtonComponent>
+                        </ButtonComponent>
                     )}
                     <ButtonComponent style={{ fontSize: 12 }} onClick={handleProjectAction} color='primary'>
                         {actionButton}

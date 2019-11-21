@@ -57,7 +57,7 @@ export function deleteProject(projectId, token) {
     return async function(dispatch) {
         try {
             await apiService.deleteProject(projectId, token);
-            dispatch(toastSuccess(successMessages.PROJECT_SAVED));
+            dispatch(toastSuccess(successMessages.PROJECT_DELETED));
         } catch(error) {
             dispatch(toastError(error.message));
             return dispatch(createError(error.message));
