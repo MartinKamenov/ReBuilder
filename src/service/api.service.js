@@ -10,6 +10,7 @@ const registerPath = '/register';
 const projectsPath = '/projects';
 const newProjectPath = '/new';
 const updateProjectInformationPath = '/update';
+const deleteProjectPath = '/delete';
 const deployPath = '/deploy';
 const templatesPath = '/templates';
 
@@ -106,6 +107,18 @@ const apiService = {
         let body = { pages, authorization: `Bearer ${token}` };
 
         return axios.post(updateProjectUrl, body);
+    },
+
+    deleteProject: (projectId, token) => {
+        debugger;
+        if(!projectId || !token) {
+            return;
+        }
+
+        const deleteProjectUrl = url + projectsPath + `/${projectId}` + deleteProjectPath;
+        let body = { authorization: `Bearer ${token}` };
+
+        return axios.post(deleteProjectUrl, body);
     },
 
     getDeploymentInformation: (projectId, token) => {

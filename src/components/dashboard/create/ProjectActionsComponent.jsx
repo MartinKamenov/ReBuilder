@@ -102,6 +102,16 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
             updateProjectInformation();
     }, [name, imageUrl, createProject, updateProjectInformation, setOpen, type]);
 
+    const handleDeleteProject = () => {
+        setOpen(false);
+        setIsLoading(true);
+        setIsCreated(true);
+
+        dispatch(projectActions.deleteProject(
+            projectInformation.id, user.token
+        ));
+    };
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -128,6 +138,7 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
     };
 
     useEffect(() => {
+        debugger;
         if(error) {
             setIsLoading(false);
         }
@@ -204,7 +215,12 @@ const ProjectActionsComponent = ({ history, type, projectInformation = {}, open,
                         onChange={({target: {value}}) => setDescription(value)} />
                 </DialogContent>
                 <DialogActions>
-                    <ButtonComponent style={{ fontSize: 12 }} onClick={handleProjectAction} color='secondary'>
+                    {type === 'create' ? null : (
+                    <ButtonComponent style={{ fontSize: 12 }} onClick={handleDeleteProject} color='secondary'>
+                        Delete project
+                    </ButtonComponent>
+                    )}
+                    <ButtonComponent style={{ fontSize: 12 }} onClick={handleProjectAction} color='primary'>
                         {actionButton}
                     </ButtonComponent>
                 </DialogActions>

@@ -53,6 +53,18 @@ export function updateProject(projectId, pages, token) {
     };
 }
 
+export function deleteProject(projectId, token) {
+    return async function(dispatch) {
+        try {
+            await apiService.deleteProject(projectId, token);
+            dispatch(toastSuccess(successMessages.PROJECT_SAVED));
+        } catch(error) {
+            dispatch(toastError(error.message));
+            return dispatch(createError(error.message));
+        }
+    };
+}
+
 export function selectProjectSuccess(project) {
     return { type: types.SELECT_PROJECT_SUCCESS, project };
 }
