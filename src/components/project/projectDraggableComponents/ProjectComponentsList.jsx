@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import DraggableComponent from './DraggableComponent';
 import './ProjectComponentsList.css';
 
-const ProjectComponentsList = ({ draggableComponents, active }) => {
+const ProjectComponentsList = ({ draggableComponents, handleAddComponent }) => {
     return (
         <div 
             className='component-list-container'>
             {
                 draggableComponents.map((component, i) => 
-                    <DraggableComponent key={i} draggableComponent={component}/>
+                    <DraggableComponent key={i}
+                        draggableComponent={component}
+                        handleAddComponent={handleAddComponent}/>
                 )
             }
         </div>
@@ -17,7 +19,8 @@ const ProjectComponentsList = ({ draggableComponents, active }) => {
 };
 
 ProjectComponentsList.propTypes = {
-    draggableComponents: PropTypes.array.isRequired
+    draggableComponents: PropTypes.array.isRequired,
+    handleAddComponent: PropTypes.func.isRequired
 };
  
 export default ProjectComponentsList;

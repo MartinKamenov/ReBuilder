@@ -124,6 +124,18 @@ class EditProjectComponent extends Component {
         this.setState({ droppedComponents, saveStatus: SaveStatus.Updated });
     }
 
+    addComponent = (draggableComponent) => {
+        const defaultComponent = Object.assign(
+            componentObjects.find((c) => c.name === draggableComponent.name)
+        );
+        const droppedComponents = [...this.state.droppedComponents];
+
+        defaultComponent.index = uuid.v1();
+
+        droppedComponents.push(defaultComponent);
+        this.setState({droppedComponents});
+    }
+
     findChildByIndex = (components, index) => {
         const children = [];
         components.filter(c => c.children)
@@ -452,6 +464,7 @@ class EditProjectComponent extends Component {
                 <div style={{ width: '100%' }}>
                     <div className="drag-drop-container">
                         <ProjectComponentsList
+                            handleAddComponent={this.addComponent}
                             draggableComponents={this.state.draggableComponents}/>
                         <ProjectPageComponent
                             componentInEditMode={componentInEditMode ? true : false}
