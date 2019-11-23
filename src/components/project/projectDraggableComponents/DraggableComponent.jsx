@@ -17,7 +17,7 @@ import {
 
 import { componentTypes } from '../components/componentTypes';
 
-const DraggableComponent = ({draggableComponent}) => {
+const DraggableComponent = ({draggableComponent, handleAddComponent}) => {
     return (
         <Draggable type="component"
             data={draggableComponent.name}
@@ -28,7 +28,7 @@ const DraggableComponent = ({draggableComponent}) => {
                 borderRadius: '50%'
             }}
             title={`${draggableComponent.name}\n${draggableComponent.description}`}>
-            <div className='draggable-element'>
+            <div className='draggable-element' onClick={() => handleAddComponent(draggableComponent)}>
                 {(() => {
                     let icon = <FontAwesomeIcon icon={faFont} />;
                     switch(draggableComponent.name) {
@@ -72,7 +72,8 @@ const DraggableComponent = ({draggableComponent}) => {
 DraggableComponent.propTypes = {
     draggableComponent: PropTypes.shape({
         name: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    handleAddComponent: PropTypes.func.isRequired
 };
  
 export default DraggableComponent;
