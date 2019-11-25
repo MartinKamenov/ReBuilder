@@ -14,42 +14,39 @@ const PagesTabComponent = ({
 }) => (
     <div className='routing-pages-styling-container'>
         <ul className='routing-page-styling-ul'>
-            {pages.map((page) => (<CardComponent header={{
-                name: page.name
-            }}/>
-                // <li
-                //     key={page.id}
-                //     className={'routing-page-styling-li' +
-                //         ((
-                //             updatePage &&
-                //             updatePage.id === page.id
-                //         ) ? ' blinkdiv' : '')
-                //     }>
-                //     <div
-                //         className='normal'
-                //         onClick={() => {
-                //             if(isUpdating) {
-                //                 selectPage(page.id);
-                //                 return;
-                //             }
+            {pages.map((page) => ( <div className='col-md-4 col-sm-6'>
+                <CardComponent
+                    key={page.id}
+                    header={{
+                        name: page.name,
+                        subheader: `Route: ${page.route}`
+                    }}
+                    cardMedia={
+                        <div
+                            style={{ cursor: 'pointer', height: 200 }}
+                            onClick={() => {
+                                if(isUpdating) {
+                                    selectPage(page.id);
+                                    return;
+                                }
 
-                //             navigateToPage(page.id);
-                //         }}>
-                //         <div className='hover-shadow'>
-                //         </div>
-                //         <div style={{zIndex: 0}}>
-                //             {
-                //                 page.elements
-                //                     .map((component) => getComponentJSX(component))
-                //             }
-                //         </div>
-                        
-                //     </div>
-                //     <div className='info'>
-                //         <h3 className='page-name-header'>{page.name}</h3>
-                //         <p className='page-name-route'>Route: "{page.route}"</p>
-                //     </div>
-                // </li>
+                                navigateToPage(page.id);
+                            }}>
+                            <div style={{ width: '100%', zIndex: 1, position: 'relative'}}></div>
+                            <div style={{ width: '100%', overflow: 'hidden', position: 'relative' }}>
+                                {
+                                    page.elements
+                                        .map((component) => getComponentJSX(component))
+                                }
+                            </div>
+                        </div>
+                    }
+                    cardContent={{
+                        description: page.route
+                    }}
+                    collapse={{
+                        description: page.route
+                    }}/></div>
             ))}
         </ul>
     </div>

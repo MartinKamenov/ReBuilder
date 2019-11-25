@@ -36,6 +36,7 @@ const UserProjectComponent = ({ projectDetails, user, history }) => {
             collapse={{
                 description: projectDetails.description
             }}
+            hasCardContent
             hasDescription={hasDescription}>
             <ProjectActionsComponent projectInformation={projectDetails} open={open} setOpen={setOpen} type='update' history={history}/>
         </CardComponent>

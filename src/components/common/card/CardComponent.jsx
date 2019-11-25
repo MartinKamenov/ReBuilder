@@ -55,7 +55,8 @@ const CardComponent = ({
     cardMedia = {},
     cardContent = {},
     collapse = {},
-    hasDescription
+    hasDescription,
+    hasCardContent
 }) => {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
@@ -85,13 +86,19 @@ const CardComponent = ({
                 title={header.name || ''}
                 subheader={header.subheader || ''}
             />
-            <Link style={{ textDecoration: 'none' }} to={cardMedia.link}>
+            {cardMedia.imageUrl ? (<Link style={{ textDecoration: 'none' }} to={cardMedia.link}>
                 <CardMedia
                     className={classes.media}
                     image={cardMedia.imageUrl}
                     title={cardMedia.title}
                 />
-            </Link>
+            </Link>) : (
+                <CardContent>
+                    {cardMedia}
+                </CardContent>
+            )}
+            {hasCardContent ? (
+            <>
             <CardContent>
                 <Typography className='project-description-text' variant="body2" color="textSecondary" component="p">
                     {cardContent.description}
@@ -124,6 +131,8 @@ const CardComponent = ({
                     </Typography>
                 </CardContent>
             </Collapse>
+            </>) : null}
+            
         </Card>
     );
 };
