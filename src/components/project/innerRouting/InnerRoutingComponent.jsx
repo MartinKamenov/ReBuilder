@@ -243,12 +243,6 @@ class InnerRoutingComponent extends Component {
         history.push('/dashboard');
     }
 
-    isValidClass = (errorField) => {
-        if(this.state[errorField]) {
-            return 'routing-form-input-invalid';
-        }
-    }
-
     getComponentJSX = (component) => {
         const style = Object.assign({}, component.style);
         if(style.height.endsWith('px')) {
@@ -304,7 +298,6 @@ class InnerRoutingComponent extends Component {
                         <PagesEditorComponent
                             handleEnterPressed={this.handleEnterPressed}
                             updateNewPageValue={this.updateNewPageValue}
-                            isValidClass={this.isValidClass}
                             addNewPage={this.addNewPage}
                             updatePage={this.updatePage}
                             deletePage={this.deletePage}
