@@ -49,15 +49,16 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const CardComponent = ({children, header, cardMedia, cardContent, collapse, hasDescription}) => {
+const CardComponent = ({
+    children,
+    header = {},
+    cardMedia = {},
+    cardContent = {},
+    collapse = {},
+    hasDescription
+}) => {
     const classes = useStyles();
-    const [open, setOpen] = useState(false);
     const [expanded, setExpanded] = useState(false);
-    debugger;
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -69,17 +70,20 @@ const CardComponent = ({children, header, cardMedia, cardContent, collapse, hasD
             {children}
             <CardHeader
                 avatar={
-                    <Link style={{ textDecoration: 'none' }} to={header.link}>
-                        <Avatar src={header.src} aria-label="avatar-src" className={classes.header} />
-                    </Link>
+                    header.src ? (
+                        <Link style={{ textDecoration: 'none' }} to={header.link}>
+                            <Avatar src={header.src} aria-label="avatar-src" className={classes.header} />
+                        </Link> ) : null
                 }
                 action={
-                    <IconButton onClick={header.onSettingsClick} aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
+                    header.onSettingsClick ? (
+                        <IconButton onClick={header.onSettingsClick} aria-label="settings">
+                            <MoreVertIcon />
+                        </IconButton>
+                    ) : null
                 }
-                title={header.name}
-                subheader={header.subheader}
+                title={header.name || ''}
+                subheader={header.subheader || ''}
             />
             <Link style={{ textDecoration: 'none' }} to={cardMedia.link}>
                 <CardMedia
@@ -122,6 +126,6 @@ const CardComponent = ({children, header, cardMedia, cardContent, collapse, hasD
             </Collapse>
         </Card>
     );
-}
+};
  
 export default CardComponent;

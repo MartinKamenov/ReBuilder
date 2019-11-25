@@ -1,40 +1,9 @@
 import React, { useState } from 'react';
 import './UserProjectComponent.css';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import dateService, {dateFormatTypes} from '../../../service/date.service';
 import ProjectActionsComponent from '../create/ProjectActionsComponent';
 import CardComponent from '../../common/card/CardComponent';
-
-const useStyles = makeStyles(theme => ({
-    card: {
-        maxWidth: 345,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        marginBottom: 10
-    },
-    media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
-    avatar: {
-        backgroundColor: 'white'
-    },
-    header: {
-        fontSize: 15,
-        fontWeight: 'bold'
-    }
-}));
 
 const UserProjectComponent = ({ projectDetails, user, history }) => {
     const [open, setOpen] = useState(false);
