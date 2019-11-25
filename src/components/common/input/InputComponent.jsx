@@ -18,7 +18,8 @@ const InputComponent = ({
     autoFocus,
     rows,
     variant,
-    multiline
+    multiline,
+    error
 }) => {
     return (
         <div className={className}
@@ -33,6 +34,8 @@ const InputComponent = ({
                 style={style}
                 type={type}
                 label={placeholder}
+                helperText={error || null}
+                error={!!error}
                 InputProps={{
                     style: {
                         fontSize: 20,
@@ -41,6 +44,11 @@ const InputComponent = ({
                 InputLabelProps={{
                     style: {
                         fontSize: 15,
+                    }
+                }}
+                FormHelperTextProps={{
+                    style: {
+                        fontSize: 10,
                     }
                 }}
             />
