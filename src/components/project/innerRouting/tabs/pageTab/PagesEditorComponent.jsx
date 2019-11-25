@@ -8,7 +8,6 @@ import InputComponent from '../../../../common/input/InputComponent';
 const PagesEditorComponent = ({
     handleEnterPressed,
     updateNewPageValue,
-    isValidClass,
     addNewPage,
     updatePage,
     deletePage,
@@ -19,21 +18,13 @@ const PagesEditorComponent = ({
         onKeyDown={
             (event) => handleEnterPressed(event.key)
         }>
-        <div className='routing-form-input-container'>
+        <div style={{ height: 70 }}>
             <InputComponent
+                style={{ width: 200, height: 40 }}
+                error={state.newPageNameError}
                 value={state.newPageName}
                 onChange={updateNewPageValue}
-                className={'routing-form-input ' + isValidClass('newPageNameError')}
                 placeholder='Page name'/>
-            {
-                state.newPageNameError ? (
-                    <div className='routing-form-input-error'>
-                        {state.newPageNameError}
-                    </div>
-                ) : (
-                    <div></div>
-                )
-            }
         </div>
         { state.isUpdating ?
             (
@@ -91,7 +82,6 @@ const PagesEditorComponent = ({
 PagesEditorComponent.propTypes = {
     handleEnterPressed: PropTypes.func.isRequired,
     updateNewPageValue: PropTypes.func.isRequired,
-    isValidClass: PropTypes.func.isRequired,
     addNewPage: PropTypes.func.isRequired,
     updatePage: PropTypes.func.isRequired,
     deletePage: PropTypes.func.isRequired,
