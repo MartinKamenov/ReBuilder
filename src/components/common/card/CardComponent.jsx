@@ -136,5 +136,26 @@ const CardComponent = ({
         </Card>
     );
 };
- 
+
+CardComponent.propTypes = {
+    header: PropTypes.shape({
+        src: PropTypes.string,
+        link: PropTypes.string,
+        name: PropTypes.string,
+        onSettingsClick: PropTypes.func,
+        subheader: PropTypes.string
+    }).isRequired,
+    cardMedia: PropTypes.oneOfType([PropTypes.object, PropTypes.shape({
+        imageUrl: PropTypes.string,
+        title: PropTypes.string,
+        link: PropTypes.string
+    })]),
+    cardContent: PropTypes.shape({
+        description: PropTypes.string
+    }),
+    collapse: PropTypes.shape({
+        description: PropTypes.string
+    })
+};
+
 export default CardComponent;
