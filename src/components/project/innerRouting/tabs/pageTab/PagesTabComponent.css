@@ -5,3 +5,20 @@
 .page-name-route {
     color: white;
 }
+
+.page-container-style {
+    cursor: pointer;
+    height: 200px;
+    overflow: hidden;
+}
+
+.page-overlay {
+    width: 100%;
+    z-index: 1;
+    position: relative;
+}
+
+.page-content-style {
+    width: 100%;
+    position: relative;
+}
