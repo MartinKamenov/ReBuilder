@@ -23,7 +23,7 @@ const PagesTabComponent = ({
                     }}
                     cardMedia={
                         <div
-                            style={{ cursor: 'pointer', height: 200 }}
+                            className='page-container-style'
                             onClick={() => {
                                 if(isUpdating) {
                                     selectPage(page.id);
@@ -32,8 +32,9 @@ const PagesTabComponent = ({
 
                                 navigateToPage(page.id);
                             }}>
-                            <div style={{ width: '100%', zIndex: 1, position: 'relative'}}></div>
-                            <div style={{ width: '100%', overflow: 'hidden', position: 'relative' }}>
+                            {/* Fix overlay */}
+                            <div className='page-overlay'></div>
+                            <div className='page-content-style'>
                                 {
                                     page.elements
                                         .map((component) => getComponentJSX(component))
