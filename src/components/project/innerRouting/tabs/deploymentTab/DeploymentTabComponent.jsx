@@ -65,6 +65,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
 
         return (
             <ButtonComponent
+                style={{ display: 'block' }}
                 className='open-deployment-btn'
                 onClick={() => openWebsite(deploymentInformation.deployUrl)}
                 type='success'
@@ -82,22 +83,24 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
                     <div key={i}>{message.message}</div>
                 ))}
             </div>
+            <div style={{ margin: 'auto', width: 250 }}>
             
-            {deploymentInformation ?
-                (visualizeDeploymentInformation()):
-                (<div>Fetching deployment info...</div>)}
-            <ButtonComponent
-                style={{ width: '250px' }}
-                onClick={() => {
-                    if(!deploymentStarted) {
-                        setDeploymentStarted(true);
-                        handleDeployProject();
-                    }
-                }}
-                type='primary'>
-                <FontAwesomeIcon icon={faArrowUp} />
-                <span className='new-project-btn-text'>Deploy project</span>
-            </ButtonComponent>
+                {deploymentInformation ?
+                    (visualizeDeploymentInformation()):
+                    (<div>Fetching deployment info...</div>)}
+                <ButtonComponent
+                    style={{ width: '250px', display: 'block', margin: 'auto' }}
+                    onClick={() => {
+                        if(!deploymentStarted) {
+                            setDeploymentStarted(true);
+                            handleDeployProject();
+                        }
+                    }}
+                    type='primary'>
+                    <FontAwesomeIcon icon={faArrowUp} />
+                    <span className='new-project-btn-text'>Deploy project</span>
+                </ButtonComponent>
+            </div>
         </div>
     );};
 
