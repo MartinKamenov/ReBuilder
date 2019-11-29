@@ -31,7 +31,13 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
     };
 
     const addDeploymentMessage = useCallback(async({ data }) => {
-        const message = JSON.parse(data);
+        let message;
+        // Adding try catch cause we recieve blob type of object which hasn't been sended by the API
+        try {
+            message = JSON.parse(data);
+        } catch(er) {
+            return;
+        }
         const percentage = parseInt(((message.index + 1) / message.count) * 100, 10);
 
         if(message.url) {
@@ -78,6 +84,7 @@ const DeploymentTabComponent = ({ id, handleDeployProject, deploymentInformation
     return (
         <div className='center-container'>
             <ProgressBarComponent progress={progress}/>
+            { deploymentStarted ? (<h3 className='deployment-message'>Project is being deployed. This may take couple of minutes...</h3>) : null }
             <div className='deployment-messages-container'>
                 {deploymentMessages.map((message, i) => (
                     <div key={i}>{message.message}</div>
