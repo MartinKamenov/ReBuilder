@@ -22,7 +22,7 @@
     "axios": "^0.19.0",
     "bootstrap": "^3.3.7",
     "file-saver": "^2.0.2",
-    "jszip": "^3.2.1",
+    "jszip": "^3.7.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.8.3",
     "re-resizable": "^5.0.1",
